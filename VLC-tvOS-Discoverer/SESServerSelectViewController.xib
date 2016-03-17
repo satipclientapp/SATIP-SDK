@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SESServerSelectViewController">
+            <connections>
+                <outlet property="serverTableView" destination="qH0-GZ-3Li" id="BTc-Rz-9Id"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="qH0-GZ-3Li">
+                    <rect key="frame" x="460" y="280" width="1000" height="700"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1000" id="2oB-Gt-v2g"/>
+                        <constraint firstAttribute="height" constant="700" id="nBH-jv-zve"/>
+                    </constraints>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discovered servers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlO-uG-lbw">
+                    <rect key="frame" x="648" y="78" width="625" height="91"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qH0-GZ-3Li" secondAttribute="bottom" constant="100" id="Mhv-Om-YIZ"/>
+                <constraint firstItem="qH0-GZ-3Li" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WFZ-ra-9XR"/>
+                <constraint firstItem="jlO-uG-lbw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="78" id="lxu-aW-Bt0"/>
+                <constraint firstItem="jlO-uG-lbw" firstAttribute="centerX" secondItem="qH0-GZ-3Li" secondAttribute="centerX" id="rAl-TJ-Fn8"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SESServerSelectViewController">
+            <connections>
+                <outlet property="serverTableView" destination="pIz-V9-6cS" id="RSl-Rg-9NG"/>
+                <outlet property="view" destination="iN0-l3-epB" id="pBt-fN-nhk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discovered servers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEu-a0-1Fs">
+                    <rect key="frame" x="188.5" y="26" width="223.5" height="32.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pIz-V9-6cS">
+                    <rect key="frame" x="81" y="95.5" width="438" height="423.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="pIz-V9-6cS" secondAttribute="bottom" constant="81" id="2QC-fS-agX"/>
+                <constraint firstAttribute="trailing" secondItem="pIz-V9-6cS" secondAttribute="trailing" constant="81" id="5mb-Gy-Bik"/>
+                <constraint firstItem="JEu-a0-1Fs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="JoZ-DP-zuE"/>
+                <constraint firstItem="JEu-a0-1Fs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KYz-Fr-ChF"/>
+                <constraint firstItem="pIz-V9-6cS" firstAttribute="top" secondItem="JEu-a0-1Fs" secondAttribute="bottom" constant="37" id="VOu-JS-Hn3"/>
+                <constraint firstItem="pIz-V9-6cS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="81" id="ytX-W6-KiT"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

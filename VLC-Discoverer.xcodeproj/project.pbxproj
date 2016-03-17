@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7D59BC861C9974AB00A37CF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59BC851C9974AB00A37CF3 /* main.m */; };
+		7D59BC891C9974AB00A37CF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59BC881C9974AB00A37CF3 /* AppDelegate.m */; };
+		7D59BC911C9974AB00A37CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D59BC901C9974AB00A37CF3 /* Assets.xcassets */; };
+		7D59BCA21C9976CE00A37CF3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCA11C9976CE00A37CF3 /* AVFoundation.framework */; };
+		7D59BCA41C9976D200A37CF3 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCA31C9976D200A37CF3 /* CoreMedia.framework */; };
+		7D59BCA61C9976D600A37CF3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCA51C9976D600A37CF3 /* CoreFoundation.framework */; };
+		7D59BCA81C9976DB00A37CF3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCA71C9976DB00A37CF3 /* CoreText.framework */; };
+		7D59BCAA1C9976E000A37CF3 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCA91C9976E000A37CF3 /* libiconv.tbd */; };
+		7D59BCAC1C9976E500A37CF3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCAB1C9976E500A37CF3 /* libc++.tbd */; };
+		7D59BCAE1C9976EA00A37CF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCAD1C9976EA00A37CF3 /* Foundation.framework */; };
+		7D59BCB01C9976F000A37CF3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCAF1C9976F000A37CF3 /* UIKit.framework */; };
+		7D59BCB21C99770A00A37CF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCB11C99770A00A37CF3 /* AudioToolbox.framework */; };
+		7D59BCC11C99ADC600A37CF3 /* DynamicTVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */; };
+		7D59BCC21C99ADDF00A37CF3 /* DynamicTVVLCKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7DFDF4B21C9ABA5300BA86A6 /* SESServerSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B01C9ABA5300BA86A6 /* SESServerSelectViewController.m */; };
+		7DFDF4B31C9ABA5300BA86A6 /* SESServerSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B11C9ABA5300BA86A6 /* SESServerSelectViewController.xib */; };
+		7DFDF4B61C9ABE0800BA86A6 /* SESServerDiscoveryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B51C9ABE0800BA86A6 /* SESServerDiscoveryController.m */; };
+		7DFDF4BA1C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B81C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m */; };
+		7DFDF4BB1C9AC13500BA86A6 /* SESChannelListAndPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B91C9AC13500BA86A6 /* SESChannelListAndPlayViewController.xib */; };
+		7DFDF4C41C9AEAC700BA86A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4C31C9AEAC700BA86A6 /* main.m */; };
+		7DFDF4CF1C9AEAC700BA86A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDF4CE1C9AEAC700BA86A6 /* Assets.xcassets */; };
+		7DFDF4D91C9AEB0200BA86A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDF4D71C9AEB0200BA86A6 /* LaunchScreen.storyboard */; };
+		7DFDF4DA1C9AEB2400BA86A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D59BC881C9974AB00A37CF3 /* AppDelegate.m */; };
+		7DFDF4DB1C9AEB2B00BA86A6 /* SESServerDiscoveryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B51C9ABE0800BA86A6 /* SESServerDiscoveryController.m */; };
+		7DFDF4DC1C9AEB2B00BA86A6 /* SESServerSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B01C9ABA5300BA86A6 /* SESServerSelectViewController.m */; };
+		7DFDF4DD1C9AEB2B00BA86A6 /* SESChannelListAndPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDF4B81C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m */; };
+		7DFDF4DF1C9AEB4600BA86A6 /* SESServerSelectViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDF4DE1C9AEB4600BA86A6 /* SESServerSelectViewController-iPad.xib */; };
+		7DFDF4E11C9AEC4300BA86A6 /* SESChannelListAndPlayViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFDF4E01C9AEC4300BA86A6 /* SESChannelListAndPlayViewController-iPad.xib */; };
+		7DFDF4E41C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFDF4E31C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework */; };
+		7DFDF4E61C9AF1C000BA86A6 /* DynamicMobileVLCKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7DFDF4E31C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7D59BC9A1C9974FA00A37CF3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7D59BCC21C99ADDF00A37CF3 /* DynamicTVVLCKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DFDF4E51C9AF1B800BA86A6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7DFDF4E61C9AF1C000BA86A6 /* DynamicMobileVLCKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7D59BC811C9974AB00A37CF3 /* VLC-tvOS-Discoverer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VLC-tvOS-Discoverer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D59BC851C9974AB00A37CF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7D59BC871C9974AB00A37CF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "VLC-tvOS-Discoverer/AppDelegate.h"; sourceTree = "<group>"; };
+		7D59BC881C9974AB00A37CF3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "VLC-tvOS-Discoverer/AppDelegate.m"; sourceTree = "<group>"; };
+		7D59BC901C9974AB00A37CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7D59BC921C9974AB00A37CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D59BCA11C9976CE00A37CF3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7D59BCA31C9976D200A37CF3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		7D59BCA51C9976D600A37CF3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		7D59BCA71C9976DB00A37CF3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		7D59BCA91C9976E000A37CF3 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		7D59BCAB1C9976E500A37CF3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		7D59BCAD1C9976EA00A37CF3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7D59BCAF1C9976F000A37CF3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7D59BCB11C99770A00A37CF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamicTVVLCKit.framework; path = ../../Desktop/drop/DynamicTVVLCKit.framework; sourceTree = "<group>"; };
+		7DFDF4AF1C9ABA5300BA86A6 /* SESServerSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESServerSelectViewController.h; path = "VLC-tvOS-Discoverer/SESServerSelectViewController.h"; sourceTree = "<group>"; };
+		7DFDF4B01C9ABA5300BA86A6 /* SESServerSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESServerSelectViewController.m; path = "VLC-tvOS-Discoverer/SESServerSelectViewController.m"; sourceTree = "<group>"; };
+		7DFDF4B11C9ABA5300BA86A6 /* SESServerSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SESServerSelectViewController.xib; sourceTree = "<group>"; };
+		7DFDF4B41C9ABE0800BA86A6 /* SESServerDiscoveryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESServerDiscoveryController.h; path = "VLC-tvOS-Discoverer/SESServerDiscoveryController.h"; sourceTree = "<group>"; };
+		7DFDF4B51C9ABE0800BA86A6 /* SESServerDiscoveryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESServerDiscoveryController.m; path = "VLC-tvOS-Discoverer/SESServerDiscoveryController.m"; sourceTree = "<group>"; };
+		7DFDF4B71C9AC13500BA86A6 /* SESChannelListAndPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESChannelListAndPlayViewController.h; path = "VLC-tvOS-Discoverer/SESChannelListAndPlayViewController.h"; sourceTree = "<group>"; };
+		7DFDF4B81C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESChannelListAndPlayViewController.m; path = "VLC-tvOS-Discoverer/SESChannelListAndPlayViewController.m"; sourceTree = "<group>"; };
+		7DFDF4B91C9AC13500BA86A6 /* SESChannelListAndPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SESChannelListAndPlayViewController.xib; sourceTree = "<group>"; };
+		7DFDF4C01C9AEAC700BA86A6 /* VLC-iOS-Discoverer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VLC-iOS-Discoverer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DFDF4C31C9AEAC700BA86A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7DFDF4CE1C9AEAC700BA86A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7DFDF4D31C9AEAC700BA86A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7DFDF4D81C9AEB0200BA86A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7DFDF4DE1C9AEB4600BA86A6 /* SESServerSelectViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SESServerSelectViewController-iPad.xib"; path = "../VLC-tvOS-Discoverer/SESServerSelectViewController-iPad.xib"; sourceTree = "<group>"; };
+		7DFDF4E01C9AEC4300BA86A6 /* SESChannelListAndPlayViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SESChannelListAndPlayViewController-iPad.xib"; path = "../VLC-tvOS-Discoverer/SESChannelListAndPlayViewController-iPad.xib"; sourceTree = "<group>"; };
+		7DFDF4E31C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamicMobileVLCKit.framework; path = ../../Desktop/drop/DynamicMobileVLCKit.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D59BC7E1C9974AB00A37CF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D59BCB21C99770A00A37CF3 /* AudioToolbox.framework in Frameworks */,
+				7D59BCB01C9976F000A37CF3 /* UIKit.framework in Frameworks */,
+				7D59BCAE1C9976EA00A37CF3 /* Foundation.framework in Frameworks */,
+				7D59BCC11C99ADC600A37CF3 /* DynamicTVVLCKit.framework in Frameworks */,
+				7D59BCAC1C9976E500A37CF3 /* libc++.tbd in Frameworks */,
+				7D59BCAA1C9976E000A37CF3 /* libiconv.tbd in Frameworks */,
+				7D59BCA81C9976DB00A37CF3 /* CoreText.framework in Frameworks */,
+				7D59BCA61C9976D600A37CF3 /* CoreFoundation.framework in Frameworks */,
+				7D59BCA41C9976D200A37CF3 /* CoreMedia.framework in Frameworks */,
+				7D59BCA21C9976CE00A37CF3 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DFDF4BD1C9AEAC700BA86A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DFDF4E41C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7D59BC781C9974AB00A37CF3 = {
+			isa = PBXGroup;
+			children = (
+				7DDD344E1C9B623000356D91 /* Cross-platform code */,
+				7DFDF4C11C9AEAC700BA86A6 /* VLC-iOS-Discoverer */,
+				7D59BC831C9974AB00A37CF3 /* VLC-tvOS-Discoverer */,
+				7D59BCB31C9978B400A37CF3 /* Frameworks */,
+				7D59BC821C9974AB00A37CF3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7D59BC821C9974AB00A37CF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D59BC811C9974AB00A37CF3 /* VLC-tvOS-Discoverer.app */,
+				7DFDF4C01C9AEAC700BA86A6 /* VLC-iOS-Discoverer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D59BC831C9974AB00A37CF3 /* VLC-tvOS-Discoverer */ = {
+			isa = PBXGroup;
+			children = (
+				7DFDF4B11C9ABA5300BA86A6 /* SESServerSelectViewController.xib */,
+				7DFDF4B91C9AC13500BA86A6 /* SESChannelListAndPlayViewController.xib */,
+				7D59BC901C9974AB00A37CF3 /* Assets.xcassets */,
+				7D59BC921C9974AB00A37CF3 /* Info.plist */,
+				7D59BC841C9974AB00A37CF3 /* Supporting Files */,
+			);
+			path = "VLC-tvOS-Discoverer";
+			sourceTree = "<group>";
+		};
+		7D59BC841C9974AB00A37CF3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7D59BC851C9974AB00A37CF3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7D59BCB31C9978B400A37CF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DFDF4E31C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework */,
+				7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */,
+				7D59BCB11C99770A00A37CF3 /* AudioToolbox.framework */,
+				7D59BCAF1C9976F000A37CF3 /* UIKit.framework */,
+				7D59BCAD1C9976EA00A37CF3 /* Foundation.framework */,
+				7D59BCAB1C9976E500A37CF3 /* libc++.tbd */,
+				7D59BCA91C9976E000A37CF3 /* libiconv.tbd */,
+				7D59BCA71C9976DB00A37CF3 /* CoreText.framework */,
+				7D59BCA51C9976D600A37CF3 /* CoreFoundation.framework */,
+				7D59BCA31C9976D200A37CF3 /* CoreMedia.framework */,
+				7D59BCA11C9976CE00A37CF3 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DDD344E1C9B623000356D91 /* Cross-platform code */ = {
+			isa = PBXGroup;
+			children = (
+				7D59BC871C9974AB00A37CF3 /* AppDelegate.h */,
+				7D59BC881C9974AB00A37CF3 /* AppDelegate.m */,
+				7DFDF4B41C9ABE0800BA86A6 /* SESServerDiscoveryController.h */,
+				7DFDF4B51C9ABE0800BA86A6 /* SESServerDiscoveryController.m */,
+				7DFDF4AF1C9ABA5300BA86A6 /* SESServerSelectViewController.h */,
+				7DFDF4B01C9ABA5300BA86A6 /* SESServerSelectViewController.m */,
+				7DFDF4B71C9AC13500BA86A6 /* SESChannelListAndPlayViewController.h */,
+				7DFDF4B81C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m */,
+			);
+			name = "Cross-platform code";
+			sourceTree = "<group>";
+		};
+		7DFDF4C11C9AEAC700BA86A6 /* VLC-iOS-Discoverer */ = {
+			isa = PBXGroup;
+			children = (
+				7DFDF4DE1C9AEB4600BA86A6 /* SESServerSelectViewController-iPad.xib */,
+				7DFDF4E01C9AEC4300BA86A6 /* SESChannelListAndPlayViewController-iPad.xib */,
+				7DFDF4CE1C9AEAC700BA86A6 /* Assets.xcassets */,
+				7DFDF4D71C9AEB0200BA86A6 /* LaunchScreen.storyboard */,
+				7DFDF4D31C9AEAC700BA86A6 /* Info.plist */,
+				7DFDF4C21C9AEAC700BA86A6 /* Supporting Files */,
+			);
+			path = "VLC-iOS-Discoverer";
+			sourceTree = "<group>";
+		};
+		7DFDF4C21C9AEAC700BA86A6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7DFDF4C31C9AEAC700BA86A6 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7D59BC801C9974AB00A37CF3 /* VLC-tvOS-Discoverer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D59BC951C9974AB00A37CF3 /* Build configuration list for PBXNativeTarget "VLC-tvOS-Discoverer" */;
+			buildPhases = (
+				7D59BC7D1C9974AB00A37CF3 /* Sources */,
+				7D59BC7E1C9974AB00A37CF3 /* Frameworks */,
+				7D59BC7F1C9974AB00A37CF3 /* Resources */,
+				7D59BC9A1C9974FA00A37CF3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VLC-tvOS-Discoverer";
+			productName = "VLC-tvOS-Discoverer";
+			productReference = 7D59BC811C9974AB00A37CF3 /* VLC-tvOS-Discoverer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7DFDF4BF1C9AEAC700BA86A6 /* VLC-iOS-Discoverer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DFDF4D41C9AEAC700BA86A6 /* Build configuration list for PBXNativeTarget "VLC-iOS-Discoverer" */;
+			buildPhases = (
+				7DFDF4BC1C9AEAC700BA86A6 /* Sources */,
+				7DFDF4BD1C9AEAC700BA86A6 /* Frameworks */,
+				7DFDF4BE1C9AEAC700BA86A6 /* Resources */,
+				7DFDF4E51C9AF1B800BA86A6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VLC-iOS-Discoverer";
+			productName = "VLC-iOS-Discoverer";
+			productReference = 7DFDF4C01C9AEAC700BA86A6 /* VLC-iOS-Discoverer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7D59BC791C9974AB00A37CF3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "VideoLabs SAS";
+				TargetAttributes = {
+					7D59BC801C9974AB00A37CF3 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					7DFDF4BF1C9AEAC700BA86A6 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 7D59BC7C1C9974AB00A37CF3 /* Build configuration list for PBXProject "VLC-Discoverer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7D59BC781C9974AB00A37CF3;
+			productRefGroup = 7D59BC821C9974AB00A37CF3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7D59BC801C9974AB00A37CF3 /* VLC-tvOS-Discoverer */,
+				7DFDF4BF1C9AEAC700BA86A6 /* VLC-iOS-Discoverer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7D59BC7F1C9974AB00A37CF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D59BC911C9974AB00A37CF3 /* Assets.xcassets in Resources */,
+				7DFDF4B31C9ABA5300BA86A6 /* SESServerSelectViewController.xib in Resources */,
+				7DFDF4BB1C9AC13500BA86A6 /* SESChannelListAndPlayViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DFDF4BE1C9AEAC700BA86A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DFDF4CF1C9AEAC700BA86A6 /* Assets.xcassets in Resources */,
+				7DFDF4D91C9AEB0200BA86A6 /* LaunchScreen.storyboard in Resources */,
+				7DFDF4DF1C9AEB4600BA86A6 /* SESServerSelectViewController-iPad.xib in Resources */,
+				7DFDF4E11C9AEC4300BA86A6 /* SESChannelListAndPlayViewController-iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D59BC7D1C9974AB00A37CF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D59BC891C9974AB00A37CF3 /* AppDelegate.m in Sources */,
+				7D59BC861C9974AB00A37CF3 /* main.m in Sources */,
+				7DFDF4BA1C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m in Sources */,
+				7DFDF4B61C9ABE0800BA86A6 /* SESServerDiscoveryController.m in Sources */,
+				7DFDF4B21C9ABA5300BA86A6 /* SESServerSelectViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DFDF4BC1C9AEAC700BA86A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DFDF4DA1C9AEB2400BA86A6 /* AppDelegate.m in Sources */,
+				7DFDF4DB1C9AEB2B00BA86A6 /* SESServerDiscoveryController.m in Sources */,
+				7DFDF4DD1C9AEB2B00BA86A6 /* SESChannelListAndPlayViewController.m in Sources */,
+				7DFDF4C41C9AEAC700BA86A6 /* main.m in Sources */,
+				7DFDF4DC1C9AEB2B00BA86A6 /* SESServerSelectViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7DFDF4D71C9AEB0200BA86A6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7DFDF4D81C9AEB0200BA86A6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7D59BC931C9974AB00A37CF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+			};
+			name = Debug;
+		};
+		7D59BC941C9974AB00A37CF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7D59BC961C9974AB00A37CF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../Desktop/drop\"";
+				INFOPLIST_FILE = "VLC-tvOS-Discoverer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-tvOS-Discoverer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7D59BC971C9974AB00A37CF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../Desktop/drop\"";
+				INFOPLIST_FILE = "VLC-tvOS-Discoverer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-tvOS-Discoverer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7DFDF4D51C9AEAC700BA86A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../Desktop/drop\"";
+				INFOPLIST_FILE = "VLC-iOS-Discoverer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-iOS-Discoverer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		7DFDF4D61C9AEAC700BA86A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../Desktop/drop\"";
+				INFOPLIST_FILE = "VLC-iOS-Discoverer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-iOS-Discoverer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D59BC7C1C9974AB00A37CF3 /* Build configuration list for PBXProject "VLC-Discoverer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D59BC931C9974AB00A37CF3 /* Debug */,
+				7D59BC941C9974AB00A37CF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D59BC951C9974AB00A37CF3 /* Build configuration list for PBXNativeTarget "VLC-tvOS-Discoverer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D59BC961C9974AB00A37CF3 /* Debug */,
+				7D59BC971C9974AB00A37CF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7DFDF4D41C9AEAC700BA86A6 /* Build configuration list for PBXNativeTarget "VLC-iOS-Discoverer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DFDF4D51C9AEAC700BA86A6 /* Debug */,
+				7DFDF4D61C9AEAC700BA86A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7D59BC791C9974AB00A37CF3 /* Project object */;
+}
