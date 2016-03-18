@@ -103,7 +103,7 @@
 #if TARGET_OS_TV
         playVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:nil bundle:nil];
 #else
-        playVC = [[SESChanneListAndPlayViewController alloc] initWithNibName:@"SESChanneListAndPlayViewController-iPad" bundle:nil];
+        playVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:@"SESChannelListAndPlayViewController-iPad" bundle:nil];
 #endif
         /* forward our server media item to the playback view controller
          * after this point, the discovery controller can be safely destroyed

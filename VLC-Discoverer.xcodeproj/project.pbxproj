@@ -469,6 +469,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../Desktop/drop\"";
 				INFOPLIST_FILE = "VLC-iOS-Discoverer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
@@ -485,6 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../../Desktop/drop\"";
 				INFOPLIST_FILE = "VLC-iOS-Discoverer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
