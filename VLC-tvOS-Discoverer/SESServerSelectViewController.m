@@ -97,7 +97,7 @@
     /* FIXME: evil hack here, violation of MVC */
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     // FIXME: this is an extremely bad way to differenciate between SAT>IP hosts and regular UPnP boxes - proper fix requires VLCKit amendment, which will come
-    if ([cell.textLabel.text rangeOfString:@"SAT>IP"].location != NSNotFound) {
+    if ([cell.textLabel.text rangeOfString:@"SatIP"].location != NSNotFound) {
         SESChannelListAndPlayViewController *playVC;
         /* load the correct UI depending on the platform */
 #if TARGET_OS_TV

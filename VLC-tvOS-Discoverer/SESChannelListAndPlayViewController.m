@@ -7,6 +7,7 @@
 //
 
 #import "SESChannelListAndPlayViewController.h"
+#import "SESTableCellView.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
@@ -43,6 +44,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    _enlarge = [UIImage imageNamed:@"expand"];
+    _reduce = [UIImage imageNamed:@"reduce"];
+    _sep = [UIImage imageNamed:@"sep"];
+    
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
     self.channelListTableView.delegate = self;
@@ -108,9 +113,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:channelListReuseIdentifier];
 
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:channelListReuseIdentifier];
+        cell = [SESTableCellView new];
+        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:channelListReuseIdentifier];
     }
-
+    
     if (!self.serverMediaItem) {
         return cell;
     }
@@ -124,8 +130,27 @@
 
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
 
-    cell.textLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
-
+    //cell.textLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
+    
+    int ch = cell.bounds.size.height;
+    int cw = cell.bounds.size.width;
+    int s = ch * 2;
+    int ih = ch * 0.75;
+    int iw = _enlarge.size.width * ih / _enlarge.size.height;
+    UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake((s - iw) / 2, (ch - ih) / 2, iw, ih)];
+    imv.image=_reduce;
+    [cell.contentView addSubview:imv];
+    
+    imv = [[UIImageView alloc]initWithFrame:CGRectMake(s, ch * 0.25, _sep.size.width * ch / _sep.size.height, ch)];
+    imv.image=_sep;
+    [cell.contentView addSubview:imv];
+    
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(s + ch / 2, ch / 2 - 14, cw, ch / 2 + 14)];
+    text.text = [channelItem metadataForKey:VLCMetaInformationTitle];
+    text.font = [text.font fontWithSize:21];
+    
+    [cell.contentView addSubview:text];
+    
     return cell;
 }
 
@@ -150,10 +175,13 @@
 
 - (IBAction)fullscreenAction:(id)sender
 {
+    UIButton* button = (UIButton*)sender;
     /* clicker method for pseudo fullscreen */
     if (_fullscreen) {
+        [button setImage:_enlarge forState:UIControlStateNormal];
         [self resizeVoutBackToSmall];
     } else {
+        [button setImage:_reduce forState:UIControlStateNormal];
         [self resizeVoutToFullscreen];
     }
     _fullscreen = !_fullscreen;
