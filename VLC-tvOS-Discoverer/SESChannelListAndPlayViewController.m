@@ -8,6 +8,7 @@
 
 #import "SESChannelListAndPlayViewController.h"
 #import "SESTableCellView.h"
+#import "SESColors.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
@@ -30,7 +31,7 @@
     VLCMediaListPlayer *_playbackPlayer;
 
     /* a cache of some view where we draw video in, so we can refer to it later */
-    CGRect _initialVoutFrame;
+    CGRect _initialVoutBounds;
 
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
@@ -53,7 +54,7 @@
     self.channelListTableView.delegate = self;
 
     /* cache the initial size of the view we draw video in for later use */
-    _initialVoutFrame = self.videoOutputView.frame;
+    _initialVoutBounds = self.videoOutputView.bounds;
 
     // FIXME: add proper error handling if we don't have such an item (which should never happen)
     if (self.serverMediaItem) {
@@ -63,6 +64,13 @@
         _parsePlayer.delegate = self;
         [_parsePlayer play];
     }
+    
+    /*CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.fullscreenButton.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
+    [gradient setStartPoint:CGPointMake(1, 1)];
+    [gradient setEndPoint:CGPointMake(0, 0)];
+    [self.fullscreenButton.layer insertSublayer:gradient atIndex:0];*/
 }
 
 /* called when our channel list is ready
@@ -114,7 +122,6 @@
 
     if (!cell) {
         cell = [SESTableCellView new];
-        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:channelListReuseIdentifier];
     }
     
     if (!self.serverMediaItem) {
@@ -130,27 +137,40 @@
 
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
 
-    //cell.textLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
-    
-    int ch = cell.bounds.size.height;
-    int cw = cell.bounds.size.width;
-    int s = ch * 2;
-    int ih = ch * 0.75;
-    int iw = _enlarge.size.width * ih / _enlarge.size.height;
-    UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake((s - iw) / 2, (ch - ih) / 2, iw, ih)];
+    CGFloat cellWidth = tableView.contentSize.width;
+    CGFloat cellHeight = tableView.contentSize.height / [tableView numberOfRowsInSection:0];
+#if TARGET_OS_TV
+    cellHeight *= 0.8;
+#endif
+    CGFloat separatorPos = cellHeight * 2;
+    CGFloat imageHeight = cellHeight * 0.75;
+    CGFloat imageWidth = _enlarge.size.width * imageHeight / _enlarge.size.height;
+
+    UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake((separatorPos - imageWidth) / 2,
+                                                                    (cellHeight - imageHeight) / 2,
+                                                                    imageWidth, imageHeight)];
     imv.image=_reduce;
     [cell.contentView addSubview:imv];
-    
-    imv = [[UIImageView alloc]initWithFrame:CGRectMake(s, ch * 0.25, _sep.size.width * ch / _sep.size.height, ch)];
+
+    imv = [[UIImageView alloc]initWithFrame:CGRectMake(separatorPos, cellHeight * 0.1,
+                                                       _sep.size.width * cellHeight / _sep.size.height,
+                                                       cellHeight * 0.8)];
     imv.image=_sep;
     [cell.contentView addSubview:imv];
-    
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(s + ch / 2, ch / 2 - 14, cw, ch / 2 + 14)];
+
+    int fontsize = 21;
+#if TARGET_OS_TV
+    fontsize = 29;
+#endif
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(separatorPos + cellHeight / 2,
+                                                              cellHeight / 2 - fontsize,
+                                                              cellWidth - separatorPos - cellHeight / 2,
+                                                              cellHeight / 2 + fontsize)];
     text.text = [channelItem metadataForKey:VLCMetaInformationTitle];
-    text.font = [text.font fontWithSize:21];
-    
+    text.font = [UIFont boldSystemFontOfSize:fontsize];
+
     [cell.contentView addSubview:text];
-    
+
     return cell;
 }
 
@@ -193,7 +213,7 @@
      * this is a poor man's fullscreen
      * note that of course you can remove the view from the hierarchy and move it some place else like a new VC, etc. */
     [UIView animateWithDuration:1. animations:^{
-        self.videoOutputView.frame = self.view.frame;
+        self.videoOutputView.bounds = self.view.bounds;
     }];
 }
 
@@ -201,7 +221,7 @@
 {
     /* leave "fullscreen" by going back to the initial size */
     [UIView animateWithDuration:1. animations:^{
-        self.videoOutputView.frame = _initialVoutFrame;
+        self.videoOutputView.bounds = _initialVoutBounds;
     }];
 }
 

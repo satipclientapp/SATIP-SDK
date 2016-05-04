@@ -19,6 +19,11 @@
 
 @implementation SESTableCellView
 
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
+{
+    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
+}
+
 - (void)setSelected:(BOOL)selected animated: (BOOL)animated
 {
     [super setSelected:selected animated:animated];
