@@ -94,24 +94,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /* FIXME: evil hack here, violation of MVC */
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    // FIXME: this is an extremely bad way to differenciate between SAT>IP hosts and regular UPnP boxes - proper fix requires VLCKit amendment, which will come
-    if ([cell.textLabel.text rangeOfString:@"Quincy"].location != NSNotFound) {
-        SESChannelListAndPlayViewController *playVC;
-        /* load the correct UI depending on the platform */
+    SESChannelListAndPlayViewController *playVC;
+
+    /* load the correct UI depending on the platform */
 #if TARGET_OS_TV
-        playVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:nil bundle:nil];
+    playVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:nil bundle:nil];
 #else
-        playVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:@"SESChannelListAndPlayViewController-iPad" bundle:nil];
+    playVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:@"SESChannelListAndPlayViewController-iPad" bundle:nil];
 #endif
-        /* forward our server media item to the playback view controller
-         * after this point, the discovery controller can be safely destroyed
-         */
-        playVC.serverMediaItem = [_discoveryController serverAtIndex:indexPath.row];
-        [self presentViewController:playVC animated:YES completion:nil];
-    } else
-        NSLog(@"Invalid server");
+
+    /* forward our server media item to the playback view controller
+     * after this point, the discovery controller can be safely destroyed
+     */
+    playVC.serverMediaItem = [_discoveryController serverAtIndex:indexPath.row];
+
+    [self presentViewController:playVC animated:YES completion:nil];
 }
 
 #pragma mark - discovery controller delegate
