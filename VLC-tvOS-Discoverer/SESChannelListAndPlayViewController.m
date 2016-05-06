@@ -46,6 +46,17 @@
 
 @implementation SESChannelListAndPlayViewController
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.frame;
+    gradient.frame = [[UIScreen mainScreen] bounds];
+    gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
+    [gradient setStartPoint:CGPointMake(1, 1)];
+    [gradient setEndPoint:CGPointMake(0, 0)];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+}
+
 #pragma mark - setup
 
 - (void)viewDidLoad {
@@ -82,7 +93,8 @@
     }
 
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
+    gradient.frame = self.view.frame;
+    gradient.frame = [[UIScreen mainScreen] bounds];
     gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
     [gradient setStartPoint:CGPointMake(1, 1)];
     [gradient setEndPoint:CGPointMake(0, 0)];
@@ -201,6 +213,7 @@
         _initialVoutBounds = self.videoOutputView.frame;
         [self resizeVoutToFullscreen];
     }
+    [self.view bringSubviewToFront:self.videoOutputView];
     [self.view bringSubviewToFront:button];
     _fullscreen = !_fullscreen;
 }

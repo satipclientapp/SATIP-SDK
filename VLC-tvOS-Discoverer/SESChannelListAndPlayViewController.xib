@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="AppleTV" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SESChannelListAndPlayViewController">
@@ -17,51 +16,35 @@
             <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel list &amp; Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4X-Fb-xHm">
-                    <rect key="frame" x="575" y="78" width="770" height="91"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-8e-ng6">
-                    <rect key="frame" x="991" y="459" width="720" height="405"/>
+                <view contentMode="scaleToFill" id="mfG-8e-ng6">
+                    <rect key="frame" x="895" y="348" width="879" height="529"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="mfG-8e-ng6" secondAttribute="height" multiplier="16:9" id="PU0-dY-Rxy"/>
-                        <constraint firstAttribute="width" constant="720" id="fYh-xT-INs"/>
-                    </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-rk-lZ9">
-                    <rect key="frame" x="1155" y="311" width="131" height="86"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RQC-rk-lZ9">
+                    <rect key="frame" x="1668" y="925" width="131" height="86"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                     <state key="normal" image="expand"/>
                     <connections>
                         <action selector="fullscreenAction:" destination="-1" eventType="primaryActionTriggered" id="4wG-8b-SFe"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="exF-sN-cqg">
-                    <rect key="frame" x="209" y="311" width="524" height="700"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" id="Z75-km-7T5">
+                    <rect key="frame" x="1566" y="212" width="334" height="54"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="exF-sN-cqg">
+                    <rect key="frame" x="212" y="212" width="524" height="700"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="524" id="2JP-ga-Mhw"/>
-                        <constraint firstAttribute="height" constant="700" id="3ez-zX-uLY"/>
-                    </constraints>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.96208892617449659" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="mfG-8e-ng6" secondAttribute="trailing" constant="209" id="4UI-9M-erE"/>
-                <constraint firstItem="RQC-rk-lZ9" firstAttribute="top" secondItem="exF-sN-cqg" secondAttribute="top" id="7Jc-FQ-PAD"/>
-                <constraint firstAttribute="bottom" secondItem="exF-sN-cqg" secondAttribute="bottom" constant="69" id="E1C-mg-PlY"/>
-                <constraint firstItem="o4X-Fb-xHm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="78" id="ENt-MY-5L2"/>
-                <constraint firstItem="o4X-Fb-xHm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="EbZ-CP-CJe"/>
-                <constraint firstItem="mfG-8e-ng6" firstAttribute="centerY" secondItem="exF-sN-cqg" secondAttribute="centerY" id="F21-FK-vrh"/>
-                <constraint firstItem="exF-sN-cqg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="209" id="IDy-PL-ZHA"/>
-                <constraint firstItem="RQC-rk-lZ9" firstAttribute="centerX" secondItem="mfG-8e-ng6" secondAttribute="centerX" id="WMx-ru-Bnj"/>
-            </constraints>
         </view>
     </objects>
     <resources>
         <image name="expand" width="51" height="39"/>
+        <image name="logo" width="248" height="36"/>
     </resources>
 </document>
