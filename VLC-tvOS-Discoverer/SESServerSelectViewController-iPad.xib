@@ -16,14 +16,15 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pIz-V9-6cS">
-                    <rect key="frame" x="81" y="95.5" width="438" height="423.5"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pIz-V9-6cS">
+                    <rect key="frame" x="81" y="87" width="438" height="423.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.9635832634" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="pIz-V9-6cS" secondAttribute="bottom" constant="81" id="2QC-fS-agX"/>
+                <constraint firstItem="pIz-V9-6cS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="87" id="2Vh-DO-TlD"/>
                 <constraint firstAttribute="trailing" secondItem="pIz-V9-6cS" secondAttribute="trailing" constant="81" id="5mb-Gy-Bik"/>
                 <constraint firstItem="pIz-V9-6cS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="81" id="ytX-W6-KiT"/>
             </constraints>
