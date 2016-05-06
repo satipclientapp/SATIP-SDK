@@ -12,5 +12,6 @@
 
 /* the table to show the servers in */
 @property (readwrite, weak) IBOutlet UITableView *serverTableView;
+@property (readwrite, weak) IBOutlet UILabel *viewControllerTitleLabel;
 
 @end

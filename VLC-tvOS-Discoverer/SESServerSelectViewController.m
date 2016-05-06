@@ -9,6 +9,7 @@
 #import "SESServerSelectViewController.h"
 #import "SESServerDiscoveryController.h"
 #import "SESChannelListAndPlayViewController.h"
+#import "SESColors.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
@@ -41,7 +42,22 @@
     self.serverTableView.dataSource = self;
     self.serverTableView.delegate = self;
 
+#if TARGET_OS_TV
+    self.serverTableView.rowHeight = 100.;
+#else
+    self.serverTableView.rowHeight = 68.;
+#endif
+
     [self.serverTableView reloadData];
+
+    self.viewControllerTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:38.];
+
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
+    [gradient setStartPoint:CGPointMake(1, 1)];
+    [gradient setEndPoint:CGPointMake(0, 0)];
+    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
 #pragma mark - start and stop discovery depending on view visibility
@@ -77,6 +93,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseableIdentifierForServer];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseableIdentifierForServer];
+        cell.backgroundColor = [SESColors SESPureWhite];
+#if TARGET_OS_TV
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:29.];
+#else
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21.];
+#endif
     }
 
     VLCMedia *media = [_discoveryController serverAtIndex:indexPath.row];

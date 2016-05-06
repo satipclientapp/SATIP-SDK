@@ -71,7 +71,13 @@
         _parsePlayer.libraryInstance.debugLogging = YES;
         [_parsePlayer play];
     }
-    
+
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
+    [gradient setStartPoint:CGPointMake(1, 1)];
+    [gradient setEndPoint:CGPointMake(0, 0)];
+    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
 /* called when our channel list is ready
