@@ -23,16 +23,16 @@
 {
     /* we have 1 player to download, process and report the playlist - it should be destroyed once this is done */
     VLCMediaPlayer *_parsePlayer;
-
+    
     /* the list player we use for playback
      * see the API documentation for VLCMediaListPlayer, it is a more efficient way to handle playlists like the channel list
      * if you want to achieve fast and memory-efficient channel switches
      * for the API missing from VLCMediaPlayer, see that there is actually an instance exposed as a property with the full thing */
     VLCMediaListPlayer *_playbackPlayer;
-
+    
     /* a cache of some view where we draw video in, so we can refer to it later */
     CGRect _initialVoutBounds;
-
+    
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
 }
@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     _enlarge = [UIImage imageNamed:@"expand"];
     _reduce = [UIImage imageNamed:@"reduce"];
     _sep = [UIImage imageNamed:@"sep"];
@@ -52,10 +52,10 @@
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
     self.channelListTableView.delegate = self;
-
+    
     /* cache the initial size of the view we draw video in for later use */
-    _initialVoutBounds = self.videoOutputView.bounds;
-
+    _initialVoutBounds = self.videoOutputView.frame;
+    
     // FIXME: add proper error handling if we don't have such an item (which should never happen)
     if (self.serverMediaItem) {
         /* setup our parse player, which we use to download the channel list and parse it */
@@ -65,12 +65,6 @@
         [_parsePlayer play];
     }
     
-    /*CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.fullscreenButton.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
-    [gradient setStartPoint:CGPointMake(1, 1)];
-    [gradient setEndPoint:CGPointMake(0, 0)];
-    [self.fullscreenButton.layer insertSublayer:gradient atIndex:0];*/
 }
 
 /* called when our channel list is ready
@@ -112,14 +106,14 @@
     if (self.serverMediaItem) {
         return self.serverMediaItem.subitems.count;
     }
-
+    
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:channelListReuseIdentifier];
-
+    
     if (!cell) {
         cell = [SESTableCellView new];
     }
@@ -127,16 +121,16 @@
     if (!self.serverMediaItem) {
         return cell;
     }
-
+    
     VLCMediaList *subItems = self.serverMediaItem.subitems;
     NSInteger row = indexPath.row;
-
+    
     if (subItems.count < row) {
         return cell;
     }
-
+    
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
-
+    
     CGFloat cellWidth = tableView.contentSize.width;
     CGFloat cellHeight = tableView.contentSize.height / [tableView numberOfRowsInSection:0];
 #if TARGET_OS_TV
@@ -145,19 +139,19 @@
     CGFloat separatorPos = cellHeight * 2;
     CGFloat imageHeight = cellHeight * 0.75;
     CGFloat imageWidth = _enlarge.size.width * imageHeight / _enlarge.size.height;
-
+    
     UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake((separatorPos - imageWidth) / 2,
                                                                     (cellHeight - imageHeight) / 2,
                                                                     imageWidth, imageHeight)];
     imv.image=_reduce;
     [cell.contentView addSubview:imv];
-
+    
     imv = [[UIImageView alloc]initWithFrame:CGRectMake(separatorPos, cellHeight * 0.1,
                                                        _sep.size.width * cellHeight / _sep.size.height,
                                                        cellHeight * 0.8)];
     imv.image=_sep;
     [cell.contentView addSubview:imv];
-
+    
     int fontsize = 21;
 #if TARGET_OS_TV
     fontsize = 29;
@@ -168,9 +162,9 @@
                                                               cellHeight / 2 + fontsize)];
     text.text = [channelItem metadataForKey:VLCMetaInformationTitle];
     text.font = [UIFont boldSystemFontOfSize:fontsize];
-
+    
     [cell.contentView addSubview:text];
-
+    
     return cell;
 }
 
@@ -186,7 +180,7 @@
         _playbackPlayer.mediaPlayer.drawable = self.videoOutputView;
         _playbackPlayer.mediaList = self.serverMediaItem.subitems;
     }
-
+    
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
     [_playbackPlayer playItemAtIndex:(int)indexPath.row];
 }
@@ -196,14 +190,15 @@
 - (IBAction)fullscreenAction:(id)sender
 {
     UIButton* button = (UIButton*)sender;
+    [button setSelected:![button isSelected]];
     /* clicker method for pseudo fullscreen */
     if (_fullscreen) {
-        [button setImage:_enlarge forState:UIControlStateNormal];
         [self resizeVoutBackToSmall];
     } else {
-        [button setImage:_reduce forState:UIControlStateNormal];
+        _initialVoutBounds = self.videoOutputView.frame;
         [self resizeVoutToFullscreen];
     }
+    [self.view bringSubviewToFront:button];
     _fullscreen = !_fullscreen;
 }
 
@@ -213,7 +208,7 @@
      * this is a poor man's fullscreen
      * note that of course you can remove the view from the hierarchy and move it some place else like a new VC, etc. */
     [UIView animateWithDuration:1. animations:^{
-        self.videoOutputView.bounds = self.view.bounds;
+        self.videoOutputView.frame = self.view.frame;
     }];
 }
 
@@ -221,7 +216,7 @@
 {
     /* leave "fullscreen" by going back to the initial size */
     [UIView animateWithDuration:1. animations:^{
-        self.videoOutputView.bounds = _initialVoutBounds;
+        self.videoOutputView.frame = _initialVoutBounds;
     }];
 }
 
