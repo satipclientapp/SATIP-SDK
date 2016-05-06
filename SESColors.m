@@ -11,6 +11,11 @@
 
 @implementation SESColors
 
++ (UIColor*)SESPureWhite
+{
+    return [UIColor whiteColor];
+}
+
 + (UIColor*)SESCloudColor
 {
     return [UIColor colorWithRed:0.66 green:0.8 blue:0.93 alpha:1];

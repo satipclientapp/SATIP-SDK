@@ -13,6 +13,7 @@
 
 @interface SESColors : NSObject
 
++ (UIColor*)SESPureWhite;
 + (UIColor*)SESCloudColor;
 + (UIColor*)SESLightGrayColor;
 + (UIColor*)SESGrayColor;
