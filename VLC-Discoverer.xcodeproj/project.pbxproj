@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A222523433AA9BBE28FD452 /* Pods_VLC_iOS_Discoverer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9B16D66C17FEE25000FFAC /* Pods_VLC_iOS_Discoverer.framework */; };
-		5AFD952211E75D018C3D454D /* Pods_VLC_tvOS_Discoverer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B4B0CE1B8767EF09914F8A /* Pods_VLC_tvOS_Discoverer.framework */; };
+		5A4E81E609A57E18D333BAF1 /* Pods_VLC_tvOS_Discoverer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6673EA064EA3CB9CEEB018D7 /* Pods_VLC_tvOS_Discoverer.framework */; };
 		7D040F291CDCD33900FFB6B9 /* SESTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D040F271CDCD33900FFB6B9 /* SESTableViewCell.m */; };
 		7D040F2A1CDCD33900FFB6B9 /* SESTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D040F281CDCD33900FFB6B9 /* SESTableViewCell.xib */; };
 		7D040F2C1CDCDC5400FFB6B9 /* SESTableViewCell-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D040F2B1CDCDC5400FFB6B9 /* SESTableViewCell-ipad.xib */; };
@@ -36,6 +35,7 @@
 		844044DA1CD8B18B007177E1 /* SESColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 844044D91CD8B18B007177E1 /* SESColors.m */; };
 		844044DB1CD8B18B007177E1 /* SESColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 844044D91CD8B18B007177E1 /* SESColors.m */; };
 		845A79291CD787B1009A1BBF /* SESChannelListAndPlayViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845A79281CD787B1009A1BBF /* SESChannelListAndPlayViewController-iPad.xib */; };
+		BCA29961CF575EE28A1700A5 /* Pods_VLC_iOS_Discoverer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCBEF25A6B22811C1A29B22 /* Pods_VLC_iOS_Discoverer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,10 +62,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5A6DCF0BA01C657379B560C5 /* Pods-VLC-iOS-Discoverer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-iOS-Discoverer.release.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer.release.xcconfig"; sourceTree = "<group>"; };
-		5E8E9CFF835C47DED2802028 /* Pods-VLC-iOS-Discoverer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-iOS-Discoverer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer.debug.xcconfig"; sourceTree = "<group>"; };
-		683B1F148BABCF7FD8A1017F /* Pods-VLC-tvOS-Discoverer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-tvOS-Discoverer.release.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer.release.xcconfig"; sourceTree = "<group>"; };
-		76B4B0CE1B8767EF09914F8A /* Pods_VLC_tvOS_Discoverer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VLC_tvOS_Discoverer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CCBEF25A6B22811C1A29B22 /* Pods_VLC_iOS_Discoverer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VLC_iOS_Discoverer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6673EA064EA3CB9CEEB018D7 /* Pods_VLC_tvOS_Discoverer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VLC_tvOS_Discoverer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D040F261CDCD33900FFB6B9 /* SESTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESTableViewCell.h; path = "VLC-tvOS-Discoverer/SESTableViewCell.h"; sourceTree = "<group>"; };
 		7D040F271CDCD33900FFB6B9 /* SESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESTableViewCell.m; path = "VLC-tvOS-Discoverer/SESTableViewCell.m"; sourceTree = "<group>"; };
 		7D040F281CDCD33900FFB6B9 /* SESTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SESTableViewCell.xib; sourceTree = "<group>"; };
@@ -104,8 +102,10 @@
 		844044D81CD8B17C007177E1 /* SESColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESColors.h; sourceTree = "<group>"; };
 		844044D91CD8B18B007177E1 /* SESColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESColors.m; sourceTree = "<group>"; };
 		845A79281CD787B1009A1BBF /* SESChannelListAndPlayViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SESChannelListAndPlayViewController-iPad.xib"; path = "../VLC-tvOS-Discoverer/SESChannelListAndPlayViewController-iPad.xib"; sourceTree = "<group>"; };
-		9D9B16D66C17FEE25000FFAC /* Pods_VLC_iOS_Discoverer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VLC_iOS_Discoverer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8F8C48E66D0EB5303689F5B /* Pods-VLC-tvOS-Discoverer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-tvOS-Discoverer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer.debug.xcconfig"; sourceTree = "<group>"; };
+		BBEDCB42DB0BEA22CD4929FF /* Pods-VLC-tvOS-Discoverer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-tvOS-Discoverer.release.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer.release.xcconfig"; sourceTree = "<group>"; };
+		D77B8CD137D6C31FB1C7BE47 /* Pods-VLC-tvOS-Discoverer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-tvOS-Discoverer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer.debug.xcconfig"; sourceTree = "<group>"; };
+		F91DEB63EA5FE32DB4E699CF /* Pods-VLC-iOS-Discoverer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-iOS-Discoverer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer.debug.xcconfig"; sourceTree = "<group>"; };
+		FB6EC576CC4B93C05AFD251A /* Pods-VLC-iOS-Discoverer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VLC-iOS-Discoverer.release.xcconfig"; path = "Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D59BCC11C99ADC600A37CF3 /* DynamicTVVLCKit.framework in Frameworks */,
-				5AFD952211E75D018C3D454D /* Pods_VLC_tvOS_Discoverer.framework in Frameworks */,
+				5A4E81E609A57E18D333BAF1 /* Pods_VLC_tvOS_Discoverer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DFDF4E41C9AF1AF00BA86A6 /* DynamicMobileVLCKit.framework in Frameworks */,
-				4A222523433AA9BBE28FD452 /* Pods_VLC_iOS_Discoverer.framework in Frameworks */,
+				BCA29961CF575EE28A1700A5 /* Pods_VLC_iOS_Discoverer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +138,7 @@
 				7D59BC831C9974AB00A37CF3 /* VLC-tvOS-Discoverer */,
 				7D59BCB31C9978B400A37CF3 /* Frameworks */,
 				7D59BC821C9974AB00A37CF3 /* Products */,
-				B38D41F1FE949B0F657C70F4 /* Pods */,
+				C0143F7F2F051EA5677EF29A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,8 +186,8 @@
 				7D59BCA51C9976D600A37CF3 /* CoreFoundation.framework */,
 				7D59BCA31C9976D200A37CF3 /* CoreMedia.framework */,
 				7D59BCA11C9976CE00A37CF3 /* AVFoundation.framework */,
-				9D9B16D66C17FEE25000FFAC /* Pods_VLC_iOS_Discoverer.framework */,
-				76B4B0CE1B8767EF09914F8A /* Pods_VLC_tvOS_Discoverer.framework */,
+				0CCBEF25A6B22811C1A29B22 /* Pods_VLC_iOS_Discoverer.framework */,
+				6673EA064EA3CB9CEEB018D7 /* Pods_VLC_tvOS_Discoverer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,13 +233,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B38D41F1FE949B0F657C70F4 /* Pods */ = {
+		C0143F7F2F051EA5677EF29A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5E8E9CFF835C47DED2802028 /* Pods-VLC-iOS-Discoverer.debug.xcconfig */,
-				5A6DCF0BA01C657379B560C5 /* Pods-VLC-iOS-Discoverer.release.xcconfig */,
-				A8F8C48E66D0EB5303689F5B /* Pods-VLC-tvOS-Discoverer.debug.xcconfig */,
-				683B1F148BABCF7FD8A1017F /* Pods-VLC-tvOS-Discoverer.release.xcconfig */,
+				F91DEB63EA5FE32DB4E699CF /* Pods-VLC-iOS-Discoverer.debug.xcconfig */,
+				FB6EC576CC4B93C05AFD251A /* Pods-VLC-iOS-Discoverer.release.xcconfig */,
+				D77B8CD137D6C31FB1C7BE47 /* Pods-VLC-tvOS-Discoverer.debug.xcconfig */,
+				BBEDCB42DB0BEA22CD4929FF /* Pods-VLC-tvOS-Discoverer.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -251,14 +251,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D59BC951C9974AB00A37CF3 /* Build configuration list for PBXNativeTarget "VLC-tvOS-Discoverer" */;
 			buildPhases = (
-				604D78C7FA4AE566CF80B73D /* 📦 Check Pods Manifest.lock */,
+				0500602149483C8430113476 /* 📦 Check Pods Manifest.lock */,
 				7D59BC7D1C9974AB00A37CF3 /* Sources */,
 				7D59BC7E1C9974AB00A37CF3 /* Frameworks */,
 				7D59BC7F1C9974AB00A37CF3 /* Resources */,
 				7D59BC9A1C9974FA00A37CF3 /* CopyFiles */,
-				C19B46542E1610BAEE63B9A6 /* 📦 Embed Pods Frameworks */,
-				2D0CDC0E2ACAAF446E71F77D /* 📦 Copy Pods Resources */,
-				9E743A4C23C5B73E5F181372 /* Embed Pods Frameworks */,
+				C688ED2F866F0FFF4EB7298B /* 📦 Embed Pods Frameworks */,
+				FA31552A9A54EBCA6822E807 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -273,14 +272,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DFDF4D41C9AEAC700BA86A6 /* Build configuration list for PBXNativeTarget "VLC-iOS-Discoverer" */;
 			buildPhases = (
-				055C94D96649D5F97D0D7681 /* 📦 Check Pods Manifest.lock */,
+				9AC5A44ED67499B0C3F84AD5 /* 📦 Check Pods Manifest.lock */,
 				7DFDF4BC1C9AEAC700BA86A6 /* Sources */,
 				7DFDF4BD1C9AEAC700BA86A6 /* Frameworks */,
 				7DFDF4BE1C9AEAC700BA86A6 /* Resources */,
 				7DFDF4E51C9AF1B800BA86A6 /* CopyFiles */,
-				68E679FDA493B0EBD697F867 /* 📦 Embed Pods Frameworks */,
-				423F03CEC36BE1885AA898FA /* 📦 Copy Pods Resources */,
-				04E2353323AFA9290D99F0DC /* Embed Pods Frameworks */,
+				C949785E53C002D31DA9CCA9 /* 📦 Embed Pods Frameworks */,
+				3C54E0D755906291ACC9B678 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -354,22 +352,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04E2353323AFA9290D99F0DC /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		055C94D96649D5F97D0D7681 /* 📦 Check Pods Manifest.lock */ = {
+		0500602149483C8430113476 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -384,22 +367,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		2D0CDC0E2ACAAF446E71F77D /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		423F03CEC36BE1885AA898FA /* 📦 Copy Pods Resources */ = {
+		3C54E0D755906291ACC9B678 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -414,7 +382,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		604D78C7FA4AE566CF80B73D /* 📦 Check Pods Manifest.lock */ = {
+		9AC5A44ED67499B0C3F84AD5 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -429,7 +397,22 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		68E679FDA493B0EBD697F867 /* 📦 Embed Pods Frameworks */ = {
+		C688ED2F866F0FFF4EB7298B /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C949785E53C002D31DA9CCA9 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,34 +427,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9E743A4C23C5B73E5F181372 /* Embed Pods Frameworks */ = {
+		FA31552A9A54EBCA6822E807 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C19B46542E1610BAEE63B9A6 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -601,7 +569,7 @@
 		};
 		7D59BC961C9974AB00A37CF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8F8C48E66D0EB5303689F5B /* Pods-VLC-tvOS-Discoverer.debug.xcconfig */;
+			baseConfigurationReference = D77B8CD137D6C31FB1C7BE47 /* Pods-VLC-tvOS-Discoverer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -614,7 +582,7 @@
 		};
 		7D59BC971C9974AB00A37CF3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 683B1F148BABCF7FD8A1017F /* Pods-VLC-tvOS-Discoverer.release.xcconfig */;
+			baseConfigurationReference = BBEDCB42DB0BEA22CD4929FF /* Pods-VLC-tvOS-Discoverer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -627,7 +595,7 @@
 		};
 		7DFDF4D51C9AEAC700BA86A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E8E9CFF835C47DED2802028 /* Pods-VLC-iOS-Discoverer.debug.xcconfig */;
+			baseConfigurationReference = F91DEB63EA5FE32DB4E699CF /* Pods-VLC-iOS-Discoverer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -644,7 +612,7 @@
 		};
 		7DFDF4D61C9AEAC700BA86A6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A6DCF0BA01C657379B560C5 /* Pods-VLC-iOS-Discoverer.release.xcconfig */;
+			baseConfigurationReference = FB6EC576CC4B93C05AFD251A /* Pods-VLC-iOS-Discoverer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

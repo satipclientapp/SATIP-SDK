@@ -10,6 +10,8 @@
 #import "SESTableViewCell.h"
 #import "SESColors.h"
 
+#import <AFNetworking/UIKit+AFNetworking.h>
+
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
 #import <DynamicTVVLCKit/DynamicTVVLCKit.h>
@@ -150,10 +152,22 @@
     }
     
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
-
-    cell.channelNameLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
-    cell.channelIconImageView.image = _enlarge;
-
+    
+    NSString *str = [channelItem metadataForKey:VLCMetaInformationTitle];
+    NSArray<NSString *> *splitName = [str componentsSeparatedByString:@";"];
+    if (splitName.count > 1)
+    {
+        NSString *address = [splitName[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSURL *URL = [NSURL URLWithString:address relativeToURL:[NSURL URLWithString:@"https://cdn.hd-plus.de"]];
+    
+        cell.channelNameLabel.text = splitName[0];
+        [cell.channelIconImageView setImageWithURL:URL];
+    }
+    else
+    {
+        cell.channelNameLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
+    }
+    
     return cell;
 }
 
