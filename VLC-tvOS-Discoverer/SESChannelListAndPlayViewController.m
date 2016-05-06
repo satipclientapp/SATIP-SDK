@@ -52,6 +52,12 @@
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
     self.channelListTableView.delegate = self;
+
+#if TARGET_OS_TV
+    self.channelListTableView.rowHeight = 100.;
+#else
+    self.channelListTableView.rowHeight = 68.;
+#endif
     
     /* cache the initial size of the view we draw video in for later use */
     _initialVoutBounds = self.videoOutputView.frame;
@@ -62,6 +68,7 @@
         _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
         _parsePlayer.media = self.serverMediaItem;
         _parsePlayer.delegate = self;
+        _parsePlayer.libraryInstance.debugLogging = YES;
         [_parsePlayer play];
     }
     
@@ -113,11 +120,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:channelListReuseIdentifier];
-    
+
     if (!cell) {
         cell = [SESTableCellView new];
+        cell.backgroundColor = [SESColors SESPureWhite];
     }
-    
+
     if (!self.serverMediaItem) {
         return cell;
     }
