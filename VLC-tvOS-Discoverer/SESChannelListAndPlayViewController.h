@@ -20,9 +20,6 @@
 @property (readwrite, weak, nonatomic) IBOutlet UITableView *channelListTableView;
 @property (readwrite, weak, nonatomic) IBOutlet UIView *videoOutputView;
 @property (readwrite, weak, nonatomic) IBOutlet UIButton *fullscreenButton;
-@property UIImage *enlarge;
-@property UIImage *reduce;
-@property UIImage *sep;
 
 /* action for the fullscreen clicker */
 - (IBAction)fullscreenAction:(id)sender;

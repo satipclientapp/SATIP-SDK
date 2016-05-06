@@ -7,7 +7,7 @@
 //
 
 #import "SESChannelListAndPlayViewController.h"
-#import "SESTableCellView.h"
+#import "SESTableViewCell.h"
 #import "SESColors.h"
 
 /* include the correct VLCKit fork per platform */
@@ -36,6 +36,10 @@
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
 }
+
+@property (readwrite, retain, nonatomic) UIImage *enlarge;
+@property (readwrite, retain, nonatomic) UIImage *reduce;
+
 @end
 
 @implementation SESChannelListAndPlayViewController
@@ -47,16 +51,18 @@
     
     _enlarge = [UIImage imageNamed:@"expand"];
     _reduce = [UIImage imageNamed:@"reduce"];
-    _sep = [UIImage imageNamed:@"sep"];
-    
+
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
     self.channelListTableView.delegate = self;
 
+
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
+    [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
 #else
     self.channelListTableView.rowHeight = 68.;
+    [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell-ipad" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
 #endif
     
     /* cache the initial size of the view we draw video in for later use */
@@ -68,7 +74,8 @@
         _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
         _parsePlayer.media = self.serverMediaItem;
         _parsePlayer.delegate = self;
-        _parsePlayer.libraryInstance.debugLogging = YES;
+        /* you can enable debug logging here ;) */
+        _parsePlayer.libraryInstance.debugLogging = NO;
         [_parsePlayer play];
     }
 
@@ -125,11 +132,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:channelListReuseIdentifier];
+    SESTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:channelListReuseIdentifier];
 
     if (!cell) {
-        cell = [SESTableCellView new];
-        cell.backgroundColor = [SESColors SESPureWhite];
+        cell = [SESTableViewCell new];
     }
 
     if (!self.serverMediaItem) {
@@ -144,41 +150,10 @@
     }
     
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
-    
-    CGFloat cellWidth = tableView.contentSize.width;
-    CGFloat cellHeight = tableView.contentSize.height / [tableView numberOfRowsInSection:0];
-#if TARGET_OS_TV
-    cellHeight *= 0.8;
-#endif
-    CGFloat separatorPos = cellHeight * 2;
-    CGFloat imageHeight = cellHeight * 0.75;
-    CGFloat imageWidth = _enlarge.size.width * imageHeight / _enlarge.size.height;
-    
-    UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake((separatorPos - imageWidth) / 2,
-                                                                    (cellHeight - imageHeight) / 2,
-                                                                    imageWidth, imageHeight)];
-    imv.image=_reduce;
-    [cell.contentView addSubview:imv];
-    
-    imv = [[UIImageView alloc]initWithFrame:CGRectMake(separatorPos, cellHeight * 0.1,
-                                                       _sep.size.width * cellHeight / _sep.size.height,
-                                                       cellHeight * 0.8)];
-    imv.image=_sep;
-    [cell.contentView addSubview:imv];
-    
-    int fontsize = 21;
-#if TARGET_OS_TV
-    fontsize = 29;
-#endif
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(separatorPos + cellHeight / 2,
-                                                              cellHeight / 2 - fontsize,
-                                                              cellWidth - separatorPos - cellHeight / 2,
-                                                              cellHeight / 2 + fontsize)];
-    text.text = [channelItem metadataForKey:VLCMetaInformationTitle];
-    text.font = [UIFont boldSystemFontOfSize:fontsize];
-    
-    [cell.contentView addSubview:text];
-    
+
+    cell.channelNameLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
+    cell.channelIconImageView.image = _enlarge;
+
     return cell;
 }
 
