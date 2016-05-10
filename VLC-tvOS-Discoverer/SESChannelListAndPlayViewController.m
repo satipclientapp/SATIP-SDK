@@ -36,6 +36,7 @@
     NSArray *_initialVoutContraints;
     NSArray *_horizontalFullscreenVoutContraints;
     NSArray *_verticalFullscreenVoutContraints;
+    UIFocusGuide *_fullscreenFocusGuide;
 
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
@@ -70,6 +71,7 @@
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
     self.channelListTableView.delegate = self;
+    self.channelListTableView.backgroundColor = [UIColor clearColor];
 
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
@@ -209,22 +211,19 @@
 
 - (IBAction)fullscreenAction:(id)sender
 {
-    UIButton* button = (UIButton*)sender;
-    [button setSelected:![button isSelected]];
+    [self.fullscreenButton setSelected:![self.fullscreenButton isSelected]];
 #if TARGET_OS_TV
-    if ([button isSelected])
+    if ([self.fullscreenButton isSelected])
     {
-        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateFocused];
-        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateHighlighted];
-        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateSelected];
-    }
-    else
-    {
-        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateFocused];
-        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateHighlighted];
-        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateSelected];
+        [self.fullscreenButton setImage:self.reduce forState:UIControlStateNormal];
+        [self.fullscreenButton setImage:self.reduce forState:UIControlStateFocused];
+        [self.fullscreenButton setImage:self.reduce forState:UIControlStateHighlighted];
+        [self.fullscreenButton setImage:self.reduce forState:UIControlStateSelected];
+    } else {
+        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateNormal];
+        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateFocused];
+        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateHighlighted];
+        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateSelected];
     }
 #endif
     /* clicker method for pseudo fullscreen */
@@ -262,4 +261,21 @@
     }];
 }
 
+#if 0
+#if TARGET_OS_TV
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
+{
+    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
+
+    if (context.nextFocusedView) {
+
+        if (context.nextFocusedView == self.channelListTableView) {
+            _fullscreenFocusGuide.preferredFocusedView = self.fullscreenButton;
+        } else {
+            _fullscreenFocusGuide.preferredFocusedView = self.channelListTableView;
+        }
+    }
+}
+#endif
+#endif
 @end
