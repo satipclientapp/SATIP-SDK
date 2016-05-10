@@ -206,6 +206,22 @@
 {
     UIButton* button = (UIButton*)sender;
     [button setSelected:![button isSelected]];
+#if TARGET_OS_TV
+    if ([button isSelected])
+    {
+        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateFocused];
+        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateHighlighted];
+        [button setImage:[UIImage imageNamed:@"reduce"] forState:UIControlStateSelected];
+    }
+    else
+    {
+        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateFocused];
+        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateHighlighted];
+        [button setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateSelected];
+    }
+#endif
     /* clicker method for pseudo fullscreen */
     if (_fullscreen) {
         [self resizeVoutBackToSmall];

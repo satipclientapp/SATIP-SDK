@@ -27,20 +27,20 @@
                     <rect key="frame" x="753" y="81" width="231" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="hTH-Ia-WXs">
-                    <rect key="frame" x="925" y="770" width="59" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" backgroundImage="expand"/>
-                    <state key="selected" backgroundImage="reduce"/>
-                    <connections>
-                        <action selector="fullscreenAction:" destination="-1" eventType="touchUpInside" id="Vym-Nk-v04"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" id="NnM-qz-lQM">
                     <rect key="frame" x="354" y="278" width="630" height="452"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="hTH-Ia-WXs">
+                    <rect key="frame" x="897" y="871" width="87" height="61"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="expand" backgroundImage="buttonBackground"/>
+                    <state key="selected" image="reduce" backgroundImage="buttonBackground"/>
+                    <connections>
+                        <action selector="fullscreenAction:" destination="-1" eventType="touchUpInside" id="Vym-Nk-v04"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.9635832634" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPadPro"/>
@@ -48,6 +48,7 @@
         </view>
     </objects>
     <resources>
+        <image name="buttonBackground" width="65" height="67"/>
         <image name="expand" width="51" height="39"/>
         <image name="logo" width="248" height="36"/>
         <image name="reduce" width="54" height="46"/>
