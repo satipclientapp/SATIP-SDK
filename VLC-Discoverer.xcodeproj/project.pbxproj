@@ -258,6 +258,7 @@
 				7D59BC9A1C9974FA00A37CF3 /* CopyFiles */,
 				C688ED2F866F0FFF4EB7298B /* 📦 Embed Pods Frameworks */,
 				FA31552A9A54EBCA6822E807 /* 📦 Copy Pods Resources */,
+				441FCA80862299F3CEA3792A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,6 +280,7 @@
 				7DFDF4E51C9AF1B800BA86A6 /* CopyFiles */,
 				C949785E53C002D31DA9CCA9 /* 📦 Embed Pods Frameworks */,
 				3C54E0D755906291ACC9B678 /* 📦 Copy Pods Resources */,
+				26614DD1F60B2165C8C8490C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,6 +369,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		26614DD1F60B2165C8C8490C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3C54E0D755906291ACC9B678 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,6 +397,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		441FCA80862299F3CEA3792A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9AC5A44ED67499B0C3F84AD5 /* 📦 Check Pods Manifest.lock */ = {
