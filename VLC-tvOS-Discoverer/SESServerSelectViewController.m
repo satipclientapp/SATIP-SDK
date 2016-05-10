@@ -140,4 +140,15 @@
     [self.serverTableView reloadData];
 }
 
+- (void)discoveryFailed
+{
+    UILabel *failLabel = [[UILabel alloc] initWithFrame:self.serverTableView.frame];
+    failLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    failLabel.font = [UIFont systemFontOfSize:20.];
+    failLabel.numberOfLines = 0;
+    failLabel.textAlignment = NSTextAlignmentCenter;
+    failLabel.text = @"Discovery of SAT>IP devices failed";
+    [self.serverTableView addSubview:failLabel];
+}
+
 @end

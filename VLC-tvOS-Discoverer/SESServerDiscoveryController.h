@@ -16,6 +16,9 @@
 @required
 - (void)listOfServersWasUpdated;
 
+@optional
+- (void)discoveryFailed;
+
 @end
 
 /* a designated object to capsulize server discovery */

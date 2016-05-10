@@ -38,7 +38,14 @@
     _discoverer = [[VLCMediaDiscoverer alloc] initWithName:@"upnp" libraryInstance:_discoveryLibrary];
     /* enable debug logging here if desired */
     _discoverer.libraryInstance.debugLogging = NO;
-    [_discoverer startDiscoverer];
+    int i_ret = [_discoverer startDiscoverer];
+    if (i_ret != 0) {
+        if (self.delegate) {
+            if ([self.delegate respondsToSelector:@selector(discoveryFailed)]) {
+                [self.delegate discoveryFailed];
+            }
+        }
+    }
 
     /* cache handle to server list and set ourselves as delegate so we get change events */
     _discoveredServerList = _discoverer.discoveredMedia;
