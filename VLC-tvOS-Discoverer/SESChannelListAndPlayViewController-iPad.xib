@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SESChannelListAndPlayViewController">
@@ -18,23 +19,25 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="InR-NH-Skc">
-                    <rect key="frame" x="40" y="81" width="286" height="1204"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="InR-NH-Skc">
+                    <rect key="frame" x="50" y="50" width="370" height="1316"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="370" id="Xby-jh-s5K"/>
+                    </constraints>
                 </tableView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" id="pOG-cl-OG5">
-                    <rect key="frame" x="753" y="81" width="231" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="pOG-cl-OG5">
+                    <rect key="frame" x="733" y="50" width="248" height="36"/>
                 </imageView>
-                <view contentMode="scaleToFill" id="NnM-qz-lQM">
-                    <rect key="frame" x="354" y="278" width="630" height="452"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NnM-qz-lQM">
+                    <rect key="frame" x="465" y="538" width="516" height="290.5"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="NnM-qz-lQM" secondAttribute="height" multiplier="16:9" id="bim-US-Oif"/>
+                    </constraints>
                 </view>
-                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="hTH-Ia-WXs">
-                    <rect key="frame" x="897" y="871" width="87" height="61"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTH-Ia-WXs">
+                    <rect key="frame" x="916" y="1129" width="65" height="67"/>
                     <state key="normal" image="expand" backgroundImage="buttonBackground"/>
                     <state key="selected" image="reduce" backgroundImage="buttonBackground"/>
                     <connections>
@@ -43,6 +46,18 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.9635832634" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hTH-Ia-WXs" secondAttribute="trailing" constant="43" id="31j-RI-tIY"/>
+                <constraint firstAttribute="bottom" secondItem="InR-NH-Skc" secondAttribute="bottom" id="Ggw-IL-vwp"/>
+                <constraint firstItem="pOG-cl-OG5" firstAttribute="trailing" secondItem="hTH-Ia-WXs" secondAttribute="trailing" id="L5Z-TX-LwX"/>
+                <constraint firstItem="NnM-qz-lQM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VIr-Be-DPp"/>
+                <constraint firstItem="pOG-cl-OG5" firstAttribute="top" secondItem="InR-NH-Skc" secondAttribute="top" id="igy-Jv-ZqP"/>
+                <constraint firstItem="NnM-qz-lQM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="465" id="ikD-DX-YKo"/>
+                <constraint firstAttribute="bottom" secondItem="hTH-Ia-WXs" secondAttribute="bottom" constant="170" id="msY-K5-gtC"/>
+                <constraint firstAttribute="trailing" secondItem="NnM-qz-lQM" secondAttribute="trailing" constant="43" id="u4J-lX-Cd4"/>
+                <constraint firstItem="InR-NH-Skc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="wsy-Nz-GkF"/>
+                <constraint firstItem="InR-NH-Skc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="xWD-YE-75m"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPadPro"/>
             <point key="canvasLocation" x="457" y="290"/>
         </view>

@@ -33,8 +33,10 @@
     VLCMediaListPlayer *_playbackPlayer;
     
     /* a cache of some view where we draw video in, so we can refer to it later */
-    CGRect _initialVoutBounds;
-    
+    NSArray *_initialVoutContraints;
+    NSArray *_horizontalFullscreenVoutContraints;
+    NSArray *_verticalFullscreenVoutContraints;
+
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
 }
@@ -69,7 +71,6 @@
     self.channelListTableView.dataSource = self;
     self.channelListTableView.delegate = self;
 
-
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
@@ -79,8 +80,12 @@
 #endif
     
     /* cache the initial size of the view we draw video in for later use */
-    _initialVoutBounds = self.videoOutputView.frame;
-    
+    _initialVoutContraints = self.videoOutputView.constraints;
+
+    NSDictionary *dict = NSDictionaryOfVariableBindings(_videoOutputView);
+    _horizontalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_videoOutputView]|" options:0 metrics:0 views:dict];
+    _verticalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_videoOutputView]|" options:0 metrics:0 views:dict];
+
     // FIXME: add proper error handling if we don't have such an item (which should never happen)
     if (self.serverMediaItem) {
         /* setup our parse player, which we use to download the channel list and parse it */
@@ -226,11 +231,8 @@
     if (_fullscreen) {
         [self resizeVoutBackToSmall];
     } else {
-        _initialVoutBounds = self.videoOutputView.frame;
         [self resizeVoutToFullscreen];
     }
-    [self.view bringSubviewToFront:self.videoOutputView];
-    [self.view bringSubviewToFront:button];
     _fullscreen = !_fullscreen;
 }
 
@@ -239,16 +241,24 @@
     /* to demo the full video quality and as well as VLC's resizing capabilities during playback
      * this is a poor man's fullscreen
      * note that of course you can remove the view from the hierarchy and move it some place else like a new VC, etc. */
+    [NSLayoutConstraint deactivateConstraints:_initialVoutContraints];
+    [NSLayoutConstraint activateConstraints:_horizontalFullscreenVoutContraints];
+    [NSLayoutConstraint activateConstraints:_verticalFullscreenVoutContraints];
     [UIView animateWithDuration:1. animations:^{
-        self.videoOutputView.frame = self.view.frame;
+        [self.view layoutIfNeeded];
+        [self.view bringSubviewToFront:self.videoOutputView];
+        [self.view bringSubviewToFront:self.fullscreenButton];
     }];
 }
 
 - (void)resizeVoutBackToSmall
 {
     /* leave "fullscreen" by going back to the initial size */
+    [NSLayoutConstraint deactivateConstraints:_horizontalFullscreenVoutContraints];
+    [NSLayoutConstraint deactivateConstraints:_verticalFullscreenVoutContraints];
+    [NSLayoutConstraint activateConstraints:_initialVoutContraints];
     [UIView animateWithDuration:1. animations:^{
-        self.videoOutputView.frame = _initialVoutBounds;
+        [self.view layoutIfNeeded];
     }];
 }
 
