@@ -1,34 +1,46 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "29x29",
-      "scale" : "2x"
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_29_settings.png",
+      "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_58_settings.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
-      "scale" : "3x"
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_40_Spotlight.png",
+      "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
-      "size" : "60x60",
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_80_Spotlight.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
-      "size" : "60x60",
-      "scale" : "3x"
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_76_iPad@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_152_iPad.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "satip-sdk_83.5-ipadpro.png",
+      "scale" : "2x"
     }
   ],
   "info" : {
