@@ -32,7 +32,7 @@
 - (void)startDiscovery
 {
     /* alloc our private library with the custom channel list URL - could be a local file in fact */
-    _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=http://people.videolan.org/~feepk/SAT-IP-debug/playlist.m3u"]];
+    _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=https://cdn.hd-plus.de/api/channels/playlist.m3u"]];
 
     /* init our discoverer with the private library */
     _discoverer = [[VLCMediaDiscoverer alloc] initWithName:@"upnp" libraryInstance:_discoveryLibrary];
