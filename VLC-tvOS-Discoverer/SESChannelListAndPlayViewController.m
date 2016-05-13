@@ -42,9 +42,6 @@
     BOOL _fullscreen;
 }
 
-@property (readwrite, retain, nonatomic) UIImage *enlarge;
-@property (readwrite, retain, nonatomic) UIImage *reduce;
-
 @end
 
 @implementation SESChannelListAndPlayViewController
@@ -64,9 +61,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    _enlarge = [UIImage imageNamed:@"expand"];
-    _reduce = [UIImage imageNamed:@"reduce"];
 
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
@@ -78,6 +72,7 @@
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
 #else
     self.channelListTableView.rowHeight = 68.;
+    self.channelListTableView.separatorColor = [UIColor clearColor];
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell-ipad" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
 #endif
     
@@ -212,20 +207,7 @@
 - (IBAction)fullscreenAction:(id)sender
 {
     [self.fullscreenButton setSelected:![self.fullscreenButton isSelected]];
-#if TARGET_OS_TV
-    if ([self.fullscreenButton isSelected])
-    {
-        [self.fullscreenButton setImage:self.reduce forState:UIControlStateNormal];
-        [self.fullscreenButton setImage:self.reduce forState:UIControlStateFocused];
-        [self.fullscreenButton setImage:self.reduce forState:UIControlStateHighlighted];
-        [self.fullscreenButton setImage:self.reduce forState:UIControlStateSelected];
-    } else {
-        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateNormal];
-        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateFocused];
-        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateHighlighted];
-        [self.fullscreenButton setImage:self.enlarge forState:UIControlStateSelected];
-    }
-#endif
+
     /* clicker method for pseudo fullscreen */
     if (_fullscreen) {
         [self resizeVoutBackToSmall];

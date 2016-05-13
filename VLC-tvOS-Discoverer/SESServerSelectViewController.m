@@ -46,6 +46,7 @@
     self.serverTableView.rowHeight = 100.;
 #else
     self.serverTableView.rowHeight = 68.;
+    self.serverTableView.separatorColor = [UIColor clearColor];
 #endif
 
     [self.serverTableView reloadData];
