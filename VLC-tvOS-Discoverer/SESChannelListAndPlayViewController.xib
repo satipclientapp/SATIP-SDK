@@ -29,6 +29,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-rk-lZ9">
                     <rect key="frame" x="1699" y="904" width="131" height="86"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                     <state key="normal" image="maximize" backgroundImage="buttonBackground"/>
                     <state key="selected" image="minimize" backgroundImage="buttonBackground"/>
