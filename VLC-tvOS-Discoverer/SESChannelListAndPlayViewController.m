@@ -9,6 +9,7 @@
 #import "SESChannelListAndPlayViewController.h"
 #import "SESTableViewCell.h"
 #import "SESColors.h"
+#import "SESFocusView.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 
@@ -36,28 +37,26 @@
     NSArray *_initialVoutContraints;
     NSArray *_horizontalFullscreenVoutContraints;
     NSArray *_verticalFullscreenVoutContraints;
-    UIFocusGuide *_fullscreenFocusGuide;
+
 
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
+
+#if TARGET_OS_TV
+    SESFocusView *_focusView;
+#endif
 }
 
 @end
 
 @implementation SESChannelListAndPlayViewController
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.frame;
-    gradient.frame = [[UIScreen mainScreen] bounds];
-    gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
-    [gradient setStartPoint:CGPointMake(1, 1)];
-    [gradient setEndPoint:CGPointMake(0, 0)];
-    [self.view.layer insertSublayer:gradient atIndex:0];
-}
-
 #pragma mark - setup
+
+- (UIView *)preferredFocusedView
+{
+    return self.fullscreenButton;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,8 +69,15 @@
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
+
+    CGRect tableViewFrame = self.channelListTableView.frame;
+    _focusView = [[SESFocusView alloc] initWithFrame:CGRectMake(tableViewFrame.origin.x + tableViewFrame.size.width, tableViewFrame.origin.y, 300., tableViewFrame.size.height)];
+    _focusView.backgroundColor = [UIColor clearColor];
+
+    [self.view addSubview:_focusView];
 #else
     self.channelListTableView.rowHeight = 68.;
+    self.channelListTableView.tintColor = [UIColor clearColor];
     self.channelListTableView.separatorColor = [UIColor clearColor];
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell-ipad" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
 #endif
@@ -93,14 +99,6 @@
         _parsePlayer.libraryInstance.debugLogging = NO;
         [_parsePlayer play];
     }
-
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.frame;
-    gradient.frame = [[UIScreen mainScreen] bounds];
-    gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
-    [gradient setStartPoint:CGPointMake(1, 1)];
-    [gradient setEndPoint:CGPointMake(0, 0)];
-    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
 /* called when our channel list is ready
@@ -242,22 +240,4 @@
         [self.view layoutIfNeeded];
     }];
 }
-
-#if 0
-#if TARGET_OS_TV
-- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
-{
-    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
-
-    if (context.nextFocusedView) {
-
-        if (context.nextFocusedView == self.channelListTableView) {
-            _fullscreenFocusGuide.preferredFocusedView = self.fullscreenButton;
-        } else {
-            _fullscreenFocusGuide.preferredFocusedView = self.channelListTableView;
-        }
-    }
-}
-#endif
-#endif
 @end
