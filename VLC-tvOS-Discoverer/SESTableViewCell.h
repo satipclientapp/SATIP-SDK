@@ -10,7 +10,8 @@
 
 @interface SESTableViewCell : UITableViewCell
 
-@property (readwrite, weak) IBOutlet UIImageView *channelIconImageView;
-@property (readwrite, weak) IBOutlet UILabel *channelNameLabel;
+@property (readwrite, strong, nonatomic) IBOutlet UIImageView *channelIconImageView;
+@property (readwrite, strong, nonatomic) IBOutlet UILabel *channelNameLabel;
+@property (readwrite, strong, nonatomic) IBOutlet UIImageView *backgroundGradientImageView;
 
 @end

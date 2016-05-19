@@ -23,27 +23,17 @@
 #endif
 }
 
-- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
-{
-    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
-}
-
+#if TARGET_OS_TV
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    UITableViewCell *cell = self;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     if (selected) {
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.frame = cell.bounds;
-        gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESCloudColor]CGColor], nil];
-        [gradient setStartPoint:CGPointMake(1, 1)];
-        [gradient setEndPoint:CGPointMake(0, 0)];
-        [cell.layer insertSublayer:gradient atIndex:0];
+        self.backgroundGradientImageView.hidden = NO;
     } else {
-        while ([[cell.layer.sublayers objectAtIndex:0] isKindOfClass:[CAGradientLayer class]])
-            [[cell.layer.sublayers objectAtIndex:0] removeFromSuperlayer];
+        self.backgroundGradientImageView.hidden = YES;
     }
 }
+#endif
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -11,9 +11,12 @@
             <rect key="frame" x="0.0" y="0.0" width="524" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBs-An-CcD" id="S0Q-fX-qc8">
-                <rect key="frame" x="0.0" y="0.0" width="508" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="524" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellbackgroundgradient" translatesAutoresizingMaskIntoConstraints="NO" id="hfZ-vp-rHX">
+                        <rect key="frame" x="0.0" y="0.0" width="516" height="100"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SB5-QG-2WF">
                         <rect key="frame" x="139" y="40" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -32,9 +35,13 @@
                     </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="hfZ-vp-rHX" firstAttribute="leading" secondItem="S0Q-fX-qc8" secondAttribute="leadingMargin" constant="-8" id="5cL-id-Peb"/>
                     <constraint firstItem="BfD-LQ-bW5" firstAttribute="leading" secondItem="S0Q-fX-qc8" secondAttribute="leadingMargin" id="FTi-ro-eMW"/>
+                    <constraint firstItem="hfZ-vp-rHX" firstAttribute="top" secondItem="S0Q-fX-qc8" secondAttribute="topMargin" constant="-8" id="HGe-Sy-1xW"/>
                     <constraint firstItem="UTm-r7-W2c" firstAttribute="leading" secondItem="BfD-LQ-bW5" secondAttribute="trailing" constant="10" id="KFY-eF-C2Y"/>
                     <constraint firstItem="BfD-LQ-bW5" firstAttribute="top" secondItem="S0Q-fX-qc8" secondAttribute="topMargin" id="MFu-Uq-6Lm"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hfZ-vp-rHX" secondAttribute="bottom" constant="-8" id="NwG-T8-YhL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="hfZ-vp-rHX" secondAttribute="trailing" id="PBU-tO-wE1"/>
                     <constraint firstItem="SB5-QG-2WF" firstAttribute="leading" secondItem="UTm-r7-W2c" secondAttribute="trailing" constant="36" id="cEk-oB-dXt"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="SB5-QG-2WF" secondAttribute="trailing" constant="10" id="dBd-I9-p3P"/>
                     <constraint firstItem="UTm-r7-W2c" firstAttribute="centerY" secondItem="S0Q-fX-qc8" secondAttribute="centerY" id="eP5-NR-ooP"/>
@@ -43,6 +50,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="backgroundGradientImageView" destination="hfZ-vp-rHX" id="uDf-vU-jNu"/>
                 <outlet property="channelIconImageView" destination="BfD-LQ-bW5" id="Fbg-9F-juR"/>
                 <outlet property="channelNameLabel" destination="SB5-QG-2WF" id="zwu-if-fbV"/>
             </connections>
@@ -50,6 +58,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="cellbackgroundgradient" width="585" height="106"/>
         <image name="sep" width="1" height="53"/>
     </resources>
 </document>

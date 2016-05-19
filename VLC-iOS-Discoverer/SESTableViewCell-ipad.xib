@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -15,6 +15,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="67.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellbackgroundgradient" translatesAutoresizingMaskIntoConstraints="NO" id="gei-bB-80G">
+                        <rect key="frame" x="8" y="8" width="304" height="51.5"/>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ht6-zn-tZo">
                         <rect key="frame" x="8" y="-0.5" width="68" height="68.5"/>
                         <constraints>
@@ -36,20 +39,27 @@
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="4hN-ff-Tvu" secondAttribute="trailing" constant="10" id="3ba-OZ-ZIf"/>
                     <constraint firstItem="Ht6-zn-tZo" firstAttribute="centerY" secondItem="VQG-Cf-Y2T" secondAttribute="centerY" id="5Xj-cY-XDd"/>
                     <constraint firstItem="4hN-ff-Tvu" firstAttribute="centerY" secondItem="VQG-Cf-Y2T" secondAttribute="centerY" id="A4z-hM-dZU"/>
+                    <constraint firstItem="gei-bB-80G" firstAttribute="leading" secondItem="VQG-Cf-Y2T" secondAttribute="leadingMargin" id="CZm-Bv-2a6"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="gei-bB-80G" secondAttribute="bottom" id="LxN-54-oBB"/>
                     <constraint firstItem="4hN-ff-Tvu" firstAttribute="leading" secondItem="vYs-VO-1cn" secondAttribute="trailing" constant="10" id="fhe-uy-eAz"/>
                     <constraint firstItem="Ht6-zn-tZo" firstAttribute="leading" secondItem="VQG-Cf-Y2T" secondAttribute="leadingMargin" id="mB7-Kh-262"/>
                     <constraint firstItem="vYs-VO-1cn" firstAttribute="height" secondItem="VQG-Cf-Y2T" secondAttribute="height" id="nuf-y6-CRt"/>
+                    <constraint firstItem="gei-bB-80G" firstAttribute="top" secondItem="VQG-Cf-Y2T" secondAttribute="topMargin" id="oex-S4-iFV"/>
                     <constraint firstItem="vYs-VO-1cn" firstAttribute="leading" secondItem="Ht6-zn-tZo" secondAttribute="trailing" constant="10" id="rZF-Dn-Xez"/>
                     <constraint firstItem="vYs-VO-1cn" firstAttribute="centerY" secondItem="VQG-Cf-Y2T" secondAttribute="centerY" id="rwj-5T-tOd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="gei-bB-80G" secondAttribute="trailing" id="wGA-uD-f0j"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="backgroundGradientImageView" destination="gei-bB-80G" id="1n0-Nx-k3k"/>
                 <outlet property="channelIconImageView" destination="Ht6-zn-tZo" id="wqy-Ic-HE4"/>
                 <outlet property="channelNameLabel" destination="4hN-ff-Tvu" id="5iB-lT-rKw"/>
+                <outlet property="selectedBackgroundView" destination="gei-bB-80G" id="wXF-T2-PA6"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="cellbackgroundgradient" width="1170" height="212"/>
         <image name="sep" width="1" height="53"/>
     </resources>
 </document>
