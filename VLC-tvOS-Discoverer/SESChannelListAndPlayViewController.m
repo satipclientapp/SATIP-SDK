@@ -22,7 +22,7 @@
 
 #define channelListReuseIdentifier @"channelListReuseIdentifier"
 
-@interface SESChannelListAndPlayViewController () <UITableViewDataSource, UITableViewDelegate, VLCMediaPlayerDelegate>
+@interface SESChannelListAndPlayViewController () <UITableViewDataSource, UITableViewDelegate, VLCMediaPlayerDelegate, VLCMediaDelegate>
 {
     /* we have 1 player to download, process and report the playlist - it should be destroyed once this is done */
     VLCMediaPlayer *_parsePlayer;
@@ -91,6 +91,8 @@
 
     // FIXME: add proper error handling if we don't have such an item (which should never happen)
     if (self.serverMediaItem) {
+        self.serverMediaItem.delegate = self;
+
         /* setup our parse player, which we use to download the channel list and parse it */
         _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
         _parsePlayer.media = self.serverMediaItem;
@@ -105,6 +107,11 @@
  * ideally filter the notification types and senders, so you can use this method
  * for both players and for more state management */
 - (void)mediaPlayerStateChanged:(NSNotification *)aNotification
+{
+    [self.channelListTableView reloadData];
+}
+
+- (void)mediaDidFinishParsing:(VLCMedia *)aMedia
 {
     [self.channelListTableView reloadData];
 }
@@ -164,8 +171,13 @@
     }
     
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
-    
-    NSString *str = [channelItem metadataForKey:VLCMetaInformationTitle];
+    NSString *str;
+    if (channelItem.isParsed) {
+        str = [channelItem metadataForKey:VLCMetaInformationTitle];
+    } else {
+        channelItem.delegate = self;
+        [channelItem parseWithOptions:VLCMediaParseNetwork | VLCMediaParseLocal | VLCMediaFetchNetwork];
+    }
     NSArray<NSString *> *splitName = [str componentsSeparatedByString:@";"];
     if (splitName.count > 1)
     {
@@ -174,12 +186,10 @@
     
         cell.channelNameLabel.text = splitName[0];
         [cell.channelIconImageView setImageWithURL:URL];
+    } else {
+        cell.channelNameLabel.text = str;
     }
-    else
-    {
-        cell.channelNameLabel.text = [channelItem metadataForKey:VLCMetaInformationTitle];
-    }
-    
+
     return cell;
 }
 
