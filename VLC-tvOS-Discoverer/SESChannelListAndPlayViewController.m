@@ -188,6 +188,7 @@
         [cell.channelIconImageView setImageWithURL:URL];
     } else {
         cell.channelNameLabel.text = str;
+        cell.channelIconImageView.image = nil;
     }
 
     return cell;
