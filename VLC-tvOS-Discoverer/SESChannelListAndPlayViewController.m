@@ -121,6 +121,17 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.channelListTableView reloadData];
+
+    [_playbackPlayer stop];
+    _playbackPlayer = nil;
+
+    /* setup the playback list player if not already done */
+    _playbackPlayer = [[VLCMediaListPlayer alloc] init];
+    /* you can enable debug logging here ;) */
+    _playbackPlayer.mediaPlayer.libraryInstance.debugLogging = NO;
+    _playbackPlayer.mediaPlayer.drawable = self.videoOutputView;
+    _playbackPlayer.mediaList = self.serverMediaItem.subitems;
+
     [super viewWillAppear:animated];
 }
 
@@ -158,6 +169,7 @@
     if (!cell) {
         cell = [SESTableViewCell new];
     }
+    cell.channelIconImageView.image = nil;
 
     if (!self.serverMediaItem) {
         return cell;
@@ -188,7 +200,6 @@
         [cell.channelIconImageView setImageWithURL:URL];
     } else {
         cell.channelNameLabel.text = str;
-        cell.channelIconImageView.image = nil;
     }
 
     return cell;
@@ -198,15 +209,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!_playbackPlayer) {
-        /* setup the playback list player if not already done */
-        _playbackPlayer = [[VLCMediaListPlayer alloc] init];
-        /* you can enable debug logging here ;) */
-        _playbackPlayer.mediaPlayer.libraryInstance.debugLogging = NO;
-        _playbackPlayer.mediaPlayer.drawable = self.videoOutputView;
-        _playbackPlayer.mediaList = self.serverMediaItem.subitems;
-    }
-    
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
     [_playbackPlayer playItemAtIndex:(int)indexPath.row];
 }

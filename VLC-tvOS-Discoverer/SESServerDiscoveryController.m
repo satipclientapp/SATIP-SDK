@@ -37,11 +37,12 @@
 
     /* alloc our private library with the custom channel list URL - could be a local file in fact */
     _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=https://cdn.hd-plus.de/api/channels/playlist.m3u"]];
+//    _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=http://www.satip.info/Playlists/ASTRA_19_2E.m3u"]];
 
     /* init our discoverer with the private library */
     _discoverer = [[VLCMediaDiscoverer alloc] initWithName:@"upnp" libraryInstance:_discoveryLibrary];
     /* enable debug logging here if desired */
-    _discoverer.libraryInstance.debugLogging = YES;
+    _discoverer.libraryInstance.debugLogging = NO;
     int i_ret = [_discoverer startDiscoverer];
     if (i_ret != 0) {
         if (self.delegate) {
