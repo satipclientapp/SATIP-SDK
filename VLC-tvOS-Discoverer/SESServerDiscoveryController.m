@@ -22,6 +22,8 @@
     VLCMediaDiscoverer *_discoverer;
     VLCMediaList *_discoveredServerList;
     VLCLibrary *_discoveryLibrary;
+
+    NSMutableArray *_filteredServerList;
 }
 @end
 
@@ -31,13 +33,15 @@
 
 - (void)startDiscovery
 {
+    _filteredServerList = [NSMutableArray array];
+
     /* alloc our private library with the custom channel list URL - could be a local file in fact */
     _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=https://cdn.hd-plus.de/api/channels/playlist.m3u"]];
 
     /* init our discoverer with the private library */
     _discoverer = [[VLCMediaDiscoverer alloc] initWithName:@"upnp" libraryInstance:_discoveryLibrary];
     /* enable debug logging here if desired */
-    _discoverer.libraryInstance.debugLogging = NO;
+    _discoverer.libraryInstance.debugLogging = YES;
     int i_ret = [_discoverer startDiscoverer];
     if (i_ret != 0) {
         if (self.delegate) {
@@ -63,9 +67,18 @@
 
 #pragma mark - media list delegation
 
-- (void)mediaList:(VLCMediaList *)aMediaList mediaAdded:(VLCMedia *)media atIndex:(NSInteger)index
+- (void)recreateFilteredList
 {
-    /* notify delegate about a new server */
+    [_filteredServerList removeAllObjects];
+
+    NSUInteger count = [_discoveredServerList count];
+    for (NSUInteger x = 0; x < count; x++) {
+        VLCMedia *media = [_discoveredServerList mediaAtIndex:x];
+        if ([[media metadataForKey:VLCMetaInformationSetting] isEqualToString:@"urn:ses-com:device:SatIPServer:1"]) {
+            [_filteredServerList addObject:media];
+        }
+    }
+
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(listOfServersWasUpdated)]) {
             [self.delegate listOfServersWasUpdated];
@@ -73,26 +86,28 @@
     }
 }
 
+- (void)mediaList:(VLCMediaList *)aMediaList mediaAdded:(VLCMedia *)media atIndex:(NSInteger)index
+{
+    /* notify delegate about a new server */
+    [self recreateFilteredList];
+}
+
 - (void)mediaList:(VLCMediaList *)aMediaList mediaRemovedAtIndex:(NSInteger)index
 {
     /* notify delegate about a removed server */
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(listOfServersWasUpdated)]) {
-            [self.delegate listOfServersWasUpdated];
-        }
-    }
+    [self recreateFilteredList];
 }
 
 #pragma mark - properties
 
 - (VLCMedia *)serverAtIndex:(NSInteger)index
 {
-    return [_discoveredServerList mediaAtIndex:index];
+    return _filteredServerList[index];
 }
 
 - (NSInteger)numberOfServers
 {
-    return [_discoveredServerList count];
+    return _filteredServerList.count;
 }
 
 @end

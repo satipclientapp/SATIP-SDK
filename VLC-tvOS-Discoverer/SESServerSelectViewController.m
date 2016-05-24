@@ -49,8 +49,6 @@
     self.serverTableView.separatorColor = [UIColor clearColor];
 #endif
 
-    [self.serverTableView reloadData];
-
     self.viewControllerTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:38.];
 
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -67,6 +65,9 @@
 {
     /* do the expensive call of starting the discovery - should be done once only */
     [_discoveryController startDiscovery];
+
+    [self.serverTableView reloadData];
+
     [super viewWillAppear:animated];
 }
 
