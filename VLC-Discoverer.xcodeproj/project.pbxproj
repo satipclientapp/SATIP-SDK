@@ -253,13 +253,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D59BC951C9974AB00A37CF3 /* Build configuration list for PBXNativeTarget "VLC-tvOS-Discoverer" */;
 			buildPhases = (
-				41C41D1FDD2828271BF9F823 /* 📦 Check Pods Manifest.lock */,
+				41C41D1FDD2828271BF9F823 /* [CP] Check Pods Manifest.lock */,
 				7D59BC7D1C9974AB00A37CF3 /* Sources */,
 				7D59BC7E1C9974AB00A37CF3 /* Frameworks */,
 				7D59BC7F1C9974AB00A37CF3 /* Resources */,
 				7D59BC9A1C9974FA00A37CF3 /* CopyFiles */,
-				7DAA329E646EAA64862588D4 /* 📦 Embed Pods Frameworks */,
-				99CA8FE6F4132E93E1C1E3BE /* 📦 Copy Pods Resources */,
+				7DAA329E646EAA64862588D4 /* [CP] Embed Pods Frameworks */,
+				99CA8FE6F4132E93E1C1E3BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,13 +274,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DFDF4D41C9AEAC700BA86A6 /* Build configuration list for PBXNativeTarget "VLC-iOS-Discoverer" */;
 			buildPhases = (
-				E9F9B30016737BF8E97A2369 /* 📦 Check Pods Manifest.lock */,
+				E9F9B30016737BF8E97A2369 /* [CP] Check Pods Manifest.lock */,
 				7DFDF4BC1C9AEAC700BA86A6 /* Sources */,
 				7DFDF4BD1C9AEAC700BA86A6 /* Frameworks */,
 				7DFDF4BE1C9AEAC700BA86A6 /* Resources */,
 				7DFDF4E51C9AF1B800BA86A6 /* CopyFiles */,
-				149ACAF8A3C0FD19AE7D0236 /* 📦 Embed Pods Frameworks */,
-				4F0B7830C28255B4EF5FEAD5 /* 📦 Copy Pods Resources */,
+				149ACAF8A3C0FD19AE7D0236 /* [CP] Embed Pods Frameworks */,
+				4F0B7830C28255B4EF5FEAD5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -360,14 +360,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		149ACAF8A3C0FD19AE7D0236 /* 📦 Embed Pods Frameworks */ = {
+		149ACAF8A3C0FD19AE7D0236 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,14 +375,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		41C41D1FDD2828271BF9F823 /* 📦 Check Pods Manifest.lock */ = {
+		41C41D1FDD2828271BF9F823 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,14 +390,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4F0B7830C28255B4EF5FEAD5 /* 📦 Copy Pods Resources */ = {
+		4F0B7830C28255B4EF5FEAD5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,14 +405,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-iOS-Discoverer/Pods-VLC-iOS-Discoverer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7DAA329E646EAA64862588D4 /* 📦 Embed Pods Frameworks */ = {
+		7DAA329E646EAA64862588D4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,14 +420,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		99CA8FE6F4132E93E1C1E3BE /* 📦 Copy Pods Resources */ = {
+		99CA8FE6F4132E93E1C1E3BE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,14 +435,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VLC-tvOS-Discoverer/Pods-VLC-tvOS-Discoverer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9F9B30016737BF8E97A2369 /* 📦 Check Pods Manifest.lock */ = {
+		E9F9B30016737BF8E97A2369 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

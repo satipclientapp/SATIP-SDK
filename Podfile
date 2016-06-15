@@ -13,7 +13,7 @@ target 'VLC-tvOS-Discoverer' do
 platform :tvos, '9.1'
 
 pod 'AFNetworking'
-pod 'SAT-IP-DynamicTVVLCKit', '3.0.0a5'
+pod 'SAT-IP-DynamicTVVLCKit', '3.0.0a7'
 
 end
 
@@ -22,6 +22,6 @@ target 'VLC-iOS-Discoverer' do
 platform :ios, '9.2'
 
 pod 'AFNetworking'
-pod 'SAT-IP-DynamicVLCKit', '3.0.0a5'
+pod 'SAT-IP-DynamicVLCKit', '3.0.0a7'
 
 end
