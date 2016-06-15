@@ -302,7 +302,7 @@
 				TargetAttributes = {
 					7D59BC801C9974AB00A37CF3 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 65Z9H5STC9;
+						DevelopmentTeam = 9K22G475S5;
 						SystemCapabilities = {
 							com.apple.BackgroundModes.appletvos = {
 								enabled = 1;
@@ -311,7 +311,7 @@
 					};
 					7DFDF4BF1C9AEAC700BA86A6 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 65Z9H5STC9;
+						DevelopmentTeam = 9K22G475S5;
 					};
 				};
 			};
@@ -574,7 +574,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "VLC-tvOS-Discoverer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-SATIP-Discoverer";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -588,7 +588,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "VLC-tvOS-Discoverer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-SATIP-Discoverer";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -605,7 +605,7 @@
 				INFOPLIST_FILE = "VLC-iOS-Discoverer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-SATIP-Discoverer";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos9.3;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -624,7 +624,7 @@
 				INFOPLIST_FILE = "VLC-iOS-Discoverer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.videolabs.VLC-SATIP-Discoverer";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos9.3;
 				TARGETED_DEVICE_FAMILY = 2;
