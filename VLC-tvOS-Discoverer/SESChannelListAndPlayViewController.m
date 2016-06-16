@@ -184,11 +184,11 @@
     
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
     NSString *str;
-    if (channelItem.isParsed) {
+    if (channelItem.parsedStatus != VLCMediaParsedStatusFailed || channelItem.parsedStatus == VLCMediaParsedStatusInit) {
         str = [channelItem metadataForKey:VLCMetaInformationTitle];
     } else {
         channelItem.delegate = self;
-        [channelItem parseWithOptions:VLCMediaParseNetwork | VLCMediaParseLocal | VLCMediaFetchNetwork];
+        [channelItem parseWithOptions:VLCMediaParseNetwork | VLCMediaParseLocal];
     }
     NSArray<NSString *> *splitName = [str componentsSeparatedByString:@";"];
     if (splitName.count > 1)
