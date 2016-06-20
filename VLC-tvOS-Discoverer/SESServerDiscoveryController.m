@@ -36,7 +36,8 @@
     _filteredServerList = [NSMutableArray array];
 
     /* alloc our private library with the custom channel list URL - could be a local file in fact */
-    _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=http://www.satip.info/Playlists/ASTRA_19_2E.m3u"]];
+    /* original list from SES http://www.satip.info/Playlists/ASTRA_19_2E.m3u */
+    _discoveryLibrary = [[VLCLibrary alloc] initWithOptions:@[@"--satip-playlist-url=https://cdn.hd-plus.de/playlist/satipsdk.m3u"]];
 
     /* init our discoverer with the private library */
     _discoverer = [[VLCMediaDiscoverer alloc] initWithName:@"upnp" libraryInstance:_discoveryLibrary];

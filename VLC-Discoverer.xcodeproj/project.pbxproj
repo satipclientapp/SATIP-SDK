@@ -69,7 +69,7 @@
 		7D040F271CDCD33900FFB6B9 /* SESTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESTableViewCell.m; path = "VLC-tvOS-Discoverer/SESTableViewCell.m"; sourceTree = "<group>"; };
 		7D040F281CDCD33900FFB6B9 /* SESTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SESTableViewCell.xib; sourceTree = "<group>"; };
 		7D040F2B1CDCDC5400FFB6B9 /* SESTableViewCell-ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SESTableViewCell-ipad.xib"; sourceTree = "<group>"; };
-		7D59BC811C9974AB00A37CF3 /* VLC-tvOS-Discoverer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VLC-tvOS-Discoverer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D59BC811C9974AB00A37CF3 /* SES SAT>IP SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SES SAT>IP SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D59BC851C9974AB00A37CF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7D59BC871C9974AB00A37CF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "VLC-tvOS-Discoverer/AppDelegate.h"; sourceTree = "<group>"; };
 		7D59BC881C9974AB00A37CF3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "VLC-tvOS-Discoverer/AppDelegate.m"; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		7DFDF4B71C9AC13500BA86A6 /* SESChannelListAndPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESChannelListAndPlayViewController.h; path = "VLC-tvOS-Discoverer/SESChannelListAndPlayViewController.h"; sourceTree = "<group>"; };
 		7DFDF4B81C9AC13500BA86A6 /* SESChannelListAndPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESChannelListAndPlayViewController.m; path = "VLC-tvOS-Discoverer/SESChannelListAndPlayViewController.m"; sourceTree = "<group>"; };
 		7DFDF4B91C9AC13500BA86A6 /* SESChannelListAndPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SESChannelListAndPlayViewController.xib; sourceTree = "<group>"; };
-		7DFDF4C01C9AEAC700BA86A6 /* VLC-iOS-Discoverer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VLC-iOS-Discoverer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DFDF4C01C9AEAC700BA86A6 /* SES SAT>IP SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SES SAT>IP SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DFDF4C31C9AEAC700BA86A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7DFDF4CE1C9AEAC700BA86A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DFDF4D31C9AEAC700BA86A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 		7D59BC821C9974AB00A37CF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7D59BC811C9974AB00A37CF3 /* VLC-tvOS-Discoverer.app */,
-				7DFDF4C01C9AEAC700BA86A6 /* VLC-iOS-Discoverer.app */,
+				7D59BC811C9974AB00A37CF3 /* SES SAT>IP SDK.app */,
+				7DFDF4C01C9AEAC700BA86A6 /* SES SAT>IP SDK.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 			);
 			name = "VLC-tvOS-Discoverer";
 			productName = "VLC-tvOS-Discoverer";
-			productReference = 7D59BC811C9974AB00A37CF3 /* VLC-tvOS-Discoverer.app */;
+			productReference = 7D59BC811C9974AB00A37CF3 /* SES SAT>IP SDK.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7DFDF4BF1C9AEAC700BA86A6 /* VLC-iOS-Discoverer */ = {
@@ -288,7 +288,7 @@
 			);
 			name = "VLC-iOS-Discoverer";
 			productName = "VLC-iOS-Discoverer";
-			productReference = 7DFDF4C01C9AEAC700BA86A6 /* VLC-iOS-Discoverer.app */;
+			productReference = 7DFDF4C01C9AEAC700BA86A6 /* SES SAT>IP SDK.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -575,7 +575,7 @@
 				INFOPLIST_FILE = "VLC-tvOS-Discoverer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SES SAT>IP SDK";
 			};
 			name = Debug;
 		};
@@ -589,7 +589,7 @@
 				INFOPLIST_FILE = "VLC-tvOS-Discoverer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SES SAT>IP SDK";
 			};
 			name = Release;
 		};
@@ -606,7 +606,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SES SAT>IP SDK";
 				SDKROOT = iphoneos9.3;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -625,7 +625,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ses.satipsdk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SES SAT>IP SDK";
 				SDKROOT = iphoneos9.3;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
