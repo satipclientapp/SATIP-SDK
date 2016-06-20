@@ -1,0 +1,419 @@
+#EXTM3U
+#EXTINF:0, 1-2-3.tv; /senderlogos/dark-cropped/24444-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=105,2815,32,2816,2815
+#EXTINF:0, 1-2-3.tv HD; /senderlogos/dark-cropped/24444-2.png
+rtsp://sat.ip/?src=1&freq=10803&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=34&pids=98,767,34,771,767
+#EXTINF:0, 3sat; /senderlogos/dark-cropped/14855-1.png
+rtsp://sat.ip/?src=1&freq=11954&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=200,210,220,221,225,222,230,231,210
+#EXTINF:0, 3sat HD; /senderlogos/dark-cropped/14855-2.png
+rtsp://sat.ip/?src=1&freq=11347&sr=22000&pol=v&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=6500,6510,6520,6521,6522,6523,6530,6531,6510
+#EXTINF:0, ARD-alpha; /senderlogos/dark-cropped/14840-1.png
+rtsp://sat.ip/?src=1&freq=12266&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1400,1401,1402,1403,1404,1406,1405,1401
+#EXTINF:0, ARIRANG TV; /senderlogos/dark-cropped/25006-1.png
+rtsp://sat.ip/?src=1&freq=11509&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=761,711,731,1242,1243,1244,1245,1246,1247,1248,711
+#EXTINF:0, ARTE; /senderlogos/dark-cropped/19712-1.png
+rtsp://sat.ip/?src=1&freq=10744&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=400,401,402,403,407,408,404,401
+#EXTINF:0, ARTE HD; /senderlogos/dark-cropped/19712-2.png
+rtsp://sat.ip/?src=1&freq=11494&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5110,5111,5112,5113,5114,5115,5116,5117,5118,5119,5111
+#EXTINF:0, Al Jazeera English; /senderlogos/dark-cropped/25005-1.png
+rtsp://sat.ip/?src=1&freq=11509&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=762,712,732,712
+#EXTINF:0, Anixe; /senderlogos/dark-cropped/19413-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=107,3311,3312,3311
+#EXTINF:0, Anixe HD; /senderlogos/dark-cropped/19413-2.png
+rtsp://sat.ip/?src=1&freq=10774&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.20&fec=34&pids=96,255,259,255
+#EXTINF:0, AstroTV; /senderlogos/dark-cropped/19414-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=98,2559,2560,2559
+#EXTINF:0, BB-MV Lokal-TV; /senderlogos/dark-cropped/25008-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=103,2559,2560,2559
+#EXTINF:0, BBC World; /senderlogos/dark-cropped/25007-1.png
+rtsp://sat.ip/?src=1&freq=11597&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1858,163,92,163
+#EXTINF:0, BR Nord HD; /senderlogos/dark-cropped/22600-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5210,5201,5202,5203,5204,5205,5206,5201
+#EXTINF:0, BR Süd HD; /senderlogos/dark-cropped/22600-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5200,5201,5202,5203,5204,5205,5206,5201
+#EXTINF:0, Bayerisches FS; /senderlogos/dark-cropped/22600-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=200,201,202,203,204,206,205,201
+#EXTINF:0, Bayerisches FS Nord; /senderlogos/dark-cropped/22600-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=500,201,202,203,204,206,205,201
+#EXTINF:0, Bayerisches FS Süd; /senderlogos/dark-cropped/22600-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=200,201,202,203,204,206,205,201
+#EXTINF:0, Bayerisches Fernsehen HD; /senderlogos/dark-cropped/22600-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5200,5201,5202,5203,5204,5205,5206,5201
+#EXTINF:0, Bibel TV; /senderlogos/dark-cropped/24456-1.png
+rtsp://sat.ip/?src=1&freq=12552&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=32,33,34,36,33
+#EXTINF:0, Bibel TV HD; /senderlogos/dark-cropped/24456-2.png
+rtsp://sat.ip/?src=1&freq=11244&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=224,2240,2241,2245,2240
+#EXTINF:0, Bloomberg TV Europe; /senderlogos/dark-cropped/14806-1.png
+rtsp://sat.ip/?src=1&freq=11597&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1090,1360,1320,1360
+#EXTINF:0, CCTV 9 Documentary; /senderlogos/dark-cropped/25011-1.png
+rtsp://sat.ip/?src=1&freq=11538&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=662,612,632,612
+#EXTINF:0, CCTV News English; /senderlogos/dark-cropped/25012-1.png
+rtsp://sat.ip/?src=1&freq=11538&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=664,614,634,614
+#EXTINF:0, CNBC Europe; /senderlogos/dark-cropped/25013-1.png
+rtsp://sat.ip/?src=1&freq=11597&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1838,307,308,307
+#EXTINF:0, Channel 21; /senderlogos/dark-cropped/24459-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=113,1023,35,1024,1023
+#EXTINF:0, DELUXE MUSIC; /senderlogos/dark-cropped/22584-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=99,3327,3328,3327
+#EXTINF:0, DIE NEUE ZEIT TV; /senderlogos/dark-cropped/24464-1.png
+rtsp://sat.ip/?src=1&freq=11421&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=109,3583,3584,3583
+#EXTINF:0, DMAX; /senderlogos/dark-cropped/15808-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=108,3327,44,3328,3327
+#EXTINF:0, DMAX Austria; /senderlogos/dark-cropped/15808-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=115,3583,45,3584,3583
+#EXTINF:0, DONAU TV; /senderlogos/dark-cropped/24468-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=105,2559,2560,2559
+#EXTINF:0, Das Erste; /senderlogos/dark-cropped/19700-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=100,101,102,103,104,106,84,105,101
+#EXTINF:0, Das Erste HD; /senderlogos/dark-cropped/19700-2.png
+rtsp://sat.ip/?src=1&freq=11494&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5100,5101,5102,5103,5104,5105,5106,5108,5101
+#EXTINF:0, Deutsches Musik Fernsehen; /senderlogos/dark-cropped/24463-1.png
+rtsp://sat.ip/?src=1&freq=12634&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=105,53,54,504,53
+#EXTINF:0, Disney Channel; /senderlogos/dark-cropped/19714-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=115,2047,36,2048,2051,2047
+#EXTINF:0, EWTN; /senderlogos/dark-cropped/24476-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=100,1023,1024,1025,1023
+#EXTINF:0, EinsPlus; /senderlogos/dark-cropped/14814-1.png
+rtsp://sat.ip/?src=1&freq=10744&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=300,301,302,303,304,306,301
+#EXTINF:0, EinsPlus HD; /senderlogos/dark-cropped/14814-2.png
+rtsp://sat.ip/?src=1&freq=11053&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5420,5421,5422,5423,5424,5426,5425,5421
+#EXTINF:0, Einsfestival; /senderlogos/dark-cropped/14813-1.png
+rtsp://sat.ip/?src=1&freq=10744&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=200,201,202,203,204,206,201
+#EXTINF:0, Einsfestival HD; /senderlogos/dark-cropped/14813-2.png
+rtsp://sat.ip/?src=1&freq=11053&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5410,5411,5412,5413,5414,5416,5415,5411
+#EXTINF:0, Eurosport 1; /senderlogos/dark-cropped/19955-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=280,101,103,102,101
+#EXTINF:0, Fashion Television; /senderlogos/dark-cropped/25058-1.png
+rtsp://sat.ip/?src=1&freq=11421&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=0,0
+#EXTINF:0, France 24 (engl.); /senderlogos/dark-cropped/25026-1.png
+rtsp://sat.ip/?src=1&freq=11538&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=202,606,626,6702,606
+#EXTINF:0, Franken Fernsehen; /senderlogos/dark-cropped/24478-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=97,511,512,511
+#EXTINF:0, Genius Plus; /senderlogos/dark-cropped/25027-1.png
+rtsp://sat.ip/?src=1&freq=10774&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.20&fec=34&pids=108,3327,3328,3327
+#EXTINF:0, HOPE Channel; /senderlogos/dark-cropped/24481-2.png
+rtsp://sat.ip/?src=1&freq=11244&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=227,2270,2271,2270
+#EXTINF:0, HSE24; /senderlogos/dark-cropped/24483-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=104,1279,37,1280,1279
+#EXTINF:0, HSE24 Extra; /senderlogos/dark-cropped/24485-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=259,512,660,576,512
+#EXTINF:0, HSE24 Extra HD; /senderlogos/dark-cropped/24485-2.png
+rtsp://sat.ip/?src=1&freq=10803&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=34&pids=97,511,33,515,511
+#EXTINF:0, HSE24 HD; /senderlogos/dark-cropped/24483-2.png
+rtsp://sat.ip/?src=1&freq=10774&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.20&fec=34&pids=100,1279,36,1283,1279
+#EXTINF:0, HSE24 TREND; /senderlogos/dark-cropped/25028-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=110,3071,37,3072,3071
+#EXTINF:0, Innovation TV; /senderlogos/dark-cropped/25029-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=101,1279,1280,1279
+#EXTINF:0, JML; /senderlogos/dark-cropped/24489-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=108,2303,2304,2303
+#EXTINF:0, Juwelo; /senderlogos/dark-cropped/24491-1.png
+rtsp://sat.ip/?src=1&freq=12634&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=116,1041,1042,1041
+#EXTINF:0, Juwelo HD; /senderlogos/dark-cropped/24491-2.png
+rtsp://sat.ip/?src=1&freq=12575&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=99,1023,1024,1023
+#EXTINF:0, K-TV; /senderlogos/dark-cropped/24495-1.png
+rtsp://sat.ip/?src=1&freq=12634&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=102,202,302,502,202
+#EXTINF:0, KiKA; /senderlogos/dark-cropped/14787-1.png
+rtsp://sat.ip/?src=1&freq=11954&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=300,310,320,321,325,330,331,310
+#EXTINF:0, KiKA HD; /senderlogos/dark-cropped/14787-2.png
+rtsp://sat.ip/?src=1&freq=11347&sr=22000&pol=v&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=6600,6610,6620,6621,6622,6630,6631,6610
+#EXTINF:0, Kinowelt TV; /senderlogos/dark-cropped/14832-1.png
+rtsp://sat.ip/?src=1&freq=10921&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=78&pids=0,0
+#EXTINF:0, L-TV; /senderlogos/dark-cropped/24496-1.png
+rtsp://sat.ip/?src=1&freq=12663&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1213,2130,2131,2130
+#EXTINF:0, Lokal TV Portal; /senderlogos/dark-cropped/25030-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=144,4607,4608,4607
+#EXTINF:0, MDR Fernsehen; /senderlogos/dark-cropped/20212-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2800,2901,2902,2903,2904,2905,2901
+#EXTINF:0, MDR Fernsehen HD; /senderlogos/dark-cropped/20212-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5320,5331,5332,5333,5334,5336,5335,5331
+#EXTINF:0, MDR S-Anhalt; /senderlogos/dark-cropped/20212-1.png
+rtsp://sat.ip/?src=1&freq=12266&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=510,511,511
+#EXTINF:0, MDR S-Anhalt HD; /senderlogos/dark-cropped/20212-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5330,5331,5332,5333,5334,5336,5335,5331
+#EXTINF:0, MDR Sachen; /senderlogos/dark-cropped/20212-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2800,2901,2902,2903,2904,2905,2901
+#EXTINF:0, MDR Sachsen HD; /senderlogos/dark-cropped/20212-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5320,5331,5332,5333,5334,5336,5335,5331
+#EXTINF:0, MDR Thüringen; /senderlogos/dark-cropped/20212-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=3000,2901,2902,2903,2904,2905,2901
+#EXTINF:0, MDR Thüringen HD; /senderlogos/dark-cropped/20212-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5340,5331,5332,5333,5334,5336,5335,5331
+#EXTINF:0, Mainfranken; /senderlogos/dark-cropped/25031-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=102,1791,1792,1791
+#EXTINF:0, ManouLenz.tv; /senderlogos/dark-cropped/25032-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=0,0
+#EXTINF:0, MediaShop- Meine Einkaufswelt; /senderlogos/dark-cropped/25033-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=114,1279,1280,1279
+#EXTINF:0, Mediashop- Neuheiten; /senderlogos/dark-cropped/25034-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=100,255,256,255
+#EXTINF:0, Mühlviertel TV; /senderlogos/dark-cropped/24505-1.png
+rtsp://sat.ip/?src=1&freq=12663&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1241,2410,2411,2410
+#EXTINF:0, N24; /senderlogos/dark-cropped/20462-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=99,1023,35,1024,1023
+#EXTINF:0, N24 Austria; /senderlogos/dark-cropped/20462-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=98,255,256,255
+#EXTINF:0, NDR FS HH; /senderlogos/dark-cropped/14850-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2500,2601,2602,2603,2604,2601
+#EXTINF:0, NDR FS HH HD; /senderlogos/dark-cropped/14850-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5240,5221,5222,5223,5224,5226,5245,5221
+#EXTINF:0, NDR FS MV; /senderlogos/dark-cropped/14850-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2400,2601,2602,2603,2604,2601
+#EXTINF:0, NDR FS MV HD; /senderlogos/dark-cropped/14850-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5230,5221,5222,5223,5224,5226,5235,5221
+#EXTINF:0, NDR FS NDS; /senderlogos/dark-cropped/14850-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2600,2601,2602,2603,2604,2601
+#EXTINF:0, NDR FS NDS HD; /senderlogos/dark-cropped/14850-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5220,5221,5222,5223,5224,5225,5226,5221
+#EXTINF:0, NDR FS SH; /senderlogos/dark-cropped/14850-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2700,2601,2602,2603,2604,2601
+#EXTINF:0, NDR FS SH HD; /senderlogos/dark-cropped/14850-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5250,5221,5222,5223,5224,5226,5255,5221
+#EXTINF:0, NDR Fernsehen; /senderlogos/dark-cropped/14850-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=2700,2601,2602,2603,2604,2601
+#EXTINF:0, NDR Fernsehen HD; /senderlogos/dark-cropped/14850-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5250,5221,5222,5223,5224,5226,5255,5221
+#EXTINF:0, Nickelodeon; /senderlogos/dark-cropped/20454-1.png
+rtsp://sat.ip/?src=1&freq=11973&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=420,4101,4102,4103,4104,4105,4101
+#EXTINF:0, ORF2E; /senderlogos/dark-cropped/24518-1.png
+rtsp://sat.ip/?src=1&freq=12693&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1004,170,171,505,170
+#EXTINF:0, PHOENIX; /senderlogos/dark-cropped/14794-1.png
+rtsp://sat.ip/?src=1&freq=10744&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=500,501,502,503,504,501
+#EXTINF:0, PHOENIX HD; /senderlogos/dark-cropped/14794-2.png
+rtsp://sat.ip/?src=1&freq=11583&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5260,5261,5262,5263,5264,5261
+#EXTINF:0, PULS 4; /senderlogos/dark-cropped/24529-1.png
+rtsp://sat.ip/?src=1&freq=12266&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=160,161,161
+#EXTINF:0, Pearl.tv; /senderlogos/dark-cropped/24524-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=96,2047,2048,2047
+#EXTINF:0, Pearl.tv HD; /senderlogos/dark-cropped/24524-2.png
+rtsp://sat.ip/?src=1&freq=12575&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=100,1279,1280,1279
+#EXTINF:0, ProSieben; /senderlogos/dark-cropped/19457-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=97,511,33,512,515,511
+#EXTINF:0, ProSieben MAXX; /senderlogos/dark-cropped/24442-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=101,1535,37,1536,1535
+#EXTINF:0, ProSieben Schweiz; /senderlogos/dark-cropped/19457-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=32,289,33,290,292,289
+#EXTINF:0, ProSieben Österreich; /senderlogos/dark-cropped/19457-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1025,161,36,84,85,161
+#EXTINF:0, QVC; /senderlogos/dark-cropped/24531-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=96,255,33,256,255
+#EXTINF:0, QVC BEAUTY & STYLE; /senderlogos/dark-cropped/25038-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=102,1791,38,1792,1791
+#EXTINF:0, QVC BEAUTY & STYLE HD; /senderlogos/dark-cropped/25038-2.png
+rtsp://sat.ip/?src=1&freq=10965&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=101,1535,37,1539,1535
+#EXTINF:0, QVC HD; /senderlogos/dark-cropped/24531-2.png
+rtsp://sat.ip/?src=1&freq=10774&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.20&fec=34&pids=99,1023,35,1027,1023
+#EXTINF:0, QVC Plus; /senderlogos/dark-cropped/24533-1.png
+rtsp://sat.ip/?src=1&freq=12552&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1060,168,144,146,168
+#EXTINF:0, QVC Plus HD; /senderlogos/dark-cropped/24533-2.png
+rtsp://sat.ip/?src=1&freq=10803&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=34&pids=100,1279,36,1283,1279
+#EXTINF:0, RFO; /senderlogos/dark-cropped/24538-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=101,1535,1536,1535
+#EXTINF:0, RTL FS; /senderlogos/dark-cropped/19456-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=56,163,104,105,163
+#EXTINF:0, RTL HB NDS; /senderlogos/dark-cropped/19456-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=55,163,104,105,163
+#EXTINF:0, RTL HH SH; /senderlogos/dark-cropped/19456-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=54,163,104,105,163
+#EXTINF:0, RTL II; /senderlogos/dark-cropped/20008-1.png
+rtsp://sat.ip/?src=1&freq=12363&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1293,0
+#EXTINF:0, RTL II Schweiz; /senderlogos/dark-cropped/20008-1.png
+rtsp://sat.ip/?src=1&freq=11392&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=96,255,32,256,255
+#EXTINF:0, RTL II Österreich; /senderlogos/dark-cropped/20008-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=400,401,402,403,401
+#EXTINF:0, RTL NITRO; /senderlogos/dark-cropped/22541-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=53,173,146,84,86,173
+#EXTINF:0, RTL Schweiz; /senderlogos/dark-cropped/19456-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=610,611,612,613,614,611
+#EXTINF:0, RTL Television; /senderlogos/dark-cropped/19456-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=44,163,104,105,106,110,163
+#EXTINF:0, RTL Österreich; /senderlogos/dark-cropped/19456-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=200,201,202,203,201
+#EXTINF:0, Radio Bremen TV; /senderlogos/dark-cropped/14850-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1200,1201,1202,1204,1201
+#EXTINF:0, Regio TV; /senderlogos/dark-cropped/24537-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=107,2047,2048,2047
+#EXTINF:0, Rhein-Main-TV; /senderlogos/dark-cropped/24539-1.png
+rtsp://sat.ip/?src=1&freq=12634&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=108,208,308,508,208
+#EXTINF:0, Rhein-Neckar Fernsehen; /senderlogos/dark-cropped/24541-1.png
+rtsp://sat.ip/?src=1&freq=12149&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=0,0
+#EXTINF:0, RiC; /senderlogos/dark-cropped/24540-1.png
+rtsp://sat.ip/?src=1&freq=12693&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1009,190,191,190
+#EXTINF:0, Russia Today; /senderlogos/dark-cropped/25039-1.png
+rtsp://sat.ip/?src=1&freq=11538&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=654,604,624,604
+#EXTINF:0, SAT.1; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=96,255,32,256,259,255
+#EXTINF:0, SAT.1 Bayern; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=103,255,32,256,259,255
+#EXTINF:0, SAT.1 Gold; /senderlogos/dark-cropped/24443-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=100,1279,36,1280,1279
+#EXTINF:0, SAT.1 HH/SH; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=103,2047,40,2048,2051,2047
+#EXTINF:0, SAT.1 NRW; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=104,255,32,256,259,255
+#EXTINF:0, SAT.1 NS/Bremen; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=104,2047,40,2048,2051,2047
+#EXTINF:0, SAT.1 RhlPf/Hessen; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=105,2047,40,2048,2051,2047
+#EXTINF:0, SAT.1 Schweiz; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=101,1535,38,1536,1539,1535
+#EXTINF:0, SAT.1 Österreich; /senderlogos/dark-cropped/19455-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1028,800,801,802,803,800
+#EXTINF:0, SR Fernsehen; /senderlogos/dark-cropped/24568-1.png
+rtsp://sat.ip/?src=1&freq=12266&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1300,1301,1302,1303,1304,1301
+#EXTINF:0, SR Fernsehen HD; /senderlogos/dark-cropped/24568-2.png
+rtsp://sat.ip/?src=1&freq=11053&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5430,5431,5432,5433,5434,5436,5435,5431
+#EXTINF:0, SUPER RTL; /senderlogos/dark-cropped/14791-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=45,165,120,65,66,165
+#EXTINF:0, SUPER RTL Schweiz; /senderlogos/dark-cropped/14791-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=52,172,145,82,172
+#EXTINF:0, SUPER RTL Österreich; /senderlogos/dark-cropped/14791-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=500,501,502,503,501
+#EXTINF:0, SWR BW HD; /senderlogos/dark-cropped/22612-2.png
+rtsp://sat.ip/?src=1&freq=11494&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5120,5121,5122,5123,5124,5125,5126,5121
+#EXTINF:0, SWR Fernsehen; /senderlogos/dark-cropped/22612-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=800,801,802,803,804,806,801
+#EXTINF:0, SWR Fernsehen BW; /senderlogos/dark-cropped/22612-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=800,801,802,803,804,806,801
+#EXTINF:0, SWR Fernsehen HD; /senderlogos/dark-cropped/22612-2.png
+rtsp://sat.ip/?src=1&freq=11494&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5120,5121,5122,5123,5124,5125,5126,5121
+#EXTINF:0, SWR Fernsehen RP; /senderlogos/dark-cropped/22612-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=3100,3101,3102,3103,3104,3106,3101
+#EXTINF:0, SWR RP HD; /senderlogos/dark-cropped/22612-2.png
+rtsp://sat.ip/?src=1&freq=11494&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5130,5121,5122,5123,5126,5134,5135,5121
+#EXTINF:0, ServusTV Deutschland; /senderlogos/dark-cropped/20210-1.png
+rtsp://sat.ip/?src=1&freq=12663&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1210,1110,1111,1112,1115,1116,1110
+#EXTINF:0, ServusTV HD Deutschland; /senderlogos/dark-cropped/20210-2.png
+rtsp://sat.ip/?src=1&freq=11303&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=110,4920,4921,4922,4924,4925,4926,4920
+#EXTINF:0, Shop24Direct; /senderlogos/dark-cropped/25070-1.png
+rtsp://sat.ip/?src=1&freq=12634&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=133,233,333,233
+#EXTINF:0, Sky Select; /senderlogos/dark-cropped/24559-1.png
+rtsp://sat.ip/?src=1&freq=12032&sr=27500&pol=h&msys=dvbs2&mtype=qpsk&plts=off&ro=0.35&fec=910&pids=105,2559,32,2560,2559
+#EXTINF:0, Sport1; /senderlogos/dark-cropped/19934-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=103,1023,39,1024,1023
+#EXTINF:0, TELE 5; /senderlogos/dark-cropped/22103-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=99,1535,38,1536,1535
+#EXTINF:0, TLC; /senderlogos/dark-cropped/24575-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=103,1535,37,1536,1535
+#EXTINF:0, TV Mittelrhein; /senderlogos/dark-cropped/24579-1.png
+rtsp://sat.ip/?src=1&freq=12663&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1213,2130,2131,2130
+#EXTINF:0, TV Oberfranken; /senderlogos/dark-cropped/24580-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=103,2047,2048,2047
+#EXTINF:0, TV5MONDE EUROPE; /senderlogos/dark-cropped/25057-1.png
+rtsp://sat.ip/?src=1&freq=11538&sr=22000&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=665,615,635,835,935,936,939,937,938,940,942,615
+#EXTINF:0, TVA Ostbayern; /senderlogos/dark-cropped/24581-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=104,2303,2304,2303
+#EXTINF:0, TecTime TV-Zeit für Technik; /senderlogos/dark-cropped/25056-1.png
+rtsp://sat.ip/?src=1&freq=12575&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=107,3071,3071
+#EXTINF:0, VIVA; /senderlogos/dark-cropped/14810-1.png
+rtsp://sat.ip/?src=1&freq=11973&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=416,4061,4062,4064,4065,4061
+#EXTINF:0, VOX; /senderlogos/dark-cropped/19458-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=47,167,136,71,74,167
+#EXTINF:0, VOX Schweiz; /senderlogos/dark-cropped/19458-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=52,172,145,82,172
+#EXTINF:0, VOX Österreich; /senderlogos/dark-cropped/19458-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=300,301,302,303,301
+#EXTINF:0, WDR Bielefeld; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=300,501,502,503,504,505,501
+#EXTINF:0, WDR Dortmund; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=400,501,502,503,504,505,501
+#EXTINF:0, WDR Düsseldorf; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=500,501,502,503,504,505,501
+#EXTINF:0, WDR Essen; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=600,501,502,503,504,505,501
+#EXTINF:0, WDR Fernsehen; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=600,601,602,603,604,605,601
+#EXTINF:0, WDR Fernsehen HD; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5500,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Bielefeld; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5510,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Dortmund; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5520,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Düsseldorf; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5530,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Essen; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5540,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Köln; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5500,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Münster; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5550,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR HD Siegen; /senderlogos/dark-cropped/14785-2.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5560,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR Köln; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=600,601,602,603,604,605,601
+#EXTINF:0, WDR Münster; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5550,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, WDR Siegen; /senderlogos/dark-cropped/14785-1.png
+rtsp://sat.ip/?src=1&freq=12422&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=5560,5501,5502,5503,5504,5506,5505,5501
+#EXTINF:0, Welt der Wunder TV; /senderlogos/dark-cropped/24586-1.png
+rtsp://sat.ip/?src=1&freq=12663&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1103,1030,1031,1030
+#EXTINF:0, ZDF; /senderlogos/dark-cropped/19688-1.png
+rtsp://sat.ip/?src=1&freq=11954&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=100,110,120,121,122,125,130,131,84,110
+#EXTINF:0, ZDF HD; /senderlogos/dark-cropped/19688-2.png
+rtsp://sat.ip/?src=1&freq=11362&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=6100,6110,6120,6121,6122,6123,6130,6131,6132,6110
+#EXTINF:0, ZDFinfo; /senderlogos/dark-cropped/24589-1.png
+rtsp://sat.ip/?src=1&freq=11954&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=600,610,620,621,625,622,630,631,610
+#EXTINF:0, ZDFinfo HD; /senderlogos/dark-cropped/24589-2.png
+rtsp://sat.ip/?src=1&freq=11347&sr=22000&pol=v&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=6700,6710,6720,6721,6722,6723,6730,6731,6710
+#EXTINF:0, ZDFkultur; /senderlogos/dark-cropped/20430-1.png
+rtsp://sat.ip/?src=1&freq=11954&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1100,1110,1120,1121,1125,1122,1130,1110
+#EXTINF:0, ZDFkultur HD; /senderlogos/dark-cropped/20430-2.png
+rtsp://sat.ip/?src=1&freq=11362&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=6400,6410,6420,6421,6422,6423,6430,6410
+#EXTINF:0, ZDFneo; /senderlogos/dark-cropped/16481-1.png
+rtsp://sat.ip/?src=1&freq=11954&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=650,660,670,671,675,672,680,681,660
+#EXTINF:0, ZDFneo HD; /senderlogos/dark-cropped/16481-2.png
+rtsp://sat.ip/?src=1&freq=11362&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=6300,6310,6320,6321,6322,6323,6330,6331,6310
+#EXTINF:0, a.tv; /senderlogos/dark-cropped/24447-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=96,255,256,255
+#EXTINF:0, allgäu.tv; /senderlogos/dark-cropped/24578-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=99,1023,1024,1023
+#EXTINF:0, euronews; /senderlogos/dark-cropped/24474-1.png
+rtsp://sat.ip/?src=1&freq=12227&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=260,2432,2433,2434,2435,2436,2437,2438,2439,2440,2441,2442,2432
+#EXTINF:0, gotv; /senderlogos/dark-cropped/24479-1.png
+rtsp://sat.ip/?src=1&freq=12693&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1021,0
+#EXTINF:0, hr-Fernsehen; /senderlogos/dark-cropped/14808-1.png
+rtsp://sat.ip/?src=1&freq=11837&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=300,301,302,303,304,301
+#EXTINF:0, hr-Fernsehen HD; /senderlogos/dark-cropped/14808-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5350,5351,5352,5353,5354,5356,5355,5351
+#EXTINF:0, intv; /senderlogos/dark-cropped/24488-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=98,767,768,767
+#EXTINF:0, kabel eins; /senderlogos/dark-cropped/19459-1.png
+rtsp://sat.ip/?src=1&freq=12545&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=98,767,34,768,767
+#EXTINF:0, kabel eins Schweiz; /senderlogos/dark-cropped/19459-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1026,162,163,165,162
+#EXTINF:0, kabel eins Österreich; /senderlogos/dark-cropped/19459-1.png
+rtsp://sat.ip/?src=1&freq=12051&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=1027,166,167,169,166
+#EXTINF:0, mediaspar HD; /senderlogos/dark-cropped/25035-2.png
+rtsp://sat.ip/?src=1&freq=10965&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=98,767,771,767
+#EXTINF:0, mediasparTV Homeshopping; /senderlogos/dark-cropped/25035-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=106,1791,1792,1791
+#EXTINF:0, meinTVshop; /senderlogos/dark-cropped/25036-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=101,511,512,511
+#EXTINF:0, münchen.tv; /senderlogos/dark-cropped/24504-1.png
+rtsp://sat.ip/?src=1&freq=11524&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=100,1279,1280,1279
+#EXTINF:0, n-tv; /senderlogos/dark-cropped/14853-1.png
+rtsp://sat.ip/?src=1&freq=12188&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=48,169,73,80,169
+#EXTINF:0, rbb Berlin; /senderlogos/dark-cropped/14845-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=600,601,602,603,604,601
+#EXTINF:0, rbb Berlin HD; /senderlogos/dark-cropped/14845-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5310,5311,5312,5313,5314,5316,5315,5311
+#EXTINF:0, rbb Brandenburg; /senderlogos/dark-cropped/14845-2.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=500,601,602,603,604,601
+#EXTINF:0, rbb Brandenburg HD; /senderlogos/dark-cropped/14845-1.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5300,5311,5312,5313,5314,5316,5315,5311
+#EXTINF:0, rbb Fernsehen; /senderlogos/dark-cropped/14845-1.png
+rtsp://sat.ip/?src=1&freq=12110&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=600,601,602,603,604,601
+#EXTINF:0, rbb Fernsehen HD; /senderlogos/dark-cropped/14845-2.png
+rtsp://sat.ip/?src=1&freq=10892&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5310,5311,5312,5313,5314,5316,5315,5311
+#EXTINF:0, sixx; /senderlogos/dark-cropped/19935-1.png
+rtsp://sat.ip/?src=1&freq=12461&sr=27500&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=99,767,35,768,767
+#EXTINF:0, sixx Austria; /senderlogos/dark-cropped/19935-1.png
+rtsp://sat.ip/?src=1&freq=12663&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=1106,1060,1061,1063,1060
+#EXTINF:0, sonnenklar.TV; /senderlogos/dark-cropped/19419-1.png
+rtsp://sat.ip/?src=1&freq=12480&sr=27500&pol=v&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=34&pids=97,2303,40,2304,2303
+#EXTINF:0, sonnenklar.TV HD; /senderlogos/dark-cropped/19419-2.png
+rtsp://sat.ip/?src=1&freq=12575&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=96,255,32,259,255
+#EXTINF:0, tagesschau24; /senderlogos/dark-cropped/14829-1.png
+rtsp://sat.ip/?src=1&freq=10744&sr=22000&pol=h&msys=dvbs&mtype=qpsk&plts=off&ro=0.35&fec=56&pids=100,101,102,104,101
+#EXTINF:0, tagesschau24 HD; /senderlogos/dark-cropped/14829-2.png
+rtsp://sat.ip/?src=1&freq=11053&sr=22000&pol=h&msys=dvbs2&mtype=8psk&plts=on&ro=0.35&fec=23&pids=5400,5401,5402,5404,5406,5401
