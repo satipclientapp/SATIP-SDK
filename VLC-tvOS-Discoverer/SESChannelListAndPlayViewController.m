@@ -190,18 +190,23 @@
         channelItem.delegate = self;
         [channelItem parseWithOptions:VLCMediaParseNetwork | VLCMediaParseLocal];
     }
-    NSArray<NSString *> *splitName = [str componentsSeparatedByString:@";"];
-    if (splitName.count > 1)
-    {
-        NSString *address = [splitName[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        NSURL *URL = [NSURL URLWithString:address relativeToURL:[NSURL URLWithString:@"https://cdn.hd-plus.de"]];
     
-        cell.channelNameLabel.text = splitName[0];
-        [cell.channelIconImageView setImageWithURL:URL];
-    } else {
-        cell.channelNameLabel.text = str;
-    }
+    NSString *logourl;
 
+    NSRange ind= [str rangeOfString: @" "];
+    logourl = [str substringFromIndex: (ind.location+1)];
+    logourl = [logourl stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    logourl = [logourl stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+    logourl = [logourl lowercaseString]; 
+    logourl = [logourl stringByAppendingString:@".png"];
+    logourl = [NSString stringWithFormat:@"%@/%@", @"sites/satip/files/files/Playlists/Channellogos", logourl];
+    
+    NSURL *URL = [NSURL URLWithString:logourl relativeToURL:[NSURL URLWithString:@"http://www.satip.info"]];
+//    NSURL *URL = [NSURL URLWithString:logourl relativeToURL:[NSURL URLWithString:@"http://apps.sensory-minds.com"]];
+
+    cell.channelNameLabel.text = str;
+    [cell.channelIconImageView setImageWithURL:URL];
+   
     return cell;
 }
 
