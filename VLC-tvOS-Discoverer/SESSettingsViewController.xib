@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SESSettingsViewController">
+            <connections>
+                <outlet property="addChannelListButton" destination="RaA-pj-B4q" id="v4h-6c-Nax"/>
+                <outlet property="addServerButton" destination="UgM-h0-kkr" id="pqs-Bz-yt8"/>
+                <outlet property="channelListTableView" destination="pP1-PE-4ST" id="CD7-8e-tQq"/>
+                <outlet property="satelliteListTableView" destination="4pm-LA-609" id="ckg-XN-iLI"/>
+                <outlet property="serverListTableView" destination="jak-tP-C1s" id="zbr-hS-1z1"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="jak-tP-C1s">
+                    <rect key="frame" x="80" y="278" width="540" height="596"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="540" id="Isr-mT-32W"/>
+                    </constraints>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgM-h0-kkr">
+                    <rect key="frame" x="80" y="914" width="540" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Add server address"/>
+                    <connections>
+                        <action selector="addServer:" destination="-1" eventType="primaryActionTriggered" id="4sr-Hh-xxP"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Servers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixq-Bs-fhu">
+                    <rect key="frame" x="80" y="200" width="236" height="58"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="4pm-LA-609">
+                    <rect key="frame" x="742" y="278" width="540" height="596"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="540" id="dl0-Kw-9C0"/>
+                    </constraints>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-pj-B4q">
+                    <rect key="frame" x="742" y="914" width="540" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Add M3U channel list"/>
+                    <connections>
+                        <action selector="addChannelList:" destination="-1" eventType="primaryActionTriggered" id="GsL-DK-deh"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Channel List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nB0-2U-eyn">
+                    <rect key="frame" x="742" y="200" width="340" height="58"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L53-Qs-0FY">
+                    <rect key="frame" x="680" y="200" width="2" height="800"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="B66-xa-5s1"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="pP1-PE-4ST">
+                    <rect key="frame" x="1322" y="200" width="520" height="800"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="520" id="6lI-mC-ksZ"/>
+                    </constraints>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ixq-Bs-fhu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="200" id="09y-Xc-rz9"/>
+                <constraint firstItem="jak-tP-C1s" firstAttribute="top" secondItem="Ixq-Bs-fhu" secondAttribute="bottom" constant="20" id="0ii-Sg-vst"/>
+                <constraint firstItem="Ixq-Bs-fhu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="2wg-jz-c4U"/>
+                <constraint firstItem="4pm-LA-609" firstAttribute="top" secondItem="nB0-2U-eyn" secondAttribute="bottom" constant="20" id="6IV-C3-4Lj"/>
+                <constraint firstItem="pP1-PE-4ST" firstAttribute="bottom" secondItem="RaA-pj-B4q" secondAttribute="bottom" id="H19-eC-HtL"/>
+                <constraint firstItem="L53-Qs-0FY" firstAttribute="top" secondItem="Ixq-Bs-fhu" secondAttribute="top" id="JUa-50-tQK"/>
+                <constraint firstItem="RaA-pj-B4q" firstAttribute="top" secondItem="4pm-LA-609" secondAttribute="bottom" constant="40" id="Jev-kb-uqh"/>
+                <constraint firstItem="UgM-h0-kkr" firstAttribute="top" secondItem="jak-tP-C1s" secondAttribute="bottom" constant="40" id="KXs-Eh-d8e"/>
+                <constraint firstItem="L53-Qs-0FY" firstAttribute="bottom" secondItem="UgM-h0-kkr" secondAttribute="bottom" id="L1h-Uj-vtd"/>
+                <constraint firstItem="UgM-h0-kkr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="L5A-cU-eUd"/>
+                <constraint firstItem="nB0-2U-eyn" firstAttribute="centerY" secondItem="Ixq-Bs-fhu" secondAttribute="centerY" id="Pjw-1o-ifY"/>
+                <constraint firstItem="nB0-2U-eyn" firstAttribute="leading" secondItem="4pm-LA-609" secondAttribute="leading" id="TeX-Jq-xO1"/>
+                <constraint firstItem="UgM-h0-kkr" firstAttribute="width" secondItem="jak-tP-C1s" secondAttribute="width" id="dys-mJ-PD9"/>
+                <constraint firstItem="RaA-pj-B4q" firstAttribute="width" secondItem="4pm-LA-609" secondAttribute="width" id="ecP-7C-A6c"/>
+                <constraint firstItem="pP1-PE-4ST" firstAttribute="leading" secondItem="RaA-pj-B4q" secondAttribute="trailing" constant="40" id="f4X-Ez-dlB"/>
+                <constraint firstItem="RaA-pj-B4q" firstAttribute="leading" secondItem="L53-Qs-0FY" secondAttribute="trailing" constant="60" id="kaI-OS-GrG"/>
+                <constraint firstItem="4pm-LA-609" firstAttribute="leading" secondItem="L53-Qs-0FY" secondAttribute="trailing" constant="60" id="l0k-1Z-uRv"/>
+                <constraint firstItem="4pm-LA-609" firstAttribute="leading" secondItem="RaA-pj-B4q" secondAttribute="leading" id="m69-ri-hKO"/>
+                <constraint firstItem="pP1-PE-4ST" firstAttribute="top" secondItem="nB0-2U-eyn" secondAttribute="top" id="ohh-iu-itY"/>
+                <constraint firstAttribute="bottom" secondItem="UgM-h0-kkr" secondAttribute="bottom" constant="80" id="uJV-6w-oIP"/>
+                <constraint firstItem="L53-Qs-0FY" firstAttribute="leading" secondItem="jak-tP-C1s" secondAttribute="trailing" constant="60" id="v2M-w1-UmV"/>
+                <constraint firstAttribute="bottom" secondItem="RaA-pj-B4q" secondAttribute="bottom" constant="80" id="xWo-8F-uIw"/>
+                <constraint firstItem="jak-tP-C1s" firstAttribute="leading" secondItem="UgM-h0-kkr" secondAttribute="leading" id="yYz-tl-mg4"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
