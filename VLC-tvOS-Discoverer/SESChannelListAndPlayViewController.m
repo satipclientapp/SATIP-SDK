@@ -26,7 +26,7 @@
 {
     /* we have 1 player to download, process and report the playlist - it should be destroyed once this is done */
     VLCMediaPlayer *_parsePlayer;
-    
+
     /* the list player we use for playback
      * see the API documentation for VLCMediaListPlayer, it is a more efficient way to handle playlists like the channel list
      * if you want to achieve fast and memory-efficient channel switches
@@ -188,30 +188,23 @@
     }
     
     VLCMedia *channelItem = [subItems mediaAtIndex:row];
-    NSString *str;
+    NSString *channelTitle;
     if (channelItem.parsedStatus != VLCMediaParsedStatusFailed || channelItem.parsedStatus == VLCMediaParsedStatusInit) {
-        str = [channelItem metadataForKey:VLCMetaInformationTitle];
+        channelTitle = [channelItem metadataForKey:VLCMetaInformationTitle];
     } else {
         channelItem.delegate = self;
         [channelItem parseWithOptions:VLCMediaParseNetwork | VLCMediaParseLocal];
     }
-    
-    NSString *logourl;
+    cell.channelNameLabel.text = channelTitle;
 
-    NSRange ind= [str rangeOfString: @" "];
-    logourl = [str substringFromIndex: (ind.location+1)];
-    logourl = [logourl stringByReplacingOccurrencesOfString:@" " withString:@"-"];
-    logourl = [logourl stringByReplacingOccurrencesOfString:@"." withString:@"-"];
-    logourl = [logourl lowercaseString]; 
-    logourl = [logourl stringByAppendingString:@".png"];
-    logourl = [NSString stringWithFormat:@"%@/%@", @"sites/satip/files/files/Playlists/Channellogos", logourl];
-    
-    NSURL *URL = [NSURL URLWithString:logourl relativeToURL:[NSURL URLWithString:@"http://www.satip.info"]];
-//    NSURL *URL = [NSURL URLWithString:logourl relativeToURL:[NSURL URLWithString:@"http://apps.sensory-minds.com"]];
+    NSRange dotRange = [channelTitle rangeOfString:@". "];
+    channelTitle = [channelTitle substringFromIndex: (dotRange.location+dotRange.length)];
+    channelTitle = [channelTitle stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    channelTitle = [channelTitle stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+    channelTitle = [channelTitle lowercaseString];
+    NSString *logourl = [NSString stringWithFormat:@"http://www.satip.info/sites/satip/files/files/Playlists/Channellogos/%@.png", channelTitle];
+    [cell.channelIconImageView setImageWithURL:[NSURL URLWithString:logourl]];
 
-    cell.channelNameLabel.text = str;
-    [cell.channelIconImageView setImageWithURL:URL];
-   
     return cell;
 }
 
