@@ -18,6 +18,11 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
 @implementation SESSettingsViewController
 
+- (NSString *)title
+{
+    return @"Settings";
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 

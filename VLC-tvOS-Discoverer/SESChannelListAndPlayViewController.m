@@ -53,6 +53,11 @@
 
 #pragma mark - setup
 
+- (NSString *)title
+{
+    return @"Playback";
+}
+
 - (UIView *)preferredFocusedView
 {
     return self.fullscreenButton;

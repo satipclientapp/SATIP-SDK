@@ -59,6 +59,11 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
+- (NSString *)title
+{
+    return @"Server Selection";
+}
+
 #pragma mark - start and stop discovery depending on view visibility
 
 - (void)viewWillAppear:(BOOL)animated
