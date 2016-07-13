@@ -9,8 +9,8 @@
             <connections>
                 <outlet property="addChannelListButton" destination="rbe-5i-pG0" id="DrM-Bz-Nq6"/>
                 <outlet property="addServerButton" destination="cmr-Ur-kN1" id="b3i-04-NqC"/>
-                <outlet property="channelListTableView" destination="DQB-Sb-5de" id="xGk-2F-pwA"/>
-                <outlet property="satelliteListTableView" destination="XsE-A4-Krn" id="c8r-JH-w4V"/>
+                <outlet property="channelListTableView" destination="XsE-A4-Krn" id="g5e-f9-FCH"/>
+                <outlet property="satelliteListTableView" destination="DQB-Sb-5de" id="NhG-Xe-w14"/>
                 <outlet property="serverListTableView" destination="OQ0-S6-4qF" id="dFm-8Q-WFe"/>
                 <outlet property="view" destination="A8Q-5b-aDG" id="XyY-FL-ny2"/>
             </connections>
