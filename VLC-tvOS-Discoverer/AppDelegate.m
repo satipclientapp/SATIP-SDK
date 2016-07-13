@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 #import "SESServerSelectViewController.h"
+#import "SESSettingsViewController.h"
+#import "SESColors.h"
 
 @interface AppDelegate ()
 {
     /* store the root view controller for potential future reference */
     SESServerSelectViewController *_serverVC;
+    SESSettingsViewController *_settingsVC;
 }
 @end
 
@@ -28,11 +31,17 @@
     /* load platform specific UI */
 #if TARGET_OS_TV
     _serverVC = [[SESServerSelectViewController alloc] initWithNibName:nil bundle:nil];
+    _settingsVC = [[SESSettingsViewController alloc] initWithNibName:nil bundle:nil];
 #else
     _serverVC = [[SESServerSelectViewController alloc] initWithNibName:@"SESServerSelectViewController-iPad" bundle:nil];
+    _settingsVC = [[SESSettingsViewController alloc] initWithNibName:@"SESSettingsViewController-ipad" bundle:nil];
 #endif
 
-    self.window.rootViewController = _serverVC;
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.tabBar.barTintColor = [SESColors SESCloudColor];
+    tabBarController.viewControllers = @[_serverVC, _settingsVC];
+
+    self.window.rootViewController = tabBarController;
 
     [self.window makeKeyAndVisible];
 
