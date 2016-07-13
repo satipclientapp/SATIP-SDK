@@ -19,6 +19,9 @@
             <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewControllerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="qry-SC-out">
+                    <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="jak-tP-C1s">
                     <rect key="frame" x="80" y="278" width="540" height="596"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,20 +79,24 @@
                     </constraints>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Ixq-Bs-fhu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="200" id="09y-Xc-rz9"/>
                 <constraint firstItem="jak-tP-C1s" firstAttribute="top" secondItem="Ixq-Bs-fhu" secondAttribute="bottom" constant="20" id="0ii-Sg-vst"/>
                 <constraint firstItem="Ixq-Bs-fhu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="2wg-jz-c4U"/>
                 <constraint firstItem="4pm-LA-609" firstAttribute="top" secondItem="nB0-2U-eyn" secondAttribute="bottom" constant="20" id="6IV-C3-4Lj"/>
                 <constraint firstItem="pP1-PE-4ST" firstAttribute="bottom" secondItem="RaA-pj-B4q" secondAttribute="bottom" id="H19-eC-HtL"/>
+                <constraint firstAttribute="bottom" secondItem="qry-SC-out" secondAttribute="bottom" id="JR6-ca-2Z1"/>
                 <constraint firstItem="L53-Qs-0FY" firstAttribute="top" secondItem="Ixq-Bs-fhu" secondAttribute="top" id="JUa-50-tQK"/>
                 <constraint firstItem="RaA-pj-B4q" firstAttribute="top" secondItem="4pm-LA-609" secondAttribute="bottom" constant="40" id="Jev-kb-uqh"/>
                 <constraint firstItem="UgM-h0-kkr" firstAttribute="top" secondItem="jak-tP-C1s" secondAttribute="bottom" constant="40" id="KXs-Eh-d8e"/>
                 <constraint firstItem="L53-Qs-0FY" firstAttribute="bottom" secondItem="UgM-h0-kkr" secondAttribute="bottom" id="L1h-Uj-vtd"/>
                 <constraint firstItem="UgM-h0-kkr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="L5A-cU-eUd"/>
                 <constraint firstItem="nB0-2U-eyn" firstAttribute="centerY" secondItem="Ixq-Bs-fhu" secondAttribute="centerY" id="Pjw-1o-ifY"/>
+                <constraint firstItem="qry-SC-out" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SIZ-2c-RFN"/>
+                <constraint firstAttribute="trailing" secondItem="qry-SC-out" secondAttribute="trailing" id="T8F-5A-0nh"/>
                 <constraint firstItem="nB0-2U-eyn" firstAttribute="leading" secondItem="4pm-LA-609" secondAttribute="leading" id="TeX-Jq-xO1"/>
+                <constraint firstItem="qry-SC-out" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cOS-sL-LxS"/>
                 <constraint firstItem="UgM-h0-kkr" firstAttribute="width" secondItem="jak-tP-C1s" secondAttribute="width" id="dys-mJ-PD9"/>
                 <constraint firstItem="RaA-pj-B4q" firstAttribute="width" secondItem="4pm-LA-609" secondAttribute="width" id="ecP-7C-A6c"/>
                 <constraint firstItem="pP1-PE-4ST" firstAttribute="leading" secondItem="RaA-pj-B4q" secondAttribute="trailing" constant="40" id="f4X-Ez-dlB"/>
@@ -104,4 +111,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="viewControllerBackground" width="1024" height="768"/>
+    </resources>
 </document>

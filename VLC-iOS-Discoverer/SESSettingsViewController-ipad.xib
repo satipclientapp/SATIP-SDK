@@ -12,6 +12,7 @@
                 <outlet property="channelListTableView" destination="DQB-Sb-5de" id="xGk-2F-pwA"/>
                 <outlet property="satelliteListTableView" destination="XsE-A4-Krn" id="c8r-JH-w4V"/>
                 <outlet property="serverListTableView" destination="OQ0-S6-4qF" id="dFm-8Q-WFe"/>
+                <outlet property="view" destination="A8Q-5b-aDG" id="XyY-FL-ny2"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,6 +20,9 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewControllerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="BQj-tm-5ie">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-S6-4qF">
                     <rect key="frame" x="71" y="120" width="240" height="478"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,7 +78,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="XsE-A4-Krn" firstAttribute="bottom" secondItem="DQB-Sb-5de" secondAttribute="bottom" id="0De-aH-JPj"/>
                 <constraint firstItem="XsE-A4-Krn" firstAttribute="height" secondItem="DQB-Sb-5de" secondAttribute="height" id="22T-rC-E6O"/>
@@ -83,11 +87,15 @@
                 <constraint firstAttribute="bottom" secondItem="rbe-5i-pG0" secondAttribute="bottom" constant="120" id="6yW-rI-7xf"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="trailing" constant="80" id="9CL-Fm-xK0"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="kzZ-H2-Nnr" secondAttribute="bottom" constant="15" id="Aph-t1-OrP"/>
+                <constraint firstItem="BQj-tm-5ie" firstAttribute="leading" secondItem="A8Q-5b-aDG" secondAttribute="leading" id="GeX-OX-nlX"/>
                 <constraint firstItem="rbe-5i-pG0" firstAttribute="centerX" secondItem="DQB-Sb-5de" secondAttribute="centerX" id="GmB-Vg-aDc"/>
+                <constraint firstAttribute="trailing" secondItem="BQj-tm-5ie" secondAttribute="trailing" id="Hga-8q-iUf"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="A8Q-5b-aDG" secondAttribute="top" constant="120" id="Khj-qu-mcW"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="leading" secondItem="jW9-it-OaU" secondAttribute="trailing" constant="40" id="N8V-AI-MT0"/>
+                <constraint firstAttribute="bottom" secondItem="BQj-tm-5ie" secondAttribute="bottom" id="Ne6-cf-ehE"/>
                 <constraint firstItem="XsE-A4-Krn" firstAttribute="top" secondItem="kzZ-H2-Nnr" secondAttribute="top" id="O88-9J-Pte"/>
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="top" secondItem="OQ0-S6-4qF" secondAttribute="bottom" constant="20" id="Of9-Hl-aGx"/>
+                <constraint firstItem="BQj-tm-5ie" firstAttribute="top" secondItem="A8Q-5b-aDG" secondAttribute="top" id="P3R-mO-hdb"/>
                 <constraint firstItem="WUr-z6-SQK" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="leading" id="Smh-bD-bjR"/>
                 <constraint firstItem="jW9-it-OaU" firstAttribute="top" secondItem="OQ0-S6-4qF" secondAttribute="top" id="W34-L7-IX1"/>
                 <constraint firstItem="rbe-5i-pG0" firstAttribute="top" secondItem="DQB-Sb-5de" secondAttribute="bottom" constant="20" id="XxI-0P-7Xb"/>
@@ -113,4 +121,7 @@
             </variation>
         </view>
     </objects>
+    <resources>
+        <image name="viewControllerBackground" width="1920" height="1080"/>
+    </resources>
 </document>
