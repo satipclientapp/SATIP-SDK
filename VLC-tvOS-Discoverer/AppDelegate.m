@@ -41,6 +41,20 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.tabBar.barTintColor = [SESColors SESCloudColor];
     tabBarController.viewControllers = @[_serverVC, _settingsVC];
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    CGRect logoViewFrame = logoView.frame;
+    CGRect tabBarFrame = tabBarController.tabBar.frame;
+#if TARGET_OS_TV
+    logoViewFrame.origin.y = (tabBarFrame.size.height - logoViewFrame.size.height) / 2.;
+    logoViewFrame.origin.x = 40.;
+#else
+    logoViewFrame.size.width = logoViewFrame.size.width / 2.;
+    logoViewFrame.size.height = logoViewFrame.size.height / 2.;
+    logoViewFrame.origin.y = (tabBarFrame.size.height - logoViewFrame.size.height) / 2.;
+    logoViewFrame.origin.x = 20.;
+#endif
+    logoView.frame = logoViewFrame;
+    [tabBarController.tabBar addSubview:logoView];
 
     self.window.rootViewController = tabBarController;
 
