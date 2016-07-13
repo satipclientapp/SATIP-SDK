@@ -35,7 +35,7 @@
     [super viewDidLoad];
 
     /* init our discovery controller - note that it doesn't discover anything yet */
-    _discoveryController = [[SESServerDiscoveryController alloc] init];
+    _discoveryController = [SESServerDiscoveryController sharedDiscoveryController];
     _discoveryController.delegate = self;
 
     /* finish table view setup */
@@ -68,19 +68,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    /* do the expensive call of starting the discovery - should be done once only */
-    [_discoveryController startDiscovery];
-
     [self.serverTableView reloadData];
 
     [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    /* stop discovery as soon as we don't need it anymore */
-    [_discoveryController stopDiscovery];
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - table view data source
@@ -115,6 +105,8 @@
     }
 
     cell.textLabel.text = [media metadataForKey:VLCMetaInformationTitle];
+
+    NSLog(@"VLCMetaInformationURL: %@", [media metadataForKey:VLCMetaInformationURL]);
 
     return cell;
 }

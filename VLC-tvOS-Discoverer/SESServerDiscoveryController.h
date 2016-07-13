@@ -24,6 +24,8 @@
 /* a designated object to capsulize server discovery */
 @interface SESServerDiscoveryController : NSObject
 
++ (instancetype)sharedDiscoveryController;
+
 /* the delegate */
 @property (readwrite, weak, nonatomic) NSObject<SESPlaybackControllerDelegate> *delegate;
 

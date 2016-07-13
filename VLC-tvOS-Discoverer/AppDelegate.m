@@ -10,6 +10,7 @@
 #import "SESServerSelectViewController.h"
 #import "SESSettingsViewController.h"
 #import "SESColors.h"
+#import "SESServerDiscoveryController.h"
 
 @interface AppDelegate ()
 {
@@ -45,13 +46,15 @@
 
     [self.window makeKeyAndVisible];
 
+    /* do the expensive call of starting the discovery - should be done once only */
+    [[SESServerDiscoveryController sharedDiscoveryController] startDiscovery];
+
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // FIXME: disable video output (current video track -> -1 or full playback stop!) before this happens
-    // FIXME: if you don't fix it, the OS will kill the app due to illegal OpenGL draw requests
+    [[SESServerDiscoveryController sharedDiscoveryController] stopDiscovery];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

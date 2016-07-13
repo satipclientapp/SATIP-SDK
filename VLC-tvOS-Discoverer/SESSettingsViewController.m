@@ -51,7 +51,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [super viewDidLoad];
 
     /* init our discovery controller - note that it doesn't discover anything yet */
-    _discoveryController = [[SESServerDiscoveryController alloc] init];
+    _discoveryController = [SESServerDiscoveryController sharedDiscoveryController];
     _discoveryController.delegate = self;
 
     _manuallyAddedServersArray = [NSMutableArray array];
@@ -95,9 +95,6 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    /* do the expensive call of starting the discovery - should be done once only */
-    [_discoveryController startDiscovery];
-
     [self.serverListTableView reloadData];
 
     [self.satelliteListTableView reloadData];
@@ -118,8 +115,6 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [_parsePlayer stop];
     _parsePlayer = nil;
 
-    /* stop discovery as soon as we don't need it anymore */
-    [_discoveryController stopDiscovery];
     [super viewWillDisappear:animated];
 }
 
