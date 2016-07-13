@@ -34,6 +34,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     NSArray *_playlistURLStringsToChooseFromArray;
 
     SESServerDiscoveryController *_discoveryController;
+    NSMutableArray *_manuallyAddedServersArray;
 }
 @end
 
@@ -52,6 +53,8 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     /* init our discovery controller - note that it doesn't discover anything yet */
     _discoveryController = [[SESServerDiscoveryController alloc] init];
     _discoveryController.delegate = self;
+
+    _manuallyAddedServersArray = [NSMutableArray array];
 
 #if TARGET_OS_TV
     self.serverListTableView.rowHeight = 100.;
@@ -139,12 +142,60 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
 - (IBAction)addServer:(id)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add server address"
+                                                                             message:@"Enter the IP address or DNS name of an undiscovered SAT>IP server" preferredStyle:UIAlertControllerStyleAlert];
+
+    __block UITextField *serverField = nil;
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"SAT>IP Server IP address or DNS name";
+        serverField = textField;
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Add Server"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                          [_manuallyAddedServersArray addObject:serverField.text];
+
+                                                          [self.serverListTableView reloadData];
+                                                      }]];
+
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)addChannelList:(id)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add M3U Channel List"
+                                                                             message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    __block UITextField *urlField = nil;
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"M3U Channel List URL";
+        urlField = textField;
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Add Channel List URL"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                          NSString *urlString = urlField.text;
+
+                                                          NSMutableArray *mutArray = [_playlistURLStringsToChooseFromArray mutableCopy];
+                                                          [mutArray addObject:urlString];
+                                                          _playlistURLStringsToChooseFromArray = [mutArray copy];
+
+                                                          mutArray = [_playlistTitlesToChooseFromArray mutableCopy];
+                                                          [mutArray addObject:[urlString lastPathComponent]];
+                                                          _playlistTitlesToChooseFromArray = [mutArray copy];
+
+                                                          [self.satelliteListTableView reloadData];
+                                                      }]];
+
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - table view data source
@@ -159,7 +210,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     if (tableView == self.satelliteListTableView) {
         return  _playlistTitlesToChooseFromArray.count;
     } else if (tableView == self.serverListTableView) {
-        return _discoveryController.numberOfServers;
+        return _discoveryController.numberOfServers + _manuallyAddedServersArray.count;
     } else {
         if (_playlistMediaItem) {
             return _playlistMediaItem.subitems.count;
@@ -172,19 +223,27 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SESTableViewCell *cell;
+    NSInteger index = indexPath.row;
+
     if (tableView == self.serverListTableView) {
         cell = [self.serverListTableView dequeueReusableCellWithIdentifier:SESServerListReUseIdentifier forIndexPath:indexPath];
         if (cell == nil) {
             cell = [SESTableViewCell new];
         }
 
-        VLCMedia *media = [_discoveryController serverAtIndex:indexPath.row];
-        if (!media) {
-            cell.textLabel.text = @"bad server";
-            return cell;
-        }
+        NSInteger serverCount = _discoveryController.numberOfServers;
+        if (index < serverCount) {
+            VLCMedia *media = [_discoveryController serverAtIndex:indexPath.row];
+            if (!media) {
+                cell.textLabel.text = @"bad server";
+                return cell;
+            }
 
-        cell.textLabel.text = [media metadataForKey:VLCMetaInformationTitle];
+            cell.channelNameLabel.text = [media metadataForKey:VLCMetaInformationTitle];
+        } else {
+            cell.channelNameLabel.text = _manuallyAddedServersArray[index - serverCount];
+        }
+        cell.channelIconImageView.image = [UIImage imageNamed:@"logo"];
 
         return cell;
     } else if (tableView == self.satelliteListTableView) {
