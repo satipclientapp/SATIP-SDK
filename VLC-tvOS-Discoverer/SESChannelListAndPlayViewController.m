@@ -9,7 +9,6 @@
 #import "SESChannelListAndPlayViewController.h"
 #import "SESTableViewCell.h"
 #import "SESColors.h"
-#import "SESFocusView.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 
@@ -41,10 +40,6 @@
 
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
-
-#if TARGET_OS_TV
-    SESFocusView *_focusView;
-#endif
 }
 
 @end

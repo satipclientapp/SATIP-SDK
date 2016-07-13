@@ -18,7 +18,6 @@
 		7D59BC911C9974AB00A37CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D59BC901C9974AB00A37CF3 /* Assets.xcassets */; };
 		7D59BCC11C99ADC600A37CF3 /* DynamicTVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */; };
 		7D59BCC21C99ADDF00A37CF3 /* DynamicTVVLCKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7DB0B2D61CEE1BF300A1A11F /* SESFocusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0B2D51CEE1BF300A1A11F /* SESFocusView.m */; };
 		7DED837A1D354B1C006CD945 /* SESSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DED83781D354B1C006CD945 /* SESSettingsViewController.m */; };
 		7DED837B1D354B1C006CD945 /* SESSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DED83791D354B1C006CD945 /* SESSettingsViewController.xib */; };
 		7DED837C1D355057006CD945 /* SESSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DED83781D354B1C006CD945 /* SESSettingsViewController.m */; };
@@ -89,8 +88,6 @@
 		7D59BCAF1C9976F000A37CF3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7D59BCB11C99770A00A37CF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7D59BCC01C99ADC600A37CF3 /* DynamicTVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamicTVVLCKit.framework; path = "Pods/SAT-IP-DynamicTVVLCKit/DynamicTVVLCKit-binary/DynamicTVVLCKit.framework"; sourceTree = "<group>"; };
-		7DB0B2D41CEE1BF300A1A11F /* SESFocusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESFocusView.h; sourceTree = "<group>"; };
-		7DB0B2D51CEE1BF300A1A11F /* SESFocusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESFocusView.m; sourceTree = "<group>"; };
 		7DED83771D354B1C006CD945 /* SESSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SESSettingsViewController.h; path = "VLC-tvOS-Discoverer/SESSettingsViewController.h"; sourceTree = "<group>"; };
 		7DED83781D354B1C006CD945 /* SESSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SESSettingsViewController.m; path = "VLC-tvOS-Discoverer/SESSettingsViewController.m"; sourceTree = "<group>"; };
 		7DED83791D354B1C006CD945 /* SESSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SESSettingsViewController.xib; sourceTree = "<group>"; };
@@ -217,8 +214,6 @@
 				7DED83781D354B1C006CD945 /* SESSettingsViewController.m */,
 				7D040F261CDCD33900FFB6B9 /* SESTableViewCell.h */,
 				7D040F271CDCD33900FFB6B9 /* SESTableViewCell.m */,
-				7DB0B2D41CEE1BF300A1A11F /* SESFocusView.h */,
-				7DB0B2D51CEE1BF300A1A11F /* SESFocusView.m */,
 				844044D81CD8B17C007177E1 /* SESColors.h */,
 				844044D91CD8B18B007177E1 /* SESColors.m */,
 			);
@@ -479,7 +474,6 @@
 				7DFDF4B61C9ABE0800BA86A6 /* SESServerDiscoveryController.m in Sources */,
 				7DFDF4B21C9ABA5300BA86A6 /* SESServerSelectViewController.m in Sources */,
 				7DED837A1D354B1C006CD945 /* SESSettingsViewController.m in Sources */,
-				7DB0B2D61CEE1BF300A1A11F /* SESFocusView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
