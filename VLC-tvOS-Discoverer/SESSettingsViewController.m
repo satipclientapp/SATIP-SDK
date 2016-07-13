@@ -9,6 +9,7 @@
 #import "SESSettingsViewController.h"
 #import "SESTableViewCell.h"
 #import "SESServerDiscoveryController.h"
+#import "SESColors.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
@@ -63,6 +64,8 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [self.satelliteListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:SESSatelliteListReUseIdentifier];
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:SESChannelListReUseIdentifier];
+    self.titleLabel.textColor = [UIColor lightGrayColor];
+    self.titleLabel.text = self.title;
 #else
     self.serverListTableView.rowHeight = 68.;
     self.serverListTableView.tintColor = [UIColor clearColor];
