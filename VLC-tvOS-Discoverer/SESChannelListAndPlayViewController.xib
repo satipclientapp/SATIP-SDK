@@ -20,23 +20,22 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewControllerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Ca7-cg-6Ym">
                     <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-8e-ng6">
-                    <rect key="frame" x="740" y="217" width="1090" height="646"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="mfG-8e-ng6" secondAttribute="height" multiplier="879:529" constant="16" id="LaM-ML-iJV"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-rk-lZ9">
-                    <rect key="frame" x="1699" y="904" width="131" height="86"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-rk-lZ9">
+                    <rect key="frame" x="730" y="220" width="1140" height="640"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="normal" image="maximize" backgroundImage="buttonBackground"/>
                     <state key="selected" image="minimize" backgroundImage="buttonBackground"/>
                     <connections>
                         <action selector="fullscreenAction:" destination="-1" eventType="primaryActionTriggered" id="4wG-8b-SFe"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-8e-ng6">
+                    <rect key="frame" x="740" y="230" width="1120" height="620"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="mfG-8e-ng6" secondAttribute="height" multiplier="16:9" constant="16" id="LaM-ML-iJV"/>
+                    </constraints>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Z75-km-7T5">
                     <rect key="frame" x="1582" y="90" width="248" height="36"/>
                 </imageView>
@@ -50,18 +49,20 @@
             </subviews>
             <color key="backgroundColor" white="0.96208892617449659" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="mfG-8e-ng6" firstAttribute="trailing" secondItem="RQC-rk-lZ9" secondAttribute="trailing" id="3Bq-E5-ika"/>
                 <constraint firstAttribute="bottom" secondItem="Ca7-cg-6Ym" secondAttribute="bottom" id="4Hx-Iz-XZS"/>
                 <constraint firstItem="Ca7-cg-6Ym" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4nU-U8-HIz"/>
-                <constraint firstAttribute="bottom" secondItem="RQC-rk-lZ9" secondAttribute="bottom" constant="90" id="HGB-kz-2Q2"/>
                 <constraint firstItem="mfG-8e-ng6" firstAttribute="leading" secondItem="exF-sN-cqg" secondAttribute="trailing" constant="100" id="JAj-Rz-jqR"/>
+                <constraint firstItem="RQC-rk-lZ9" firstAttribute="width" secondItem="mfG-8e-ng6" secondAttribute="width" constant="20" id="MQ8-6b-Am3"/>
+                <constraint firstItem="RQC-rk-lZ9" firstAttribute="height" secondItem="mfG-8e-ng6" secondAttribute="height" constant="20" id="TkN-0J-QgJ"/>
                 <constraint firstAttribute="bottom" secondItem="exF-sN-cqg" secondAttribute="bottom" id="VWZ-vr-7Lh"/>
+                <constraint firstAttribute="trailing" secondItem="mfG-8e-ng6" secondAttribute="trailing" constant="60" id="XoT-g3-Lru"/>
                 <constraint firstItem="exF-sN-cqg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="90" id="cC9-Fm-scC"/>
+                <constraint firstItem="RQC-rk-lZ9" firstAttribute="centerY" secondItem="mfG-8e-ng6" secondAttribute="centerY" id="cdO-6E-g8i"/>
+                <constraint firstItem="RQC-rk-lZ9" firstAttribute="centerX" secondItem="mfG-8e-ng6" secondAttribute="centerX" id="ilo-eN-9LK"/>
                 <constraint firstAttribute="trailing" secondItem="Ca7-cg-6Ym" secondAttribute="trailing" id="kBC-qr-dVb"/>
                 <constraint firstItem="mfG-8e-ng6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="n2I-yM-bRj"/>
                 <constraint firstAttribute="trailing" secondItem="Z75-km-7T5" secondAttribute="trailing" constant="90" id="n65-tG-Ei5"/>
                 <constraint firstItem="Ca7-cg-6Ym" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qRs-zV-XU4"/>
-                <constraint firstItem="RQC-rk-lZ9" firstAttribute="trailing" secondItem="Z75-km-7T5" secondAttribute="trailing" id="qsc-Gq-TxC"/>
                 <constraint firstItem="Z75-km-7T5" firstAttribute="top" secondItem="exF-sN-cqg" secondAttribute="top" id="uSd-Pi-CGd"/>
                 <constraint firstItem="exF-sN-cqg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="90" id="ytt-sI-x2U"/>
             </constraints>
@@ -70,7 +71,6 @@
     <resources>
         <image name="buttonBackground" width="65" height="67"/>
         <image name="logo" width="248" height="36"/>
-        <image name="maximize" width="51" height="39"/>
         <image name="minimize" width="54" height="46"/>
         <image name="viewControllerBackground" width="1024" height="768"/>
     </resources>

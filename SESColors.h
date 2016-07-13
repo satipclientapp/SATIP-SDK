@@ -18,6 +18,7 @@
 + (UIColor*)SESLightGrayColor;
 + (UIColor*)SESGrayColor;
 + (UIColor*)SESPearlColor;
++ (UIImage *)sesImageWithColor:(UIColor *)color;
 
 @end
 

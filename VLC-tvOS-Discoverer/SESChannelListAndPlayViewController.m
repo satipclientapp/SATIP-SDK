@@ -74,12 +74,9 @@
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
-
-    CGRect tableViewFrame = self.channelListTableView.frame;
-    _focusView = [[SESFocusView alloc] initWithFrame:CGRectMake(tableViewFrame.origin.x + tableViewFrame.size.width, tableViewFrame.origin.y, 300., tableViewFrame.size.height)];
-    _focusView.backgroundColor = [UIColor clearColor];
-
-    [self.view addSubview:_focusView];
+    UIImage *whiteButtonBackgroundImage = [SESColors sesImageWithColor:[UIColor whiteColor]];
+    [self.fullscreenButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateNormal];
+    [self.fullscreenButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateFocused];
 #else
     self.channelListTableView.rowHeight = 68.;
     self.channelListTableView.tintColor = [UIColor clearColor];
