@@ -24,6 +24,8 @@
     VLCLibrary *_discoveryLibrary;
 
     NSMutableArray *_filteredServerList;
+
+    BOOL _discoveryFailed;
 }
 @end
 
@@ -33,6 +35,7 @@
 
 - (void)startDiscovery
 {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     _filteredServerList = [NSMutableArray array];
 
     /* alloc our private library with the custom channel list URL - could be a local file in fact */
@@ -43,8 +46,10 @@
     _discoverer = [[VLCMediaDiscoverer alloc] initWithName:@"upnp" libraryInstance:_discoveryLibrary];
     /* enable debug logging here if desired */
     _discoverer.libraryInstance.debugLogging = NO;
+    _discoveryFailed = NO;
     int i_ret = [_discoverer startDiscoverer];
     if (i_ret != 0) {
+        _discoveryFailed = YES;
         if (self.delegate) {
             if ([self.delegate respondsToSelector:@selector(discoveryFailed)]) {
                 [self.delegate discoveryFailed];
@@ -59,8 +64,11 @@
 
 - (void)stopDiscovery
 {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     /* stop discovery and dealloc everything but us */
-    [_discoverer stopDiscoverer];
+    if (!_discoveryFailed) {
+        [_discoverer stopDiscoverer];
+    }
     _discoverer = nil;
     _discoveredServerList = nil;
     _discoveryLibrary = nil;
