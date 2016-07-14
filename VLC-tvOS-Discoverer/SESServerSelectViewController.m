@@ -9,7 +9,7 @@
 #import "SESServerSelectViewController.h"
 #import "SESServerDiscoveryController.h"
 #import "SESChannelListAndPlayViewController.h"
-#import "SESColors.h"
+#import "UIColor+SES.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
@@ -53,7 +53,7 @@
 
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[SESColors SESPureWhite]CGColor], (id)[[SESColors SESPearlColor]CGColor], nil];
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor sesPureWhite]CGColor], (id)[[UIColor sesPearlColor]CGColor], nil];
     [gradient setStartPoint:CGPointMake(1, 1)];
     [gradient setEndPoint:CGPointMake(0, 0)];
     [self.view.layer insertSublayer:gradient atIndex:0];
@@ -96,7 +96,7 @@
 
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseableIdentifierForServer];
-        cell.backgroundColor = [SESColors SESPureWhite];
+        cell.backgroundColor = [UIColor sesPureWhite];
 #if TARGET_OS_TV
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:29.];
 #else

@@ -7,14 +7,14 @@
 //
 
 #import "SESTableViewCell.h"
-#import "SESColors.h"
+#import "UIColor+SES.h"
 
 @implementation SESTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    self.backgroundColor = [SESColors SESPureWhite];
+    self.backgroundColor = [UIColor sesPureWhite];
 
 #if TARGET_OS_TV
     self.channelNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:29.];

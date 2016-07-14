@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "SESServerSelectViewController.h"
 #import "SESSettingsViewController.h"
-#import "SESColors.h"
+#import "UIColor+SES.h"
 #import "SESServerDiscoveryController.h"
 
 @interface AppDelegate ()
@@ -39,7 +39,7 @@
 #endif
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.tabBar.barTintColor = [SESColors SESCloudColor];
+    tabBarController.tabBar.barTintColor = [UIColor sesCloudColor];
     tabBarController.viewControllers = @[_serverVC, _settingsVC];
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     CGRect logoViewFrame = logoView.frame;

@@ -8,7 +8,7 @@
 
 #import "SESChannelListAndPlayViewController.h"
 #import "SESTableViewCell.h"
-#import "SESColors.h"
+#import "UIColor+SES.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 
@@ -36,7 +36,6 @@
     NSArray *_initialVoutContraints;
     NSArray *_horizontalFullscreenVoutContraints;
     NSArray *_verticalFullscreenVoutContraints;
-
 
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
@@ -69,7 +68,7 @@
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
-    UIImage *whiteButtonBackgroundImage = [SESColors sesImageWithColor:[UIColor whiteColor]];
+    UIImage *whiteButtonBackgroundImage = [UIColor sesImageWithColor:[UIColor whiteColor]];
     [self.fullscreenButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateNormal];
     [self.fullscreenButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateFocused];
 #else

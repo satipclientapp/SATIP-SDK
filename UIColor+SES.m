@@ -1,37 +1,36 @@
 //
-//  SESColors.m
+//  UIColor+SES.m
 //  VLC-Discoverer
 //
-//  Created by videolan on 03/05/16.
+//  Created by Felix Paul Kühne on 14/07/16.
 //  Copyright © 2016 VideoLabs SAS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "SESColors.h"
+#import "UIColor+SES.h"
 
-@implementation SESColors
+@implementation UIColor (SESColors)
 
-+ (UIColor*)SESPureWhite
++ (UIColor*)sesPureWhite
 {
     return [UIColor whiteColor];
 }
 
-+ (UIColor*)SESCloudColor
++ (UIColor*)sesCloudColor
 {
     return [UIColor colorWithRed:0.66 green:0.8 blue:0.93 alpha:1];
 }
 
-+ (UIColor*)SESLightGrayColor
++ (UIColor*)sesLightGrayColor
 {
     return [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1];
 }
 
-+ (UIColor*)SESGrayColor
++ (UIColor*)sesGrayColor
 {
     return [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 }
 
-+ (UIColor*)SESPearlColor
++ (UIColor*)sesPearlColor
 {
     return [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1];
 }

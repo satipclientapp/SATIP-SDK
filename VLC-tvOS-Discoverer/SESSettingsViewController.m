@@ -9,7 +9,6 @@
 #import "SESSettingsViewController.h"
 #import "SESTableViewCell.h"
 #import "SESServerDiscoveryController.h"
-#import "SESColors.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
