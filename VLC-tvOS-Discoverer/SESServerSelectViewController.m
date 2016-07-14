@@ -137,7 +137,7 @@
 
     NSInteger serverCount = _discoveryController.numberOfServers;
     if (index < serverCount) {
-        NSURLComponents *components = [NSURLComponents componentsWithURL:[_discoveryController serverAtIndex:_discoveryController.selectedServerIndex].url resolvingAgainstBaseURL:NO];
+        NSURLComponents *components = [NSURLComponents componentsWithURL:[_discoveryController serverAtIndex:index].url resolvingAgainstBaseURL:NO];
         ipString = [components.queryItems.firstObject value];
     } else {
         ipString = _discoveryController.customServers[index - serverCount];

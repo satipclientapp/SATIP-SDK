@@ -8,6 +8,7 @@
 
 #import "SESChannelListAndPlayViewController.h"
 #import "SESTableViewCell.h"
+#import "SESServerDiscoveryController.h"
 #import "UIColor+SES.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
@@ -159,8 +160,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     /* automatic playback start */
-    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:animated scrollPosition:UITableViewScrollPositionNone];
-    [_playbackPlayer playItemAtIndex:0];
+    NSInteger index = [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex;
+    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:animated scrollPosition:UITableViewScrollPositionNone];
+    [_playbackPlayer playItemAtIndex:(int)index];
     [super viewDidAppear:animated];
 }
 
@@ -236,8 +238,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger row = indexPath.row;
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
-    [_playbackPlayer playItemAtIndex:(int)indexPath.row];
+    [_playbackPlayer playItemAtIndex:(int)row];
+    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
 }
 
 - (void)previousChannel
@@ -255,6 +259,7 @@
     index = index - 1;
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     [_playbackPlayer playItemAtIndex:(int)index];
+    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
 }
 
 - (void)nextChannel
@@ -272,6 +277,7 @@
     index = index + 1;
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     [_playbackPlayer playItemAtIndex:(int)index];
+    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
 }
 
 #pragma mark - pseudo-fullscreen

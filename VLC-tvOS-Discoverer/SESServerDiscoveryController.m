@@ -20,6 +20,7 @@ NSString *SESCustomServers = @"SESCustomServers";
 NSString *SESChannelListURLs = @"SESChannelListURLs";
 NSString *SESChannelListURLNames = @"SESChannelListURLNames";
 NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
+NSString *SESLastChannelIndex = @"SESLastChannelIndex";
 
 /* we need to be a VLCMediaListDelegate, as this is how we get notified about servers becoming available or disappearing */
 @interface SESServerDiscoveryController () <VLCMediaListDelegate>
@@ -46,7 +47,8 @@ NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
                                         SESChannelListURLs : @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
                                                                @"http://www.satip.info/Playlists/ASTRA_28_2E.m3u",
                                                                @"http://www.satip.info/Playlists/ASTRA_23_5E.m3u"],
-                                        SESSelectedChannelListIndex : @(0)};
+                                        SESSelectedChannelListIndex : @(0),
+                                        SESLastChannelIndex : @(0)};
     [defaults registerDefaults:standardDefaults];
 }
 
@@ -74,13 +76,13 @@ NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
         _playlistURLStringsToChooseFrom = [defaults arrayForKey:SESChannelListURLs];
         _selectedServerIndex = [defaults integerForKey:SESSelectedServerIndex];
         _selectedPlaylistIndex = [defaults integerForKey:SESSelectedChannelListIndex];
+        _lastPlayedChannelIndex = [defaults integerForKey:SESLastChannelIndex];
     }
     return self;
 }
 
 - (void)startDiscovery
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     _filteredServerList = [NSMutableArray array];
 
     _discoveryLibrary = [VLCLibrary sharedLibrary];
@@ -107,7 +109,6 @@ NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
 
 - (void)stopDiscovery
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     /* stop discovery and dealloc everything but us */
     if (!_discoveryFailed) {
         [_discoverer stopDiscoverer];
@@ -127,7 +128,6 @@ NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
     for (NSUInteger x = 0; x < count; x++) {
         VLCMedia *media = [_discoveredServerList mediaAtIndex:x];
         if ([[media metadataForKey:VLCMetaInformationSetting] isEqualToString:@"urn:ses-com:device:SatIPServer:1"]) {
-            NSLog(@"media url: %@", media.url);
             [_filteredServerList addObject:media];
         }
     }
@@ -163,14 +163,6 @@ NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
     return _filteredServerList.count;
 }
 
-/* @property (readwrite) NSArray *customServers;
- @property (readwrite) NSInteger selectedServerIndex;
-
- @property (readwrite) NSArray *playlistTitlesToChooseFrom;
- @property (readwrite) NSArray *playlistURLStringsToChooseFrom;
- @property (readwrite) NSInteger selectedPlaylistIndex;
- */
-
 - (void)setCustomServers:(NSArray *)customServers
 {
     _customServers = customServers;
@@ -199,6 +191,12 @@ NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
 {
     _selectedPlaylistIndex = selectedPlaylistIndex;
     [[NSUserDefaults standardUserDefaults] setInteger:selectedPlaylistIndex forKey:SESSelectedChannelListIndex];
+}
+
+- (void)setLastPlayedChannelIndex:(NSInteger)lastPlayedChannelIndex
+{
+    _lastPlayedChannelIndex = lastPlayedChannelIndex;
+    [[NSUserDefaults standardUserDefaults] setInteger:lastPlayedChannelIndex forKey:SESLastChannelIndex];
 }
 
 @end

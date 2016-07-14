@@ -50,4 +50,6 @@
 @property (readwrite, nonatomic) NSArray *playlistURLStringsToChooseFrom;
 @property (readwrite, nonatomic) NSInteger selectedPlaylistIndex;
 
+@property (readwrite, nonatomic) NSInteger lastPlayedChannelIndex;
+
 @end
