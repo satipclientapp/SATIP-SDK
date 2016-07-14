@@ -50,13 +50,6 @@
 #endif
 
     self.viewControllerTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:38.];
-
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor sesPureWhite]CGColor], (id)[[UIColor sesPearlColor]CGColor], nil];
-    [gradient setStartPoint:CGPointMake(1, 1)];
-    [gradient setEndPoint:CGPointMake(0, 0)];
-    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
 - (NSString *)title
