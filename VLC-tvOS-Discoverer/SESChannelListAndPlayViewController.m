@@ -21,7 +21,7 @@
 
 #define channelListReuseIdentifier @"channelListReuseIdentifier"
 
-@interface SESChannelListAndPlayViewController () <UITableViewDataSource, UITableViewDelegate, VLCMediaPlayerDelegate, VLCMediaDelegate>
+@interface SESChannelListAndPlayViewController () <UITableViewDataSource, UITableViewDelegate, VLCMediaPlayerDelegate, VLCMediaDelegate, UIGestureRecognizerDelegate>
 {
     /* we have 1 player to download, process and report the playlist - it should be destroyed once this is done */
     VLCMediaPlayer *_parsePlayer;
@@ -39,6 +39,8 @@
 
     /* are we in our pseudo-fullscreen? */
     BOOL _fullscreen;
+
+    NSSet<UIGestureRecognizer *> *_simultaneousGestureRecognizers;
 }
 
 @end
@@ -65,12 +67,29 @@
     self.channelListTableView.delegate = self;
     self.channelListTableView.backgroundColor = [UIColor clearColor];
 
+    UISwipeGestureRecognizer *leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousChannel)];
+    leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+
+    UISwipeGestureRecognizer *rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextChannel)];
+    rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+
 #if TARGET_OS_TV
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
     UIImage *whiteButtonBackgroundImage = [UIColor sesImageWithColor:[UIColor whiteColor]];
     [self.fullscreenButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateNormal];
     [self.fullscreenButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateFocused];
+
+    [self.view addGestureRecognizer:leftSwipeRecognizer];
+    [self.view addGestureRecognizer:rightSwipeRecognizer];
+
+    leftSwipeRecognizer.delegate = self;
+    rightSwipeRecognizer.delegate = self;
+
+    NSMutableSet<UIGestureRecognizer *> *simultaneousGestureRecognizers = [NSMutableSet set];
+    [simultaneousGestureRecognizers addObject:leftSwipeRecognizer];
+    [simultaneousGestureRecognizers addObject:rightSwipeRecognizer];
+    _simultaneousGestureRecognizers = simultaneousGestureRecognizers;
 #else
     self.channelListTableView.rowHeight = 68.;
     self.channelListTableView.tintColor = [UIColor clearColor];
@@ -80,7 +99,8 @@
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullscreenAction:)];
     [self.videoOutputView addGestureRecognizer:tapRecognizer];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
+    [self.videoOutputView addGestureRecognizer:leftSwipeRecognizer];
+    [self.videoOutputView addGestureRecognizer:rightSwipeRecognizer];
 #endif
 
     /* cache the initial size of the view we draw video in for later use */
@@ -220,6 +240,40 @@
     [_playbackPlayer playItemAtIndex:(int)indexPath.row];
 }
 
+- (void)previousChannel
+{
+#if TARGET_OS_TV
+    if (!_fullscreen) {
+        return;
+    }
+#endif
+
+    NSInteger index = self.channelListTableView.indexPathForSelectedRow.row;
+    if (index == 0)
+        return;
+
+    index = index - 1;
+    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    [_playbackPlayer playItemAtIndex:(int)index];
+}
+
+- (void)nextChannel
+{
+#if TARGET_OS_TV
+    if (!_fullscreen) {
+        return;
+    }
+#endif
+
+    NSInteger index = self.channelListTableView.indexPathForSelectedRow.row;
+    if (index == (self.serverMediaItem.subitems.count - 1))
+        return;
+
+    index = index + 1;
+    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    [_playbackPlayer playItemAtIndex:(int)index];
+}
+
 #pragma mark - pseudo-fullscreen
 
 - (IBAction)fullscreenAction:(id)sender
@@ -264,6 +318,18 @@
 - (IBAction)dismissScreen:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - gesture recognizer delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return [_simultaneousGestureRecognizers containsObject:gestureRecognizer];
 }
 
 @end
