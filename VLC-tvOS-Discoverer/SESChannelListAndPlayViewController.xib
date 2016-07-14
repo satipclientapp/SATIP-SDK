@@ -20,17 +20,16 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewControllerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Ca7-cg-6Ym">
                     <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-rk-lZ9">
-                    <rect key="frame" x="730" y="220" width="1140" height="640"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-rk-lZ9">
+                    <rect key="frame" x="730" y="220" width="1140" height="641"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="selected" image="minimize" backgroundImage="buttonBackground"/>
                     <connections>
                         <action selector="fullscreenAction:" destination="-1" eventType="primaryActionTriggered" id="4wG-8b-SFe"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-8e-ng6">
-                    <rect key="frame" x="740" y="230" width="1120" height="620"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-8e-ng6">
+                    <rect key="frame" x="740" y="230" width="1120" height="621"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="mfG-8e-ng6" secondAttribute="height" multiplier="16:9" constant="16" id="LaM-ML-iJV"/>
@@ -69,9 +68,7 @@
         </view>
     </objects>
     <resources>
-        <image name="buttonBackground" width="65" height="67"/>
         <image name="logo" width="248" height="36"/>
-        <image name="minimize" width="54" height="46"/>
         <image name="viewControllerBackground" width="1024" height="768"/>
     </resources>
 </document>
