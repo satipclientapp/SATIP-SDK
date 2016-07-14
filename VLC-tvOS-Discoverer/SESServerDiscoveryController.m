@@ -15,6 +15,12 @@
 #import <DynamicMobileVLCKit/DynamicMobileVLCKit.h>
 #endif
 
+NSString *SESSelectedServerIndex = @"SESSelectedServerIndex";
+NSString *SESCustomServers = @"SESCustomServers";
+NSString *SESChannelListURLs = @"SESChannelListURLs";
+NSString *SESChannelListURLNames = @"SESChannelListURLNames";
+NSString *SESSelectedChannelListIndex = @"SESSelectedChannelListIndex";
+
 /* we need to be a VLCMediaListDelegate, as this is how we get notified about servers becoming available or disappearing */
 @interface SESServerDiscoveryController () <VLCMediaListDelegate>
 {
@@ -30,6 +36,19 @@
 @end
 
 @implementation SESServerDiscoveryController
+
++ (void)initialize
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *standardDefaults = @{ SESSelectedServerIndex : @(0),
+                                        SESCustomServers : @[],
+                                        SESChannelListURLNames : @[@"Astra 19°2E", @"Astra 28°2E", @"Astra 23°5E"],
+                                        SESChannelListURLs : @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
+                                                               @"http://www.satip.info/Playlists/ASTRA_28_2E.m3u",
+                                                               @"http://www.satip.info/Playlists/ASTRA_23_5E.m3u"],
+                                        SESSelectedChannelListIndex : @(0)};
+    [defaults registerDefaults:standardDefaults];
+}
 
 + (instancetype)sharedDiscoveryController
 {
@@ -49,11 +68,12 @@
 {
     self = [super init];
     if (self) {
-        _playlistTitlesToChooseFrom = @[@"Astra 19°2E", @"Astra 28°2E", @"Astra 23°5E"];
-        _playlistURLStringsToChooseFrom = @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
-                                            @"http://www.satip.info/Playlists/ASTRA_28_2E.m3u",
-                                            @"http://www.satip.info/Playlists/ASTRA_23_5E.m3u"];
-        _customServers = @[];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        _customServers = [defaults arrayForKey:SESCustomServers];
+        _playlistTitlesToChooseFrom = [defaults arrayForKey:SESChannelListURLNames];
+        _playlistURLStringsToChooseFrom = [defaults arrayForKey:SESChannelListURLs];
+        _selectedServerIndex = [defaults integerForKey:SESSelectedServerIndex];
+        _selectedPlaylistIndex = [defaults integerForKey:SESSelectedChannelListIndex];
     }
     return self;
 }
@@ -141,6 +161,44 @@
 - (NSInteger)numberOfServers
 {
     return _filteredServerList.count;
+}
+
+/* @property (readwrite) NSArray *customServers;
+ @property (readwrite) NSInteger selectedServerIndex;
+
+ @property (readwrite) NSArray *playlistTitlesToChooseFrom;
+ @property (readwrite) NSArray *playlistURLStringsToChooseFrom;
+ @property (readwrite) NSInteger selectedPlaylistIndex;
+ */
+
+- (void)setCustomServers:(NSArray *)customServers
+{
+    _customServers = customServers;
+    [[NSUserDefaults standardUserDefaults] setValue:customServers forKey:SESCustomServers];
+}
+
+- (void)setSelectedServerIndex:(NSInteger)selectedServerIndex
+{
+    _selectedServerIndex = selectedServerIndex;
+    [[NSUserDefaults standardUserDefaults] setInteger:selectedServerIndex forKey:SESSelectedServerIndex];
+}
+
+- (void)setPlaylistTitlesToChooseFrom:(NSArray *)playlistTitlesToChooseFrom
+{
+    _playlistTitlesToChooseFrom = playlistTitlesToChooseFrom;
+    [[NSUserDefaults standardUserDefaults] setObject:playlistTitlesToChooseFrom forKey:SESChannelListURLNames];
+}
+
+- (void)setPlaylistURLStringsToChooseFrom:(NSArray *)playlistURLStringsToChooseFrom
+{
+    _playlistURLStringsToChooseFrom = playlistURLStringsToChooseFrom;
+    [[NSUserDefaults standardUserDefaults] setObject:playlistURLStringsToChooseFrom forKey:SESChannelListURLs];
+}
+
+- (void)setSelectedPlaylistIndex:(NSInteger)selectedPlaylistIndex
+{
+    _selectedPlaylistIndex = selectedPlaylistIndex;
+    [[NSUserDefaults standardUserDefaults] setInteger:selectedPlaylistIndex forKey:SESSelectedChannelListIndex];
 }
 
 @end
