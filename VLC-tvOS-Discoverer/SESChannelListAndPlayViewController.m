@@ -80,6 +80,8 @@
 
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullscreenAction:)];
     [self.videoOutputView addGestureRecognizer:tapRecognizer];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
 #endif
 
     /* cache the initial size of the view we draw video in for later use */
@@ -251,4 +253,10 @@
         [self.view layoutIfNeeded];
     }];
 }
+
+- (IBAction)dismissScreen:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

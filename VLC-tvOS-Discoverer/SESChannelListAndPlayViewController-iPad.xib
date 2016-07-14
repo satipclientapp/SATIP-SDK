@@ -22,7 +22,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="InR-NH-Skc">
-                    <rect key="frame" x="37" y="37" width="280" height="1329"/>
+                    <rect key="frame" x="37" y="75" width="280" height="1291"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="Xby-jh-s5K"/>
@@ -38,6 +38,13 @@
                         <constraint firstAttribute="width" secondItem="NnM-qz-lQM" secondAttribute="height" multiplier="16:9" id="bim-US-Oif"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sW-xf-zRc">
+                    <rect key="frame" x="42" y="37" width="37" height="30"/>
+                    <state key="normal" title="Done"/>
+                    <connections>
+                        <action selector="dismissScreen:" destination="-1" eventType="touchUpInside" id="7dr-ae-Jbc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.9635832634" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -46,12 +53,14 @@
                 <constraint firstItem="95c-5S-qV8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DVY-cu-dRL"/>
                 <constraint firstAttribute="bottom" secondItem="InR-NH-Skc" secondAttribute="bottom" id="Ggw-IL-vwp"/>
                 <constraint firstItem="pOG-cl-OG5" firstAttribute="trailing" secondItem="NnM-qz-lQM" secondAttribute="trailing" id="Haq-Ae-rcM"/>
+                <constraint firstItem="95c-5S-qV8" firstAttribute="top" secondItem="pOG-cl-OG5" secondAttribute="bottom" constant="-73" id="JhN-xJ-aq9"/>
+                <constraint firstItem="1sW-xf-zRc" firstAttribute="leading" secondItem="InR-NH-Skc" secondAttribute="leading" id="JlA-cn-iPT"/>
                 <constraint firstAttribute="bottom" secondItem="95c-5S-qV8" secondAttribute="bottom" id="Q3a-9t-G5Y"/>
                 <constraint firstItem="NnM-qz-lQM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VIr-Be-DPp"/>
-                <constraint firstItem="pOG-cl-OG5" firstAttribute="top" secondItem="InR-NH-Skc" secondAttribute="top" id="igy-Jv-ZqP"/>
+                <constraint firstItem="InR-NH-Skc" firstAttribute="top" secondItem="1sW-xf-zRc" secondAttribute="bottom" constant="8" id="ojl-NY-eNd"/>
                 <constraint firstAttribute="trailing" secondItem="NnM-qz-lQM" secondAttribute="trailing" constant="33" id="u4J-lX-Cd4"/>
+                <constraint firstItem="1sW-xf-zRc" firstAttribute="top" secondItem="pOG-cl-OG5" secondAttribute="top" id="vwP-MU-Uwf"/>
                 <constraint firstItem="InR-NH-Skc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37" id="wsy-Nz-GkF"/>
-                <constraint firstItem="InR-NH-Skc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="37" id="xWD-YE-75m"/>
                 <constraint firstAttribute="trailing" secondItem="95c-5S-qV8" secondAttribute="trailing" id="z0V-ux-WT2"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPadPro"/>

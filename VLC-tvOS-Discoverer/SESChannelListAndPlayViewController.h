@@ -24,4 +24,6 @@
 /* action for the fullscreen clicker */
 - (IBAction)fullscreenAction:(id)sender;
 
+- (IBAction)dismissScreen:(id)sender;
+
 @end
