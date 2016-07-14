@@ -116,7 +116,11 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     }
 
     /* setup our parse player, which we use to download the channel list and parse it */
-    _playlistMediaItem = [VLCMedia mediaWithURL:[NSURL URLWithString:_discoveryController.playlistURLStringsToChooseFrom[_discoveryController.selectedPlaylistIndex]]];
+    NSURL *url = [NSURL URLWithString:_discoveryController.playlistURLStringsToChooseFrom[_discoveryController.selectedPlaylistIndex]];
+    if (!url) {
+        return;
+    }
+    _playlistMediaItem = [VLCMedia mediaWithURL:url];
     _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
     _parsePlayer.media = _playlistMediaItem;
     _parsePlayer.delegate = self;
