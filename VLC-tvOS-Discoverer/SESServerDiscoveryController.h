@@ -43,4 +43,11 @@
 /* VLCMedia object of type VLCMediaTypeDirectory describing the actual server */
 - (VLCMedia *)serverAtIndex:(NSInteger)index;
 
+@property (readwrite) NSArray *customServers;
+@property (readwrite) NSInteger selectedServerIndex;
+
+@property (readwrite) NSArray *playlistTitlesToChooseFrom;
+@property (readwrite) NSArray *playlistURLStringsToChooseFrom;
+@property (readwrite) NSInteger selectedPlaylistIndex;
+
 @end

@@ -71,6 +71,10 @@
     [self.serverTableView reloadData];
 
     [super viewWillAppear:animated];
+
+    NSInteger selectedServer = _discoveryController.selectedServerIndex;
+
+    [self.serverTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedServer inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark - table view data source
@@ -82,12 +86,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _discoveryController.numberOfServers;
+    return _discoveryController.numberOfServers + _discoveryController.customServers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseableIdentifierForServer];
+    NSInteger index = indexPath.row;
+
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseableIdentifierForServer];
         cell.backgroundColor = [SESColors SESPureWhite];
@@ -98,15 +104,18 @@
 #endif
     }
 
-    VLCMedia *media = [_discoveryController serverAtIndex:indexPath.row];
-    if (!media) {
-        cell.textLabel.text = @"bad server";
-        return cell;
+    NSInteger serverCount = _discoveryController.numberOfServers;
+    if (index < serverCount) {
+        VLCMedia *media = [_discoveryController serverAtIndex:index];
+        if (!media) {
+            cell.textLabel.text = @"bad server";
+            return cell;
+        }
+
+        cell.textLabel.text = [media metadataForKey:VLCMetaInformationTitle];
+    } else {
+        cell.textLabel.text = _discoveryController.customServers[index - serverCount];
     }
-
-    cell.textLabel.text = [media metadataForKey:VLCMetaInformationTitle];
-
-    NSLog(@"VLCMetaInformationURL: %@", [media metadataForKey:VLCMetaInformationURL]);
 
     return cell;
 }

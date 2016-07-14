@@ -30,12 +30,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     VLCMediaPlayer *_parsePlayer;
     VLCMedia *_playlistMediaItem;
 
-    NSInteger _selectedPlaylistIndex;
-    NSArray *_playlistTitlesToChooseFromArray;
-    NSArray *_playlistURLStringsToChooseFromArray;
-
     SESServerDiscoveryController *_discoveryController;
-    NSMutableArray *_manuallyAddedServersArray;
 }
 @end
 
@@ -54,8 +49,6 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     /* init our discovery controller - note that it doesn't discover anything yet */
     _discoveryController = [SESServerDiscoveryController sharedDiscoveryController];
     _discoveryController.delegate = self;
-
-    _manuallyAddedServersArray = [NSMutableArray array];
 
 #if TARGET_OS_TV
     self.serverListTableView.rowHeight = 100.;
@@ -88,12 +81,6 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     self.satelliteListTableView.delegate = self;
 
     self.channelListTableView.dataSource = self;
-
-    _selectedPlaylistIndex = 0;
-    _playlistTitlesToChooseFromArray = @[@"Astra 19°2E", @"Astra 28°2E", @"Astra 23°5E"];
-    _playlistURLStringsToChooseFromArray = @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
-                                             @"http://www.satip.info/Playlists/ASTRA_28_2E.m3u",
-                                             @"http://www.satip.info/Playlists/ASTRA_23_5E.m3u"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,7 +93,8 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
     [super viewWillAppear:animated];
 
-    [self.satelliteListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedPlaylistIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [self.satelliteListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_discoveryController.selectedPlaylistIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [self.serverListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_discoveryController.selectedServerIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -129,7 +117,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     }
 
     /* setup our parse player, which we use to download the channel list and parse it */
-    _playlistMediaItem = [VLCMedia mediaWithURL:[NSURL URLWithString:_playlistURLStringsToChooseFromArray[_selectedPlaylistIndex]]];
+    _playlistMediaItem = [VLCMedia mediaWithURL:[NSURL URLWithString:_discoveryController.playlistURLStringsToChooseFrom[_discoveryController.selectedPlaylistIndex]]];
     _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
     _parsePlayer.media = _playlistMediaItem;
     _parsePlayer.delegate = self;
@@ -151,7 +139,9 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [alertController addAction:[UIAlertAction actionWithTitle:@"Add Server"
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                          [_manuallyAddedServersArray addObject:serverField.text];
+                                                          NSMutableArray *customServers = [_discoveryController.customServers mutableCopy];
+                                                          [customServers addObject:serverField.text];
+                                                          _discoveryController.customServers = [customServers copy];
 
                                                           [self.serverListTableView reloadData];
                                                       }]];
@@ -178,13 +168,13 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
                                                       handler:^(UIAlertAction * _Nonnull action) {
                                                           NSString *urlString = urlField.text;
 
-                                                          NSMutableArray *mutArray = [_playlistURLStringsToChooseFromArray mutableCopy];
+                                                          NSMutableArray *mutArray = [_discoveryController.playlistURLStringsToChooseFrom mutableCopy];
                                                           [mutArray addObject:urlString];
-                                                          _playlistURLStringsToChooseFromArray = [mutArray copy];
+                                                          _discoveryController.playlistURLStringsToChooseFrom = [mutArray copy];
 
-                                                          mutArray = [_playlistTitlesToChooseFromArray mutableCopy];
+                                                          mutArray = [_discoveryController.playlistTitlesToChooseFrom mutableCopy];
                                                           [mutArray addObject:[urlString lastPathComponent]];
-                                                          _playlistTitlesToChooseFromArray = [mutArray copy];
+                                                          _discoveryController.playlistTitlesToChooseFrom = [mutArray copy];
 
                                                           [self.satelliteListTableView reloadData];
                                                       }]];
@@ -206,9 +196,9 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.satelliteListTableView) {
-        return  _playlistTitlesToChooseFromArray.count;
+        return  _discoveryController.playlistTitlesToChooseFrom.count;
     } else if (tableView == self.serverListTableView) {
-        return _discoveryController.numberOfServers + _manuallyAddedServersArray.count;
+        return _discoveryController.numberOfServers + _discoveryController.customServers.count;
     } else {
         if (_playlistMediaItem) {
             return _playlistMediaItem.subitems.count;
@@ -231,15 +221,15 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
         NSInteger serverCount = _discoveryController.numberOfServers;
         if (index < serverCount) {
-            VLCMedia *media = [_discoveryController serverAtIndex:indexPath.row];
+            VLCMedia *media = [_discoveryController serverAtIndex:index];
             if (!media) {
-                cell.textLabel.text = @"bad server";
+                cell.channelNameLabel.text = @"bad server";
                 return cell;
             }
 
             cell.channelNameLabel.text = [media metadataForKey:VLCMetaInformationTitle];
         } else {
-            cell.channelNameLabel.text = _manuallyAddedServersArray[index - serverCount];
+            cell.channelNameLabel.text = _discoveryController.customServers[index - serverCount];
         }
         cell.channelIconImageView.image = [UIImage imageNamed:@"logo"];
 
@@ -249,7 +239,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         if (!cell) {
             cell = [SESTableViewCell new];
         }
-        cell.channelNameLabel.text = _playlistTitlesToChooseFromArray[indexPath.row];
+        cell.channelNameLabel.text = _discoveryController.playlistTitlesToChooseFrom[indexPath.row];
         cell.channelIconImageView.image = [UIImage imageNamed:@"logo"];
         return cell;
     } else {
@@ -300,11 +290,11 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s: %@", __PRETTY_FUNCTION__, indexPath);
-
     if (tableView == self.satelliteListTableView) {
-        _selectedPlaylistIndex = indexPath.row;
+        _discoveryController.selectedPlaylistIndex = indexPath.row;
         [self parseCurrentChannelList];
+    } else {
+        _discoveryController.selectedServerIndex = indexPath.row;
     }
 }
 

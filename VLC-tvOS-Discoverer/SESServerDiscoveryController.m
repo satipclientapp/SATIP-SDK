@@ -45,6 +45,18 @@
 
 #pragma mark - setup and destruction
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _playlistTitlesToChooseFrom = @[@"Astra 19°2E", @"Astra 28°2E", @"Astra 23°5E"];
+        _playlistURLStringsToChooseFrom = @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
+                                            @"http://www.satip.info/Playlists/ASTRA_28_2E.m3u",
+                                            @"http://www.satip.info/Playlists/ASTRA_23_5E.m3u"];
+    }
+    return self;
+}
+
 - (void)startDiscovery
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -94,6 +106,7 @@
     for (NSUInteger x = 0; x < count; x++) {
         VLCMedia *media = [_discoveredServerList mediaAtIndex:x];
         if ([[media metadataForKey:VLCMetaInformationSetting] isEqualToString:@"urn:ses-com:device:SatIPServer:1"]) {
+            NSLog(@"media url: %@", media.url);
             [_filteredServerList addObject:media];
         }
     }
