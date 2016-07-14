@@ -136,6 +136,14 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    /* automatic playback start */
+    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:animated scrollPosition:UITableViewScrollPositionNone];
+    [_playbackPlayer playItemAtIndex:0];
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     /* this is extremely important!
