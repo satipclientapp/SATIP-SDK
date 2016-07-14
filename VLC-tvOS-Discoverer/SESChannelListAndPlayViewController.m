@@ -77,8 +77,11 @@
     self.channelListTableView.tintColor = [UIColor clearColor];
     self.channelListTableView.separatorColor = [UIColor clearColor];
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell-ipad" bundle:nil] forCellReuseIdentifier:channelListReuseIdentifier];
+
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullscreenAction:)];
+    [self.videoOutputView addGestureRecognizer:tapRecognizer];
 #endif
-    
+
     /* cache the initial size of the view we draw video in for later use */
     _initialVoutContraints = self.videoOutputView.constraints;
 

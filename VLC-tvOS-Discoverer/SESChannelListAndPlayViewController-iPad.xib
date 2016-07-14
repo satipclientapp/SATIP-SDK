@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,7 +9,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SESChannelListAndPlayViewController">
             <connections>
                 <outlet property="channelListTableView" destination="InR-NH-Skc" id="0d4-TZ-sPg"/>
-                <outlet property="fullscreenButton" destination="hTH-Ia-WXs" id="bn9-vy-zKe"/>
                 <outlet property="videoOutputView" destination="NnM-qz-lQM" id="niu-rK-5g0"/>
                 <outlet property="view" destination="iN0-l3-epB" id="orn-pf-CBT"/>
             </connections>
@@ -33,33 +32,23 @@
                     <rect key="frame" x="743" y="37" width="248" height="36"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NnM-qz-lQM">
-                    <rect key="frame" x="351" y="503.5" width="640" height="360"/>
+                    <rect key="frame" x="351" y="503" width="640" height="360"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="NnM-qz-lQM" secondAttribute="height" multiplier="16:9" id="bim-US-Oif"/>
                     </constraints>
                 </view>
-                <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTH-Ia-WXs">
-                    <rect key="frame" x="881" y="1170" width="110" height="70"/>
-                    <state key="normal" image="maximizeButton"/>
-                    <state key="selected" image="minimizeButton"/>
-                    <connections>
-                        <action selector="fullscreenAction:" destination="-1" eventType="touchUpInside" id="Vym-Nk-v04"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.9635832634" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="NnM-qz-lQM" firstAttribute="leading" secondItem="InR-NH-Skc" secondAttribute="trailing" constant="34" id="2KB-8C-WhU"/>
-                <constraint firstAttribute="trailing" secondItem="hTH-Ia-WXs" secondAttribute="trailing" constant="33" id="31j-RI-tIY"/>
                 <constraint firstItem="95c-5S-qV8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bsh-nB-XaB"/>
                 <constraint firstItem="95c-5S-qV8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DVY-cu-dRL"/>
                 <constraint firstAttribute="bottom" secondItem="InR-NH-Skc" secondAttribute="bottom" id="Ggw-IL-vwp"/>
-                <constraint firstItem="pOG-cl-OG5" firstAttribute="trailing" secondItem="hTH-Ia-WXs" secondAttribute="trailing" id="L5Z-TX-LwX"/>
+                <constraint firstItem="pOG-cl-OG5" firstAttribute="trailing" secondItem="NnM-qz-lQM" secondAttribute="trailing" id="Haq-Ae-rcM"/>
                 <constraint firstAttribute="bottom" secondItem="95c-5S-qV8" secondAttribute="bottom" id="Q3a-9t-G5Y"/>
                 <constraint firstItem="NnM-qz-lQM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VIr-Be-DPp"/>
                 <constraint firstItem="pOG-cl-OG5" firstAttribute="top" secondItem="InR-NH-Skc" secondAttribute="top" id="igy-Jv-ZqP"/>
-                <constraint firstAttribute="bottom" secondItem="hTH-Ia-WXs" secondAttribute="bottom" constant="126" id="msY-K5-gtC"/>
                 <constraint firstAttribute="trailing" secondItem="NnM-qz-lQM" secondAttribute="trailing" constant="33" id="u4J-lX-Cd4"/>
                 <constraint firstItem="InR-NH-Skc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37" id="wsy-Nz-GkF"/>
                 <constraint firstItem="InR-NH-Skc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="37" id="xWD-YE-75m"/>
@@ -71,8 +60,6 @@
     </objects>
     <resources>
         <image name="logo" width="248" height="36"/>
-        <image name="maximizeButton" width="110" height="70"/>
-        <image name="minimizeButton" width="110" height="70"/>
         <image name="viewControllerBackground" width="1024" height="768"/>
     </resources>
 </document>
