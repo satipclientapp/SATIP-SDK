@@ -136,7 +136,27 @@
     /* forward our server media item to the playback view controller
      * after this point, the discovery controller can be safely destroyed
      */
-    playVC.serverMediaItem = [_discoveryController serverAtIndex:indexPath.row];
+
+    NSInteger index = indexPath.row;
+    VLCMedia *serverItem;
+    NSString *playlistURLString = _discoveryController.playlistURLStringsToChooseFrom[_discoveryController.selectedPlaylistIndex];
+    NSString *ipString;
+
+    NSInteger serverCount = _discoveryController.numberOfServers;
+    if (index < serverCount) {
+        NSURLComponents *components = [NSURLComponents componentsWithURL:[_discoveryController serverAtIndex:_discoveryController.selectedServerIndex].url resolvingAgainstBaseURL:NO];
+        ipString = [components.queryItems.firstObject value];
+    } else {
+        ipString = _discoveryController.customServers[index - serverCount];
+    }
+
+    NSString *mrl = [playlistURLString stringByReplacingOccurrencesOfString:@"http://" withString:@"http/lua://"];
+    mrl = [mrl stringByReplacingOccurrencesOfString:@"https://" withString:@"https/lua://"];
+    mrl = [mrl stringByAppendingFormat:@"?device=%@", ipString];
+
+    serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
+
+    playVC.serverMediaItem = serverItem;
 
     [self presentViewController:playVC animated:YES completion:nil];
 }

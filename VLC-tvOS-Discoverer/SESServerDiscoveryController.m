@@ -53,6 +53,7 @@
         _playlistURLStringsToChooseFrom = @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
                                             @"http://www.satip.info/Playlists/ASTRA_28_2E.m3u",
                                             @"http://www.satip.info/Playlists/ASTRA_23_5E.m3u"];
+        _customServers = @[];
     }
     return self;
 }
