@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sat IP Sdk</string>
+    <string name="channels">Channels</string>
+    <string name="settings">Settings</string>
+    <string name="add_server">Add server address manually</string>
+    <string name="add_channel">Add m3u channel list manually</string>
+</resources>

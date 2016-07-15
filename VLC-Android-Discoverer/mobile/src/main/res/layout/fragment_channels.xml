@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        android:animateLayoutChanges="true" >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/channel_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="40dp" />
+
+        <ImageView
+            android:id="@+id/ses_logo"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/ses_logo"/>
+
+        <FrameLayout
+            android:id="@+id/video_surface_frame"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_toRightOf="@+id/channel_list"
+            android:layout_below="@id/ses_logo"
+            android:layout_alignParentRight="true"
+            android:layout_margin="40dp"
+            android:foregroundGravity="clip_horizontal|clip_vertical"
+            android:background="@android:color/black"
+            android:focusable="true">
+
+            <SurfaceView
+                android:id="@+id/video_surface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black" />
+        </FrameLayout>
+    </RelativeLayout>
+</layout>
