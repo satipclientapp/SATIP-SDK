@@ -28,10 +28,8 @@ public class ServerActivity extends AppCompatActivity implements MediaBrowser.Ev
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_server);
         ArrayList<ListAdapter.Item> serverList = new ArrayList<>();
-//        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
-//        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
         mBinding.serverList.setLayoutManager(new LinearLayoutManager(this));
-        mListAdapter = new ListAdapter(serverList);
+        mListAdapter = new ListAdapter(serverList, true);
         mBinding.serverList.setAdapter(mListAdapter);
         mListAdapter.notifyDataSetChanged();
 

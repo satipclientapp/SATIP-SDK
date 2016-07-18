@@ -43,7 +43,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 //        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
 //        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
         mBinding.serverList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mServerListAdapter = new ListAdapter(serverList);
+        mServerListAdapter = new ListAdapter(serverList, false);
         mBinding.serverList.setAdapter(mServerListAdapter);
         mServerListAdapter.notifyDataSetChanged();
         // Channels
@@ -55,7 +55,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
         channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mChannelListAdapter = new ListAdapter(channelList);
+        mChannelListAdapter = new ListAdapter(channelList, false);
         mBinding.channelList.setAdapter(mChannelListAdapter);
         mChannelListAdapter.notifyDataSetChanged();
 

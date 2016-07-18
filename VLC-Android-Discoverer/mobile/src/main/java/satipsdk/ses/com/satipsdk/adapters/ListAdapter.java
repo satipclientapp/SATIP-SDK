@@ -26,13 +26,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     public static final int TYPE_SERVER = 0;
     public static final int TYPE_CHANNEL = 1;
 
-    ArrayList<Item> mItemList;
-    LayoutInflater mInflater;
-    SparseIntArray mItemsIndex = new SparseIntArray();
+    private boolean mClickable;
 
-    public ListAdapter(ArrayList<Item> serverList) {
+    private ArrayList<Item> mItemList;
+    private LayoutInflater mInflater;
+    private SparseIntArray mItemsIndex = new SparseIntArray();
+
+    public ListAdapter(ArrayList<Item> serverList, boolean clickable) {
         super();
         mItemList = serverList;
+        mClickable = clickable;
     }
 
     @Override
@@ -107,6 +110,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
         @Override
         public void onClick(View v) {
+            if (!mClickable) return;
             if (binding.getItem().type == TYPE_SERVER) {
                 v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
             } else {

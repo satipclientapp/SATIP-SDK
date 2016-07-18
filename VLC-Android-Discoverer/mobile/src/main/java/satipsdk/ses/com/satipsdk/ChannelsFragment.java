@@ -94,7 +94,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, View.OnFo
 //        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
 //        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mBinding.channelList.setAdapter(new ListAdapter(channelList));
+        mBinding.channelList.setAdapter(new ListAdapter(channelList, true));
         mBinding.channelList.getAdapter().notifyDataSetChanged();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
