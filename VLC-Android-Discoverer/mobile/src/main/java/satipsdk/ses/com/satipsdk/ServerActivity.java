@@ -49,9 +49,9 @@ public class ServerActivity extends AppCompatActivity implements MediaBrowser.Ev
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
         releaseBrowser();
+        super.onPause();
     }
 
     private void releaseBrowser() {
