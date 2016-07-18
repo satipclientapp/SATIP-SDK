@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import org.videolan.libvlc.IVLCVout;
 import org.videolan.libvlc.LibVLC;
 import org.videolan.libvlc.Media;
+import org.videolan.libvlc.MediaList;
 import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.HWDecoderUtil;
 
@@ -71,6 +72,13 @@ public class ChannelsFragment extends Fragment implements TabFragment, View.OnFo
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loadChannelList();
+            }
+        }).start();
+
         if (ENABLE_SUBTITLES && HWDecoderUtil.HAS_SUBTITLES_SURFACE) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.subtitles_stub);
             mSubtitlesSurface = (SurfaceView) stub.inflate();
@@ -79,12 +87,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, View.OnFo
         }
 
         ArrayList<ListAdapter.Item> channelList = new ArrayList<>();
-        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
-        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
-        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
-        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
-        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
-        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
+//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
+//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
+//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
+//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
+//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
+//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.channelList.setAdapter(new ListAdapter(channelList));
         mBinding.channelList.getAdapter().notifyDataSetChanged();
@@ -92,6 +100,28 @@ public class ChannelsFragment extends Fragment implements TabFragment, View.OnFo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mBinding.videoSurfaceFrame.setOnFocusChangeListener(this);
         mBinding.videoSurfaceFrame.setOnClickListener(this);
+    }
+
+    private void loadChannelList() {
+        Uri uri = getActivity().getIntent().getData();
+        Media playlist = new Media(mLibVLC, uri);
+        final MediaList ml = playlist.subItems();
+        playlist.release();
+        final Media[] media = new Media[1];
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                ListAdapter la = (ListAdapter) mBinding.channelList.getAdapter();
+                for (int i = 0; i< ml.getCount(); ++i) {
+                    media[0] = ml.getMediaAt(i);
+                    la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
+                            media[0].getMeta(Media.Meta.Title),
+                            "channel description",
+                            media[0].getUri().toString(),
+                            null));
+                }
+            }
+        });
     }
 
     @Override

@@ -3,6 +3,7 @@ package satipsdk.ses.com.satipsdk.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
@@ -51,6 +52,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             .crossFade()
             .into(holder.binding.itemLogo);
         holder.itemView.requestFocus();
+    }
+
+    public void add(Item item) {
+        mItemList.add(item);
+        notifyItemInserted(mItemList.size()-1);
     }
 
     public void add(int position, Item item) {
@@ -102,8 +108,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         @Override
         public void onClick(View v) {
             if (binding.getItem().type == TYPE_SERVER) {
-                v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class)
-                        .putExtra("url", binding.getItem().url));
+                v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
             } else {
                 //TODO play stream
             }
