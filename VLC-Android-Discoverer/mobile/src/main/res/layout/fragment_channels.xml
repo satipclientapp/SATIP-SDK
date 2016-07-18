@@ -26,20 +26,32 @@
         <FrameLayout
             android:id="@+id/video_surface_frame"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/channel_list"
             android:layout_below="@id/ses_logo"
             android:layout_alignParentRight="true"
             android:layout_margin="40dp"
+            android:background="@color/light_gray"
             android:foregroundGravity="clip_horizontal|clip_vertical"
-            android:background="@android:color/black"
             android:focusable="true">
 
             <SurfaceView
                 android:id="@+id/video_surface"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/black" />
+                android:layout_width="1dp"
+                android:layout_height="1dp" />
+
+            <ViewStub
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout="@layout/subtitles_surface"
+                android:id="@+id/subtitles_stub" />
         </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/channel_list"
+            android:layout_below="@id/video_surface_frame" />
     </RelativeLayout>
 </layout>
