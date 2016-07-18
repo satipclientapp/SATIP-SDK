@@ -70,7 +70,7 @@ public class ServerActivity extends AppCompatActivity implements MediaBrowser.Ev
 
     @Override
     public void onMediaRemoved(int i, Media media) {
-//        mListAdapter.remove(i);
+        mListAdapter.remove(i);
     }
 
     @Override
