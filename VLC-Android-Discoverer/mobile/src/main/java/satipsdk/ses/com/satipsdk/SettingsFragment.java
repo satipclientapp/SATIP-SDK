@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentSettingsBinding;
+import satipsdk.ses.com.satipsdk.util.Util;
 
 public class SettingsFragment extends Fragment implements TabFragment, MediaBrowser.EventListener {
 
@@ -39,8 +40,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         super.onViewCreated(view, savedInstanceState);
         // Servers
         ArrayList<ListAdapter.Item> serverList = new ArrayList<>();
-        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
-        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
+//        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
+//        serverList.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, "Astra 19\"2 E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
         mBinding.serverList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mServerListAdapter = new ListAdapter(serverList);
         mBinding.serverList.setAdapter(mServerListAdapter);
@@ -68,11 +69,11 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onStart() {
         super.onStart();
-//        mServerListAdapter.clear();
+        mServerListAdapter.clear();
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
-//        if (Util.hasLANConnection())
-//            mMediaBrowser.discoverNetworkShares();
+        if (Util.hasLANConnection())
+            mMediaBrowser.discoverNetworkShares();
         mBinding.serverList.requestFocus();
     }
 
