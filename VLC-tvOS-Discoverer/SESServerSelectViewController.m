@@ -143,9 +143,7 @@
         ipString = _discoveryController.customServers[index - serverCount];
     }
 
-    NSString *mrl = [playlistURLString stringByReplacingOccurrencesOfString:@"http://" withString:@"http/lua://"];
-    mrl = [mrl stringByReplacingOccurrencesOfString:@"https://" withString:@"https/lua://"];
-    mrl = [mrl stringByAppendingFormat:@"?device=%@", ipString];
+    NSString *mrl = [playlistURLString stringByAppendingFormat:@"?satip-device=%@", ipString];
 
     serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
 
