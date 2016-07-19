@@ -25,6 +25,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
     public static final int TYPE_SERVER = 0;
     public static final int TYPE_CHANNEL = 1;
+    public static final int TYPE_CHANNEL_LIST = 2;
 
     private boolean mClickable;
 
@@ -62,6 +63,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             .fitCenter()
             .crossFade()
             .into(holder.binding.itemLogo);
+        else
+            holder.binding.itemLogo.setVisibility(View.GONE);
         holder.itemView.requestFocus();
     }
 
@@ -91,6 +94,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             return;
         mItemList.clear();
         notifyDataSetChanged();
+    }
+
+    public ArrayList<Item> getAll() {
+        return mItemList;
     }
 
     @Override
