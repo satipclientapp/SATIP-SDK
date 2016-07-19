@@ -164,7 +164,14 @@
         NSURLComponents *components = [NSURLComponents componentsWithURL:[_discoveryController serverAtIndex:index].url resolvingAgainstBaseURL:NO];
         ipString = [components.queryItems.firstObject value];
     } else {
-        ipString = _discoveryController.customServers[index - serverCount];
+        NSInteger customerServerIndex = index - serverCount;
+        if (customerServerIndex < _discoveryController.customServers.count) {
+            ipString = _discoveryController.customServers[index - serverCount];
+        }
+    }
+
+    if (ipString == nil) {
+        return;
     }
 
     NSString *mrl = [playlistURLString stringByAppendingFormat:@"?satip-device=%@", ipString];
