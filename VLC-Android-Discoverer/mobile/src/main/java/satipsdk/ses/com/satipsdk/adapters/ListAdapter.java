@@ -71,6 +71,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
     public void remove(int position) {
         int actualPosition = mItemsIndex.get(position);
+        if (actualPosition >= mItemList.size() || actualPosition < 0)
+            return;
         mItemList.remove(actualPosition);
         notifyItemRemoved(actualPosition);
         mItemsIndex.delete(position);
