@@ -79,8 +79,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     public void onResume() {
         super.onResume();
         refreshServers();
-        if (mChannelListAdapter.getItemCount() > 0)
-            refreshChannels();
+        refreshChannels();
     }
 
     private void refreshServers() {
@@ -104,7 +103,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         mChannelListAdapter.clear();
         Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
         Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
-        if (prefListsNames == null || prefListsUrls == null) {
+        if (Util.isCollectionEmpty(prefListsNames) || Util.isCollectionEmpty(prefListsUrls)) {
             mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
             mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, "http://www.satip.info/Playlists/ASTRA_28_2E.m3u", null));
             mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, "http://www.satip.info/Playlists/ASTRA_23_5E.m3u", null));
