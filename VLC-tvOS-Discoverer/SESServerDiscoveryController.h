@@ -46,8 +46,8 @@
 @property (readwrite, nonatomic) NSArray *customServers;
 @property (readwrite, nonatomic) NSInteger selectedServerIndex;
 
-@property (readwrite, nonatomic) NSArray *playlistTitlesToChooseFrom;
-@property (readwrite, nonatomic) NSArray *playlistURLStringsToChooseFrom;
+@property (readwrite, nonatomic, copy) NSArray *playlistTitlesToChooseFrom;
+@property (readwrite, nonatomic, copy) NSArray *playlistURLStringsToChooseFrom;
 @property (readwrite, nonatomic) NSInteger selectedPlaylistIndex;
 
 @property (readwrite, nonatomic) NSInteger lastPlayedChannelIndex;

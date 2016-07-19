@@ -41,7 +41,7 @@ NSString *SESLastChannelIndex = @"SESLastChannelIndex";
 + (void)initialize
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *standardDefaults = @{ SESSelectedServerIndex : @(0),
+    NSDictionary *standardDefaults = @{ SESSelectedServerIndex : @(-1),
                                         SESCustomServers : @[],
                                         SESChannelListURLNames : @[@"Astra 19°2E", @"Astra 28°2E", @"Astra 23°5E"],
                                         SESChannelListURLs : @[@"http://www.satip.info/Playlists/ASTRA_19_2E.m3u",
@@ -70,6 +70,7 @@ NSString *SESLastChannelIndex = @"SESLastChannelIndex";
 {
     self = [super init];
     if (self) {
+        NSLog(@"%s", __PRETTY_FUNCTION__);
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         _customServers = [defaults arrayForKey:SESCustomServers];
         _playlistTitlesToChooseFrom = [defaults arrayForKey:SESChannelListURLNames];

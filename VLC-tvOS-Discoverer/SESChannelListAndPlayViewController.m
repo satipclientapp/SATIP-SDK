@@ -22,7 +22,7 @@
 
 #define channelListReuseIdentifier @"channelListReuseIdentifier"
 
-@interface SESChannelListAndPlayViewController () <UITableViewDataSource, UITableViewDelegate, VLCMediaPlayerDelegate, VLCMediaDelegate, UIGestureRecognizerDelegate>
+@interface SESChannelListAndPlayViewController () <UITableViewDataSource, UITableViewDelegate, VLCMediaPlayerDelegate, VLCMediaDelegate, UIGestureRecognizerDelegate, SESPlaybackControllerDelegate>
 {
     /* we have 1 player to download, process and report the playlist - it should be destroyed once this is done */
     VLCMediaPlayer *_parsePlayer;
@@ -42,6 +42,10 @@
     BOOL _fullscreen;
 
     NSSet<UIGestureRecognizer *> *_simultaneousGestureRecognizers;
+
+    SESServerDiscoveryController *_discoveryController;
+
+    BOOL _automaticallyStarted;
 }
 
 @end
@@ -52,7 +56,7 @@
 
 - (NSString *)title
 {
-    return @"Playback";
+    return @"Live TV";
 }
 
 - (UIView *)preferredFocusedView
@@ -62,6 +66,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    _discoveryController = [SESServerDiscoveryController sharedDiscoveryController];
+    _discoveryController.delegate = self;
 
     /* finish table view configuration */
     self.channelListTableView.dataSource = self;
@@ -110,19 +117,6 @@
     NSDictionary *dict = NSDictionaryOfVariableBindings(_videoOutputView);
     _horizontalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_videoOutputView]|" options:0 metrics:0 views:dict];
     _verticalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_videoOutputView]|" options:0 metrics:0 views:dict];
-
-    // FIXME: add proper error handling if we don't have such an item (which should never happen)
-    if (self.serverMediaItem) {
-        self.serverMediaItem.delegate = self;
-
-        /* setup our parse player, which we use to download the channel list and parse it */
-        _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
-        _parsePlayer.media = self.serverMediaItem;
-        _parsePlayer.delegate = self;
-        /* you can enable debug logging here ;) */
-        _parsePlayer.libraryInstance.debugLogging = NO;
-        [_parsePlayer play];
-    }
 }
 
 /* called when our channel list is ready
@@ -136,16 +130,73 @@
 - (void)mediaDidFinishParsing:(VLCMedia *)aMedia
 {
     [self.channelListTableView reloadData];
+
+    if (!_automaticallyStarted) {
+        [self performSelector:@selector(automaticPlaybackStart) withObject:nil afterDelay:2.];
+    }
 }
 
 #pragma mark - visibility
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    [self startPlayback];
+}
+
+- (void)startPlayback
+{
+    NSInteger index = _discoveryController.selectedServerIndex;
+
+    if (index == -1)
+        return;
+
+    NSInteger serverCount = _discoveryController.numberOfServers;
+    if (serverCount == 0) {
+        return;
+    }
+
+    VLCMedia *serverItem;
+    NSString *playlistURLString = _discoveryController.playlistURLStringsToChooseFrom[_discoveryController.selectedPlaylistIndex];
+    NSString *ipString;
+
+    if (index < serverCount) {
+        NSURLComponents *components = [NSURLComponents componentsWithURL:[_discoveryController serverAtIndex:index].url resolvingAgainstBaseURL:NO];
+        ipString = [components.queryItems.firstObject value];
+    } else {
+        ipString = _discoveryController.customServers[index - serverCount];
+    }
+
+    NSString *mrl = [playlistURLString stringByAppendingFormat:@"?satip-device=%@", ipString];
+
+    serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
+
+    _serverMediaItem = serverItem;
+
+    // FIXME: add proper error handling if we don't have such an item (which should never happen)
+    if (self.serverMediaItem) {
+        self.serverMediaItem.delegate = self;
+
+        if (_parsePlayer) {
+            [_parsePlayer stop];
+            _parsePlayer = nil;
+        }
+
+        /* setup our parse player, which we use to download the channel list and parse it */
+        _parsePlayer = [[VLCMediaPlayer alloc] initWithOptions:@[@"--play-and-stop"]];
+        _parsePlayer.media = self.serverMediaItem;
+        _parsePlayer.delegate = self;
+        /* you can enable debug logging here ;) */
+        _parsePlayer.libraryInstance.debugLogging = NO;
+        [_parsePlayer play];
+    }
+
     [self.channelListTableView reloadData];
 
-    [_playbackPlayer stop];
-    _playbackPlayer = nil;
+    if (_playbackPlayer) {
+        [_playbackPlayer stop];
+        _playbackPlayer = nil;
+    }
 
     /* setup the playback list player if not already done */
     _playbackPlayer = [[VLCMediaListPlayer alloc] init];
@@ -153,17 +204,15 @@
     _playbackPlayer.mediaPlayer.libraryInstance.debugLogging = NO;
     _playbackPlayer.mediaPlayer.drawable = self.videoOutputView;
     _playbackPlayer.mediaList = self.serverMediaItem.subitems;
-
-    [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)automaticPlaybackStart
 {
     /* automatic playback start */
-    NSInteger index = [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex;
-    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:animated scrollPosition:UITableViewScrollPositionNone];
-    [_playbackPlayer playItemAtIndex:(int)index];
-    [super viewDidAppear:animated];
+    NSInteger channelIndex = _discoveryController.lastPlayedChannelIndex;
+    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:channelIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [_playbackPlayer playItemAtIndex:(int)channelIndex];
+    _automaticallyStarted = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -336,6 +385,19 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return [_simultaneousGestureRecognizers containsObject:gestureRecognizer];
+}
+
+#pragma mark - SESPlaybackControllerDelegate
+- (void)listOfServersWasUpdated
+{
+    if (!_playbackPlayer) {
+        [self startPlayback];
+    }
+}
+
+- (void)discoveryFailed
+{
+    NSLog(@"Server discovery failed");
 }
 
 @end

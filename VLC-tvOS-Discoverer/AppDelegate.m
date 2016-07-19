@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SESServerSelectViewController.h"
+#import "SESChannelListAndPlayViewController.h"
 #import "SESSettingsViewController.h"
 #import "UIColor+SES.h"
 #import "SESServerDiscoveryController.h"
@@ -15,7 +15,7 @@
 @interface AppDelegate ()
 {
     /* store the root view controller for potential future reference */
-    SESServerSelectViewController *_serverVC;
+    SESChannelListAndPlayViewController *_playbackVC;
     SESSettingsViewController *_settingsVC;
 }
 @end
@@ -31,16 +31,16 @@
 
     /* load platform specific UI */
 #if TARGET_OS_TV
-    _serverVC = [[SESServerSelectViewController alloc] initWithNibName:nil bundle:nil];
+    _playbackVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:nil bundle:nil];
     _settingsVC = [[SESSettingsViewController alloc] initWithNibName:nil bundle:nil];
 #else
-    _serverVC = [[SESServerSelectViewController alloc] initWithNibName:@"SESServerSelectViewController-iPad" bundle:nil];
+    _playbackVC = [[SESChannelListAndPlayViewController alloc] initWithNibName:@"SESChannelListAndPlayViewController-iPad" bundle:nil];
     _settingsVC = [[SESSettingsViewController alloc] initWithNibName:@"SESSettingsViewController-ipad" bundle:nil];
 #endif
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.tabBar.barTintColor = [UIColor sesCloudColor];
-    tabBarController.viewControllers = @[_serverVC, _settingsVC];
+    tabBarController.viewControllers = @[_playbackVC, _settingsVC];
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     CGRect logoViewFrame = logoView.frame;
     CGRect tabBarFrame = tabBarController.tabBar.frame;
@@ -61,7 +61,9 @@
     [self.window makeKeyAndVisible];
 
     /* do the expensive call of starting the discovery - should be done once only */
-    [[SESServerDiscoveryController sharedDiscoveryController] startDiscovery];
+    SESServerDiscoveryController *discoveryController = [SESServerDiscoveryController sharedDiscoveryController];
+    [discoveryController startDiscovery];
+    tabBarController.selectedIndex = discoveryController.selectedServerIndex == -1 ? 1 : 0;
 
     return YES;
 }
