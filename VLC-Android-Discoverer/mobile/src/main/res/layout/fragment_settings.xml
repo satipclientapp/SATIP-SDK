@@ -27,7 +27,10 @@
                 android:id="@+id/button_server"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_server"/>
+                android:text="@string/add_server"
+                android:textColor="@color/deep_gray"
+                android:onClick="@{handler.openServerDialog}"
+                style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
 
         <View
@@ -53,7 +56,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_channel"
-                android:onClick="@{handler.openChannelsDialog}"/>
+                android:textColor="@color/deep_gray"
+                android:onClick="@{handler.openChannelsDialog}"
+                style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/channel_display_list"

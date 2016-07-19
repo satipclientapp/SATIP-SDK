@@ -21,7 +21,7 @@ import java.util.Set;
 
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentSettingsBinding;
-import satipsdk.ses.com.satipsdk.dialogs.ChannelListDialog;
+import satipsdk.ses.com.satipsdk.dialogs.ItemListDialog;
 import satipsdk.ses.com.satipsdk.util.Util;
 
 public class SettingsFragment extends Fragment implements TabFragment, MediaBrowser.EventListener {
@@ -155,7 +155,10 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private ClickHandler mClickHandler = new ClickHandler();
     public class ClickHandler {
         public void openChannelsDialog(View v) {
-            new ChannelListDialog(mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
+            new ItemListDialog(ListAdapter.TYPE_CHANNEL_LIST, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
+        }
+        public void openServerDialog(View v) {
+            new ItemListDialog(ListAdapter.TYPE_SERVER, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
         }
     }
 
