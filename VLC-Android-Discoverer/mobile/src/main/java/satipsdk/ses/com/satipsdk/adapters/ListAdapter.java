@@ -137,10 +137,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             if (binding.getItem().type == TYPE_SERVER)
                 v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
             else if (mItemClickCb != null) {
-                if (binding.getItem().type == TYPE_CHANNEL_LIST) {
-                    itemView.setFocusableInTouchMode(true);
-                    itemView.requestFocus();
-                }
+                itemView.setFocusableInTouchMode(true);
+                itemView.requestFocus();
                 mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
             }
         }
