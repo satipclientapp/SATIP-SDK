@@ -36,7 +36,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private ItemClickCb mItemClickCb;
 
     public interface ItemClickCb {
-        void onItemClick(Item item);
+        void onItemClick(int position, Item item);
     }
 
     public ListAdapter(boolean clickable) {
@@ -127,8 +127,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         public ViewHolder(ListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.getRoot().setOnClickListener(this);
-            binding.getRoot().setOnFocusChangeListener(ListAdapter.this);
+            itemView.setOnClickListener(this);
+            itemView.setOnFocusChangeListener(ListAdapter.this);
         }
 
         @Override
@@ -136,8 +136,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             if (!mClickable) return;
             if (binding.getItem().type == TYPE_SERVER)
                 v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
-            else if (mItemClickCb != null)
-                mItemClickCb.onItemClick(binding.getItem());
+            else if (mItemClickCb != null) {
+                if (binding.getItem().type == TYPE_CHANNEL_LIST) {
+                    itemView.setFocusableInTouchMode(true);
+                    itemView.requestFocus();
+                }
+                mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
+            }
         }
     }
 

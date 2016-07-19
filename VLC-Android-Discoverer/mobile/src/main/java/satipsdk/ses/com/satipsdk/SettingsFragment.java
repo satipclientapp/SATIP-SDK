@@ -2,7 +2,9 @@ package satipsdk.ses.com.satipsdk;
 
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.videolan.libvlc.Media;
+import org.videolan.libvlc.MediaList;
 import org.videolan.libvlc.util.MediaBrowser;
 
 import java.util.ArrayList;
@@ -62,12 +65,14 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         mServerListAdapter = new ListAdapter(false);
         mBinding.serverList.setAdapter(mServerListAdapter);
         mServerListAdapter.notifyDataSetChanged();
-        // Channels
-       mChannelListAdapter = new ListAdapter(false);
-
+        // Channels List
+        mChannelListAdapter = new ListAdapter(true);
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.channelList.setAdapter(mChannelListAdapter);
-
+        mChannelListAdapter.setItemClickHandler(mChannelListClickCb);
+        //Channels display
+        mBinding.channelDisplayList.setAdapter(new ListAdapter(false));
+        mBinding.channelDisplayList.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
@@ -90,7 +95,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
             for (int i = 0; i<prefListsNames.size(); ++i)
-                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, (String) names[i], null, (String) urls[i], null));
+                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER_CUSTOM, (String) names[i], null, (String) urls[i], null));
         }
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
@@ -113,6 +118,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             for (int i = 0; i<prefListsNames.size(); ++i)
                 mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, (String) urls[i], null));
         }
+        mChannelListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -176,6 +182,41 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         releaseBrowser();
     }
 
+    private Handler mHandler = new Handler();
+    private ListAdapter.ItemClickCb mChannelListClickCb = new ListAdapter.ItemClickCb() {
+        @Override
+        public void onItemClick(int position, ListAdapter.Item item) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Uri uri = getActivity().getIntent().getData();
+                    Media playlist = new Media(VLCInstance.get(), uri);
+                    playlist.parse(Media.Parse.ParseNetwork);
+                    final MediaList ml = playlist.subItems();
+                    playlist.release();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ListAdapter la = (ListAdapter) mBinding.channelDisplayList.getAdapter();
+                            Media media;
+                            String title;
+                            for (int i = 0; i< ml.getCount(); ++i) {
+                                media = ml.getMediaAt(i);
+                                title = media.getMeta(Media.Meta.Title);
+                                int dot = title.indexOf('.');
+                                la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
+                                        media.getMeta(Media.Meta.Title).substring(dot+2),
+                                        "channel description",
+                                        media.getUri().toString(),
+                                        null));
+                            }
+                        }
+                    });
+                }
+            }).start();
+        }
+    };
+
     private ClickHandler mClickHandler = new ClickHandler();
     public class ClickHandler {
         public void openChannelsDialog(View v) {
@@ -190,7 +231,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     public class SettingsCb {
         public void addItem(int type, String name, String url) {
             ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST ?
-                                mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
+                    mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
             adapter.add(new ListAdapter.Item(type, name, null, url, null));
         }
     }

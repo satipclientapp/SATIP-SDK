@@ -267,7 +267,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private int mVideoSarDen = 0;
     private SurfaceView mSubtitlesSurface = null;
 
-    public void onItemClick(ListAdapter.Item item) {
+    public void onItemClick(int position, ListAdapter.Item item) {
         Media media = new Media(mLibVLC, Uri.parse(item.url));
         mMediaPlayer.setMedia(media);
         media.release();
