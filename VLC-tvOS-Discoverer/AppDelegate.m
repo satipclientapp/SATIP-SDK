@@ -40,7 +40,17 @@
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.tabBar.barTintColor = [UIColor sesCloudColor];
+#if TARGET_OS_TV
     tabBarController.viewControllers = @[_playbackVC, _settingsVC];
+#else
+    UINavigationController *playbackNavCon = [[UINavigationController alloc] initWithRootViewController:_playbackVC];
+    playbackNavCon.tabBarItem.image = [UIImage imageNamed:@"playbackIcon"];
+    playbackNavCon.navigationBarHidden = YES;
+    UINavigationController *settingsNavCon = [[UINavigationController alloc] initWithRootViewController:_settingsVC];
+    settingsNavCon.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
+    settingsNavCon.navigationBarHidden = YES;
+    tabBarController.viewControllers = @[playbackNavCon, settingsNavCon];
+#endif
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     CGRect logoViewFrame = logoView.frame;
     CGRect tabBarFrame = tabBarController.tabBar.frame;
