@@ -67,8 +67,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         mServerListAdapter.clear();
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
@@ -78,8 +78,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         releaseBrowser();
     }
 
