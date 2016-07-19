@@ -21,6 +21,7 @@ import java.util.Set;
 
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentSettingsBinding;
+import satipsdk.ses.com.satipsdk.dialogs.ChannelListDialog;
 import satipsdk.ses.com.satipsdk.util.Util;
 
 public class SettingsFragment extends Fragment implements TabFragment, MediaBrowser.EventListener {
@@ -49,6 +50,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
+        mBinding.setHandler(mClickHandler);
         return mBinding.getRoot();
     }
 
@@ -56,29 +58,15 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Servers
-        ArrayList<ListAdapter.Item> serverList = new ArrayList<>();
         mBinding.serverList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mServerListAdapter = new ListAdapter(serverList, false);
+        mServerListAdapter = new ListAdapter(false);
         mBinding.serverList.setAdapter(mServerListAdapter);
         mServerListAdapter.notifyDataSetChanged();
         // Channels
-        Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
-        Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
-        ArrayList<ListAdapter.Item> channelList = new ArrayList<>();
-        if (prefListsNames == null || prefListsUrls == null) {
-            channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
-            channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, "http://www.satip.info/Playlists/ASTRA_28_2E.m3u", null));
-            channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, "http://www.satip.info/Playlists/ASTRA_23_5E.m3u", null));
-        } else {
-            Object[] names = prefListsNames.toArray();
-            Object[] urls = prefListsUrls.toArray();
-            for (int i = 0; i<prefListsNames.size(); ++i)
-                channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, (String) urls[i], null));
-        }
+       mChannelListAdapter = new ListAdapter(false);
+
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mChannelListAdapter = new ListAdapter(channelList, false);
         mBinding.channelList.setAdapter(mChannelListAdapter);
-        mChannelListAdapter.notifyDataSetChanged();
 
     }
 
@@ -91,11 +79,31 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     public void onResume() {
         super.onResume();
         mServerListAdapter.clear();
+        refreshChannels();
+        if (mChannelListAdapter.getItemCount() > 0)
+            refreshChannels();
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
         if (Util.hasLANConnection())
             mMediaBrowser.discoverNetworkShares();
         mBinding.serverList.requestFocus();
+    }
+
+    private void refreshChannels() {
+        mChannelListAdapter.clear();
+        Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
+        Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
+        if (prefListsNames == null || prefListsUrls == null) {
+            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
+            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, "http://www.satip.info/Playlists/ASTRA_28_2E.m3u", null));
+            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, "http://www.satip.info/Playlists/ASTRA_23_5E.m3u", null));
+        } else {
+            Object[] names = prefListsNames.toArray();
+            Object[] urls = prefListsUrls.toArray();
+            for (int i = 0; i<prefListsNames.size(); ++i)
+                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, (String) urls[i], null));
+        }
+        mChannelListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -142,5 +150,21 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onBrowseEnd() {
         releaseBrowser();
+    }
+
+    private ClickHandler mClickHandler = new ClickHandler();
+    public class ClickHandler {
+        public void openChannelsDialog(View v) {
+            new ChannelListDialog(mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
+        }
+    }
+
+    private SettingsCb mScb = new SettingsCb();
+    public class SettingsCb {
+        public void addItem(int type, String name, String url) {
+            ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST ?
+                                mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
+            adapter.add(new ListAdapter.Item(type, name, null, url, null));
+        }
     }
 }

@@ -4,4 +4,6 @@
     <string name="settings">Settings</string>
     <string name="add_server">Add server address manually</string>
     <string name="add_channel">Add m3u channel list manually</string>
+    <string name="name_hint">List name</string>
+    <string name="url_hint">http://....m3u</string>
 </resources>

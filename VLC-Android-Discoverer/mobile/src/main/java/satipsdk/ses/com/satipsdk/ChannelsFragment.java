@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentChannelsBinding;
 
-public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.Player, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback {
+public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback {
 
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
@@ -87,15 +87,9 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         }
 
         ArrayList<ListAdapter.Item> channelList = new ArrayList<>();
-//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
-//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
-//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
-//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
-//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "ZDF HD", null, "rtsp://sat.ip/?src=1&freq=11362&pol=h&ro=0.35&msys=dvbs2&mtype=8psk&plts=on&sr=22000&fec=23&pids=0,17,18,6100,6110,6120,6130", null));
-//        channelList.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL, "RTL Television", null, "rtsp://sat.ip/?src=1&freq=12188&pol=h&ro=0.35&msys=dvbs&mtype=qpsk&plts=off&sr=27500&fec=34&pids=0,17,18,163,104,44,105", null));
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
         ListAdapter channelsAdapter = new ListAdapter(channelList, true);
-        channelsAdapter.setPlayer(this);
+        channelsAdapter.setItemClickHandler(this);
         mBinding.channelList.setAdapter(channelsAdapter);
         channelsAdapter.notifyDataSetChanged();
 
@@ -257,7 +251,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     /*
-     * Video Player
+     * Video ItemClickCb
      */
 
     private final Handler mHandler = new Handler();
@@ -273,8 +267,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private int mVideoSarDen = 0;
     private SurfaceView mSubtitlesSurface = null;
 
-    public void play(Uri uri) {
-        Media media = new Media(mLibVLC, uri);
+    public void onItemClick(ListAdapter.Item item) {
+        Media media = new Media(mLibVLC, Uri.parse(item.url));
         mMediaPlayer.setMedia(media);
         media.release();
         mMediaPlayer.play();

@@ -32,19 +32,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private ArrayList<Item> mItemList;
     private LayoutInflater mInflater;
     private SparseIntArray mItemsIndex = new SparseIntArray();
-    private Player mPlayer;
+    private ItemClickCb mItemClickCb;
 
-    public interface Player {
-        void play(Uri uri);
+    public interface ItemClickCb {
+        void onItemClick(Item item);
     }
+
+    public ListAdapter(boolean clickable) {
+        this(new ArrayList<Item>(), clickable);
+    }
+
     public ListAdapter(ArrayList<Item> serverList, boolean clickable) {
         super();
         mItemList = serverList;
         mClickable = clickable;
     }
 
-    public void setPlayer(Player player) {
-        mPlayer = player;
+    public void setItemClickHandler(ItemClickCb itemClickCb) {
+        mItemClickCb = itemClickCb;
     }
 
     @Override
@@ -128,11 +133,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         @Override
         public void onClick(View v) {
             if (!mClickable) return;
-            if (binding.getItem().type == TYPE_SERVER) {
+            if (binding.getItem().type == TYPE_SERVER)
                 v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
-            } else if (binding.getItem().type == TYPE_CHANNEL && mPlayer != null) {
-                mPlayer.play(Uri.parse(binding.getItem().url));
-            }
+            else if (mItemClickCb != null)
+                mItemClickCb.onItemClick(binding.getItem());
         }
     }
 
