@@ -30,8 +30,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
     private static final String KEY_CHANNELS_NAMES = "key_channels_names";
     private static final String KEY_CHANNELS_URLS = "key_channels_URLs";
-    private static final String KEY_SERVERS_NAMES = "key_channels_names";
-    private static final String KEY_SERVERSS_URLS = "key_channels_URLs";
+    private static final String KEY_SERVERS_NAMES = "key_server_names";
+    private static final String KEY_SERVERSS_URLS = "key_server_URLs";
     private FragmentSettingsBinding mBinding;
 
     MediaBrowser mMediaBrowser;
@@ -78,10 +78,21 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onResume() {
         super.onResume();
-        mServerListAdapter.clear();
-        refreshChannels();
+        refreshServers();
         if (mChannelListAdapter.getItemCount() > 0)
             refreshChannels();
+    }
+
+    private void refreshServers() {
+        mServerListAdapter.clear();
+        Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_SERVERS_NAMES, null);
+        Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_SERVERSS_URLS, null);
+        if (prefListsNames != null && prefListsUrls != null) {
+            Object[] names = prefListsNames.toArray();
+            Object[] urls = prefListsUrls.toArray();
+            for (int i = 0; i<prefListsNames.size(); ++i)
+                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER, (String) names[i], null, (String) urls[i], null));
+        }
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
         if (Util.hasLANConnection())
@@ -103,7 +114,6 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             for (int i = 0; i<prefListsNames.size(); ++i)
                 mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, (String) urls[i], null));
         }
-        mChannelListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -115,16 +125,31 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onStop() {
         super.onStop();
+        saveItems();
+    }
+
+    private void saveItems() {
         ArrayList<ListAdapter.Item> items = ((ListAdapter)mBinding.channelList.getAdapter()).getAll();
-        Set<String> names = new HashSet<>();
-        Set<String> urls = new HashSet<>();
+        Set<String> chanListNames = new HashSet<>();
+        Set<String> chanListUrls = new HashSet<>();
         for (ListAdapter.Item item : items) {
-            names.add(item.title);
-            urls.add(item.url);
+            chanListNames.add(item.title);
+            chanListUrls.add(item.url);
+        }
+        Set<String> serverNames = new HashSet<>();
+        Set<String> serverUrls = new HashSet<>();
+        items = ((ListAdapter)mBinding.serverList.getAdapter()).getAll();
+        for (ListAdapter.Item item : items) {
+            if (item.type != ListAdapter.TYPE_SERVER_CUSTOM)
+                continue;
+            serverNames.add(item.title);
+            serverUrls.add(item.url);
         }
         mSharedPreferences.edit()
-                .putStringSet(KEY_CHANNELS_NAMES, names)
-                .putStringSet(KEY_CHANNELS_URLS, urls)
+                .putStringSet(KEY_CHANNELS_NAMES, chanListNames)
+                .putStringSet(KEY_CHANNELS_URLS, chanListUrls)
+                .putStringSet(KEY_SERVERS_NAMES, serverNames)
+                .putStringSet(KEY_SERVERSS_URLS, serverUrls)
                 .apply();
     }
 
@@ -158,7 +183,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             new ItemListDialog(ListAdapter.TYPE_CHANNEL_LIST, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
         }
         public void openServerDialog(View v) {
-            new ItemListDialog(ListAdapter.TYPE_SERVER, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
+            new ItemListDialog(ListAdapter.TYPE_SERVER_CUSTOM, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
         }
     }
 

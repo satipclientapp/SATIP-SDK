@@ -26,6 +26,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     public static final int TYPE_SERVER = 0;
     public static final int TYPE_CHANNEL = 1;
     public static final int TYPE_CHANNEL_LIST = 2;
+    public static final int TYPE_SERVER_CUSTOM = 3;
 
     private boolean mClickable;
 
