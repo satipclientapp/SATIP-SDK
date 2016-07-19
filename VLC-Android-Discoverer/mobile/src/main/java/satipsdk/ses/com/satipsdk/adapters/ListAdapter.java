@@ -31,11 +31,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private ArrayList<Item> mItemList;
     private LayoutInflater mInflater;
     private SparseIntArray mItemsIndex = new SparseIntArray();
+    private Player mPlayer;
 
+    public interface Player {
+        void play(Uri uri);
+    }
     public ListAdapter(ArrayList<Item> serverList, boolean clickable) {
         super();
         mItemList = serverList;
         mClickable = clickable;
+    }
+
+    public void setPlayer(Player player) {
+        mPlayer = player;
     }
 
     @Override
@@ -115,8 +123,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             if (!mClickable) return;
             if (binding.getItem().type == TYPE_SERVER) {
                 v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
-            } else {
-                //TODO play stream
+            } else if (binding.getItem().type == TYPE_CHANNEL && mPlayer != null) {
+                mPlayer.play(Uri.parse(binding.getItem().url));
             }
         }
     }
