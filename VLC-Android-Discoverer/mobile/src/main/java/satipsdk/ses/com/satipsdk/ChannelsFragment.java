@@ -104,20 +104,25 @@ public class ChannelsFragment extends Fragment implements TabFragment, View.OnFo
 
     private void loadChannelList() {
         Uri uri = getActivity().getIntent().getData();
+        final String query = uri.getQuery();
         Media playlist = new Media(mLibVLC, uri);
+        playlist.parse(Media.Parse.ParseNetwork);
         final MediaList ml = playlist.subItems();
         playlist.release();
-        final Media[] media = new Media[1];
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 ListAdapter la = (ListAdapter) mBinding.channelList.getAdapter();
+                Media media;
+                String title;
                 for (int i = 0; i< ml.getCount(); ++i) {
-                    media[0] = ml.getMediaAt(i);
+                    media = ml.getMediaAt(i);
+                    title = media.getMeta(Media.Meta.Title);
+                    int dot = title.indexOf('.');
                     la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
-                            media[0].getMeta(Media.Meta.Title),
+                            media.getMeta(Media.Meta.Title).substring(dot+2),
                             "channel description",
-                            media[0].getUri().toString(),
+                            media.getUri().toString()+"&"+query,
                             null));
                 }
             }
