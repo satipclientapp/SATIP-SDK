@@ -32,4 +32,8 @@ public class Util {
         }
         return -1;
     }
+
+    public static boolean isCollectionEmpty(Collection collection) {
+        return collection == null || collection.isEmpty();
+    }
 }
