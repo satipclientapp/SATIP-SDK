@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="524" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBs-An-CcD" id="S0Q-fX-qc8">
-                <rect key="frame" x="0.0" y="0.0" width="508" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="524" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellbackgroundgradient" translatesAutoresizingMaskIntoConstraints="NO" id="hfZ-vp-rHX">
@@ -27,10 +27,10 @@
                         <rect key="frame" x="102" y="24" width="1" height="53"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BfD-LQ-bW5">
-                        <rect key="frame" x="8" y="8" width="84" height="84"/>
+                        <rect key="frame" x="8" y="28" width="84" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="84" id="PNV-dY-gbP"/>
-                            <constraint firstAttribute="height" constant="84" id="fCu-tP-FcN"/>
+                            <constraint firstAttribute="height" constant="44" id="fCu-tP-FcN"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -39,14 +39,13 @@
                     <constraint firstItem="BfD-LQ-bW5" firstAttribute="leading" secondItem="S0Q-fX-qc8" secondAttribute="leadingMargin" id="FTi-ro-eMW"/>
                     <constraint firstItem="hfZ-vp-rHX" firstAttribute="top" secondItem="S0Q-fX-qc8" secondAttribute="topMargin" constant="-8" id="HGe-Sy-1xW"/>
                     <constraint firstItem="UTm-r7-W2c" firstAttribute="leading" secondItem="BfD-LQ-bW5" secondAttribute="trailing" constant="10" id="KFY-eF-C2Y"/>
-                    <constraint firstItem="BfD-LQ-bW5" firstAttribute="top" secondItem="S0Q-fX-qc8" secondAttribute="topMargin" id="MFu-Uq-6Lm"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hfZ-vp-rHX" secondAttribute="bottom" constant="-8" id="NwG-T8-YhL"/>
                     <constraint firstAttribute="trailingMargin" secondItem="hfZ-vp-rHX" secondAttribute="trailing" id="PBU-tO-wE1"/>
+                    <constraint firstItem="BfD-LQ-bW5" firstAttribute="centerY" secondItem="S0Q-fX-qc8" secondAttribute="centerY" id="aDN-aZ-xit"/>
                     <constraint firstItem="SB5-QG-2WF" firstAttribute="leading" secondItem="UTm-r7-W2c" secondAttribute="trailing" constant="36" id="cEk-oB-dXt"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="SB5-QG-2WF" secondAttribute="trailing" constant="10" id="dBd-I9-p3P"/>
                     <constraint firstItem="UTm-r7-W2c" firstAttribute="centerY" secondItem="S0Q-fX-qc8" secondAttribute="centerY" id="eP5-NR-ooP"/>
                     <constraint firstItem="SB5-QG-2WF" firstAttribute="centerY" secondItem="S0Q-fX-qc8" secondAttribute="centerY" id="gg7-YI-Rt2"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="BfD-LQ-bW5" secondAttribute="bottom" id="wuB-V6-Ors"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

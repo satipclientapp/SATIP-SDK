@@ -25,6 +25,11 @@
     return [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1];
 }
 
++ (UIColor *)sesButtonLabelBlueColor
+{
+    return [UIColor colorWithRed:0.32 green:0.56 blue:0.82 alpha:1.];
+}
+
 + (UIColor*)sesGrayColor
 {
     return [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];

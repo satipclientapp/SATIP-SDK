@@ -55,11 +55,6 @@
 
 #pragma mark - setup
 
-- (NSString *)title
-{
-    return @"Live TV";
-}
-
 - (UIView *)preferredFocusedView
 {
     return self.fullscreenButton;

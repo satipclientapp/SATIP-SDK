@@ -39,18 +39,26 @@
 #endif
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.tabBar.barTintColor = [UIColor sesCloudColor];
-#if TARGET_OS_TV
-    tabBarController.viewControllers = @[_playbackVC, _settingsVC];
-#else
+    tabBarController.tabBar.barTintColor = [UIColor whiteColor];
     UINavigationController *playbackNavCon = [[UINavigationController alloc] initWithRootViewController:_playbackVC];
+    [playbackNavCon.tabBarItem setTitle:@"Live TV"];
+#if TARGET_OS_TV
+    [playbackNavCon.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor sesButtonLabelBlueColor]} forState:UIControlStateHighlighted];
+    [playbackNavCon.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState:UIControlStateNormal];
+#else
     playbackNavCon.tabBarItem.image = [UIImage imageNamed:@"playbackIcon"];
     playbackNavCon.navigationBarHidden = YES;
+#endif
     UINavigationController *settingsNavCon = [[UINavigationController alloc] initWithRootViewController:_settingsVC];
+#if TARGET_OS_TV
+    [settingsNavCon.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor sesButtonLabelBlueColor]} forState:UIControlStateHighlighted];
+    [settingsNavCon.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor lightGrayColor]} forState:UIControlStateNormal];
+#else
     settingsNavCon.tabBarItem.image = [UIImage imageNamed:@"settingsIcon"];
     settingsNavCon.navigationBarHidden = YES;
-    tabBarController.viewControllers = @[playbackNavCon, settingsNavCon];
 #endif
+    tabBarController.viewControllers = @[playbackNavCon, settingsNavCon];
+
     UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     CGRect logoViewFrame = logoView.frame;
     CGRect tabBarFrame = tabBarController.tabBar.frame;

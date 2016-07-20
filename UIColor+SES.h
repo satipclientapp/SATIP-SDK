@@ -13,6 +13,7 @@
 + (UIColor *)sesPureWhite;
 + (UIColor *)sesCloudColor;
 + (UIColor *)sesLightGrayColor;
++ (UIColor *)sesButtonLabelBlueColor;
 + (UIColor *)sesGrayColor;
 + (UIColor *)sesPearlColor;
 + (UIImage *)sesImageWithColor:(UIColor *)color;

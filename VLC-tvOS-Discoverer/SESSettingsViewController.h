@@ -19,10 +19,6 @@
 @property (readwrite, weak, nonatomic) IBOutlet UIButton *addServerButton;
 @property (readwrite, weak, nonatomic) IBOutlet UIButton *editServerButton;
 
-#if TARGET_OS_TV
-@property (readwrite, weak, nonatomic) IBOutlet UILabel *titleLabel;
-#endif
-
 - (IBAction)addServer:(id)sender;
 - (IBAction)addChannelList:(id)sender;
 

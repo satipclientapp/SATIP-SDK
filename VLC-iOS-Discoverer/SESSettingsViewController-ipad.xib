@@ -26,69 +26,77 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-S6-4qF">
-                    <rect key="frame" x="71" y="120" width="240" height="478"/>
+                    <rect key="frame" x="41" y="120" width="280" height="478"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="V7w-kp-kCg"/>
+                        <constraint firstAttribute="width" constant="280" id="V7w-kp-kCg"/>
                     </constraints>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DQB-Sb-5de">
-                    <rect key="frame" x="392" y="120" width="240" height="478"/>
+                    <rect key="frame" x="372" y="120" width="280" height="478"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="qP2-46-0OI"/>
+                        <constraint firstAttribute="width" constant="280" id="qP2-46-0OI"/>
                     </constraints>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XsE-A4-Krn">
-                    <rect key="frame" x="700" y="82" width="240" height="516"/>
+                    <rect key="frame" x="702" y="82" width="280" height="516"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="nZw-Jb-S8j"/>
+                        <constraint firstAttribute="width" constant="280" id="nZw-Jb-S8j"/>
                     </constraints>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmr-Ur-kN1">
-                    <rect key="frame" x="71" y="618" width="240" height="30"/>
+                    <rect key="frame" x="41" y="618" width="280" height="30"/>
                     <state key="normal" title="Add server address"/>
                     <connections>
                         <action selector="addServer:" destination="-1" eventType="touchUpInside" id="Q1J-wX-a4S"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbe-5i-pG0">
-                    <rect key="frame" x="392" y="618" width="240" height="30"/>
+                    <rect key="frame" x="372" y="618" width="280" height="30"/>
                     <state key="normal" title="Add M3U channel list"/>
                     <connections>
                         <action selector="addChannelList:" destination="-1" eventType="touchUpInside" id="BMP-BK-Xga"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Channel List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzZ-H2-Nnr">
-                    <rect key="frame" x="392" y="82" width="134" height="23"/>
+                    <rect key="frame" x="372" y="82" width="134" height="23"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Servers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-z6-SQK">
-                    <rect key="frame" x="71" y="82" width="94" height="23"/>
+                    <rect key="frame" x="41" y="82" width="94" height="23"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jW9-it-OaU">
-                    <rect key="frame" x="351" y="120" width="1" height="478"/>
+                    <rect key="frame" x="346" y="120" width="1" height="478"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="xFj-f4-VL8"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF3-cC-pkn">
-                    <rect key="frame" x="281" y="79" width="30" height="30"/>
-                    <state key="normal" title="Edit"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF3-cC-pkn">
+                    <rect key="frame" x="294" y="79" width="27" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="oG2-zp-9th"/>
+                        <constraint firstAttribute="width" constant="27" id="wp0-Gf-sbA"/>
+                    </constraints>
+                    <state key="normal" image="editIconInactive"/>
                     <connections>
                         <action selector="editAction:" destination="-1" eventType="touchUpInside" id="rxg-vH-YAg"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-2r-trk">
-                    <rect key="frame" x="602" y="79" width="30" height="30"/>
-                    <state key="normal" title="Edit"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-2r-trk">
+                    <rect key="frame" x="625" y="80" width="27" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="lFc-SN-7oZ"/>
+                        <constraint firstAttribute="width" constant="27" id="mia-mn-EmZ"/>
+                    </constraints>
+                    <state key="normal" image="editIconInactive"/>
                     <connections>
                         <action selector="editAction:" destination="-1" eventType="touchUpInside" id="Axu-Ln-tca"/>
                     </connections>
@@ -108,7 +116,7 @@
                 <constraint firstItem="rbe-5i-pG0" firstAttribute="centerX" secondItem="DQB-Sb-5de" secondAttribute="centerX" id="GmB-Vg-aDc"/>
                 <constraint firstAttribute="trailing" secondItem="BQj-tm-5ie" secondAttribute="trailing" id="Hga-8q-iUf"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="A8Q-5b-aDG" secondAttribute="top" constant="120" id="Khj-qu-mcW"/>
-                <constraint firstItem="DQB-Sb-5de" firstAttribute="leading" secondItem="jW9-it-OaU" secondAttribute="trailing" constant="40" id="N8V-AI-MT0"/>
+                <constraint firstItem="DQB-Sb-5de" firstAttribute="leading" secondItem="jW9-it-OaU" secondAttribute="trailing" constant="25" id="N8V-AI-MT0"/>
                 <constraint firstAttribute="bottom" secondItem="BQj-tm-5ie" secondAttribute="bottom" id="Ne6-cf-ehE"/>
                 <constraint firstItem="XsE-A4-Krn" firstAttribute="top" secondItem="kzZ-H2-Nnr" secondAttribute="top" id="O88-9J-Pte"/>
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="top" secondItem="OQ0-S6-4qF" secondAttribute="bottom" constant="20" id="Of9-Hl-aGx"/>
@@ -116,13 +124,13 @@
                 <constraint firstItem="WUr-z6-SQK" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="leading" id="Smh-bD-bjR"/>
                 <constraint firstItem="jW9-it-OaU" firstAttribute="top" secondItem="OQ0-S6-4qF" secondAttribute="top" id="W34-L7-IX1"/>
                 <constraint firstItem="rbe-5i-pG0" firstAttribute="top" secondItem="DQB-Sb-5de" secondAttribute="bottom" constant="20" id="XxI-0P-7Xb"/>
-                <constraint firstItem="XsE-A4-Krn" firstAttribute="leading" secondItem="DQB-Sb-5de" secondAttribute="trailing" constant="68" id="Yv3-kb-ZHh"/>
+                <constraint firstItem="XsE-A4-Krn" firstAttribute="leading" secondItem="DQB-Sb-5de" secondAttribute="trailing" constant="50" id="Yv3-kb-ZHh"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="centerX" secondItem="A8Q-5b-aDG" secondAttribute="centerX" id="ay1-as-E6Y"/>
                 <constraint firstItem="rbe-5i-pG0" firstAttribute="width" secondItem="DQB-Sb-5de" secondAttribute="width" id="bIC-a3-sAH"/>
                 <constraint firstItem="RiR-2r-trk" firstAttribute="trailing" secondItem="DQB-Sb-5de" secondAttribute="trailing" id="cmT-nc-6ip"/>
                 <constraint firstItem="jW9-it-OaU" firstAttribute="bottom" secondItem="OQ0-S6-4qF" secondAttribute="bottom" id="dph-4B-1RU"/>
                 <constraint firstItem="RiR-2r-trk" firstAttribute="centerY" secondItem="kzZ-H2-Nnr" secondAttribute="centerY" id="oFr-Fb-xHp"/>
-                <constraint firstItem="jW9-it-OaU" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="trailing" constant="40" id="pu0-bD-GIc"/>
+                <constraint firstItem="jW9-it-OaU" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="trailing" constant="25" id="pu0-bD-GIc"/>
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="centerX" secondItem="OQ0-S6-4qF" secondAttribute="centerX" id="sbP-x1-lcr"/>
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="width" secondItem="OQ0-S6-4qF" secondAttribute="width" id="tmR-bB-LlY"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="XsE-A4-Krn" secondAttribute="top" id="w6g-yD-xGZ"/>
@@ -142,6 +150,7 @@
         </view>
     </objects>
     <resources>
+        <image name="editIconInactive" width="1170" height="212"/>
         <image name="viewControllerBackground" width="1920" height="1080"/>
     </resources>
 </document>

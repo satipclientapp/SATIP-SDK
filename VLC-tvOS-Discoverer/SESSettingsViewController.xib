@@ -13,7 +13,6 @@
                 <outlet property="editServerButton" destination="E3W-bi-ll4" id="bfw-RS-3mc"/>
                 <outlet property="satelliteListTableView" destination="4pm-LA-609" id="ckg-XN-iLI"/>
                 <outlet property="serverListTableView" destination="jak-tP-C1s" id="zbr-hS-1z1"/>
-                <outlet property="titleLabel" destination="4eq-7u-EJL" id="XwV-K7-ed9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
             </connections>
         </placeholder>
@@ -81,25 +80,20 @@
                         <constraint firstAttribute="width" constant="520" id="6lI-mC-ksZ"/>
                     </constraints>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eq-7u-EJL">
-                    <rect key="frame" x="825" y="50" width="270" height="91"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3W-bi-ll4">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3W-bi-ll4">
                     <rect key="frame" x="567" y="203" width="53" height="53"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="53" id="1CI-x3-NNi"/>
                         <constraint firstAttribute="height" constant="53" id="6Am-5n-i6u"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="normal" backgroundImage="editButtonActive"/>
+                    <state key="normal" backgroundImage="editButtonInactive"/>
+                    <state key="focused" backgroundImage="editButtonFocus"/>
                     <connections>
                         <action selector="editAction:" destination="-1" eventType="primaryActionTriggered" id="8yt-y6-EV7"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHB-Tm-sFb">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHB-Tm-sFb">
                     <rect key="frame" x="1229" y="203" width="53" height="53"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="53" id="G0A-2h-TUY"/>
@@ -107,6 +101,7 @@
                     </constraints>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                     <state key="normal" backgroundImage="editButtonInactive"/>
+                    <state key="focused" backgroundImage="editButtonFocus"/>
                     <connections>
                         <action selector="editAction:" destination="-1" eventType="primaryActionTriggered" id="7il-dQ-hMJ"/>
                     </connections>
@@ -117,7 +112,6 @@
                 <constraint firstItem="Ixq-Bs-fhu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="200" id="09y-Xc-rz9"/>
                 <constraint firstItem="E3W-bi-ll4" firstAttribute="trailing" secondItem="jak-tP-C1s" secondAttribute="trailing" id="1FA-sR-1ei"/>
                 <constraint firstItem="Ixq-Bs-fhu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="2wg-jz-c4U"/>
-                <constraint firstItem="4eq-7u-EJL" firstAttribute="centerX" secondItem="qry-SC-out" secondAttribute="centerX" id="5nc-O0-Rr2"/>
                 <constraint firstItem="4pm-LA-609" firstAttribute="top" secondItem="QHB-Tm-sFb" secondAttribute="bottom" constant="20" id="DDH-Kl-Vga"/>
                 <constraint firstItem="pP1-PE-4ST" firstAttribute="bottom" secondItem="RaA-pj-B4q" secondAttribute="bottom" id="H19-eC-HtL"/>
                 <constraint firstAttribute="bottom" secondItem="qry-SC-out" secondAttribute="bottom" id="JR6-ca-2Z1"/>
@@ -130,7 +124,6 @@
                 <constraint firstItem="qry-SC-out" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SIZ-2c-RFN"/>
                 <constraint firstAttribute="trailing" secondItem="qry-SC-out" secondAttribute="trailing" id="T8F-5A-0nh"/>
                 <constraint firstItem="nB0-2U-eyn" firstAttribute="leading" secondItem="4pm-LA-609" secondAttribute="leading" id="TeX-Jq-xO1"/>
-                <constraint firstItem="4eq-7u-EJL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="UV4-Ko-gX7"/>
                 <constraint firstItem="E3W-bi-ll4" firstAttribute="centerY" secondItem="Ixq-Bs-fhu" secondAttribute="centerY" id="WOO-bm-LCF"/>
                 <constraint firstItem="QHB-Tm-sFb" firstAttribute="centerY" secondItem="nB0-2U-eyn" secondAttribute="centerY" id="bHv-8y-bpY"/>
                 <constraint firstItem="qry-SC-out" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cOS-sL-LxS"/>
@@ -151,7 +144,7 @@
         </view>
     </objects>
     <resources>
-        <image name="editButtonActive" width="53" height="53"/>
+        <image name="editButtonFocus" width="50" height="50"/>
         <image name="editButtonInactive" width="50" height="50"/>
         <image name="viewControllerBackground" width="1024" height="768"/>
     </resources>

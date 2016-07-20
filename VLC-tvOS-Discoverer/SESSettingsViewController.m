@@ -57,12 +57,12 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [self.satelliteListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:SESSatelliteListReUseIdentifier];
     self.channelListTableView.rowHeight = 100.;
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:SESChannelListReUseIdentifier];
-    self.titleLabel.textColor = [UIColor lightGrayColor];
-    self.titleLabel.text = self.title;
 
-    UIImage *blueButtonBackgroundImage = [UIColor sesImageWithColor:[UIColor sesCloudColor]];
-    [self.addServerButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
-    [self.addChannelListButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
+    UIImage *whiteButtonBackgroundImage = [UIColor sesImageWithColor:[UIColor whiteColor]];
+    [self.addServerButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateNormal];
+    [self.addServerButton setTintColor:[UIColor sesButtonLabelBlueColor]];
+    [self.addChannelListButton setBackgroundImage:whiteButtonBackgroundImage forState:UIControlStateNormal];
+    [self.addChannelListButton setTintColor:[UIColor sesButtonLabelBlueColor]];
 #else
     self.serverListTableView.rowHeight = 68.;
     self.serverListTableView.tintColor = [UIColor clearColor];
@@ -208,9 +208,15 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
 #if TARGET_OS_TV
     if (edit) {
-        [sender setImage:[UIImage imageNamed:@"editButtonActive"] forState:UIControlStateNormal];
+        [sender setBackgroundImage:[UIImage imageNamed:@"editButtonActive"] forState:UIControlStateNormal];
     } else {
-        [sender setImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
+        [sender setBackgroundImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
+    }
+#else
+    if (edit) {
+        [sender setImage:[UIImage imageNamed:@"editIcon"] forState:UIControlStateNormal];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
     }
 #endif
 }
@@ -260,7 +266,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         } else {
             cell.channelNameLabel.text = _discoveryController.customServers[index - serverCount];
         }
-        cell.channelIconImageView.image = [UIImage imageNamed:@"logo"];
+        cell.channelIconImageView.image = [UIImage imageNamed:@"satipListLogo"];
 
         return cell;
     } else if (tableView == self.satelliteListTableView) {
@@ -269,7 +275,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
             cell = [SESTableViewCell new];
         }
         cell.channelNameLabel.text = _discoveryController.playlistTitlesToChooseFrom[indexPath.row];
-        cell.channelIconImageView.image = [UIImage imageNamed:@"logo"];
+        cell.channelIconImageView.image = [UIImage imageNamed:@"astraListLogo"];
         return cell;
     } else {
         cell = [self.channelListTableView dequeueReusableCellWithIdentifier:SESChannelListReUseIdentifier forIndexPath:indexPath];
