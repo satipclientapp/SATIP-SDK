@@ -13,7 +13,7 @@ public class StartActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                StartActivity.this.startActivity(new Intent(StartActivity.this, ServerActivity.class));
+                StartActivity.this.startActivity(new Intent(StartActivity.this, ChannelsActivity.class));
                 StartActivity.this.finish();
                 StartActivity.this.overridePendingTransition(0,0);
             }
