@@ -39,7 +39,7 @@
                     <rect key="frame" x="1582" y="90" width="248" height="36"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="exF-sN-cqg">
-                    <rect key="frame" x="90" y="90" width="550" height="990"/>
+                    <rect key="frame" x="90" y="120" width="550" height="960"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="550" id="lrK-7a-jwt"/>
@@ -55,14 +55,14 @@
                 <constraint firstItem="RQC-rk-lZ9" firstAttribute="height" secondItem="mfG-8e-ng6" secondAttribute="height" constant="20" id="TkN-0J-QgJ"/>
                 <constraint firstAttribute="bottom" secondItem="exF-sN-cqg" secondAttribute="bottom" id="VWZ-vr-7Lh"/>
                 <constraint firstAttribute="trailing" secondItem="mfG-8e-ng6" secondAttribute="trailing" constant="60" id="XoT-g3-Lru"/>
-                <constraint firstItem="exF-sN-cqg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="90" id="cC9-Fm-scC"/>
+                <constraint firstItem="exF-sN-cqg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="120" id="cC9-Fm-scC"/>
                 <constraint firstItem="RQC-rk-lZ9" firstAttribute="centerY" secondItem="mfG-8e-ng6" secondAttribute="centerY" id="cdO-6E-g8i"/>
                 <constraint firstItem="RQC-rk-lZ9" firstAttribute="centerX" secondItem="mfG-8e-ng6" secondAttribute="centerX" id="ilo-eN-9LK"/>
                 <constraint firstAttribute="trailing" secondItem="Ca7-cg-6Ym" secondAttribute="trailing" id="kBC-qr-dVb"/>
                 <constraint firstItem="mfG-8e-ng6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="n2I-yM-bRj"/>
                 <constraint firstAttribute="trailing" secondItem="Z75-km-7T5" secondAttribute="trailing" constant="90" id="n65-tG-Ei5"/>
                 <constraint firstItem="Ca7-cg-6Ym" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qRs-zV-XU4"/>
-                <constraint firstItem="Z75-km-7T5" firstAttribute="top" secondItem="exF-sN-cqg" secondAttribute="top" id="uSd-Pi-CGd"/>
+                <constraint firstItem="Z75-km-7T5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="90" id="xBQ-3D-UV4"/>
                 <constraint firstItem="exF-sN-cqg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="90" id="ytt-sI-x2U"/>
             </constraints>
         </view>
