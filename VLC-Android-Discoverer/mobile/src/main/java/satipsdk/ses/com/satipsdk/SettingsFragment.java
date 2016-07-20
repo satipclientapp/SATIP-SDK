@@ -60,17 +60,17 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         super.onViewCreated(view, savedInstanceState);
         // Servers
         mBinding.serverList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mServerListAdapter = new ListAdapter(true);
+        mServerListAdapter = new ListAdapter();
         mBinding.serverList.setAdapter(mServerListAdapter);
         mServerListAdapter.notifyDataSetChanged();
         mServerListAdapter.setItemClickHandler(mServerListClickCb);
         // Channels List
-        mChannelListAdapter = new ListAdapter(true);
+        mChannelListAdapter = new ListAdapter();
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.channelList.setAdapter(mChannelListAdapter);
         mChannelListAdapter.setItemClickHandler(mChannelListClickCb);
         //Channels display
-        mBinding.channelDisplayList.setAdapter(new ListAdapter(false));
+        mBinding.channelDisplayList.setAdapter(new ListAdapter());
         mBinding.channelDisplayList.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 

@@ -96,7 +96,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         ArrayList<ListAdapter.Item> channelList = new ArrayList<>();
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ListAdapter channelsAdapter = new ListAdapter(channelList, true);
+        ListAdapter channelsAdapter = new ListAdapter(channelList);
         channelsAdapter.setItemClickHandler(this);
         mBinding.channelList.setAdapter(channelsAdapter);
         channelsAdapter.notifyDataSetChanged();

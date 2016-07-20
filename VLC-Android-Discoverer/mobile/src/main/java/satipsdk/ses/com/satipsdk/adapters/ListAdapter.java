@@ -26,8 +26,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     public static final int TYPE_CHANNEL_LIST = 2;
     public static final int TYPE_SERVER_CUSTOM = 3;
 
-    private boolean mClickable;
-
     private ArrayList<Item> mItemList;
     private LayoutInflater mInflater;
     private SparseIntArray mItemsIndex = new SparseIntArray();
@@ -37,14 +35,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         void onItemClick(int position, Item item);
     }
 
-    public ListAdapter(boolean clickable) {
-        this(new ArrayList<Item>(), clickable);
+    public ListAdapter() {
+        this(new ArrayList<Item>());
     }
 
-    public ListAdapter(ArrayList<Item> serverList, boolean clickable) {
+    public ListAdapter(ArrayList<Item> serverList) {
         super();
         mItemList = serverList;
-        mClickable = clickable;
     }
 
     public void setItemClickHandler(ItemClickCb itemClickCb) {
