@@ -75,10 +75,10 @@
     self.channelListTableView.delegate = self;
     self.channelListTableView.backgroundColor = [UIColor clearColor];
 
-    UISwipeGestureRecognizer *leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousChannel)];
+    UISwipeGestureRecognizer *leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextChannel)];
     leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
 
-    UISwipeGestureRecognizer *rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextChannel)];
+    UISwipeGestureRecognizer *rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousChannel)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
 
 #if TARGET_OS_TV
