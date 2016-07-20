@@ -187,7 +187,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     @Override
     public String getTitle() {
-        return SatIpApplication.get().getString(R.string.channels);
+        return SatIpApplication.get().getString(R.string.live_tv_title);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
