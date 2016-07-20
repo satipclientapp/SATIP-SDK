@@ -112,15 +112,15 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         mChannelListAdapter.clear();
         Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
         Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
-        if (Util.isCollectionEmpty(prefListsNames) || Util.isCollectionEmpty(prefListsUrls)) {
-            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
-            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
-            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_23_5E.m3u"), null));
-        } else {
+
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_23_5E.m3u"), null));
+        if (!Util.isCollectionEmpty(prefListsNames) && !Util.isCollectionEmpty(prefListsUrls)) {
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
             for (int i = 0; i<prefListsNames.size(); ++i)
-                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, Uri.parse((String) urls[i]), null));
+                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST_CUSTOM, (String) names[i], null, Uri.parse((String) urls[i]), null));
         }
         mChannelListAdapter.notifyDataSetChanged();
     }
@@ -142,6 +142,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         Set<String> chanListNames = new HashSet<>();
         Set<String> chanListUrls = new HashSet<>();
         for (ListAdapter.Item item : items) {
+            if (item.type != ListAdapter.TYPE_CHANNEL_LIST_CUSTOM)
+                continue;
             chanListNames.add(item.title);
             chanListUrls.add(item.uri.toString());
         }
@@ -246,7 +248,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private ClickHandler mClickHandler = new ClickHandler();
     public class ClickHandler {
         public void openChannelsDialog(View v) {
-            new ItemListDialog(ListAdapter.TYPE_CHANNEL_LIST, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
+            new ItemListDialog(ListAdapter.TYPE_CHANNEL_LIST_CUSTOM, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
         }
         public void openServerDialog(View v) {
             new ItemListDialog(ListAdapter.TYPE_SERVER_CUSTOM, mScb).show(getActivity().getSupportFragmentManager(), "add_channels_dialog");
@@ -256,7 +258,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private SettingsCb mScb = new SettingsCb();
     public class SettingsCb {
         public void addItem(int type, String name, String url) {
-            ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST ?
+            ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST_CUSTOM ?
                     mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
             adapter.add(new ListAdapter.Item(type, name, null, Uri.parse(url), null));
         }

@@ -33,7 +33,7 @@ public class ItemListDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_item_list, container, false);
         mBinding.setHandler(mClickHandler);
-        if (mType == ListAdapter.TYPE_SERVER) {
+        if (mType == ListAdapter.TYPE_SERVER_CUSTOM) {
             mBinding.nameLayout.setHint(getString(R.string.name_hint_server));
             mBinding.urlLayout.setHint(getString(R.string.url_hint_server));
         }
@@ -44,7 +44,7 @@ public class ItemListDialog extends DialogFragment {
     @Override
     public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
         AppCompatDialog dialog = new AppCompatDialog(getActivity(), getTheme());
-        dialog.setTitle(getString(mType == ListAdapter.TYPE_CHANNEL_LIST ? R.string.add_channel : R.string.add_server) );
+        dialog.setTitle(getString(mType == ListAdapter.TYPE_CHANNEL_LIST_CUSTOM ? R.string.add_channel : R.string.add_server) );
 
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
