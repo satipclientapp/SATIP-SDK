@@ -9,6 +9,7 @@
 #import "SESSettingsViewController.h"
 #import "SESTableViewCell.h"
 #import "SESServerDiscoveryController.h"
+#import "UIColor+SES.h"
 
 /* include the correct VLCKit fork per platform */
 #if TARGET_OS_TV
@@ -58,6 +59,12 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [self.channelListTableView registerNib:[UINib nibWithNibName:@"SESTableViewCell" bundle:nil] forCellReuseIdentifier:SESChannelListReUseIdentifier];
     self.titleLabel.textColor = [UIColor lightGrayColor];
     self.titleLabel.text = self.title;
+
+    UIImage *blueButtonBackgroundImage = [UIColor sesImageWithColor:[UIColor sesCloudColor]];
+    [self.editServerButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
+    [self.editChannelListButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
+    [self.addServerButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
+    [self.addChannelListButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
 #else
     self.serverListTableView.rowHeight = 68.;
     self.serverListTableView.tintColor = [UIColor clearColor];
@@ -189,6 +196,25 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (IBAction)editAction:(UIButton *)sender
+{
+    BOOL edit;
+
+    if (sender == _editServerButton) {
+        edit = !_serverListTableView.editing;
+        [_serverListTableView setEditing:edit animated:YES];
+    } else {
+        edit = !_satelliteListTableView.editing;
+        [_satelliteListTableView setEditing:edit animated:YES];
+    }
+
+    if (edit) {
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+    } else {
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -199,7 +225,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.satelliteListTableView) {
-        return  _discoveryController.playlistTitlesToChooseFrom.count;
+        return _discoveryController.playlistTitlesToChooseFrom.count;
     } else if (tableView == self.serverListTableView) {
         return _discoveryController.numberOfServers + _discoveryController.customServers.count;
     } else {
@@ -298,6 +324,45 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         [self parseCurrentChannelList];
     } else {
         _discoveryController.selectedServerIndex = indexPath.row;
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _satelliteListTableView) {
+        if (indexPath.row > 2) {
+            return YES;
+        }
+    } else {
+        if (indexPath.row >= _discoveryController.numberOfServers) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger index = indexPath.row;
+
+    if (tableView == _satelliteListTableView) {
+        NSMutableArray *mutArray = [_discoveryController.playlistURLStringsToChooseFrom mutableCopy];
+        [mutArray removeObjectAtIndex:index];
+        _discoveryController.playlistURLStringsToChooseFrom = [mutArray copy];
+
+        mutArray = [_discoveryController.playlistTitlesToChooseFrom mutableCopy];
+        [mutArray removeObjectAtIndex:index];
+        _discoveryController.playlistTitlesToChooseFrom = [mutArray copy];
+
+        [_satelliteListTableView reloadData];
+    } else {
+        index = index - _discoveryController.numberOfServers;
+        NSMutableArray *customServers = [_discoveryController.customServers mutableCopy];
+        [customServers removeObjectAtIndex:index];
+        _discoveryController.customServers = [customServers copy];
+
+        [_serverListTableView reloadData];
     }
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -9,6 +9,8 @@
                 <outlet property="addChannelListButton" destination="RaA-pj-B4q" id="v4h-6c-Nax"/>
                 <outlet property="addServerButton" destination="UgM-h0-kkr" id="pqs-Bz-yt8"/>
                 <outlet property="channelListTableView" destination="pP1-PE-4ST" id="CD7-8e-tQq"/>
+                <outlet property="editChannelListButton" destination="QHB-Tm-sFb" id="w6c-Q9-xPs"/>
+                <outlet property="editServerButton" destination="E3W-bi-ll4" id="bfw-RS-3mc"/>
                 <outlet property="satelliteListTableView" destination="4pm-LA-609" id="ckg-XN-iLI"/>
                 <outlet property="serverListTableView" destination="jak-tP-C1s" id="zbr-hS-1z1"/>
                 <outlet property="titleLabel" destination="4eq-7u-EJL" id="XwV-K7-ed9"/>
@@ -24,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="jak-tP-C1s">
-                    <rect key="frame" x="80" y="278" width="540" height="596"/>
+                    <rect key="frame" x="80" y="292" width="540" height="582"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="540" id="Isr-mT-32W"/>
@@ -45,7 +47,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="4pm-LA-609">
-                    <rect key="frame" x="742" y="278" width="540" height="596"/>
+                    <rect key="frame" x="742" y="292" width="540" height="582"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="540" id="dl0-Kw-9C0"/>
@@ -73,7 +75,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="pP1-PE-4ST">
-                    <rect key="frame" x="1322" y="200" width="520" height="800"/>
+                    <rect key="frame" x="1322" y="186" width="520" height="814"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="520" id="6lI-mC-ksZ"/>
@@ -85,14 +87,30 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3W-bi-ll4">
+                    <rect key="frame" x="474" y="186" width="146" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Edit"/>
+                    <connections>
+                        <action selector="editAction:" destination="-1" eventType="primaryActionTriggered" id="8yt-y6-EV7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHB-Tm-sFb">
+                    <rect key="frame" x="1136" y="186" width="146" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Edit"/>
+                    <connections>
+                        <action selector="editAction:" destination="-1" eventType="primaryActionTriggered" id="7il-dQ-hMJ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Ixq-Bs-fhu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="200" id="09y-Xc-rz9"/>
-                <constraint firstItem="jak-tP-C1s" firstAttribute="top" secondItem="Ixq-Bs-fhu" secondAttribute="bottom" constant="20" id="0ii-Sg-vst"/>
+                <constraint firstItem="E3W-bi-ll4" firstAttribute="trailing" secondItem="jak-tP-C1s" secondAttribute="trailing" id="1FA-sR-1ei"/>
                 <constraint firstItem="Ixq-Bs-fhu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="2wg-jz-c4U"/>
                 <constraint firstItem="4eq-7u-EJL" firstAttribute="centerX" secondItem="qry-SC-out" secondAttribute="centerX" id="5nc-O0-Rr2"/>
-                <constraint firstItem="4pm-LA-609" firstAttribute="top" secondItem="nB0-2U-eyn" secondAttribute="bottom" constant="20" id="6IV-C3-4Lj"/>
+                <constraint firstItem="4pm-LA-609" firstAttribute="top" secondItem="QHB-Tm-sFb" secondAttribute="bottom" constant="20" id="DDH-Kl-Vga"/>
                 <constraint firstItem="pP1-PE-4ST" firstAttribute="bottom" secondItem="RaA-pj-B4q" secondAttribute="bottom" id="H19-eC-HtL"/>
                 <constraint firstAttribute="bottom" secondItem="qry-SC-out" secondAttribute="bottom" id="JR6-ca-2Z1"/>
                 <constraint firstItem="L53-Qs-0FY" firstAttribute="top" secondItem="Ixq-Bs-fhu" secondAttribute="top" id="JUa-50-tQK"/>
@@ -105,14 +123,18 @@
                 <constraint firstAttribute="trailing" secondItem="qry-SC-out" secondAttribute="trailing" id="T8F-5A-0nh"/>
                 <constraint firstItem="nB0-2U-eyn" firstAttribute="leading" secondItem="4pm-LA-609" secondAttribute="leading" id="TeX-Jq-xO1"/>
                 <constraint firstItem="4eq-7u-EJL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="UV4-Ko-gX7"/>
+                <constraint firstItem="E3W-bi-ll4" firstAttribute="centerY" secondItem="Ixq-Bs-fhu" secondAttribute="centerY" id="WOO-bm-LCF"/>
+                <constraint firstItem="QHB-Tm-sFb" firstAttribute="centerY" secondItem="nB0-2U-eyn" secondAttribute="centerY" id="bHv-8y-bpY"/>
                 <constraint firstItem="qry-SC-out" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cOS-sL-LxS"/>
+                <constraint firstItem="QHB-Tm-sFb" firstAttribute="trailing" secondItem="4pm-LA-609" secondAttribute="trailing" id="cpL-df-Q7b"/>
                 <constraint firstItem="UgM-h0-kkr" firstAttribute="width" secondItem="jak-tP-C1s" secondAttribute="width" id="dys-mJ-PD9"/>
                 <constraint firstItem="RaA-pj-B4q" firstAttribute="width" secondItem="4pm-LA-609" secondAttribute="width" id="ecP-7C-A6c"/>
                 <constraint firstItem="pP1-PE-4ST" firstAttribute="leading" secondItem="RaA-pj-B4q" secondAttribute="trailing" constant="40" id="f4X-Ez-dlB"/>
                 <constraint firstItem="RaA-pj-B4q" firstAttribute="leading" secondItem="L53-Qs-0FY" secondAttribute="trailing" constant="60" id="kaI-OS-GrG"/>
                 <constraint firstItem="4pm-LA-609" firstAttribute="leading" secondItem="L53-Qs-0FY" secondAttribute="trailing" constant="60" id="l0k-1Z-uRv"/>
+                <constraint firstItem="pP1-PE-4ST" firstAttribute="top" secondItem="QHB-Tm-sFb" secondAttribute="top" id="ltS-Fc-mtg"/>
                 <constraint firstItem="4pm-LA-609" firstAttribute="leading" secondItem="RaA-pj-B4q" secondAttribute="leading" id="m69-ri-hKO"/>
-                <constraint firstItem="pP1-PE-4ST" firstAttribute="top" secondItem="nB0-2U-eyn" secondAttribute="top" id="ohh-iu-itY"/>
+                <constraint firstItem="jak-tP-C1s" firstAttribute="top" secondItem="E3W-bi-ll4" secondAttribute="bottom" constant="20" id="rPi-VC-rYr"/>
                 <constraint firstAttribute="bottom" secondItem="UgM-h0-kkr" secondAttribute="bottom" constant="80" id="uJV-6w-oIP"/>
                 <constraint firstItem="L53-Qs-0FY" firstAttribute="leading" secondItem="jak-tP-C1s" secondAttribute="trailing" constant="60" id="v2M-w1-UmV"/>
                 <constraint firstAttribute="bottom" secondItem="RaA-pj-B4q" secondAttribute="bottom" constant="80" id="xWo-8F-uIw"/>

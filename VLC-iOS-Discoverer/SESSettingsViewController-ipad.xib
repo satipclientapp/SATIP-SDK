@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -10,6 +10,8 @@
                 <outlet property="addChannelListButton" destination="rbe-5i-pG0" id="DrM-Bz-Nq6"/>
                 <outlet property="addServerButton" destination="cmr-Ur-kN1" id="b3i-04-NqC"/>
                 <outlet property="channelListTableView" destination="XsE-A4-Krn" id="g5e-f9-FCH"/>
+                <outlet property="editChannelListButton" destination="RiR-2r-trk" id="4Ri-LU-oea"/>
+                <outlet property="editServerButton" destination="GF3-cC-pkn" id="rth-3M-inp"/>
                 <outlet property="satelliteListTableView" destination="DQB-Sb-5de" id="NhG-Xe-w14"/>
                 <outlet property="serverListTableView" destination="OQ0-S6-4qF" id="dFm-8Q-WFe"/>
                 <outlet property="view" destination="A8Q-5b-aDG" id="XyY-FL-ny2"/>
@@ -61,13 +63,13 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Channel List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzZ-H2-Nnr">
                     <rect key="frame" x="392" y="82" width="134" height="23"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Servers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-z6-SQK">
                     <rect key="frame" x="71" y="82" width="94" height="23"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jW9-it-OaU">
@@ -77,6 +79,20 @@
                         <constraint firstAttribute="width" constant="1" id="xFj-f4-VL8"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF3-cC-pkn">
+                    <rect key="frame" x="281" y="79" width="30" height="30"/>
+                    <state key="normal" title="Edit"/>
+                    <connections>
+                        <action selector="editAction:" destination="-1" eventType="touchUpInside" id="rxg-vH-YAg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-2r-trk">
+                    <rect key="frame" x="602" y="79" width="30" height="30"/>
+                    <state key="normal" title="Edit"/>
+                    <connections>
+                        <action selector="editAction:" destination="-1" eventType="touchUpInside" id="Axu-Ln-tca"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -85,6 +101,7 @@
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="centerY" secondItem="rbe-5i-pG0" secondAttribute="centerY" id="51g-oE-CHN"/>
                 <constraint firstItem="kzZ-H2-Nnr" firstAttribute="leading" secondItem="DQB-Sb-5de" secondAttribute="leading" id="5sz-bx-wJI"/>
                 <constraint firstAttribute="bottom" secondItem="rbe-5i-pG0" secondAttribute="bottom" constant="120" id="6yW-rI-7xf"/>
+                <constraint firstItem="GF3-cC-pkn" firstAttribute="trailing" secondItem="OQ0-S6-4qF" secondAttribute="trailing" id="94R-zz-4Ny"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="trailing" constant="80" id="9CL-Fm-xK0"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="kzZ-H2-Nnr" secondAttribute="bottom" constant="15" id="Aph-t1-OrP"/>
                 <constraint firstItem="BQj-tm-5ie" firstAttribute="leading" secondItem="A8Q-5b-aDG" secondAttribute="leading" id="GeX-OX-nlX"/>
@@ -102,13 +119,16 @@
                 <constraint firstItem="XsE-A4-Krn" firstAttribute="leading" secondItem="DQB-Sb-5de" secondAttribute="trailing" constant="68" id="Yv3-kb-ZHh"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="centerX" secondItem="A8Q-5b-aDG" secondAttribute="centerX" id="ay1-as-E6Y"/>
                 <constraint firstItem="rbe-5i-pG0" firstAttribute="width" secondItem="DQB-Sb-5de" secondAttribute="width" id="bIC-a3-sAH"/>
+                <constraint firstItem="RiR-2r-trk" firstAttribute="trailing" secondItem="DQB-Sb-5de" secondAttribute="trailing" id="cmT-nc-6ip"/>
                 <constraint firstItem="jW9-it-OaU" firstAttribute="bottom" secondItem="OQ0-S6-4qF" secondAttribute="bottom" id="dph-4B-1RU"/>
+                <constraint firstItem="RiR-2r-trk" firstAttribute="centerY" secondItem="kzZ-H2-Nnr" secondAttribute="centerY" id="oFr-Fb-xHp"/>
                 <constraint firstItem="jW9-it-OaU" firstAttribute="leading" secondItem="OQ0-S6-4qF" secondAttribute="trailing" constant="40" id="pu0-bD-GIc"/>
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="centerX" secondItem="OQ0-S6-4qF" secondAttribute="centerX" id="sbP-x1-lcr"/>
                 <constraint firstItem="cmr-Ur-kN1" firstAttribute="width" secondItem="OQ0-S6-4qF" secondAttribute="width" id="tmR-bB-LlY"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="XsE-A4-Krn" secondAttribute="top" id="w6g-yD-xGZ"/>
                 <constraint firstItem="OQ0-S6-4qF" firstAttribute="top" secondItem="WUr-z6-SQK" secondAttribute="bottom" constant="15" id="wh3-EA-Uw0"/>
                 <constraint firstItem="DQB-Sb-5de" firstAttribute="top" secondItem="OQ0-S6-4qF" secondAttribute="top" id="yh5-2P-GfD"/>
+                <constraint firstItem="GF3-cC-pkn" firstAttribute="centerY" secondItem="WUr-z6-SQK" secondAttribute="centerY" id="zUh-Pt-WCu"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
