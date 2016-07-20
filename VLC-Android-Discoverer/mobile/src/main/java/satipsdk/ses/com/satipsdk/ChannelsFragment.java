@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
@@ -40,6 +41,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
+    public static final String KEY_LAST_CHANNEL = "key_last_channel";
 
     private FragmentChannelsBinding mBinding;
     private ViewDimensions mViewDimensions;
@@ -128,6 +130,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                             media.getUri(),
                             null));
                 }
+                String lastUrl = mSharedPreferences.getString(KEY_LAST_CHANNEL, null);
+                if (!TextUtils.isEmpty(lastUrl))
+                    play(Uri.parse(lastUrl));
+                else if (ml != null && ml.getCount() >0)
+                    play(ml.getMediaAt(0).getUri());
             }
         });
     }
@@ -276,11 +283,16 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private SurfaceView mSubtitlesSurface = null;
 
     public void onItemClick(int position, ListAdapter.Item item) {
-        Media media = new Media(mLibVLC, item.uri);
+        play(item.uri);
+        mBinding.channelDescription.setText(item.description);
+        mSharedPreferences.edit().putString(KEY_LAST_CHANNEL, item.uri.toString()).apply();
+    }
+
+    private void play(Uri uri) {
+        Media media = new Media(mLibVLC, uri);
         mMediaPlayer.setMedia(media);
         media.release();
         mMediaPlayer.play();
-        mBinding.channelDescription.setText(item.description);
     }
 
     private void updateVideoSurfaces() {
