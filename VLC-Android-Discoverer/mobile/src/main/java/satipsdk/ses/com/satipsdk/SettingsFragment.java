@@ -216,6 +216,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
                 @Override
                 public void run() {
                     ListAdapter la = (ListAdapter) mBinding.channelDisplayList.getAdapter();
+                    la.clear();
                     Media media;
                     String title;
                     for (int i = 0; i< ml.getCount(); ++i) {

@@ -115,6 +115,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             @Override
             public void run() {
                 ListAdapter la = (ListAdapter) mBinding.channelList.getAdapter();
+                la.clear();
                 Media media;
                 String title;
                 for (int i = 0; i< ml.getCount(); ++i) {
