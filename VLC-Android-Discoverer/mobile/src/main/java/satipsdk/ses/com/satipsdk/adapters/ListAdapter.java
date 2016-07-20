@@ -1,9 +1,7 @@
 package satipsdk.ses.com.satipsdk.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
@@ -15,7 +13,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import satipsdk.ses.com.satipsdk.ChannelsActivity;
 import satipsdk.ses.com.satipsdk.R;
 import satipsdk.ses.com.satipsdk.databinding.ListItemBinding;
 
@@ -135,10 +132,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
         @Override
         public void onClick(View v) {
-            if (!mClickable) return;
-            if (binding.getItem().type == TYPE_SERVER)
-                v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
-            else if (mItemClickCb != null) {
+            if (mItemClickCb != null) {
                 v.setFocusableInTouchMode(true);
                 v.requestFocus();
                 mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
