@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -83,6 +84,11 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         super.onResume();
         refreshServers();
         refreshChannels();
+
+        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
+        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+        if (url == null || device == null)
+            Snackbar.make(getView(), R.string.warning_list_selection, Snackbar.LENGTH_LONG).show();
     }
 
     private void refreshServers() {
