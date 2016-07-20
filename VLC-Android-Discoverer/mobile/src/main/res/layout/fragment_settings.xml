@@ -37,7 +37,7 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:background="@color/deep_gray"/>
+            android:background="@color/cloud"/>
 
         <LinearLayout
             android:layout_width="0dp"
