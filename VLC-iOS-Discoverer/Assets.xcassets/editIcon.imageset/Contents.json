@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "ipad",
-      "filename" : "icon_iOS-edit.png",
+      "filename" : "icon_iOS-edit-active.png",
       "scale" : "1x"
     },
     {
       "idiom" : "ipad",
-      "filename" : "icon_iOS-edit@2x.png",
+      "filename" : "icon_iOS-edit-active@2x.png",
       "scale" : "2x"
     }
   ],
