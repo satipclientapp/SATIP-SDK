@@ -2,6 +2,7 @@ package satipsdk.ses.com.satipsdk.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
@@ -142,14 +143,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
     public static class Item {
         public int type;
-        public String title, description, logoUrl, url;
+        public String title, description, logoUrl;
+        public Uri uri;
 
-        public Item(int type, String title, String description, String url, String logoUrl) {
+        public Item(int type, String title, String description, Uri uri, String logoUrl) {
             this.type = type;
             this.title = title;
             this.description = description;
             this.logoUrl = type == TYPE_CHANNEL ? generateLogoUrl(title) : logoUrl;
-            this.url = url;
+            this.uri = uri;
         }
 
         String generateLogoUrl(String title) {

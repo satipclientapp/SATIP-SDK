@@ -2,6 +2,7 @@ package satipsdk.ses.com.satipsdk;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.PixelFormat;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +43,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     private FragmentChannelsBinding mBinding;
     private ViewDimensions mViewDimensions;
+    private SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SatIpApplication.get());
     private boolean expanded = false;
     private int mScreenWidth, mScreenHeight;
 
@@ -72,12 +75,17 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                loadChannelList();
-            }
-        }).start();
+        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
+        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+        if (url == null || device == null)
+            ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
+        else
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    loadChannelList(Uri.parse(url+"?"+device));
+                }
+            }).start();
 
         if (ENABLE_SUBTITLES && HWDecoderUtil.HAS_SUBTITLES_SURFACE) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.subtitles_stub);
@@ -98,8 +106,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mBinding.videoSurfaceFrame.setOnClickListener(this);
     }
 
-    private void loadChannelList() {
-        Uri uri = getActivity().getIntent().getData();
+    public void loadChannelList(Uri uri) {
         Media playlist = new Media(mLibVLC, uri);
         playlist.parse(Media.Parse.ParseNetwork);
         final MediaList ml = playlist.subItems();
@@ -117,7 +124,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
                             media.getMeta(Media.Meta.Title).substring(dot+2),
                             "channel description",
-                            media.getUri().toString(),
+                            media.getUri(),
                             null));
                 }
             }
@@ -268,7 +275,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private SurfaceView mSubtitlesSurface = null;
 
     public void onItemClick(int position, ListAdapter.Item item) {
-        Media media = new Media(mLibVLC, Uri.parse(item.url));
+        Media media = new Media(mLibVLC, item.uri);
         mMediaPlayer.setMedia(media);
         media.release();
         mMediaPlayer.play();

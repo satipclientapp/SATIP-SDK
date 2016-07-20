@@ -35,19 +35,16 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private static final String KEY_CHANNELS_URLS = "key_channels_URLs";
     private static final String KEY_SERVERS_NAMES = "key_server_names";
     private static final String KEY_SERVERS_URLS = "key_server_URLs";
+    public static final String KEY_CURRENT_DEVICE = "key_current_device";
+    public static final String KEY_CURRENT_CHANNEL_LIST_ADDRESS = "key_current_channel_list_address";
+
     private FragmentSettingsBinding mBinding;
 
     MediaBrowser mMediaBrowser;
     ListAdapter mServerListAdapter, mChannelListAdapter;
-    private SharedPreferences mSharedPreferences;
+    private SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SatIpApplication.get());
 
     public SettingsFragment() {}
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-    }
 
     @Nullable
     @Override
@@ -62,9 +59,10 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         super.onViewCreated(view, savedInstanceState);
         // Servers
         mBinding.serverList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mServerListAdapter = new ListAdapter(false);
+        mServerListAdapter = new ListAdapter(true);
         mBinding.serverList.setAdapter(mServerListAdapter);
         mServerListAdapter.notifyDataSetChanged();
+        mServerListAdapter.setItemClickHandler(mServerListClickCb);
         // Channels List
         mChannelListAdapter = new ListAdapter(true);
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,7 +93,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
             for (int i = 0; i<prefListsNames.size(); ++i)
-                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER_CUSTOM, (String) names[i], null, (String) urls[i], null));
+                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER_CUSTOM, (String) names[i], null, Uri.parse((String) urls[i]), null));
         }
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
@@ -109,14 +107,14 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
         Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
         if (Util.isCollectionEmpty(prefListsNames) || Util.isCollectionEmpty(prefListsUrls)) {
-            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, "http://www.satip.info/Playlists/ASTRA_19_2E.m3u", null));
-            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, "http://www.satip.info/Playlists/ASTRA_28_2E.m3u", null));
-            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, "http://www.satip.info/Playlists/ASTRA_23_5E.m3u", null));
+            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
+            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
+            mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_23_5E.m3u"), null));
         } else {
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
             for (int i = 0; i<prefListsNames.size(); ++i)
-                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, (String) urls[i], null));
+                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, (String) names[i], null, Uri.parse((String) urls[i]), null));
         }
         mChannelListAdapter.notifyDataSetChanged();
     }
@@ -139,7 +137,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         Set<String> chanListUrls = new HashSet<>();
         for (ListAdapter.Item item : items) {
             chanListNames.add(item.title);
-            chanListUrls.add(item.url);
+            chanListUrls.add(item.uri.toString());
         }
         Set<String> serverNames = new HashSet<>();
         Set<String> serverUrls = new HashSet<>();
@@ -148,7 +146,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             if (item.type != ListAdapter.TYPE_SERVER_CUSTOM)
                 continue;
             serverNames.add(item.title);
-            serverUrls.add(item.url);
+            serverUrls.add(item.uri.toString());
         }
         mSharedPreferences.edit()
                 .putStringSet(KEY_CHANNELS_NAMES, chanListNames)
@@ -168,7 +166,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onMediaAdded(int i, Media media) {
         if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1")) {
-            mServerListAdapter.add(i, new ListAdapter.Item(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), null, media.getUri().toString(), media.getMeta(Media.Meta.ArtworkURL)));
+            mServerListAdapter.add(i, new ListAdapter.Item(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), null, media.getUri(), media.getMeta(Media.Meta.ArtworkURL)));
         }
     }
 
@@ -183,39 +181,60 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     }
 
     private Handler mHandler = new Handler();
-    private ListAdapter.ItemClickCb mChannelListClickCb = new ListAdapter.ItemClickCb() {
+    private ListAdapter.ItemClickCb mServerListClickCb = new ListAdapter.ItemClickCb() {
         @Override
         public void onItemClick(int position, ListAdapter.Item item) {
+            mSharedPreferences.edit().putString(KEY_CURRENT_DEVICE, item.uri.getQuery()).apply();
+            reloadChannels();
+        }
+    };
+    private ListAdapter.ItemClickCb mChannelListClickCb = new ListAdapter.ItemClickCb() {
+        @Override
+        public void onItemClick(int position, final ListAdapter.Item item) {
+            mSharedPreferences.edit().putString(KEY_CURRENT_CHANNEL_LIST_ADDRESS, item.uri.toString()).apply();
+            reloadChannels();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Uri uri = getActivity().getIntent().getData();
-                    Media playlist = new Media(VLCInstance.get(), uri);
-                    playlist.parse(Media.Parse.ParseNetwork);
-                    final MediaList ml = playlist.subItems();
-                    playlist.release();
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ListAdapter la = (ListAdapter) mBinding.channelDisplayList.getAdapter();
-                            Media media;
-                            String title;
-                            for (int i = 0; i< ml.getCount(); ++i) {
-                                media = ml.getMediaAt(i);
-                                title = media.getMeta(Media.Meta.Title);
-                                int dot = title.indexOf('.');
-                                la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
-                                        media.getMeta(Media.Meta.Title).substring(dot+2),
-                                        "channel description",
-                                        media.getUri().toString(),
-                                        null));
-                            }
-                        }
-                    });
+                    parseChannelList(item.uri);
                 }
             }).start();
         }
+
+        private void parseChannelList(Uri uri) {
+            Media playlist = new Media(VLCInstance.get(), uri);
+            playlist.parse(Media.Parse.ParseNetwork);
+            final MediaList ml = playlist.subItems();
+            playlist.release();
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    ListAdapter la = (ListAdapter) mBinding.channelDisplayList.getAdapter();
+                    Media media;
+                    String title;
+                    for (int i = 0; i< ml.getCount(); ++i) {
+                        media = ml.getMediaAt(i);
+                        title = media.getMeta(Media.Meta.Title);
+                        int dot = title.indexOf('.');
+                        la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
+                                media.getMeta(Media.Meta.Title).substring(dot+2),
+                                "channel description",
+                                media.getUri(),
+                                null));
+                    }
+                }
+            });
+        }
     };
+
+    private void reloadChannels() {
+        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
+        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+        if (url == null || device == null)
+            return;
+        ChannelsFragment cf = (ChannelsFragment) ((ChannelsActivity)getActivity()).mFragments[0];
+        cf.loadChannelList(Uri.parse(url+"?"+device));
+    }
 
     private ClickHandler mClickHandler = new ClickHandler();
     public class ClickHandler {
@@ -232,7 +251,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         public void addItem(int type, String name, String url) {
             ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST ?
                     mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
-            adapter.add(new ListAdapter.Item(type, name, null, url, null));
+            adapter.add(new ListAdapter.Item(type, name, null, Uri.parse(url), null));
         }
     }
 }
