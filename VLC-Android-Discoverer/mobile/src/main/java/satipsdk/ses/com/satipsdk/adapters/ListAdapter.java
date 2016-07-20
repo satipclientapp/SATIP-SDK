@@ -115,8 +115,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus)
             v.setBackground(v.getResources().getDrawable(R.drawable.gradient_cloud));
-        else
+        else {
             v.setBackgroundColor(v.getResources().getColor(R.color.pure_white));
+            v.setFocusableInTouchMode(false);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             v.setElevation(hasFocus ? 10.0f : 0.0f);
     }
@@ -137,8 +139,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             if (binding.getItem().type == TYPE_SERVER)
                 v.getContext().startActivity(new Intent(v.getContext(), ChannelsActivity.class).setData(Uri.parse(binding.getItem().url)));
             else if (mItemClickCb != null) {
-                itemView.setFocusableInTouchMode(true);
-                itemView.requestFocus();
+                v.setFocusableInTouchMode(true);
+                v.requestFocus();
                 mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
             }
         }
