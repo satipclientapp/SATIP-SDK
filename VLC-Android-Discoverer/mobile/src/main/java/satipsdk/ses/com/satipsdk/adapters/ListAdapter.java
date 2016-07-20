@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -83,6 +84,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     }
 
     public void remove(int position) {
+        mItemList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void removeServer(int position) {
         int actualPosition = mItemsIndex.get(position);
         if (actualPosition >= mItemList.size() || actualPosition < 0)
             return;
@@ -126,15 +132,29 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             super(binding.getRoot());
             this.binding = binding;
             itemView.setOnClickListener(this);
+            binding.itemDelete.setOnClickListener(this);
             itemView.setOnFocusChangeListener(ListAdapter.this);
         }
 
         @Override
         public void onClick(View v) {
             if (mItemClickCb != null) {
-                v.setFocusableInTouchMode(true);
-                v.requestFocus();
-                mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
+                if (v.getId() == itemView.getId()) {
+                    v.setFocusableInTouchMode(true);
+                    v.requestFocus();
+                    mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
+                } else if (v.getId() == binding.itemDelete.getId()) {
+                    final int position = getAdapterPosition();
+                    final Item item = binding.getItem();
+                    remove(position);
+                    Snackbar.make(v, item.type == TYPE_SERVER_CUSTOM ? R.string.server_removed : R.string.channel_list_removed,
+                            Snackbar.LENGTH_LONG).setAction(android.R.string.cancel, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            add(position, item);
+                        }
+                    }).show();
+                }
             }
         }
     }

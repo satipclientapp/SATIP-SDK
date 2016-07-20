@@ -30,6 +30,7 @@
             android:textColor="@color/deep_gray"
             android:textSize="21sp"/>
         <ImageView
+            android:id="@+id/item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"

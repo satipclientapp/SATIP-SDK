@@ -180,7 +180,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
     @Override
     public void onMediaRemoved(int i, Media media) {
-        mServerListAdapter.remove(i);
+        mServerListAdapter.removeServer(i);
     }
 
     @Override

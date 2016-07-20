@@ -9,4 +9,6 @@
     <string name="name_hint_channel_list">List name</string>
     <string name="url_hint_channel_list">http://....m3u</string>
     <string name="warning_list_selection">Please select a server and a channel list</string>
+    <string name="server_removed">Server removed</string>
+    <string name="channel_list_removed">Channel list removed</string>
 </resources>
