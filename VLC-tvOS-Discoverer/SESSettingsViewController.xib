@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="jak-tP-C1s">
-                    <rect key="frame" x="80" y="292" width="540" height="582"/>
+                    <rect key="frame" x="80" y="276" width="540" height="598"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="540" id="Isr-mT-32W"/>
@@ -47,7 +47,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="4pm-LA-609">
-                    <rect key="frame" x="742" y="292" width="540" height="582"/>
+                    <rect key="frame" x="742" y="276" width="540" height="598"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="540" id="dl0-Kw-9C0"/>
@@ -75,7 +75,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="pP1-PE-4ST">
-                    <rect key="frame" x="1322" y="186" width="520" height="814"/>
+                    <rect key="frame" x="1322" y="203" width="520" height="797"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="520" id="6lI-mC-ksZ"/>
@@ -87,18 +87,26 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3W-bi-ll4">
-                    <rect key="frame" x="474" y="186" width="146" height="86"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3W-bi-ll4">
+                    <rect key="frame" x="567" y="203" width="53" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="53" id="1CI-x3-NNi"/>
+                        <constraint firstAttribute="height" constant="53" id="6Am-5n-i6u"/>
+                    </constraints>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="normal" title="Edit"/>
+                    <state key="normal" backgroundImage="editButtonActive"/>
                     <connections>
                         <action selector="editAction:" destination="-1" eventType="primaryActionTriggered" id="8yt-y6-EV7"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHB-Tm-sFb">
-                    <rect key="frame" x="1136" y="186" width="146" height="86"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHB-Tm-sFb">
+                    <rect key="frame" x="1229" y="203" width="53" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="G0A-2h-TUY"/>
+                        <constraint firstAttribute="width" constant="53" id="HiP-Vj-WbW"/>
+                    </constraints>
                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="normal" title="Edit"/>
+                    <state key="normal" backgroundImage="editButtonInactive"/>
                     <connections>
                         <action selector="editAction:" destination="-1" eventType="primaryActionTriggered" id="7il-dQ-hMJ"/>
                     </connections>
@@ -143,6 +151,8 @@
         </view>
     </objects>
     <resources>
+        <image name="editButtonActive" width="53" height="53"/>
+        <image name="editButtonInactive" width="50" height="50"/>
         <image name="viewControllerBackground" width="1024" height="768"/>
     </resources>
 </document>

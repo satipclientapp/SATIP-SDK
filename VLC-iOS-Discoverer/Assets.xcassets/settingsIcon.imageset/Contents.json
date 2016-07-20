@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "ipad",
-      "filename" : "mostviewed_2x-1.png",
+      "filename" : "icon_iOS-settings-inactive.png",
       "scale" : "1x"
     },
     {
       "idiom" : "ipad",
-      "filename" : "mostviewed_2x.png",
+      "filename" : "icon_iOS-settings-inactive@2x.png",
       "scale" : "2x"
     }
   ],

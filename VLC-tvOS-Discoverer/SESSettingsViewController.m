@@ -61,8 +61,6 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     self.titleLabel.text = self.title;
 
     UIImage *blueButtonBackgroundImage = [UIColor sesImageWithColor:[UIColor sesCloudColor]];
-    [self.editServerButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
-    [self.editChannelListButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
     [self.addServerButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
     [self.addChannelListButton setBackgroundImage:blueButtonBackgroundImage forState:UIControlStateNormal];
 #else
@@ -208,11 +206,13 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         [_satelliteListTableView setEditing:edit animated:YES];
     }
 
+#if TARGET_OS_TV
     if (edit) {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"editButtonActive"] forState:UIControlStateNormal];
     } else {
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
     }
+#endif
 }
 
 #pragma mark - table view data source

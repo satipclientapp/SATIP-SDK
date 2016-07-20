@@ -2,12 +2,10 @@
   "images" : [
     {
       "idiom" : "ipad",
-      "filename" : "icon_iOS-livetv-inactive.png",
       "scale" : "1x"
     },
     {
       "idiom" : "ipad",
-      "filename" : "icon_iOS-livetv-inactive@2x.png",
       "scale" : "2x"
     }
   ],
