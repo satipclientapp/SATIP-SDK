@@ -46,6 +46,7 @@
     SESServerDiscoveryController *_discoveryController;
 
     BOOL _automaticallyStarted;
+    BOOL _appBackgrounded;
 }
 
 @end
@@ -117,6 +118,38 @@
     NSDictionary *dict = NSDictionaryOfVariableBindings(_videoOutputView);
     _horizontalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_videoOutputView]|" options:0 metrics:0 views:dict];
     _verticalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_videoOutputView]|" options:0 metrics:0 views:dict];
+
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(appWillGoToBackground) name:UIApplicationWillResignActiveNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(appWillGoToForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    if (_playbackPlayer) {
+        [_playbackPlayer stop];
+        _playbackPlayer = nil;
+    }
+}
+
+- (void)appWillGoToBackground
+{
+    if (_playbackPlayer) {
+        _appBackgrounded = YES;
+        [_playbackPlayer.mediaPlayer stop];
+    }
+}
+
+- (void)appWillGoToForeground
+{
+    if (!_appBackgrounded) {
+        return;
+    }
+
+    _appBackgrounded = NO;
+    [self automaticPlaybackStart];
 }
 
 /* called when our channel list is ready
@@ -148,8 +181,9 @@
 {
     NSInteger index = _discoveryController.selectedServerIndex;
 
-    if (index == -1)
+    if (index == -1) {
         return;
+    }
 
     NSInteger serverCount = _discoveryController.numberOfServers;
     if (serverCount == 0) {
@@ -194,7 +228,7 @@
         _parsePlayer.media = self.serverMediaItem;
         _parsePlayer.delegate = self;
         /* you can enable debug logging here ;) */
-        _parsePlayer.libraryInstance.debugLogging = NO;
+        // _parsePlayer.libraryInstance.debugLogging = YES;
         [_parsePlayer play];
     }
 
@@ -208,7 +242,7 @@
     /* setup the playback list player if not already done */
     _playbackPlayer = [[VLCMediaListPlayer alloc] init];
     /* you can enable debug logging here ;) */
-    _playbackPlayer.mediaPlayer.libraryInstance.debugLogging = NO;
+//    _playbackPlayer.mediaPlayer.libraryInstance.debugLogging = YES;
     _playbackPlayer.mediaPlayer.drawable = self.videoOutputView;
     _playbackPlayer.mediaList = self.serverMediaItem.subitems;
 }
