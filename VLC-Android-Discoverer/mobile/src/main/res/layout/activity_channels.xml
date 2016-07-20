@@ -5,7 +5,8 @@
     <RelativeLayout
         android:layout_width="match_parent" android:layout_height="match_parent"
         tools:context=".ChannelsActivity"
-        android:animateLayoutChanges="true" >
+        android:animateLayoutChanges="true"
+        android:background="@color/light_gray" >
 
         <android.support.design.widget.TabLayout
             android:id="@+id/sliding_tabs"
