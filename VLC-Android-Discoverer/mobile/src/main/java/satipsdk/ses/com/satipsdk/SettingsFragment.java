@@ -34,7 +34,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private static final String KEY_CHANNELS_NAMES = "key_channels_names";
     private static final String KEY_CHANNELS_URLS = "key_channels_URLs";
     private static final String KEY_SERVERS_NAMES = "key_server_names";
-    private static final String KEY_SERVERSS_URLS = "key_server_URLs";
+    private static final String KEY_SERVERS_URLS = "key_server_URLs";
     private FragmentSettingsBinding mBinding;
 
     MediaBrowser mMediaBrowser;
@@ -90,7 +90,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private void refreshServers() {
         mServerListAdapter.clear();
         Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_SERVERS_NAMES, null);
-        Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_SERVERSS_URLS, null);
+        Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_SERVERS_URLS, null);
         if (prefListsNames != null && prefListsUrls != null) {
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
@@ -154,7 +154,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
                 .putStringSet(KEY_CHANNELS_NAMES, chanListNames)
                 .putStringSet(KEY_CHANNELS_URLS, chanListUrls)
                 .putStringSet(KEY_SERVERS_NAMES, serverNames)
-                .putStringSet(KEY_SERVERSS_URLS, serverUrls)
+                .putStringSet(KEY_SERVERS_URLS, serverUrls)
                 .apply();
     }
 
