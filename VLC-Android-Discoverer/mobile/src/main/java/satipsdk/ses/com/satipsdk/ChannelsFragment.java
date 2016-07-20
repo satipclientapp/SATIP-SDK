@@ -280,6 +280,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mMediaPlayer.setMedia(media);
         media.release();
         mMediaPlayer.play();
+        mBinding.channelDescription.setText(item.description);
     }
 
     private void updateVideoSurfaces() {
