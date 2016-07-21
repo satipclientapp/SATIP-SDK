@@ -76,7 +76,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             .into(holder.binding.itemLogo);
         else
             holder.binding.itemLogo.setVisibility(View.GONE);
-        holder.itemView.requestFocus();
     }
 
     private void setItemViewBackground(View view, int position) {
@@ -158,10 +157,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         public void onFocusChange(View v, boolean hasFocus) {
             if (mSelectedPosition != getAdapterPosition()) {
                 v.setBackgroundResource(hasFocus ? R.drawable.background_light_gray : R.drawable.background_pure_white);
-                v.setFocusableInTouchMode(hasFocus);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                 v.setElevation(hasFocus ? 10.0f : 0.0f);
+            if (!hasFocus)
+                v.setFocusableInTouchMode(false);
         }
 
         private void delete(View v) {
