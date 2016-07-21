@@ -46,13 +46,5 @@
                 android:layout="@layout/subtitles_surface"
                 android:id="@+id/subtitles_stub" />
         </FrameLayout>
-
-        <TextView
-            android:id="@+id/channel_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@+id/channel_list"
-            android:layout_below="@id/video_surface_frame" />
     </RelativeLayout>
 </layout>

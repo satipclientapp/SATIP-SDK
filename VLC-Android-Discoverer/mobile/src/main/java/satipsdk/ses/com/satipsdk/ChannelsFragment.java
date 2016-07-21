@@ -126,7 +126,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     int dot = title.indexOf('.');
                     la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
                             media.getMeta(Media.Meta.Title).substring(dot+2),
-                            "channel description",
                             media.getUri(),
                             null));
                 }
@@ -284,7 +283,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     public void onItemClick(int position, ListAdapter.Item item) {
         play(item.uri);
-        mBinding.channelDescription.setText(item.description);
         mSharedPreferences.edit().putString(KEY_LAST_CHANNEL, item.uri.toString()).apply();
     }
 

@@ -99,7 +99,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
             for (int i = 0; i<prefListsNames.size(); ++i)
-                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER_CUSTOM, (String) names[i], null, Uri.parse((String) urls[i]), null));
+                mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER_CUSTOM, (String) names[i], Uri.parse((String) urls[i]), null));
         }
         if (mMediaBrowser == null)
             mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
@@ -113,14 +113,14 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
         Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
 
-        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
-        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
-        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", null, Uri.parse("http://www.satip.info/Playlists/ASTRA_23_5E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", Uri.parse("http://www.satip.info/Playlists/ASTRA_23_5E.m3u"), null));
         if (!Util.isCollectionEmpty(prefListsNames) && !Util.isCollectionEmpty(prefListsUrls)) {
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
             for (int i = 0; i<prefListsNames.size(); ++i)
-                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST_CUSTOM, (String) names[i], null, Uri.parse((String) urls[i]), null));
+                mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST_CUSTOM, (String) names[i], Uri.parse((String) urls[i]), null));
         }
         mChannelListAdapter.notifyDataSetChanged();
     }
@@ -174,7 +174,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onMediaAdded(int i, Media media) {
         if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1")) {
-            mServerListAdapter.add(i, new ListAdapter.Item(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), null, media.getUri(), media.getMeta(Media.Meta.ArtworkURL)));
+            mServerListAdapter.add(i, new ListAdapter.Item(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), media.getUri(), media.getMeta(Media.Meta.ArtworkURL)));
         }
     }
 
@@ -227,7 +227,6 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
                         int dot = title.indexOf('.');
                         la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
                                 media.getMeta(Media.Meta.Title).substring(dot+2),
-                                "channel description",
                                 media.getUri(),
                                 null));
                     }
@@ -260,7 +259,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         public void addItem(int type, String name, String url) {
             ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST_CUSTOM ?
                     mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
-            adapter.add(new ListAdapter.Item(type, name, null, Uri.parse(url), null));
+            adapter.add(new ListAdapter.Item(type, name, Uri.parse(url), null));
         }
     }
 }

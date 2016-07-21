@@ -161,13 +161,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
     public static class Item {
         public int type;
-        public String title, description, logoUrl;
+        public String title, logoUrl;
         public Uri uri;
 
-        public Item(int type, String title, String description, Uri uri, String logoUrl) {
+        public Item(int type, String title, Uri uri, String logoUrl) {
             this.type = type;
             this.title = title;
-            this.description = description;
             this.logoUrl = type == TYPE_CHANNEL ? generateLogoUrl(title) : logoUrl;
             this.uri = uri;
         }
