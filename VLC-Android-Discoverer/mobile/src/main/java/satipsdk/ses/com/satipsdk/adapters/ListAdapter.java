@@ -206,11 +206,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
-    private void select(int position) {
+    public void select(int position) {
         int previous = mSelectedPosition;
         mSelectedPosition = position;
         notifyItemChanged(previous);
         notifyItemChanged(position);
+    }
+
+    public int getSelectedPosition() {
+        return mSelectedPosition;
     }
 
     public static class Item {
