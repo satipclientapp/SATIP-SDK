@@ -19,11 +19,14 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import satipsdk.ses.com.satipsdk.R;
+import satipsdk.ses.com.satipsdk.SatIpApplication;
 import satipsdk.ses.com.satipsdk.databinding.ListItemBinding;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements View.OnFocusChangeListener{
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private static final String TAG = "ListAdapter";
+
+    private static final int COLOR_PURE_WHITE = SatIpApplication.get().getResources().getColor(R.color.pure_white);
 
     public static final int TYPE_SERVER = 0;
     public static final int TYPE_CHANNEL = 1;
@@ -35,6 +38,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private LayoutInflater mInflater;
     private SparseIntArray mItemsIndex = new SparseIntArray();
     private ItemClickCb mItemClickCb;
+    private int mSelectedPosition = 0;
 
     public interface ItemClickCb {
         void onItemClick(int position, Item item);
@@ -63,6 +67,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.binding.setItem(mItemList.get(position));
+        setItemViewBackground(holder.itemView, position);
         if (mItemList.get(position).logoUrl != null)
             Glide.with(holder.itemView.getContext())
             .load(holder.binding.getItem().logoUrl)
@@ -72,6 +77,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         else
             holder.binding.itemLogo.setVisibility(View.GONE);
         holder.itemView.requestFocus();
+    }
+
+    private void setItemViewBackground(View view, int position) {
+        if (mSelectedPosition == position)
+            view.setBackgroundResource(R.drawable.gradient_cloud);
+        else
+            view.setBackgroundColor(COLOR_PURE_WHITE);
     }
 
     public void add(Item item) {
@@ -116,19 +128,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         return mItemList.size();
     }
 
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (hasFocus)
-            v.setBackground(v.getResources().getDrawable(R.drawable.gradient_cloud));
-        else {
-            v.setBackgroundColor(v.getResources().getColor(R.color.pure_white));
-            v.setFocusableInTouchMode(false);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            v.setElevation(hasFocus ? 10.0f : 0.0f);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnFocusChangeListener {
         ListItemBinding binding;
 
         public ViewHolder(ListItemBinding binding) {
@@ -137,7 +137,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
             binding.itemDelete.setOnClickListener(this);
-            itemView.setOnFocusChangeListener(ListAdapter.this);
+            itemView.setOnFocusChangeListener(this);
         }
 
         @Override
@@ -147,10 +147,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                     v.setFocusableInTouchMode(true);
                     v.requestFocus();
                     mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
+                    select(getAdapterPosition());
                 } else if (v.getId() == binding.itemDelete.getId()) {
                     delete(v);
                 }
             }
+        }
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (mSelectedPosition != getAdapterPosition()) {
+                v.setBackgroundResource(hasFocus ? R.drawable.background_light_gray : R.drawable.background_pure_white);
+                v.setFocusableInTouchMode(hasFocus);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                v.setElevation(hasFocus ? 10.0f : 0.0f);
         }
 
         private void delete(View v) {
@@ -193,6 +204,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                     .show();
             return true;
         }
+    }
+
+    private void select(int position) {
+        int previous = mSelectedPosition;
+        mSelectedPosition = position;
+        notifyItemChanged(previous);
+        notifyItemChanged(position);
     }
 
     public static class Item {
