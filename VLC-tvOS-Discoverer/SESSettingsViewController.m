@@ -312,7 +312,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         channelTitle = [channelTitle stringByReplacingOccurrencesOfString:@" " withString:@"-"];
         channelTitle = [channelTitle stringByReplacingOccurrencesOfString:@"." withString:@"-"];
         channelTitle = [channelTitle lowercaseString];
-        NSString *logourl = [NSString stringWithFormat:@"http://www.satip.info/sites/satip/files/files/Playlists/Channellogos/%@.png", channelTitle];
+        NSString *logourl = [NSString stringWithFormat:@"http://www.satip.info/Playlists/Channellogos/%@.png", channelTitle];
         [cell.channelIconImageView setImageWithURL:[NSURL URLWithString:logourl]];
 
         return cell;
