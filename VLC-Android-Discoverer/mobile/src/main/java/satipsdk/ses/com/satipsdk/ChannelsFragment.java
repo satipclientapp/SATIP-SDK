@@ -3,7 +3,6 @@ package satipsdk.ses.com.satipsdk;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -61,7 +60,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         //VLC player init
         final ArrayList<String> args = new ArrayList<>();
-        args.add("-vvv"); //Set VLC to verbose
         mLibVLC = new LibVLC(args);
         mMediaPlayer = new MediaPlayer(mLibVLC);
     }
@@ -78,6 +76,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
         final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+
         if (url == null || device == null)
             ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
         else
@@ -155,26 +154,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             vlcVout.setSubtitlesView(mSubtitlesSurface);
         vlcVout.attachViews();
         mMediaPlayer.getVLCVout().addCallback(this);
-
-        if (mOnLayoutChangeListener == null) {
-            mOnLayoutChangeListener = new View.OnLayoutChangeListener() {
-                private final Runnable mRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        updateVideoSurfaces();
-                    }
-                };
-                @Override
-                public void onLayoutChange(View v, int left, int top, int right,
-                                           int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                    if (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom) {
-                        mHandler.removeCallbacks(mRunnable);
-                        mHandler.post(mRunnable);
-                    }
-                }
-            };
-        }
-        mBinding.videoSurfaceFrame.addOnLayoutChangeListener(mOnLayoutChangeListener);
     }
 
     @Override
@@ -213,17 +192,14 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         return expanded;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void toggleFullscreen() {
-        if (mViewDimensions == null) //Display is not ready
-            return;
         expanded = !expanded;
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mBinding.videoSurfaceFrame.getLayoutParams();
-        Resources res = mBinding.getRoot().getContext().getResources();
-        mBinding.getRoot().setBackgroundColor(expanded ? res.getColor(android.R.color.black) : res.getColor(R.color.light_gray));
         if (expanded) {
-            float sar = mViewDimensions.videoHeight / (float) mViewDimensions.videoWidth;
+            mViewDimensions = new ViewDimensions((ViewGroup.MarginLayoutParams) mBinding.videoSurfaceFrame.getLayoutParams());
             lp.width = mScreenWidth;
-            lp.height = (int) (mScreenWidth * sar);
+            lp.height = mScreenHeight;
             lp.leftMargin = 0;
             lp.bottomMargin = 0;
             lp.rightMargin = 0;
@@ -238,25 +214,20 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         }
         mVideoWidth = mVideoVisibleWidth = lp.width;
         mVideoHeight = mVideoVisibleHeight = lp.height;
-        lp.addRule(RelativeLayout.CENTER_IN_PARENT, expanded ? RelativeLayout.TRUE : 0);
-        ((ChannelsActivity)getActivity()).toggleFullscreen(expanded);
+        lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
         mBinding.sesLogo.setVisibility(expanded ? View.GONE : View.VISIBLE);
+        ((ChannelsActivity)getActivity()).toggleFullscreen(expanded);
         mBinding.videoSurfaceFrame.setLayoutParams(lp);
-        mBinding.videoSurfaceFrame.post(new Runnable() {
-            @Override
-            public void run() {
-                updateVideoSurfaces();
-            }
-        });
+        updateVideoSurfaces();
     }
 
     class ViewDimensions {
         public int videoWidth, videoHeight, leftMargin, bottomMargin, rightMargin, topMargin;
 
         ViewDimensions(ViewGroup.MarginLayoutParams lp) {
-            videoWidth = lp.width;
-            videoHeight = lp.height;
+            videoWidth = mBinding.videoSurfaceFrame.getWidth();
+            videoHeight = mBinding.videoSurfaceFrame.getHeight();
             leftMargin = lp.leftMargin;
             bottomMargin = lp.bottomMargin;
             rightMargin = lp.rightMargin;
@@ -297,9 +268,9 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private void updateVideoSurfaces() {
         if (mVideoWidth * mVideoHeight == 0 || getActivity() == null)
             return;
-        int sw = expanded ? mScreenWidth : mBinding.videoSurfaceFrame.getWidth();
+        int sw = expanded ? mScreenWidth : mVideoWidth;
         int var = mVideoWidth / mVideoHeight;
-        int sh = expanded ? mScreenHeight : mBinding.videoSurfaceFrame.getWidth() / var;
+        int sh = expanded ? mScreenHeight : mVideoHeight;
 
         mMediaPlayer.getVLCVout().setWindowSize(sw, sh);
         double dw = sw, dh = sh;
@@ -364,7 +335,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mVideoSarNum = sarNum;
         mVideoSarDen = sarDen;
         updateVideoSurfaces();
-        mViewDimensions = new ViewDimensions((ViewGroup.MarginLayoutParams) mBinding.videoSurfaceFrame.getLayoutParams());
     }
 
     @Override
