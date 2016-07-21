@@ -3,6 +3,7 @@ package satipsdk.ses.com.satipsdk;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -195,9 +196,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void toggleFullscreen() {
         expanded = !expanded;
+        Resources res = mBinding.getRoot().getContext().getResources();
+        mBinding.getRoot().setBackgroundColor(expanded ? res.getColor(android.R.color.black) : res.getColor(R.color.light_gray));
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mBinding.videoSurfaceFrame.getLayoutParams();
         if (expanded) {
-            mViewDimensions = new ViewDimensions((ViewGroup.MarginLayoutParams) mBinding.videoSurfaceFrame.getLayoutParams());
             lp.width = mScreenWidth;
             lp.height = mScreenHeight;
             lp.leftMargin = 0;
@@ -212,8 +214,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.rightMargin = mViewDimensions.rightMargin;
             lp.topMargin = mViewDimensions.topMargin;
         }
-        mVideoWidth = mVideoVisibleWidth = lp.width;
-        mVideoHeight = mVideoVisibleHeight = lp.height;
+        mVideoWidth = mVideoVisibleWidth = mViewDimensions.videoWidth;
+        mVideoHeight = mVideoVisibleHeight = mViewDimensions.videoHeight;
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
         mBinding.sesLogo.setVisibility(expanded ? View.GONE : View.VISIBLE);
@@ -225,9 +227,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     class ViewDimensions {
         public int videoWidth, videoHeight, leftMargin, bottomMargin, rightMargin, topMargin;
 
-        ViewDimensions(ViewGroup.MarginLayoutParams lp) {
-            videoWidth = mBinding.videoSurfaceFrame.getWidth();
-            videoHeight = mBinding.videoSurfaceFrame.getHeight();
+        ViewDimensions() {
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mBinding.videoSurfaceFrame.getLayoutParams();
+
+            videoWidth = mBinding.videoSurfaceFrame.getMeasuredWidth();
+            videoHeight = mBinding.videoSurfaceFrame.getMeasuredHeight();
             leftMargin = lp.leftMargin;
             bottomMargin = lp.bottomMargin;
             rightMargin = lp.rightMargin;
@@ -255,7 +259,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onItemClick(int position, ListAdapter.Item item) {
         play(item.uri);
         mSharedPreferences.edit().putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString()).apply();
-        mSharedPreferences.edit().putInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0).apply();
+        mSharedPreferences.edit().putInt(SettingsFragment.KEY_SELECTED_CHANNEL, position).apply();
     }
 
     private void play(Uri uri) {
@@ -308,8 +312,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         // set display size
         ViewGroup.LayoutParams lp = mBinding.videoSurface.getLayoutParams();
-        lp.width  = (int) Math.ceil(dw * mVideoWidth / mVideoVisibleWidth);
-        lp.height = (int) Math.ceil(dh * mVideoHeight / mVideoVisibleHeight);
+//        Log.d(TAG, "updateVideoSurfaces: original "+lp.width+", "+lp.height);
+        lp.width  = (int) Math.ceil(dw * mVideoWidth / (float)mVideoVisibleWidth);
+//        Log.d(TAG, "updateVideoSurfaces: dh "+dh+" mvh "+mVideoHeight+" mvvh "+mVideoVisibleHeight);
+        lp.height = (int) Math.ceil(dh * mVideoHeight / (float)mVideoVisibleHeight);
+//        Log.d(TAG, "updateVideoSurfaces: updated "+lp.width+", "+lp.height);
         mBinding.videoSurface.setLayoutParams(lp);
         if (mSubtitlesSurface != null)
             mSubtitlesSurface.setLayoutParams(lp);
@@ -328,10 +335,13 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onNewLayout(IVLCVout vlcVout, int width, int height, int visibleWidth, int visibleHeight, int sarNum, int sarDen) {
-        mVideoWidth = width;
-        mVideoHeight = height;
-        mVideoVisibleWidth = visibleWidth;
-        mVideoVisibleHeight = visibleHeight;
+        mViewDimensions = new ViewDimensions();
+        int layoutWidth = mBinding.videoSurfaceFrame.getMeasuredWidth();
+        mVideoWidth = layoutWidth;
+        float ar = width / (float) height;
+        mVideoHeight = (int) (layoutWidth / ar);
+        mVideoVisibleWidth = mVideoWidth;
+        mVideoVisibleHeight = mVideoHeight;
         mVideoSarNum = sarNum;
         mVideoSarDen = sarDen;
         updateVideoSurfaces();
