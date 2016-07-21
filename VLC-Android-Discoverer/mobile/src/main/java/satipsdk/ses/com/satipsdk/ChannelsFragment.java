@@ -41,7 +41,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
-    public static final String KEY_LAST_CHANNEL = "key_last_channel";
 
     private FragmentChannelsBinding mBinding;
     private ViewDimensions mViewDimensions;
@@ -129,7 +128,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                             media.getUri(),
                             null));
                 }
-                String lastUrl = mSharedPreferences.getString(KEY_LAST_CHANNEL, null);
+                la.select(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
+                String lastUrl = mSharedPreferences.getString(SettingsFragment.KEY_LAST_CHANNEL_URL, null);
                 if (!TextUtils.isEmpty(lastUrl))
                     play(Uri.parse(lastUrl));
                 else if (ml != null && ml.getCount() >0)
@@ -283,7 +283,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     public void onItemClick(int position, ListAdapter.Item item) {
         play(item.uri);
-        mSharedPreferences.edit().putString(KEY_LAST_CHANNEL, item.uri.toString()).apply();
+        mSharedPreferences.edit().putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString()).apply();
+        mSharedPreferences.edit().putInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0).apply();
     }
 
     private void play(Uri uri) {

@@ -40,6 +40,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     public static final String KEY_CURRENT_CHANNEL_LIST_ADDRESS = "key_current_channel_list_address";
     public static final String KEY_SELECTED_DEVICE = "key_selected_device";
     public static final String KEY_SELECTED_CHANNEL_LIST = "key_selected_channel_list";
+    public static final String KEY_SELECTED_CHANNEL = "key_selected_channel";
+    public static final String KEY_LAST_CHANNEL_URL = "key_last_channel_url";
 
     private FragmentSettingsBinding mBinding;
 
@@ -248,6 +250,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private void reloadChannels() {
         final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
         final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+        mSharedPreferences.edit().putInt(KEY_SELECTED_CHANNEL, 0).apply();
         if (url == null || device == null)
             return;
         ChannelsFragment cf = (ChannelsFragment) ((ChannelsActivity)getActivity()).mFragments[0];
