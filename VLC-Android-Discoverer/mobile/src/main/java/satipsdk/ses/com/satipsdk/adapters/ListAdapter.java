@@ -1,10 +1,13 @@
 package satipsdk.ses.com.satipsdk.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -125,13 +128,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             v.setElevation(hasFocus ? 10.0f : 0.0f);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         ListItemBinding binding;
 
         public ViewHolder(ListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             binding.itemDelete.setOnClickListener(this);
             itemView.setOnFocusChangeListener(ListAdapter.this);
         }
@@ -144,18 +148,50 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                     v.requestFocus();
                     mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
                 } else if (v.getId() == binding.itemDelete.getId()) {
-                    final int position = getAdapterPosition();
-                    final Item item = binding.getItem();
-                    remove(position);
-                    Snackbar.make(v, item.type == TYPE_SERVER_CUSTOM ? R.string.server_removed : R.string.channel_list_removed,
-                            Snackbar.LENGTH_LONG).setAction(android.R.string.cancel, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            add(position, item);
-                        }
-                    }).show();
+                    delete(v);
                 }
             }
+        }
+
+        private void delete(View v) {
+            final int position = getAdapterPosition();
+            final Item item = binding.getItem();
+            remove(position);
+            Snackbar.make(v, item.type == TYPE_SERVER_CUSTOM ? R.string.server_removed : R.string.channel_list_removed,
+                    Snackbar.LENGTH_LONG).setAction(android.R.string.cancel, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    add(position, item);
+                }
+            }).show();
+        }
+
+        @Override
+        public boolean onLongClick(final View v) {
+            int type = binding.getItem().type;
+            if (type != TYPE_CHANNEL_LIST_CUSTOM && type != TYPE_SERVER_CUSTOM)
+                return false;
+            Resources res = v.getResources();
+            String mediaType = type == TYPE_CHANNEL_LIST_CUSTOM ?
+                    res.getString(R.string.channel_list)
+                    : res.getString(R.string.server);
+            new AlertDialog.Builder(v.getContext(), R.style.AlertDialogStyle)
+                    .setTitle(String.format(res.getString(R.string.delete_item), binding.getItem().title))
+                    .setMessage(String.format(res.getString(R.string.delete_message), mediaType))
+                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            delete(v);
+                        }
+                    })
+                    .show();
+            return true;
         }
     }
 

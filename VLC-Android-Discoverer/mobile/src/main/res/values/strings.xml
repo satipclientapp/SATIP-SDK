@@ -11,4 +11,8 @@
     <string name="warning_list_selection">Please select a server and a channel list</string>
     <string name="server_removed">Server removed</string>
     <string name="channel_list_removed">Channel list removed</string>
+    <string name="server">Server</string>
+    <string name="channel_list">Channel list</string>
+    <string name="delete_item">Delete %1$s</string>
+    <string name="delete_message">You are about to remove this %1$s</string>
 </resources>
