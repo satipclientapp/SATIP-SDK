@@ -275,7 +275,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
             cell = [SESTableViewCell new];
         }
         cell.channelNameLabel.text = _discoveryController.playlistTitlesToChooseFrom[indexPath.row];
-        cell.channelIconImageView.image = [UIImage imageNamed:@"astraListLogo"];
+        cell.channelIconImageView.image = [UIImage imageNamed:@"satipListLogo"];
         return cell;
     } else {
         cell = [self.channelListTableView dequeueReusableCellWithIdentifier:SESChannelListReUseIdentifier forIndexPath:indexPath];
