@@ -123,7 +123,6 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
         mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
         mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
-        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 23°5E", Uri.parse("http://www.satip.info/Playlists/ASTRA_23_5E.m3u"), null));
         if (!Util.isCollectionEmpty(prefListsNames) && !Util.isCollectionEmpty(prefListsUrls)) {
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
