@@ -66,15 +66,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.binding.setItem(mItemList.get(position));
+        Item item = mItemList.get(position);
+        holder.binding.setItem(item);
         setItemViewBackground(holder.itemView, position);
-        if (mItemList.get(position).logoUrl != null)
+        if (item.logoUrl != null)
             Glide.with(holder.itemView.getContext())
-            .load(holder.binding.getItem().logoUrl)
+            .load(item.logoUrl)
             .fitCenter()
             .crossFade()
             .into(holder.binding.itemLogo);
-        else
+        else if (item.type == TYPE_CHANNEL_LIST) {
+            holder.binding.itemLogo.setVisibility(View.VISIBLE);
+            holder.binding.itemLogo.setImageResource(R.drawable.ses_logo);
+        } else
             holder.binding.itemLogo.setVisibility(View.GONE);
     }
 
