@@ -14,10 +14,13 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +40,7 @@ import java.util.ArrayList;
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentChannelsBinding;
 
-public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback {
+public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback, View.OnTouchListener, GestureDetector.OnGestureListener {
 
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
@@ -105,6 +108,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mBinding.videoSurfaceFrame.setOnFocusChangeListener(this);
         mBinding.videoSurfaceFrame.setOnClickListener(this);
+        mGestureDetector = new GestureDetectorCompat(getActivity(), this);
+        mBinding.videoSurfaceFrame.setOnTouchListener(this);
     }
 
     public void loadChannelList(Uri uri) {
@@ -240,8 +245,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     /*
-     * Video ItemClickCb
+     * Video surface management
      */
+
+    private static final int FLING_MIN_VELOCITY = 3000;
 
     private final Handler mHandler = new Handler();
     private View.OnLayoutChangeListener mOnLayoutChangeListener = null;
@@ -255,6 +262,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private int mVideoSarNum = 0;
     private int mVideoSarDen = 0;
     private SurfaceView mSubtitlesSurface = null;
+    private GestureDetectorCompat mGestureDetector;
 
     public void onItemClick(int position, ListAdapter.Item item) {
         play(item.uri);
@@ -312,11 +320,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         // set display size
         ViewGroup.LayoutParams lp = mBinding.videoSurface.getLayoutParams();
-//        Log.d(TAG, "updateVideoSurfaces: original "+lp.width+", "+lp.height);
         lp.width  = (int) Math.ceil(dw * mVideoWidth / (float)mVideoVisibleWidth);
-//        Log.d(TAG, "updateVideoSurfaces: dh "+dh+" mvh "+mVideoHeight+" mvvh "+mVideoVisibleHeight);
         lp.height = (int) Math.ceil(dh * mVideoHeight / (float)mVideoVisibleHeight);
-//        Log.d(TAG, "updateVideoSurfaces: updated "+lp.width+", "+lp.height);
         mBinding.videoSurface.setLayoutParams(lp);
         if (mSubtitlesSurface != null)
             mSubtitlesSurface.setLayoutParams(lp);
@@ -355,4 +360,50 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     @Override
     public void onHardwareAccelerationError(IVLCVout vlcVout) {}
+
+    /*
+     * Touch controls
+     */
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_MOVE){
+           mBinding.getRoot().getParent().requestDisallowInterceptTouchEvent(true);
+        }
+        if (mGestureDetector != null && mGestureDetector.onTouchEvent(event))
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {}
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {}
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+            ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
+            int newPosition = adapter.getSelectedPosition() + (velocityX > 0 ? 1 : -1);
+            play(adapter.getItem(newPosition).uri);
+            adapter.select(newPosition);
+            return true;
+        }
+        return false;
+    }
 }

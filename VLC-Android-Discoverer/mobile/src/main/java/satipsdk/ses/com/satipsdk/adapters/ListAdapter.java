@@ -131,6 +131,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return mItemList.size();
     }
 
+    public Item getItem(int position) {
+        return mItemList.get(position);
+    }
+
+    public Item getNextItem() {
+        return mItemList.get(mSelectedPosition+1);
+    }
+
+    public Item getPreviousItem() {
+        return mItemList.get(mSelectedPosition-1);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnFocusChangeListener {
         ListItemBinding binding;
 
