@@ -84,12 +84,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         if (url == null || device == null)
             ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
         else
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    loadChannelList(Uri.parse(url+"?"+device));
-                }
-            }).start();
+            loadChannelList(Uri.parse(url+"?"+device));
 
         if (ENABLE_SUBTITLES && HWDecoderUtil.HAS_SUBTITLES_SURFACE) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.subtitles_stub);
@@ -112,35 +107,40 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mBinding.videoSurfaceFrame.setOnTouchListener(this);
     }
 
-    public void loadChannelList(Uri uri) {
-        Media playlist = new Media(mLibVLC, uri);
-        playlist.parse(Media.Parse.ParseNetwork);
-        final MediaList ml = playlist.subItems();
-        playlist.release();
-        mHandler.post(new Runnable() {
+    public void loadChannelList(final Uri uri) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                ListAdapter la = (ListAdapter) mBinding.channelList.getAdapter();
-                la.clear();
-                Media media;
-                String title;
-                for (int i = 0; i< ml.getCount(); ++i) {
-                    media = ml.getMediaAt(i);
-                    title = media.getMeta(Media.Meta.Title);
-                    int dot = title.indexOf('.');
-                    la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
-                            media.getMeta(Media.Meta.Title).substring(dot+2),
-                            media.getUri(),
-                            null));
-                }
-                la.select(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
-                String lastUrl = mSharedPreferences.getString(SettingsFragment.KEY_LAST_CHANNEL_URL, null);
-                if (!TextUtils.isEmpty(lastUrl))
-                    play(Uri.parse(lastUrl));
-                else if (ml != null && ml.getCount() >0)
-                    play(ml.getMediaAt(0).getUri());
+                Media playlist = new Media(mLibVLC, uri);
+                playlist.parse(Media.Parse.ParseNetwork);
+                final MediaList ml = playlist.subItems();
+                playlist.release();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ListAdapter la = (ListAdapter) mBinding.channelList.getAdapter();
+                        la.clear();
+                        Media media;
+                        String title;
+                        for (int i = 0; i< ml.getCount(); ++i) {
+                            media = ml.getMediaAt(i);
+                            title = media.getMeta(Media.Meta.Title);
+                            int dot = title.indexOf('.');
+                            la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
+                                    media.getMeta(Media.Meta.Title).substring(dot+2),
+                                    media.getUri(),
+                                    null));
+                        }
+                        la.select(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
+                        String lastUrl = mSharedPreferences.getString(SettingsFragment.KEY_LAST_CHANNEL_URL, null);
+                        if (!TextUtils.isEmpty(lastUrl))
+                            play(Uri.parse(lastUrl));
+                        else if (ml != null && ml.getCount() >0)
+                            play(ml.getMediaAt(0).getUri());
+                    }
+                });
             }
-        });
+        }).start();
     }
 
     @Override
