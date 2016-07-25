@@ -250,7 +250,7 @@
     /* automatic playback start */
     NSInteger channelIndex = _discoveryController.lastPlayedChannelIndex;
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:channelIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [_playbackPlayer playItemAtIndex:(int)channelIndex];
+    [_playbackPlayer playItemAtNumber:@(channelIndex)];
     _automaticallyStarted = YES;
 }
 
@@ -328,7 +328,7 @@
 {
     NSInteger row = indexPath.row;
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
-    [_playbackPlayer playItemAtIndex:(int)row];
+    [_playbackPlayer playItemAtNumber:@(row)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
 }
 
@@ -346,7 +346,7 @@
 
     index = index - 1;
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [_playbackPlayer playItemAtIndex:(int)index];
+    [_playbackPlayer playItemAtNumber:@(index)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
 }
 
@@ -364,7 +364,7 @@
 
     index = index + 1;
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [_playbackPlayer playItemAtIndex:(int)index];
+    [_playbackPlayer playItemAtNumber:@(index)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
 }
 
