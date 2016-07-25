@@ -14,19 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - SAT-IP-DynamicTVVLCKit (3.0.0a12)
-  - SAT-IP-DynamicVLCKit (3.0.0a12)
+  - SAT-IP-DynamicTVVLCKit (3.0.0a13)
+  - SAT-IP-DynamicVLCKit (3.0.0a13)
 
 DEPENDENCIES:
   - AFNetworking
-  - SAT-IP-DynamicTVVLCKit (= 3.0.0a12)
-  - SAT-IP-DynamicVLCKit (= 3.0.0a12)
+  - SAT-IP-DynamicTVVLCKit (= 3.0.0a13)
+  - SAT-IP-DynamicVLCKit (= 3.0.0a13)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  SAT-IP-DynamicTVVLCKit: bb5eb5041a4618a5c2a4b9ceaa58e034e011a296
-  SAT-IP-DynamicVLCKit: 3e913ef1c4dcf0174394c832acb51580672125b6
+  SAT-IP-DynamicTVVLCKit: 950888f182c2f041945ee2672dfdad9705d2d117
+  SAT-IP-DynamicVLCKit: 9cde4a08a84a4a4f6ef75b2dd4df35180ea6cd83
 
-PODFILE CHECKSUM: e1f134fe50ab2d38166fd5db5a138aaff2bd61a3
+PODFILE CHECKSUM: fda26e008e5c1c89fe65421abb26b5420629e3ce
 
 COCOAPODS: 1.0.1
