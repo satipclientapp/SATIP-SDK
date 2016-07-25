@@ -399,7 +399,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if (Math.abs(velocityX) > FLING_MIN_VELOCITY) {
             ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
-            int newPosition = adapter.getSelectedPosition() + (velocityX > 0 ? 1 : -1);
+            int newPosition = adapter.getSelectedPosition() + (velocityX < 0 ? 1 : -1);
             play(adapter.getItem(newPosition).uri);
             adapter.select(newPosition);
             return true;
