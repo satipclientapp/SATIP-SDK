@@ -177,11 +177,13 @@
     NSInteger index = _discoveryController.selectedServerIndex;
 
     if (index == -1) {
+        NSLog(@"%s: No server selected", __PRETTY_FUNCTION__);
         return;
     }
 
     NSInteger serverCount = _discoveryController.numberOfServers;
-    if (serverCount == 0) {
+    if (serverCount == 0 && _discoveryController.customServers.count == 0) {
+        NSLog(@"%s: No server found", __PRETTY_FUNCTION__);
         return;
     }
 
@@ -200,6 +202,7 @@
     }
 
     if (ipString == nil) {
+        NSLog(@"%s: Server parsing failure", __PRETTY_FUNCTION__);
         return;
     }
 
