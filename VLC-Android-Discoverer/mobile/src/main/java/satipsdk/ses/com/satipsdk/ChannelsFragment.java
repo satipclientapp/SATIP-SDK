@@ -219,8 +219,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.rightMargin = mViewDimensions.rightMargin;
             lp.topMargin = mViewDimensions.topMargin;
         }
-        mVideoWidth = mVideoVisibleWidth = mViewDimensions.videoWidth;
-        mVideoHeight = mVideoVisibleHeight = mViewDimensions.videoHeight;
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
         mBinding.sesLogo.setVisibility(expanded ? View.GONE : View.VISIBLE);
@@ -278,6 +276,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private void updateVideoSurfaces() {
+        if (mViewDimensions != null) {
+            mVideoWidth = mVideoVisibleWidth = expanded ? mScreenWidth : mViewDimensions.videoWidth;
+            mVideoHeight = mVideoVisibleHeight = expanded ? mScreenHeight : mViewDimensions.videoHeight;
+        }
         if (mVideoWidth * mVideoHeight == 0 || getActivity() == null)
             return;
         int sw = expanded ? mScreenWidth : mVideoWidth;
@@ -340,7 +342,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onNewLayout(IVLCVout vlcVout, int width, int height, int visibleWidth, int visibleHeight, int sarNum, int sarDen) {
-        mViewDimensions = new ViewDimensions();
         int layoutWidth = mBinding.videoSurfaceFrame.getMeasuredWidth();
         mVideoWidth = layoutWidth;
         float ar = width / (float) height;
@@ -350,6 +351,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mVideoSarNum = sarNum;
         mVideoSarDen = sarDen;
         updateVideoSurfaces();
+        if (mViewDimensions == null && mBinding.videoSurfaceFrame.getMeasuredHeight() > 10)
+            mViewDimensions = new ViewDimensions();
     }
 
     @Override
