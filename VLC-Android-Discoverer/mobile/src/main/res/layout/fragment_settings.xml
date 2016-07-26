@@ -16,6 +16,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/server_lists"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:textSize="18sp" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/server_list"
                 android:layout_width="match_parent"
@@ -46,6 +54,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/channel_lists"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:textSize="18sp" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/channel_list"
                 android:layout_width="match_parent"
