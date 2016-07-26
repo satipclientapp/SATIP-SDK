@@ -95,8 +95,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             Snackbar.make(getView(), R.string.warning_list_selection, Snackbar.LENGTH_LONG).show();
         else
             parseChannelList(Uri.parse(url));
-        mServerListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_DEVICE, 0));
-        mChannelListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_CHANNEL_LIST, 0));
+        mServerListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_DEVICE, -1));
+        mChannelListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_CHANNEL_LIST, -1));
     }
 
     private void refreshServers() {

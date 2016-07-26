@@ -38,7 +38,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private LayoutInflater mInflater;
     private SparseIntArray mItemsIndex = new SparseIntArray();
     private ItemClickCb mItemClickCb;
-    private int mSelectedPosition = 0;
+    private int mSelectedPosition = -1;
 
     public interface ItemClickCb {
         void onItemClick(int position, Item item);
@@ -223,6 +223,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public void select(int position) {
+        if (position == -1)
+            return;
         int previous = mSelectedPosition;
         mSelectedPosition = position;
         notifyItemChanged(previous);
