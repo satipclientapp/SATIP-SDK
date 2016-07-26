@@ -268,11 +268,16 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mSharedPreferences.edit().putInt(SettingsFragment.KEY_SELECTED_CHANNEL, position).apply();
     }
 
-    private void play(Uri uri) {
-        Media media = new Media(mLibVLC, uri);
-        mMediaPlayer.setMedia(media);
-        media.release();
-        mMediaPlayer.play();
+    private void play(final Uri uri) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Media media = new Media(mLibVLC, uri);
+                mMediaPlayer.setMedia(media);
+                media.release();
+                mMediaPlayer.play();
+            }
+        }).start();
     }
 
     private void updateVideoSurfaces() {
