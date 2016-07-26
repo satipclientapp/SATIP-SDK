@@ -1,6 +1,7 @@
 package satipsdk.ses.com.satipsdk.dialogs;
 
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ public class ItemListDialog extends DialogFragment {
         if (mType == ListAdapter.TYPE_SERVER_CUSTOM) {
             mBinding.nameLayout.setHint(getString(R.string.name_hint_server));
             mBinding.urlLayout.setHint(getString(R.string.url_hint_server));
+            mBinding.urlEdittext.setText(R.string.url_text_server);
         }
         return mBinding.getRoot();
     }
@@ -58,7 +60,11 @@ public class ItemListDialog extends DialogFragment {
             String url = mBinding.urlEdittext.getText().toString();
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(url))
                 return;
-            mCb.addItem(mType, name, url);
+            Uri uri = Uri.parse(url);
+            if (mType ==  ListAdapter.TYPE_SERVER_CUSTOM) {
+                uri = Uri.parse(url+"?satip-device="+uri.getAuthority());
+            }
+            mCb.addItem(mType, name, uri);
             dismiss();
         }
     }

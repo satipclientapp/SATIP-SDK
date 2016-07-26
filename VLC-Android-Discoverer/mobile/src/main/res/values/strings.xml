@@ -5,7 +5,8 @@
     <string name="add_server">Add server address manually</string>
     <string name="add_channel">Add m3u channel list manually</string>
     <string name="name_hint_server">Server name</string>
-    <string name="url_hint_server">http://&lt;server address&gt;</string>
+    <string name="url_hint_server">http://X.X.X.X</string>
+    <string name="url_text_server">http://</string>
     <string name="name_hint_channel_list">List name</string>
     <string name="url_hint_channel_list">http://....m3u</string>
     <string name="warning_list_selection">Please select a server and a channel list</string>

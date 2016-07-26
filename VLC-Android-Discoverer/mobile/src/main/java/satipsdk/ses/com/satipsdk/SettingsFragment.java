@@ -269,10 +269,10 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
     private SettingsCb mScb = new SettingsCb();
     public class SettingsCb {
-        public void addItem(int type, String name, String url) {
+        public void addItem(int type, String name, Uri uri) {
             ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST_CUSTOM ?
                     mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
-            adapter.add(new ListAdapter.Item(type, name, Uri.parse(url), null));
+            adapter.add(new ListAdapter.Item(type, name, uri, null));
         }
     }
 }
