@@ -20,9 +20,11 @@
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 
-NSString *SESServerListReUseIdentifier = @"SESServerListReUseIdentifier";
-NSString *SESSatelliteListReUseIdentifier = @"SESSatelliteListReUseIdentifier";
-NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
+NSString *const SESSettingsMajorPlaybackConfigurationChange = @"SESSettingsMajorPlaybackConfigurationChange";
+
+NSString *const SESServerListReUseIdentifier = @"SESServerListReUseIdentifier";
+NSString *const SESSatelliteListReUseIdentifier = @"SESSatelliteListReUseIdentifier";
+NSString *const SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 
 @interface SESSettingsViewController () <UITableViewDelegate, UITableViewDataSource, SESPlaybackControllerDelegate, VLCMediaPlayerDelegate, VLCMediaDelegate>
 {
@@ -329,8 +331,10 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     if (tableView == self.satelliteListTableView) {
         _discoveryController.selectedPlaylistIndex = indexPath.row;
         [self parseCurrentChannelList];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SESSettingsMajorPlaybackConfigurationChange object:nil];
     } else if (tableView == self.serverListTableView) {
         _discoveryController.selectedServerIndex = indexPath.row;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SESSettingsMajorPlaybackConfigurationChange object:nil];
     } else if (tableView == self.channelListTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -365,6 +369,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         _discoveryController.playlistTitlesToChooseFrom = [mutArray copy];
 
         [_satelliteListTableView reloadData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SESSettingsMajorPlaybackConfigurationChange object:nil];
     } else {
         index = index - _discoveryController.numberOfServers;
         NSMutableArray *customServers = [_discoveryController.customServers mutableCopy];
@@ -372,6 +377,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
         _discoveryController.customServers = [customServers copy];
 
         [_serverListTableView reloadData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SESSettingsMajorPlaybackConfigurationChange object:nil];
     }
 }
 

@@ -10,6 +10,7 @@
 #import "SESTableViewCell.h"
 #import "SESServerDiscoveryController.h"
 #import "UIColor+SES.h"
+#import "SESSettingsViewController.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 
@@ -115,8 +116,18 @@
     _verticalFullscreenVoutContraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_videoOutputView]|" options:0 metrics:0 views:dict];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(appWillGoToBackground) name:UIApplicationWillResignActiveNotification object:nil];
-    [notificationCenter addObserver:self selector:@selector(appWillGoToForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(appWillGoToBackground)
+                               name:UIApplicationWillResignActiveNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(appWillGoToForeground)
+                               name:UIApplicationWillEnterForegroundNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(resetPlaybackEngine)
+                               name:SESSettingsMajorPlaybackConfigurationChange
+                             object:nil];
 }
 
 - (void)dealloc
@@ -155,6 +166,27 @@
 
     _appBackgrounded = NO;
     [self automaticPlaybackStart];
+}
+
+- (void)resetPlaybackEngine
+{
+    _discoveryController.lastPlayedChannelIndex = 0;
+
+    if (_playbackPlayer) {
+        [_playbackPlayer stop];
+        _playbackPlayer = nil;
+    }
+
+    if (_parsePlayer) {
+        [_parsePlayer stop];
+        _parsePlayer = nil;
+    }
+
+    _serverMediaItem = nil;
+
+    _appBackgrounded = NO;
+
+    _automaticallyStarted = NO;
 }
 
 /* called when our channel list is ready

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const SESSettingsMajorPlaybackConfigurationChange;
+
 @interface SESSettingsViewController : UIViewController
 
 @property (readwrite, weak, nonatomic) IBOutlet UITableView *channelListTableView;
