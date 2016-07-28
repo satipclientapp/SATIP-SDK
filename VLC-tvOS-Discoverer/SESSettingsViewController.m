@@ -85,6 +85,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     self.satelliteListTableView.delegate = self;
 
     self.channelListTableView.dataSource = self;
+    self.channelListTableView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -328,8 +329,10 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     if (tableView == self.satelliteListTableView) {
         _discoveryController.selectedPlaylistIndex = indexPath.row;
         [self parseCurrentChannelList];
-    } else {
+    } else if (tableView == self.satelliteListTableView) {
         _discoveryController.selectedServerIndex = indexPath.row;
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
 
