@@ -329,9 +329,9 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
     if (tableView == self.satelliteListTableView) {
         _discoveryController.selectedPlaylistIndex = indexPath.row;
         [self parseCurrentChannelList];
-    } else if (tableView == self.satelliteListTableView) {
+    } else if (tableView == self.serverListTableView) {
         _discoveryController.selectedServerIndex = indexPath.row;
-    } else {
+    } else if (tableView == self.channelListTableView) {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
