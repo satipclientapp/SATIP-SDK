@@ -336,7 +336,7 @@ NSString *SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier";
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _satelliteListTableView) {
-        if (indexPath.row > 2) {
+        if (indexPath.row > 1) {
             return YES;
         }
     } else {
