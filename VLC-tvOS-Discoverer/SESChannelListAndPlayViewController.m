@@ -123,9 +123,19 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+    /* this is extremely important!
+     * if the VC is released and therefore the player references,
+     * it is absolutely illegal to destroy the player before you stop
+     * therefore, stop both here whatever happens */
+
     if (_playbackPlayer) {
         [_playbackPlayer stop];
         _playbackPlayer = nil;
+    }
+
+    if (_parsePlayer) {
+        [_parsePlayer stop];
+        _parsePlayer = nil;
     }
 }
 
@@ -169,6 +179,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if (_appBackgrounded) {
+        [self appWillGoToForeground];
+        return;
+    }
+
     [self startPlayback];
 }
 
@@ -256,13 +272,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    /* this is extremely important!
-     * if the VC disappears, it will be released and therefore the player references
-     * however, it is absolutely illegal to destroy the player before you stop
-     * therefore, stop both here whatever happens */
-    [_playbackPlayer stop];
-    [_parsePlayer stop];
     [super viewWillDisappear:animated];
+    [self appWillGoToBackground];
 }
 
 #pragma mark - table view data source
