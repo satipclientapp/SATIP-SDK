@@ -80,6 +80,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             holder.binding.itemLogo.setImageResource(R.drawable.ses_logo);
         } else
             holder.binding.itemLogo.setVisibility(View.GONE);
+
+        /*
+         * Manually set nextFocusDown in settings
+         * rv nextFocusDown="@+id/button_server"
+         * android:descendantFocusability="afterDescendants"
+         * have no effect
+         */
+        if (position == mItemList.size()-1) {
+            if (item.type == TYPE_SERVER || item.type == TYPE_SERVER_CUSTOM)
+                holder.itemView.setNextFocusDownId(R.id.button_server);
+            else if (item.type == TYPE_CHANNEL_LIST || item.type == TYPE_CHANNEL_LIST_CUSTOM)
+                holder.itemView.setNextFocusDownId(R.id.button_channel_list);
+        }
     }
 
     private void setItemViewBackground(View view, int position) {
