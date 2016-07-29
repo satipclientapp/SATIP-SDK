@@ -113,6 +113,17 @@ NSString *const SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier"
     [_parsePlayer stop];
     _parsePlayer = nil;
 
+    [self.serverListTableView setEditing:NO animated:NO];
+    [self.satelliteListTableView setEditing:NO animated:NO];
+
+#if TARGET_OS_TV
+    [self.editServerButton setBackgroundImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
+    [self.editChannelListButton setBackgroundImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
+#else
+    [self.editServerButton setBackgroundImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
+    [self.editChannelListButton setBackgroundImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
+#endif
+
     [super viewWillDisappear:animated];
 }
 
