@@ -286,7 +286,11 @@
     }
 
     /* setup the playback list player if not already done */
+#if TARGET_OS_TV
     _playbackPlayer = [[VLCMediaListPlayer alloc] init];
+#else
+    _playbackPlayer = [[VLCMediaListPlayer alloc] initWithOptions:@[@"videotoolbox-zero-copy"]];
+#endif
     /* you can enable debug logging here ;) */
 //    _playbackPlayer.mediaPlayer.libraryInstance.debugLogging = YES;
     _playbackPlayer.mediaPlayer.drawable = self.videoOutputView;
