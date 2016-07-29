@@ -201,6 +201,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void toggleFullscreen() {
+        if (mBinding.videoSurfaceFrame.getHeight() < 100)
+            return;
         expanded = !expanded;
         Resources res = mBinding.getRoot().getContext().getResources();
         mBinding.getRoot().setBackgroundColor(expanded ? res.getColor(android.R.color.black) : res.getColor(R.color.light_gray));

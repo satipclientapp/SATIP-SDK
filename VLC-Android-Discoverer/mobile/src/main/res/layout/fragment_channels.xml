@@ -29,10 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/channel_list"
             android:layout_alignParentRight="true"
+            android:background="@color/light_gray"
             android:layout_below="@id/ses_logo"
             android:layout_margin="40dp"
             android:foregroundGravity="clip_horizontal|clip_vertical"
-            android:focusable="true">
+            android:focusable="true" >
 
             <SurfaceView
                 android:id="@+id/video_surface"
