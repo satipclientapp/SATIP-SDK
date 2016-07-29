@@ -161,8 +161,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 if (v.getId() == itemView.getId()) {
                     v.setFocusableInTouchMode(true);
                     v.requestFocus();
-                    mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
                     select(getAdapterPosition());
+                    mItemClickCb.onItemClick(getAdapterPosition(), binding.getItem());
                 } else if (v.getId() == binding.itemDelete.getId()) {
                     delete(v);
                 }
