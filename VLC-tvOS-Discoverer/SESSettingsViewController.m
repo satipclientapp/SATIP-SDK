@@ -120,8 +120,8 @@ NSString *const SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier"
     [self.editServerButton setBackgroundImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
     [self.editChannelListButton setBackgroundImage:[UIImage imageNamed:@"editButtonInactive"] forState:UIControlStateNormal];
 #else
-    [self.editServerButton setBackgroundImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
-    [self.editChannelListButton setBackgroundImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
+    [self.editServerButton setImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
+    [self.editChannelListButton setImage:[UIImage imageNamed:@"editIconInactive"] forState:UIControlStateNormal];
 #endif
 
     [super viewWillDisappear:animated];
