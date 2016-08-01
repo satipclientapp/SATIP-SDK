@@ -49,7 +49,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private ViewDimensions mViewDimensions;
     private SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SatIpApplication.get());
     private boolean expanded = false;
-    private int mScreenWidth, mScreenHeight;
+    private int mScreenWidth, mScreenHeight, mFoldedViewWidth;
+    private double mVideoAr = 1.0d;
 
     public ChannelsFragment() {}
 
@@ -284,15 +285,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private void updateVideoSurfaces() {
-        if (mViewDimensions != null) {
-            mVideoWidth = mVideoVisibleWidth = expanded ? mScreenWidth : mViewDimensions.videoWidth;
-            mVideoHeight = mVideoVisibleHeight = expanded ? mScreenHeight : mViewDimensions.videoHeight;
-        }
+        mVideoWidth = expanded ? mScreenWidth : mFoldedViewWidth;
+        mVideoHeight = expanded ? mScreenHeight : (int) (mFoldedViewWidth / mVideoAr);
         if (mVideoWidth * mVideoHeight == 0 || getActivity() == null)
             return;
-        int sw = expanded ? mScreenWidth : mVideoWidth;
-        int var = mVideoWidth / mVideoHeight;
-        int sh = expanded ? mScreenHeight : mVideoHeight;
+        int sw = mVideoWidth;
+        int sh =  mVideoHeight;
 
         mMediaPlayer.getVLCVout().setWindowSize(sw, sh);
         double dw = sw, dh = sh;
@@ -330,8 +328,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         // set display size
         ViewGroup.LayoutParams lp = mBinding.videoSurface.getLayoutParams();
-        lp.width  = (int) Math.ceil(dw * mVideoWidth / (float)mVideoVisibleWidth);
-        lp.height = (int) Math.ceil(dh * mVideoHeight / (float)mVideoVisibleHeight);
+        lp.width = (int) Math.floor(dw);
+        lp.height = (int) Math.floor(dh);
         mBinding.videoSurface.setLayoutParams(lp);
         if (mSubtitlesSurface != null)
             mSubtitlesSurface.setLayoutParams(lp);
@@ -350,14 +348,13 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onNewLayout(IVLCVout vlcVout, int width, int height, int visibleWidth, int visibleHeight, int sarNum, int sarDen) {
-        int layoutWidth = mBinding.videoSurfaceFrame.getMeasuredWidth();
-        mVideoWidth = layoutWidth;
-        float ar = width / (float) height;
-        mVideoHeight = (int) (layoutWidth / ar);
-        mVideoVisibleWidth = mVideoWidth;
-        mVideoVisibleHeight = mVideoHeight;
+        if (!expanded)
+            mFoldedViewWidth = mBinding.videoSurfaceFrame.getWidth();
+        mVideoVisibleWidth = visibleWidth;
+        mVideoVisibleHeight = visibleHeight;
         mVideoSarNum = sarNum;
         mVideoSarDen = sarDen;
+        mVideoAr = width/(double)height;
         updateVideoSurfaces();
         if (mViewDimensions == null && mBinding.videoSurfaceFrame.getMeasuredHeight() > 10)
             mViewDimensions = new ViewDimensions();
