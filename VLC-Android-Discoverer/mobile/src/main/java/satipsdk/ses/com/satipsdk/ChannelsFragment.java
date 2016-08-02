@@ -19,6 +19,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -107,6 +108,16 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mBinding.videoSurfaceFrame.setOnClickListener(this);
         mGestureDetector = new GestureDetectorCompat(getActivity(), this);
         mBinding.videoSurfaceFrame.setOnTouchListener(this);
+        mBinding.videoSurfaceFrame.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (!expanded || (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT && keyCode != KeyEvent.KEYCODE_DPAD_LEFT))
+                    return false;
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                    switchToSiblingChannel(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT);
+                return true;
+            }
+        });
     }
 
     public void loadChannelList(final Uri uri) {
@@ -284,6 +295,13 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         }).start();
     }
 
+    public void switchToSiblingChannel(boolean next) {
+        ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
+        int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
+        play(adapter.getItem(newPosition).uri);
+        adapter.select(newPosition);
+    }
+
     private void updateVideoSurfaces() {
         mVideoWidth = expanded ? mScreenWidth : mFoldedViewWidth;
         mVideoHeight = expanded ? mScreenHeight : (int) (mFoldedViewWidth / mVideoAr);
@@ -406,10 +424,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if (Math.abs(velocityX) > FLING_MIN_VELOCITY) {
-            ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
-            int newPosition = adapter.getSelectedPosition() + (velocityX < 0 ? 1 : -1);
-            play(adapter.getItem(newPosition).uri);
-            adapter.select(newPosition);
+            switchToSiblingChannel(velocityX < 0);
             return true;
         }
         return false;
