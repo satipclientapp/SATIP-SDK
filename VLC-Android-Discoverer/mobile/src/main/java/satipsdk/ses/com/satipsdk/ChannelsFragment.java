@@ -111,7 +111,14 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mBinding.videoSurfaceFrame.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (!expanded || (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT && keyCode != KeyEvent.KEYCODE_DPAD_LEFT))
+                if (!expanded) {
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                        focusOnCurrentChannel();
+                        return true;
+                    }
+                    return false;
+                }
+                if (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT && keyCode != KeyEvent.KEYCODE_DPAD_LEFT)
                     return false;
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                     switchToSiblingChannel(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT);
@@ -192,6 +199,17 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @Override
     public String getTitle() {
         return SatIpApplication.get().getString(R.string.live_tv_title);
+    }
+
+    @Override
+    public void onPageSelected() {
+        focusOnCurrentChannel();
+    }
+
+    private void focusOnCurrentChannel() {
+        View v = mBinding.channelList.getChildAt(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
+        if (v != null)
+            v.requestFocus();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

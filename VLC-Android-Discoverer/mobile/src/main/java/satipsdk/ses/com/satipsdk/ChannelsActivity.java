@@ -3,6 +3,7 @@ package satipsdk.ses.com.satipsdk;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,7 +13,7 @@ import android.view.WindowManager;
 
 import satipsdk.ses.com.satipsdk.databinding.ActivityChannelsBinding;
 
-public class ChannelsActivity extends AppCompatActivity {
+public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     protected static final int NUM_FRAGMENTS = 2;
     private static final String TAG = "ChannelsActivity";
@@ -28,6 +29,7 @@ public class ChannelsActivity extends AppCompatActivity {
         mFragments = new TabFragment[]{new ChannelsFragment(), new SettingsFragment()};
         mBinding.pager.setAdapter(new ViewPagerAdapter(fm));
         mBinding.slidingTabs.setupWithViewPager(mBinding.pager);
+        mBinding.slidingTabs.addOnTabSelectedListener(this);
     }
 
     @Override
@@ -59,6 +61,17 @@ public class ChannelsActivity extends AppCompatActivity {
             return NUM_FRAGMENTS;
         }
     }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mFragments[tab.getPosition()].onPageSelected();
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {}
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {}
 
     public void toggleFullscreen(boolean fullscreen) {
         mBinding.slidingTabs.setVisibility(fullscreen ? View.GONE : View.VISIBLE);

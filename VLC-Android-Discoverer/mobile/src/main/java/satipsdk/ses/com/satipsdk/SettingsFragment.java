@@ -87,6 +87,9 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     }
 
     @Override
+    public void onPageSelected() {}
+
+    @Override
     public void onResume() {
         super.onResume();
         refreshServers();
