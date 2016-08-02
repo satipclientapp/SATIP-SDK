@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Build;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
@@ -195,15 +194,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         private void delete(View v) {
             final int position = getAdapterPosition();
-            final Item item = binding.getItem();
             remove(position);
-            Snackbar.make(v, item.type == TYPE_SERVER_CUSTOM ? R.string.server_removed : R.string.channel_list_removed,
-                    Snackbar.LENGTH_LONG).setAction(android.R.string.cancel, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    add(position, item);
-                }
-            }).show();
         }
 
         @Override
