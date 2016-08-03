@@ -12,7 +12,7 @@ target 'VLC-iOS-Discoverer' do
 platform :ios, '9.2'
 
 pod 'AFNetworking'
-pod 'SAT-IP-DynamicVLCKit', '3.0.0a13'
+pod 'SAT-IP-DynamicVLCKit', '3.0.0a14'
 
 end
 post_install do |installer|
