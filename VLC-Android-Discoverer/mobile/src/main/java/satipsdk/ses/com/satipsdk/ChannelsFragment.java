@@ -325,8 +325,9 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     public void onItemClick(int position, ListAdapter.Item item) {
         play(item.uri);
-        mSharedPreferences.edit().putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString()).apply();
-        mSharedPreferences.edit().putInt(SettingsFragment.KEY_SELECTED_CHANNEL, position).apply();
+        mSharedPreferences.edit()
+                .putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString())
+                .putInt(SettingsFragment.KEY_SELECTED_CHANNEL, position).apply();
     }
 
     private void play(final Uri uri) {
@@ -345,8 +346,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void switchToSiblingChannel(boolean next) {
         ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
         int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
-        play(adapter.getItem(newPosition).uri);
+        ListAdapter.Item item = adapter.getItem(newPosition);
+        play(item.uri);
         adapter.select(newPosition);
+        mSharedPreferences.edit()
+                .putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString())
+                .putInt(SettingsFragment.KEY_SELECTED_CHANNEL, newPosition).apply();
     }
 
     private void updateVideoSurfaces() {
