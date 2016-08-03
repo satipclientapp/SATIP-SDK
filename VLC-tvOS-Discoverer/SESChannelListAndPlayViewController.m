@@ -48,6 +48,9 @@
 
     BOOL _automaticallyStarted;
     BOOL _appBackgrounded;
+
+    BOOL _rightSwipePerformed;
+    BOOL _leftSwipePerformed;
 }
 
 @end
@@ -72,10 +75,10 @@
     self.channelListTableView.delegate = self;
     self.channelListTableView.backgroundColor = [UIColor clearColor];
 
-    UISwipeGestureRecognizer *leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextChannel)];
+    UISwipeGestureRecognizer *leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeftAction)];
     leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
 
-    UISwipeGestureRecognizer *rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousChannel)];
+    UISwipeGestureRecognizer *rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightAction)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
 
 #if TARGET_OS_TV
@@ -379,8 +382,18 @@
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
 }
 
+- (void)swipeRightAction
+{
+    [self performSelector:@selector(previousChannel) withObject:nil afterDelay:0.5];
+    _rightSwipePerformed = NO;
+}
+
 - (void)previousChannel
 {
+    if (_rightSwipePerformed) {
+        return;
+    }
+
 #if TARGET_OS_TV
     if (!_fullscreen) {
         return;
@@ -395,10 +408,22 @@
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     [_playbackPlayer playItemAtNumber:@(index)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
+
+    _rightSwipePerformed = YES;
+}
+
+- (void)swipeLeftAction
+{
+    [self performSelector:@selector(nextChannel) withObject:nil afterDelay:0.5];
+    _leftSwipePerformed = NO;
 }
 
 - (void)nextChannel
 {
+    if (_leftSwipePerformed) {
+        return;
+    }
+
 #if TARGET_OS_TV
     if (!_fullscreen) {
         return;
@@ -413,6 +438,8 @@
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     [_playbackPlayer playItemAtNumber:@(index)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
+
+    _leftSwipePerformed = YES;
 }
 
 #pragma mark - pseudo-fullscreen
