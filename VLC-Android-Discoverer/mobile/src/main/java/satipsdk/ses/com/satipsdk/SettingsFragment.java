@@ -260,6 +260,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         if (url == null || device == null)
             return;
         ChannelsFragment cf = (ChannelsFragment) ((ChannelsActivity)getActivity()).mFragments[0];
+        cf.stopPlayback();
         cf.loadChannelList(Uri.parse(url+"?"+device));
     }
 

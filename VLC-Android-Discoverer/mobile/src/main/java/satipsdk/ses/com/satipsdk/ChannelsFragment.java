@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentChannelsBinding;
 
-public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback, View.OnTouchListener, GestureDetector.OnGestureListener {
+public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback, View.OnTouchListener, GestureDetector.OnGestureListener, MediaPlayer.EventListener {
 
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
@@ -127,6 +127,15 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         });
     }
 
+    public void stopPlayback() {
+        mMediaPlayer.stop();
+        mBinding.videoSurfaceFrame.setVisibility(View.GONE);
+        mSharedPreferences.edit()
+                .putInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0)
+                .putString(SettingsFragment.KEY_LAST_CHANNEL_URL, null)
+                .apply();
+    }
+
     public void loadChannelList(final Uri uri) {
         new Thread(new Runnable() {
             @Override
@@ -152,6 +161,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                                     null));
                         }
                         la.select(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
+                        focusOnCurrentChannel();
                         String lastUrl = mSharedPreferences.getString(SettingsFragment.KEY_LAST_CHANNEL_URL, null);
                         if (!TextUtils.isEmpty(lastUrl))
                             play(Uri.parse(lastUrl));
@@ -180,6 +190,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             vlcVout.setSubtitlesView(mSubtitlesSurface);
         vlcVout.attachViews();
         mMediaPlayer.getVLCVout().addCallback(this);
+        mMediaPlayer.setEventListener(this);
     }
 
     @Override
@@ -194,6 +205,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mMediaPlayer.stop();
         mMediaPlayer.getVLCVout().detachViews();
         mMediaPlayer.getVLCVout().removeCallback(this);
+        mMediaPlayer.setEventListener(null);
     }
 
     @Override
@@ -208,8 +220,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     private void focusOnCurrentChannel() {
         View v = mBinding.channelList.getChildAt(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
-        if (v != null)
+        if (v != null) {
+            v.setFocusableInTouchMode(true);
             v.requestFocus();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -260,6 +274,20 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         updateVideoSurfaces();
     }
 
+    @Override
+    public void onEvent(MediaPlayer.Event event) {
+        switch(event.type) {
+            case MediaPlayer.Event.Playing:
+                mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
+                mBinding.videoSurfaceFrame.setFocusable(true);
+                break;
+            case MediaPlayer.Event.Stopped:
+                mBinding.videoSurfaceFrame.setVisibility(View.GONE);
+                mBinding.videoSurfaceFrame.setFocusable(false);
+                break;
+        }
+    }
+
     class ViewDimensions {
         public int videoWidth, videoHeight, leftMargin, bottomMargin, rightMargin, topMargin;
 
@@ -302,6 +330,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private void play(final Uri uri) {
+        mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {

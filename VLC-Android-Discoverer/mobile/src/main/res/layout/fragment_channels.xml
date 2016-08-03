@@ -34,7 +34,7 @@
             android:layout_below="@id/ses_logo"
             android:layout_margin="40dp"
             android:foregroundGravity="clip_horizontal|clip_vertical"
-            android:focusable="true" >
+            android:focusable="false">
 
             <SurfaceView
                 android:id="@+id/video_surface"
