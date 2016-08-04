@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -71,7 +72,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         if (item.logoUrl != null)
             Glide.with(holder.itemView.getContext())
             .load(item.logoUrl)
-            .fitCenter()
+            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
             .crossFade()
             .into(holder.binding.itemLogo);
         else if (item.type == TYPE_CHANNEL_LIST) {
