@@ -68,6 +68,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Item item = mItemList.get(position);
         holder.binding.setItem(item);
+        holder.binding.executePendingBindings();
         setItemViewBackground(holder.itemView, position);
         if (item.logoUrl != null)
             Glide.with(holder.itemView.getContext())
@@ -87,7 +88,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
          * android:descendantFocusability="afterDescendants"
          * have no effect
          */
-        if (position == mItemList.size()-1) {
+        if (item.type != TYPE_CHANNEL && position == mItemList.size()-1) {
             if (item.type == TYPE_SERVER || item.type == TYPE_SERVER_CUSTOM)
                 holder.itemView.setNextFocusDownId(R.id.button_server);
             else if (item.type == TYPE_CHANNEL_LIST || item.type == TYPE_CHANNEL_LIST_CUSTOM)
