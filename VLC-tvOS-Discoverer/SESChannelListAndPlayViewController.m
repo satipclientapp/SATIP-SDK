@@ -384,7 +384,7 @@
 
 - (void)swipeRightAction
 {
-    [self performSelector:@selector(previousChannel) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(previousChannel) withObject:nil afterDelay:0.8];
     _rightSwipePerformed = NO;
 }
 
@@ -414,7 +414,7 @@
 
 - (void)swipeLeftAction
 {
-    [self performSelector:@selector(nextChannel) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(nextChannel) withObject:nil afterDelay:0.8];
     _leftSwipePerformed = NO;
 }
 
