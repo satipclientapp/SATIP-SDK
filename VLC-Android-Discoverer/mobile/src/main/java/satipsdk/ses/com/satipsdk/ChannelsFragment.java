@@ -116,7 +116,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                         focusOnCurrentChannel();
                         return true;
                     }
-                    return false;
+                    //Deactivate fragment switch with →
+                    return keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
                 }
                 if (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT && keyCode != KeyEvent.KEYCODE_DPAD_LEFT)
                     return false;

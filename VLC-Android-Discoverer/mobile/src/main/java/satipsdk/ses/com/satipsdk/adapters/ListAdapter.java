@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             else if (item.type == TYPE_CHANNEL_LIST || item.type == TYPE_CHANNEL_LIST_CUSTOM)
                 holder.itemView.setNextFocusDownId(R.id.button_channel_list);
         }
+        //Deactivate fragment switch with ←
+        holder.itemView.setOnKeyListener(item.type == TYPE_SERVER ? sServerKeyListener : null);
     }
 
     private void setItemViewBackground(View view, int position) {
@@ -240,6 +243,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public int getSelectedPosition() {
         return mSelectedPosition;
     }
+
+    static final View.OnKeyListener sServerKeyListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            return keyCode == KeyEvent.KEYCODE_DPAD_LEFT;
+        }
+    };
 
     public static class Item {
         public int type;
