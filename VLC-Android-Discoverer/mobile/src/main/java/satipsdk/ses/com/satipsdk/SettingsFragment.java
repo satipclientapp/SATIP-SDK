@@ -127,8 +127,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         Set<String> prefListsNames = mSharedPreferences.getStringSet(KEY_CHANNELS_NAMES, null);
         Set<String> prefListsUrls = mSharedPreferences.getStringSet(KEY_CHANNELS_URLS, null);
 
-        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19°2E", Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
-        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28°2E", Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 19.2°E", Uri.parse("http://www.satip.info/Playlists/ASTRA_19_2E.m3u"), null));
+        mChannelListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL_LIST, "Astra 28.2°E", Uri.parse("http://www.satip.info/Playlists/ASTRA_28_2E.m3u"), null));
         if (!Util.isCollectionEmpty(prefListsNames) && !Util.isCollectionEmpty(prefListsUrls)) {
             Object[] names = prefListsNames.toArray();
             Object[] urls = prefListsUrls.toArray();
