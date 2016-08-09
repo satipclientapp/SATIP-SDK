@@ -51,6 +51,7 @@
 
     BOOL _rightSwipePerformed;
     BOOL _leftSwipePerformed;
+    BOOL _channelSelectionPerformed;
 }
 
 @end
@@ -377,9 +378,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
+    [self performSelector:@selector(performChannelSwitchToIndex:) withObject:@(row) afterDelay:0.8];
+    _channelSelectionPerformed = NO;
+}
+
+- (void)performChannelSwitchToIndex:(NSNumber *)index
+{
+    if (_channelSelectionPerformed) {
+        return;
+    }
+
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
-    [_playbackPlayer playItemAtNumber:@(row)];
-    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
+    [_playbackPlayer playItemAtNumber:index];
+    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index.integerValue;
+    _channelSelectionPerformed = YES;
 }
 
 - (void)swipeRightAction
