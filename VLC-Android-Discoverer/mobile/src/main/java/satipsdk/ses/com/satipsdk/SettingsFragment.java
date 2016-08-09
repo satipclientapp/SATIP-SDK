@@ -92,8 +92,6 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onResume() {
         super.onResume();
-        refreshServers();
-        refreshChannels();
 
         final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
         final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
@@ -101,6 +99,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             Snackbar.make(getView(), R.string.warning_list_selection, Snackbar.LENGTH_LONG).show();
         else
             parseChannelList(Uri.parse(url));
+        refreshServers();
+        refreshChannels();
         mServerListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_DEVICE, -1));
         mChannelListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_CHANNEL_LIST, -1));
     }
@@ -216,7 +216,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     };
     private ListAdapter.ItemClickCb mChannelListClickCb = new ListAdapter.ItemClickCb() {
         @Override
-        public void onItemClick(int position, final ListAdapter.Item item) {
+        public void onItemClick(final int position, final ListAdapter.Item item) {
             mSharedPreferences.edit().putString(KEY_CURRENT_CHANNEL_LIST_ADDRESS, item.uri.toString()).apply();
             reloadChannels();
             parseChannelList(item.uri);
@@ -261,7 +261,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             return;
         ChannelsFragment cf = (ChannelsFragment) ((ChannelsActivity)getActivity()).mFragments[0];
         cf.stopPlayback();
-        cf.loadChannelList(Uri.parse(url+"?"+device));
+        cf.loadChannelList(Uri.parse(url+"?"+device), false);
     }
 
     private ClickHandler mClickHandler = new ClickHandler();

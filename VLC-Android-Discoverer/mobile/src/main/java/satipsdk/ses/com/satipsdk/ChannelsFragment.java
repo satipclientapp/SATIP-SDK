@@ -86,7 +86,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         if (url == null || device == null)
             ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
         else
-            loadChannelList(Uri.parse(url+"?"+device));
+            loadChannelList(Uri.parse(url+"?"+device), false);
 
         if (ENABLE_SUBTITLES && HWDecoderUtil.HAS_SUBTITLES_SURFACE) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.subtitles_stub);
@@ -136,7 +136,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 .apply();
     }
 
-    public void loadChannelList(final Uri uri) {
+    public void loadChannelList(final Uri uri, final boolean focus) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -161,7 +161,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                                     null));
                         }
                         la.select(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
-                        focusOnCurrentChannel();
+                        if (focus)
+                            focusOnCurrentChannel();
                         String lastUrl = mSharedPreferences.getString(SettingsFragment.KEY_LAST_CHANNEL_URL, null);
                         if (!TextUtils.isEmpty(lastUrl))
                             play(Uri.parse(lastUrl));
