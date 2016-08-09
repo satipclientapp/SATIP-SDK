@@ -280,6 +280,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Playing:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
+                if (!expanded)
+                    focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setVisibility(View.GONE);
