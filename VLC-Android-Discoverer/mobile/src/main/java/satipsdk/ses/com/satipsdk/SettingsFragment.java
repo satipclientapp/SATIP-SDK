@@ -10,10 +10,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.MediaList;
@@ -76,7 +80,10 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         mBinding.channelList.setItemAnimator(null);
         mChannelListAdapter.setItemClickHandler(mChannelListClickCb);
         //Channels display
-        mBinding.channelDisplayList.setAdapter(new ListAdapter());
+        ListAdapter channelDisplayListAdapter = new ListAdapter();
+        mBinding.channelDisplayList.setAdapter(channelDisplayListAdapter);
+        channelDisplayListAdapter.setGlideRequestManager(Glide.with(this));
+        mBinding.channelDisplayList.addOnScrollListener(new ChannelDisplayListScrollListener());
         mBinding.channelDisplayList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.channelDisplayList.setItemAnimator(null);
     }
@@ -280,6 +287,17 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             ListAdapter adapter = (ListAdapter) (type == ListAdapter.TYPE_CHANNEL_LIST_CUSTOM ?
                     mBinding.channelList.getAdapter() : mBinding.serverList.getAdapter());
             adapter.add(new ListAdapter.Item(type, name, uri, null));
+        }
+    }
+
+    private class ChannelDisplayListScrollListener extends RecyclerView.OnScrollListener {
+        RequestManager glide = ((ListAdapter) mBinding.channelDisplayList.getAdapter()).getGlideRequestManager();
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            if (newState == RecyclerView.SCROLL_STATE_SETTLING)
+               glide.pauseRequests();
+            else
+               glide.resumeRequests();
         }
     }
 }

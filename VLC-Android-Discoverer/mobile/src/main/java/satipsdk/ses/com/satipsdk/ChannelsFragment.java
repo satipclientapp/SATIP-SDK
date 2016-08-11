@@ -16,6 +16,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -29,6 +31,9 @@ import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+
 import org.videolan.libvlc.IVLCVout;
 import org.videolan.libvlc.LibVLC;
 import org.videolan.libvlc.Media;
@@ -41,13 +46,16 @@ import java.util.ArrayList;
 import satipsdk.ses.com.satipsdk.adapters.ListAdapter;
 import satipsdk.ses.com.satipsdk.databinding.FragmentChannelsBinding;
 
-public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb, View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback, View.OnTouchListener, GestureDetector.OnGestureListener, MediaPlayer.EventListener {
+public class ChannelsFragment extends Fragment implements TabFragment, ListAdapter.ItemClickCb,
+        View.OnFocusChangeListener, View.OnClickListener, IVLCVout.Callback, View.OnTouchListener,
+        GestureDetector.OnGestureListener, MediaPlayer.EventListener {
 
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
 
     private FragmentChannelsBinding mBinding;
     private ViewDimensions mViewDimensions;
+    private OnScrollListener mScrollListener;
     private SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SatIpApplication.get());
     private boolean expanded = false;
     private int mScreenWidth, mScreenHeight, mFoldedViewWidth;
@@ -99,9 +107,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mBinding.channelList.setLayoutManager(new LinearLayoutManager(getActivity()));
         ListAdapter channelsAdapter = new ListAdapter(channelList);
         channelsAdapter.setItemClickHandler(this);
+        channelsAdapter.setGlideRequestManager(Glide.with(this));
         mBinding.channelList.setAdapter(channelsAdapter);
         mBinding.channelList.setItemAnimator(null);
         channelsAdapter.notifyDataSetChanged();
+        mScrollListener = new ChannelListScrollListener();
+        mBinding.channelList.addOnScrollListener(mScrollListener);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mBinding.videoSurfaceFrame.setOnFocusChangeListener(this);
@@ -225,6 +236,17 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         if (v != null) {
             v.setFocusableInTouchMode(true);
             v.requestFocus();
+        }
+    }
+
+    private class ChannelListScrollListener extends RecyclerView.OnScrollListener {
+        RequestManager glide = ((ListAdapter) mBinding.channelList.getAdapter()).getGlideRequestManager();
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            if (newState == RecyclerView.SCROLL_STATE_SETTLING)
+               glide.pauseRequests();
+            else
+               glide.resumeRequests();
         }
     }
 

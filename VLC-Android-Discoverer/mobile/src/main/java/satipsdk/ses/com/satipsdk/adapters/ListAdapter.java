@@ -14,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 
@@ -40,6 +43,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private SparseIntArray mItemsIndex = new SparseIntArray();
     private ItemClickCb mItemClickCb;
     private int mSelectedPosition = -1;
+    private RequestManager mRequestManager = null;
+
+    public void setGlideRequestManager(RequestManager rm) {
+        mRequestManager = rm;
+    }
+
+    public RequestManager getGlideRequestManager() {
+        return mRequestManager;
+    }
 
     public interface ItemClickCb {
         void onItemClick(int position, Item item);
@@ -66,18 +78,29 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Item item = mItemList.get(position);
         holder.binding.setItem(item);
         holder.binding.executePendingBindings();
         setItemViewBackground(holder.itemView, position);
-        if (item.logoUrl != null)
-            Glide.with(holder.itemView.getContext())
-            .load(item.logoUrl)
-            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-            .crossFade()
-            .into(holder.binding.itemLogo);
-        else if (item.type == TYPE_CHANNEL_LIST) {
+        if (item.logoUrl != null && mRequestManager != null) {
+            holder.binding.itemLogo.setVisibility(View.INVISIBLE);
+            mRequestManager.load(item.logoUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .crossFade()
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            holder.binding.itemLogo.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    })
+                    .into(holder.binding.itemLogo);
+        } else if (item.type == TYPE_CHANNEL_LIST) {
             holder.binding.itemLogo.setVisibility(View.VISIBLE);
             holder.binding.itemLogo.setImageResource(R.drawable.ses_logo);
         } else
