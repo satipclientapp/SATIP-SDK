@@ -289,6 +289,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.bottomMargin = mViewDimensions.bottomMargin;
             lp.rightMargin = mViewDimensions.rightMargin;
             lp.topMargin = mViewDimensions.topMargin;
+            focusOnCurrentChannel();
         }
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
@@ -304,8 +305,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Playing:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
-                if (!expanded)
-                    focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setVisibility(View.GONE);
@@ -350,10 +349,16 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private GestureDetectorCompat mGestureDetector;
 
     public void onItemClick(int position, ListAdapter.Item item) {
+        play(position, item);
+    }
+
+    private void play(int position, ListAdapter.Item item) {
         play(item.uri);
         mSharedPreferences.edit()
                 .putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString())
                 .putInt(SettingsFragment.KEY_SELECTED_CHANNEL, position).apply();
+        if (!expanded)
+            focusOnCurrentChannel();
     }
 
     private void play(final Uri uri) {
@@ -373,11 +378,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
         int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
         ListAdapter.Item item = adapter.getItem(newPosition);
-        play(item.uri);
+        play(newPosition, item);
         adapter.select(newPosition);
-        mSharedPreferences.edit()
-                .putString(SettingsFragment.KEY_LAST_CHANNEL_URL, item.uri.toString())
-                .putInt(SettingsFragment.KEY_SELECTED_CHANNEL, newPosition).apply();
     }
 
     private void updateVideoSurfaces() {
