@@ -373,6 +373,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             public void run() {
                 Media media = new Media(mLibVLC, uri);
                 try {
+                    mMediaPlayer.stop();
                     mMediaPlayer.setMedia(media);
                     mMediaPlayer.play();
                 } catch (IllegalStateException e) {
