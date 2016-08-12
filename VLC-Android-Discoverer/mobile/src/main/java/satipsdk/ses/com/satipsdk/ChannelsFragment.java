@@ -283,12 +283,17 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.rightMargin = 0;
             lp.topMargin = 0;
         } else {
-            lp.width = mViewDimensions.videoWidth;
-            lp.height = mViewDimensions.videoHeight;
-            lp.leftMargin = mViewDimensions.leftMargin;
-            lp.bottomMargin = mViewDimensions.bottomMargin;
-            lp.rightMargin = mViewDimensions.rightMargin;
-            lp.topMargin = mViewDimensions.topMargin;
+            if (mViewDimensions != null) {
+                lp.width = mViewDimensions.videoWidth;
+                lp.height = mViewDimensions.videoHeight;
+                lp.leftMargin = mViewDimensions.leftMargin;
+                lp.bottomMargin = mViewDimensions.bottomMargin;
+                lp.rightMargin = mViewDimensions.rightMargin;
+                lp.topMargin = mViewDimensions.topMargin;
+            } else {
+                lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            }
             focusOnCurrentChannel();
         }
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
