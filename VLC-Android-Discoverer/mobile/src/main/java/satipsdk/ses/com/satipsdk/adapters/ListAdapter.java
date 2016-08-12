@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseIntArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +39,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private ArrayList<Item> mItemList;
     private LayoutInflater mInflater;
-    private SparseIntArray mItemsIndex = new SparseIntArray();
     private ItemClickCb mItemClickCb;
     private int mSelectedPosition = -1;
     private RequestManager mRequestManager = null;
@@ -135,25 +133,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyItemInserted(mItemList.size()-1);
     }
 
-    public void add(int position, Item item) {
-        int actualPosition = mItemList.size();
-        mItemList.add(item);
-        mItemsIndex.put(position, actualPosition);
-        notifyItemInserted(actualPosition);
+    public void addServer(int type, String title, Uri uri, String logoUrl) {
+        for (Item currentItem : mItemList)
+            if (currentItem.uri.equals(uri))
+                return;
+        add(new Item(type, title, uri, logoUrl));
     }
 
     public void remove(int position) {
         mItemList.remove(position);
         notifyItemRemoved(position);
-    }
-
-    public void removeServer(int position) {
-        int actualPosition = mItemsIndex.get(position);
-        if (actualPosition >= mItemList.size() || actualPosition < 0)
-            return;
-        mItemList.remove(actualPosition);
-        notifyItemRemoved(actualPosition);
-        mItemsIndex.delete(position);
     }
 
     public void clear() {

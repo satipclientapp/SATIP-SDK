@@ -198,15 +198,12 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
     @Override
     public void onMediaAdded(int i, Media media) {
-        if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1")) {
-            mServerListAdapter.add(i, new ListAdapter.Item(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), media.getUri(), media.getMeta(Media.Meta.ArtworkURL)));
-        }
+        if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1"))
+            mServerListAdapter.addServer(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), media.getUri(), media.getMeta(Media.Meta.ArtworkURL));
     }
 
     @Override
-    public void onMediaRemoved(int i, Media media) {
-        mServerListAdapter.removeServer(i);
-    }
+    public void onMediaRemoved(int i, Media media) {}
 
     @Override
     public void onBrowseEnd() {
