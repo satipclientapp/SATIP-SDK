@@ -88,14 +88,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
-        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
-
-        if (url == null || device == null)
-            ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
-        else
-            loadChannelList(Uri.parse(url+"?"+device), false);
-
         if (ENABLE_SUBTITLES && HWDecoderUtil.HAS_SUBTITLES_SURFACE) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.subtitles_stub);
             mSubtitlesSurface = (SurfaceView) stub.inflate();
@@ -137,6 +129,19 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
+        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+
+        if (url == null || device == null)
+            ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
+        else
+            loadChannelList(Uri.parse(url+"?"+device), false);
     }
 
     public void stopPlayback() {
