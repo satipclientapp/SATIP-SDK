@@ -74,7 +74,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
         //VLC player init
         final ArrayList<String> args = new ArrayList<>();
-        mLibVLC = new LibVLC(args);
+        mLibVLC = VLCInstance.get();
         mMediaPlayer = new MediaPlayer(mLibVLC);
     }
 
@@ -481,9 +481,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     @Override
     public void onSurfacesDestroyed(IVLCVout vlcVout) {}
-
-    @Override
-    public void onHardwareAccelerationError(IVLCVout vlcVout) {}
 
     /*
      * Touch controls

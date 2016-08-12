@@ -2,6 +2,8 @@ package satipsdk.ses.com.satipsdk;
 
 import org.videolan.libvlc.LibVLC;
 
+import java.util.ArrayList;
+
 public class VLCInstance {
 
     private static LibVLC sLibVLC;
@@ -14,7 +16,9 @@ public class VLCInstance {
 //                throw new IllegalStateException("LibVLC initialisation failed: " + VLCUtil.getErrorMsg());
 //            }
 
-            sLibVLC = new LibVLC(/*VLCOptions.getLibOptions()*/);
+            ArrayList<String> options = new ArrayList<>();
+            options.add("-vv");
+            sLibVLC = new LibVLC(SatIpApplication.get(), options);
         }
         return sLibVLC;
     }
