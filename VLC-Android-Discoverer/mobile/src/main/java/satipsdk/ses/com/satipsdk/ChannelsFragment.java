@@ -391,6 +391,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void switchToSiblingChannel(boolean next) {
         ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
         int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
+        if (newPosition < 0 || newPosition >= adapter.getItemCount())
+            return;
         ListAdapter.Item item = adapter.getItem(newPosition);
         play(newPosition, item);
         adapter.select(newPosition);
