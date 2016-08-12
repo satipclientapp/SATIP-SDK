@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChannelsActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="sensorLandscape"/>
     </application>
 
 </manifest>
