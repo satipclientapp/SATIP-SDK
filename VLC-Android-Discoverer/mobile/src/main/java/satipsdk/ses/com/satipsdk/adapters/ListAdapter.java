@@ -112,12 +112,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
          * android:descendantFocusability="afterDescendants"
          * have no effect
          */
-        if (item.type != TYPE_CHANNEL && position == mItemList.size()-1) {
+        if (position == mItemList.size()-1)
             if (item.type == TYPE_SERVER || item.type == TYPE_SERVER_CUSTOM)
                 holder.itemView.setNextFocusDownId(R.id.button_server);
             else if (item.type == TYPE_CHANNEL_LIST || item.type == TYPE_CHANNEL_LIST_CUSTOM)
                 holder.itemView.setNextFocusDownId(R.id.button_channel_list);
-        }
+        if (position == 0 && item.type != TYPE_CHANNEL)
+                holder.itemView.setNextFocusUpId(R.id.sliding_tabs);
         //Deactivate fragment switch with ←
         holder.itemView.setOnKeyListener(item.type == TYPE_SERVER ? sServerKeyListener : null);
     }
