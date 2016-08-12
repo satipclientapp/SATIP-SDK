@@ -131,19 +131,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
-        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
-
-        if (url == null || device == null)
-            ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
-        else
-            loadChannelList(Uri.parse(url+"?"+device), false);
-    }
-
     public void stopPlayback() {
         mMediaPlayer.stop();
         mBinding.videoSurfaceFrame.setVisibility(View.GONE);
@@ -199,8 +186,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
         final IVLCVout vlcVout = mMediaPlayer.getVLCVout();
         vlcVout.setVideoView(mBinding.videoSurface);
@@ -209,11 +196,19 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         vlcVout.attachViews();
         mMediaPlayer.getVLCVout().addCallback(this);
         mMediaPlayer.setEventListener(this);
+
+        final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
+        final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
+
+        if (url == null || device == null)
+            ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
+        else
+            loadChannelList(Uri.parse(url+"?"+device), true);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
 
         if (mOnLayoutChangeListener != null) {
             mBinding.videoSurfaceFrame.removeOnLayoutChangeListener(mOnLayoutChangeListener);
@@ -315,6 +310,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Playing:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
+                if (mBinding.channelList.hasFocus())
+                    focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setVisibility(View.GONE);
