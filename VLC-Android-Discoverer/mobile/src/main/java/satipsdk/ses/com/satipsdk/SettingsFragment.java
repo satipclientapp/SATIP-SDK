@@ -245,9 +245,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
                         for (int i = 0; i < ml.getCount(); ++i) {
                             media = ml.getMediaAt(i);
                             title = media.getMeta(Media.Meta.Title);
-                            int dot = title.indexOf('.');
                             la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
-                                    media.getMeta(Media.Meta.Title).substring(dot + 2),
+                                    media.getMeta(Media.Meta.Title),
                                     media.getUri(),
                                     null));
                         }
