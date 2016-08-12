@@ -13,7 +13,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_margin="40dp" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp" />
 
         <ImageView
             android:id="@+id/ses_logo"
@@ -32,7 +33,7 @@
             android:layout_alignParentRight="true"
             android:background="@color/light_gray"
             android:layout_below="@id/ses_logo"
-            android:layout_margin="40dp"
+            android:layout_margin="@dimen/video_frame_margin"
             android:foregroundGravity="clip_horizontal|clip_vertical"
             android:focusable="false">
 

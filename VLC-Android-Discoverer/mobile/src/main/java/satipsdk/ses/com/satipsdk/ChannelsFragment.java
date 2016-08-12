@@ -54,7 +54,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private static final boolean ENABLE_SUBTITLES = true;
 
     private FragmentChannelsBinding mBinding;
-    private ViewDimensions mViewDimensions;
     private OnScrollListener mScrollListener;
     private SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SatIpApplication.get());
     private boolean expanded = false;
@@ -285,17 +284,13 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.rightMargin = 0;
             lp.topMargin = 0;
         } else {
-            if (mViewDimensions != null) {
-                lp.width = mViewDimensions.videoWidth;
-                lp.height = mViewDimensions.videoHeight;
-                lp.leftMargin = mViewDimensions.leftMargin;
-                lp.bottomMargin = mViewDimensions.bottomMargin;
-                lp.rightMargin = mViewDimensions.rightMargin;
-                lp.topMargin = mViewDimensions.topMargin;
-            } else {
-                lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            }
+            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            int margin = SatIpApplication.get().getResources().getDimensionPixelSize(R.dimen.video_frame_margin);
+            lp.leftMargin = margin;
+            lp.bottomMargin = margin;
+            lp.rightMargin = margin;
+            lp.topMargin = margin;
             focusOnCurrentChannel();
         }
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
@@ -474,8 +469,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mVideoSarDen = sarDen;
         mVideoAr = width/(double)height;
         updateVideoSurfaces();
-        if (mViewDimensions == null && mBinding.videoSurfaceFrame.getMeasuredHeight() > 10)
-            mViewDimensions = new ViewDimensions();
     }
 
     @Override
