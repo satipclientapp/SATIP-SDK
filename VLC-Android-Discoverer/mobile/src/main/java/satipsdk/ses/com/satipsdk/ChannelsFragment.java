@@ -391,7 +391,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 } catch (IllegalStateException e) {
                     try { //retry
                         mMediaPlayer.setMedia(media);
-                    mMediaPlayer.play();
+                        mMediaPlayer.play();
                     } catch (IllegalStateException e1) {} //too bad
                 } finally {
                     media.release();
