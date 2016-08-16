@@ -282,7 +282,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         String generateLogoUrl(String title) {
             StringBuilder sb = new StringBuilder("http://www.satip.info/Playlists/Channellogos/")
-                    .append(title.replace(' ', '-').replace('.', '-').toLowerCase())
+                    .append(title.substring(title.indexOf('.')+2).replace(' ', '-').replace('.', '-').toLowerCase())
                     .append(".png");
             return sb.toString();
         }
