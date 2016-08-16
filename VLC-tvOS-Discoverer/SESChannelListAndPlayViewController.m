@@ -375,6 +375,14 @@
 
 #pragma mark - table delegation
 
+#if TARGET_OS_TV
+- (NSIndexPath *)indexPathForPreferredFocusedViewInTableView:(UITableView *)tableView
+{
+    NSInteger lastIndex = [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex;
+    return [NSIndexPath indexPathForRow:lastIndex inSection:0];
+}
+#endif
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
