@@ -150,10 +150,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                         ListAdapter la = (ListAdapter) mBinding.channelList.getAdapter();
                         la.clear();
                         Media media;
-                        String title;
                         for (int i = 0; i< ml.getCount(); ++i) {
                             media = ml.getMediaAt(i);
-                            title = media.getMeta(Media.Meta.Title);
                             la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
                                     media.getMeta(Media.Meta.Title),
                                     media.getUri(),
