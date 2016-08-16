@@ -313,14 +313,20 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onEvent(MediaPlayer.Event event) {
         switch(event.type) {
             case MediaPlayer.Event.Playing:
-                mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
-                mBinding.videoSurfaceFrame.setFocusable(true);
                 if (mBinding.channelList.hasFocus())
                     focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
-                mBinding.videoSurfaceFrame.setVisibility(View.GONE);
                 mBinding.videoSurfaceFrame.setFocusable(false);
+                mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
+                break;
+            case MediaPlayer.Event.Vout:
+                mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
+                mBinding.videoSurfaceFrame.setFocusable(true);
+                break;
+            case MediaPlayer.Event.EncounteredError:
+                if (expanded)
+                    toggleFullscreen();
                 break;
         }
     }
@@ -380,7 +386,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             public void run() {
                 Media media = new Media(mLibVLC, uri);
                 try {
-                    mMediaPlayer.stop();
                     mMediaPlayer.setMedia(media);
                     mMediaPlayer.play();
                 } catch (IllegalStateException e) {
