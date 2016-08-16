@@ -115,8 +115,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 holder.itemView.setNextFocusDownId(R.id.button_server);
             else if (item.type == TYPE_CHANNEL_LIST || item.type == TYPE_CHANNEL_LIST_CUSTOM)
                 holder.itemView.setNextFocusDownId(R.id.button_channel_list);
-        if (position == 0 && item.type != TYPE_CHANNEL)
+        if (position == 0) {
+            if (item.type != TYPE_CHANNEL)
                 holder.itemView.setNextFocusUpId(R.id.sliding_tabs);
+            if (item.type == TYPE_SERVER || item.type == TYPE_SERVER_CUSTOM)
+                holder.itemView.requestFocus();
+        }
         //Deactivate fragment switch with ←
         holder.itemView.setOnKeyListener(item.type == TYPE_SERVER ? sServerKeyListener : null);
     }

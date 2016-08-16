@@ -94,7 +94,18 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     }
 
     @Override
-    public void onPageSelected() {}
+    public void onPageSelected() {
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mBinding == null || mBinding.serverList == null)
+                    return;
+                View v = mBinding.serverList.getChildAt(0);
+                if (v != null)
+                    v.requestFocus();
+            }
+        }, 500);
+    }
 
     @Override
     public void onResume() {
