@@ -323,6 +323,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Vout:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
+                ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(false);
                 break;
             case MediaPlayer.Event.EncounteredError:
                 if (expanded)
@@ -380,6 +381,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private void play(final Uri uri) {
+        ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(true);
         mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
         new Thread(new Runnable() {
             @Override

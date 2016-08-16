@@ -42,6 +42,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ItemClickCb mItemClickCb;
     private int mSelectedPosition = -1;
     private RequestManager mRequestManager = null;
+    private boolean mBlockDpadRight = true;
 
     public void setGlideRequestManager(RequestManager rm) {
         mRequestManager = rm;
@@ -122,7 +123,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 holder.itemView.requestFocus();
         }
         //Deactivate fragment switch with ←
-        holder.itemView.setOnKeyListener(item.type == TYPE_SERVER ? sServerKeyListener : null);
+        if (item.type == TYPE_SERVER || item.type == TYPE_SERVER_CUSTOM)
+            holder.itemView.setOnKeyListener(sServerKeyListener);
+        else if (item.type == TYPE_CHANNEL)
+            holder.itemView.setOnKeyListener(mChannelKeyListener);
+        else
+            holder.itemView.setOnKeyListener(null);
     }
 
     private void setItemViewBackground(View view, int position) {
@@ -265,6 +271,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             return keyCode == KeyEvent.KEYCODE_DPAD_LEFT;
+        }
+    };
+
+    public void blockDpadRight(boolean block) {
+        mBlockDpadRight = block;
+    }
+
+    final View.OnKeyListener mChannelKeyListener = new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            return mBlockDpadRight && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
         }
     };
 
