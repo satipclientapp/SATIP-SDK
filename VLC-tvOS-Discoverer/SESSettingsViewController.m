@@ -397,11 +397,22 @@ NSString *const SESChannelListReUseIdentifier = @"SESChannelListReUseIdentifier"
 - (void)listOfServersWasUpdated
 {
     [self.serverListTableView reloadData];
+
+    if (_discoveryController.selectedServerIndex == -1 && _discoveryController.numberOfServers > 0) {
+        [self performSelector:@selector(selectFirstFoundServer) withObject:nil afterDelay:0.5];
+    }
 }
 
 - (void)discoveryFailed
 {
     NSLog(@"Discovery of SAT>IP devices failed");
+}
+
+- (void)selectFirstFoundServer
+{
+    _discoveryController.selectedServerIndex = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:SESSettingsMajorPlaybackConfigurationChange object:nil];
+    [_serverListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
 }
 
 #pragma mark - VLC media delegation
