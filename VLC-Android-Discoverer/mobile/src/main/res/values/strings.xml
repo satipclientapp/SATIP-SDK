@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sat IP Sdk</string>
+    <string name="app_name">SAT>IP SDK</string>
     <string name="live_tv_title">Live TV</string>
     <string name="settings">Settings</string>
     <string name="add_server">Add server address manually</string>
