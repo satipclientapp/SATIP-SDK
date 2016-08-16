@@ -1,7 +1,6 @@
 package satipsdk.ses.com.satipsdk;
 
 import android.content.SharedPreferences;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,7 +57,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
+        mBinding = FragmentSettingsBinding.inflate(inflater, container, false);
         mBinding.setHandler(mClickHandler);
         return mBinding.getRoot();
     }
