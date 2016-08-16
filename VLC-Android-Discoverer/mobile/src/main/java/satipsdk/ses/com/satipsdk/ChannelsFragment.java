@@ -70,11 +70,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         windowManager.getDefaultDisplay().getSize(size);
         mScreenWidth = size.x;
         mScreenHeight = size.y;
-
-        //VLC player init
-        final ArrayList<String> args = new ArrayList<>();
-        mLibVLC = VLCInstance.get();
-        mMediaPlayer = new MediaPlayer(mLibVLC);
     }
 
     @Nullable
@@ -189,21 +184,35 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onStart() {
         super.onStart();
 
-        final IVLCVout vlcVout = mMediaPlayer.getVLCVout();
-        vlcVout.setVideoView(mBinding.videoSurface);
-        if (mSubtitlesSurface != null)
-            vlcVout.setSubtitlesView(mSubtitlesSurface);
-        vlcVout.attachViews();
-        mMediaPlayer.getVLCVout().addCallback(this);
-        mMediaPlayer.setEventListener(this);
-
         final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
         final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
-
-        if (url == null || device == null)
+        final boolean ready = url != null && device != null;
+        if (!ready)
             ((ChannelsActivity)getActivity()).mBinding.pager.setCurrentItem(1);
-        else
-            loadChannelList(Uri.parse(url+"?"+device), true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //VLC player init
+                mLibVLC = VLCInstance.get();
+                mMediaPlayer = new MediaPlayer(mLibVLC);
+                final IVLCVout vlcVout = mMediaPlayer.getVLCVout();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        vlcVout.setVideoView(mBinding.videoSurface);
+                        if (mSubtitlesSurface != null)
+                            vlcVout.setSubtitlesView(mSubtitlesSurface);
+                        vlcVout.attachViews();
+                        mMediaPlayer.getVLCVout().addCallback(ChannelsFragment.this);
+                        mMediaPlayer.setEventListener(ChannelsFragment.this);
+
+                        //Load channels
+                        if (ready)
+                            loadChannelList(Uri.parse(url+"?"+device), true);
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
