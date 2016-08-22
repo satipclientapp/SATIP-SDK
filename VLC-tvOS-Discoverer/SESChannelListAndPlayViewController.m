@@ -48,6 +48,8 @@
 
     BOOL _automaticallyStarted;
     BOOL _appBackgrounded;
+
+    BOOL _swipeChannelIndexDelay;
 }
 
 @end
@@ -393,6 +395,13 @@
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
 }
 
+- (void)swipeToIndex:(NSInteger)index
+{
+    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    [_playbackPlayer playItemAtNumber:@(index)];
+    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
+}
+
 - (void)swipeRightAction
 {
 #if TARGET_OS_TV
@@ -406,9 +415,19 @@
         return;
 
     index = index - 1;
-    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [_playbackPlayer playItemAtNumber:@(index)];
-    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
+
+    if (_swipeChannelIndexDelay) {
+        return;
+    }
+
+    _swipeChannelIndexDelay = YES;
+
+    double amountOfSeconds = 0.3;
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(amountOfSeconds * NSEC_PER_SEC));
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        _swipeChannelIndexDelay = NO;
+        [self swipeToIndex:index];
+    });
 }
 
 - (void)swipeLeftAction
@@ -424,9 +443,19 @@
         return;
 
     index = index + 1;
-    [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    [_playbackPlayer playItemAtNumber:@(index)];
-    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
+
+    if (_swipeChannelIndexDelay) {
+        return;
+    }
+
+    _swipeChannelIndexDelay = YES;
+
+    double amountOfSeconds = 0.3;
+    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(amountOfSeconds * NSEC_PER_SEC));
+    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+        _swipeChannelIndexDelay = NO;
+        [self swipeToIndex:index];
+    });
 }
 
 #pragma mark - pseudo-fullscreen
