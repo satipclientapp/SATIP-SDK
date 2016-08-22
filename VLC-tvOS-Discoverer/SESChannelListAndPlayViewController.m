@@ -385,11 +385,6 @@
 {
     NSInteger row = indexPath.row;
 
-    /* reject channel switch to the same channel when we are still buffering */
-    if (row == [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex && _playbackPlayer.mediaPlayer.state == VLCMediaPlayerStateBuffering) {
-        return;
-    }
-
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
     [_playbackPlayer playItemAtNumber:@(row)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
