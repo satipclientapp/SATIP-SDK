@@ -244,23 +244,23 @@
     NSString *ipString;
 
     if (index < serverCount) {
-        NSURLComponents *components = [NSURLComponents componentsWithURL:[_discoveryController serverAtIndex:index].url resolvingAgainstBaseURL:NO];
-        ipString = [components.queryItems.firstObject value];
+        serverItem = [_discoveryController serverAtIndex:index];
     } else {
         NSInteger customerServerIndex = index - serverCount;
         if (customerServerIndex < _discoveryController.customServers.count) {
             ipString = _discoveryController.customServers[index - serverCount];
         }
+
+        if (ipString == nil) {
+            NSLog(@"%s: Server parsing failure", __PRETTY_FUNCTION__);
+            return;
+        }
+
+        NSString *mrl = playlistURLString;
+
+        serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
+        [serverItem addOptions:@{ @"satip-host" : ipString}];
     }
-
-    if (ipString == nil) {
-        NSLog(@"%s: Server parsing failure", __PRETTY_FUNCTION__);
-        return;
-    }
-
-    NSString *mrl = [playlistURLString stringByAppendingFormat:@"?satip-device=%@", ipString];
-
-    serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
 
     _serverMediaItem = serverItem;
 
