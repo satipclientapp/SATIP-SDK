@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/channel_list"
-            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
             android:background="@color/light_gray"
             android:layout_below="@id/ses_logo"
             android:layout_margin="@dimen/video_frame_margin"

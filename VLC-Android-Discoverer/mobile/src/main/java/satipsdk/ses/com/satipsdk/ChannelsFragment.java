@@ -67,7 +67,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         super.onCreate(savedInstanceState);
         WindowManager windowManager = (WindowManager) SatIpApplication.get().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
-        windowManager.getDefaultDisplay().getSize(size);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN)
+            windowManager.getDefaultDisplay().getSize(size);
+        else
+            windowManager.getDefaultDisplay().getRealSize(size);
         mScreenWidth = size.x;
         mScreenHeight = size.y;
     }
