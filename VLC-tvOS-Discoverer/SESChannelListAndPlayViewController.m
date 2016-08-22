@@ -48,10 +48,6 @@
 
     BOOL _automaticallyStarted;
     BOOL _appBackgrounded;
-
-    BOOL _rightSwipePerformed;
-    BOOL _leftSwipePerformed;
-    BOOL _channelSelectionPerformed;
 }
 
 @end
@@ -386,34 +382,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
-    [self performSelector:@selector(performChannelSwitchToIndex:) withObject:@(row) afterDelay:0.8];
-    _channelSelectionPerformed = NO;
-}
-
-- (void)performChannelSwitchToIndex:(NSNumber *)index
-{
-    if (_channelSelectionPerformed) {
-        return;
-    }
 
     /* and switch to the channel you want - this can be done repeatedly without destroying stuff over and over again */
-    [_playbackPlayer playItemAtNumber:index];
-    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index.integerValue;
-    _channelSelectionPerformed = YES;
+    [_playbackPlayer playItemAtNumber:@(row)];
+    [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = row;
 }
 
 - (void)swipeRightAction
 {
-    [self performSelector:@selector(previousChannel) withObject:nil afterDelay:0.8];
-    _rightSwipePerformed = NO;
-}
-
-- (void)previousChannel
-{
-    if (_rightSwipePerformed) {
-        return;
-    }
-
 #if TARGET_OS_TV
     if (!_fullscreen) {
         return;
@@ -428,22 +404,10 @@
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     [_playbackPlayer playItemAtNumber:@(index)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
-
-    _rightSwipePerformed = YES;
 }
 
 - (void)swipeLeftAction
 {
-    [self performSelector:@selector(nextChannel) withObject:nil afterDelay:0.8];
-    _leftSwipePerformed = NO;
-}
-
-- (void)nextChannel
-{
-    if (_leftSwipePerformed) {
-        return;
-    }
-
 #if TARGET_OS_TV
     if (!_fullscreen) {
         return;
@@ -458,8 +422,6 @@
     [self.channelListTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     [_playbackPlayer playItemAtNumber:@(index)];
     [SESServerDiscoveryController sharedDiscoveryController].lastPlayedChannelIndex = index;
-
-    _leftSwipePerformed = YES;
 }
 
 #pragma mark - pseudo-fullscreen
