@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -30,6 +31,12 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
         mBinding.pager.setAdapter(new ViewPagerAdapter(fm));
         mBinding.slidingTabs.setupWithViewPager(mBinding.pager);
         mBinding.slidingTabs.addOnTabSelectedListener(this);
+        mBinding.pager.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                return (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT || keyCode == KeyEvent.KEYCODE_DPAD_LEFT);
+            }
+        });
     }
 
     @Override
@@ -92,3 +99,4 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
         super.onDestroy();
     }
 }
+
