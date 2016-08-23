@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -174,6 +175,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public Item getItem(int position) {
+        if (position < 0 || position >= getItemCount())
+            return null;
         return mItemList.get(position);
     }
 
@@ -254,6 +257,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     .show();
             return true;
         }
+    }
+
+    public void select(String uriString) {
+        if (TextUtils.isEmpty(uriString))
+            return;
+        int position = -1;
+        for (int i = 0; i < mItemList.size(); ++i) {
+            if (TextUtils.equals(uriString, mItemList.get(i).uri.toString())) {
+                position = i;
+                break;
+            }
+        }
+        select(position);
     }
 
     public void select(int position) {

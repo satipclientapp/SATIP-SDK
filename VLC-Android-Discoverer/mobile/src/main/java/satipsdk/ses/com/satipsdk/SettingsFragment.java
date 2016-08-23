@@ -42,7 +42,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private static final String KEY_SERVERS_URLS = "key_server_URLs";
     public static final String KEY_CURRENT_DEVICE = "key_current_device";
     public static final String KEY_CURRENT_CHANNEL_LIST_ADDRESS = "key_current_channel_list_address";
-    public static final String KEY_SELECTED_DEVICE = "key_selected_device";
+    public static final String KEY_SELECTED_DEVICE = "key_selected_device_string";
     public static final String KEY_SELECTED_CHANNEL_LIST = "key_selected_channel_list";
     public static final String KEY_SELECTED_CHANNEL = "key_selected_channel";
     public static final String KEY_LAST_CHANNEL_URL = "key_last_channel_url";
@@ -126,7 +126,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             parseChannelList(Uri.parse(url));
         refreshServers();
         refreshChannels();
-        mServerListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_DEVICE, -1));
+        mServerListAdapter.select(mSharedPreferences.getString(KEY_SELECTED_DEVICE, ""));
         mChannelListAdapter.select(mSharedPreferences.getInt(KEY_SELECTED_CHANNEL_LIST, -1));
     }
 
@@ -195,15 +195,17 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             serverUrls.add(item.uri.toString());
         }
         //Selected positions
-        int selectedServer = mServerListAdapter.getSelectedPosition();
+        ListAdapter.Item server = mServerListAdapter.getItem(mServerListAdapter.getSelectedPosition());
+        String selectedServer = server != null ? server.uri.toString() : null;
         int selectedChannelList = mChannelListAdapter.getSelectedPosition();
-        mSharedPreferences.edit()
+         SharedPreferences.Editor editor = mSharedPreferences.edit()
                 .putStringSet(KEY_CHANNELS_NAMES, chanListNames)
                 .putStringSet(KEY_CHANNELS_URLS, chanListUrls)
                 .putStringSet(KEY_SERVERS_NAMES, serverNames)
-                .putStringSet(KEY_SERVERS_URLS, serverUrls)
-                .putInt(KEY_SELECTED_DEVICE, selectedServer)
-                .putInt(KEY_SELECTED_CHANNEL_LIST, selectedChannelList)
+                .putStringSet(KEY_SERVERS_URLS, serverUrls);
+                if (selectedServer != null)
+                    editor.putString(KEY_SELECTED_DEVICE, selectedServer);
+                editor.putInt(KEY_SELECTED_CHANNEL_LIST, selectedChannelList)
                 .apply();
     }
 
@@ -216,8 +218,12 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
     @Override
     public void onMediaAdded(int i, Media media) {
-        if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1"))
+        if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1")) {
             mServerListAdapter.addServer(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), media.getUri(), media.getMeta(Media.Meta.ArtworkURL));
+            String selectedServer = mSharedPreferences.getString(KEY_SELECTED_DEVICE, "");
+            if (TextUtils.equals(media.getUri().toString(), selectedServer))
+                mServerListAdapter.select(mServerListAdapter.getItemCount()-1);
+        }
     }
 
     @Override
