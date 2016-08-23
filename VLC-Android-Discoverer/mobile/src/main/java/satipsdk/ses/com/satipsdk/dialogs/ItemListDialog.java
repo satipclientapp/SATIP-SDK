@@ -61,9 +61,6 @@ public class ItemListDialog extends DialogFragment {
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(url))
                 return;
             Uri uri = Uri.parse(url);
-            if (mType ==  ListAdapter.TYPE_SERVER_CUSTOM) {
-                uri = Uri.parse(url+"?satip-device="+uri.getAuthority());
-            }
             mCb.addItem(mType, name, uri);
             dismiss();
         }

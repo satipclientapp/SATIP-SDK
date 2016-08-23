@@ -147,7 +147,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         for (Item currentItem : mItemList)
             if (currentItem.uri.equals(uri))
                 return;
-        add(new Item(type, title, uri, logoUrl));
+        Item item = new Item(type, title, uri, logoUrl);
+        item.host = Uri.parse(logoUrl).getHost();
+        add(item);
     }
 
     public void remove(int position) {
@@ -287,7 +289,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public static class Item {
         public int type;
-        public String title, logoUrl;
+        public String title, logoUrl, host;
         public Uri uri;
 
         public Item(int type, String title, Uri uri, String logoUrl) {

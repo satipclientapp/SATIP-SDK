@@ -232,7 +232,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private ListAdapter.ItemClickCb mServerListClickCb = new ListAdapter.ItemClickCb() {
         @Override
         public void onItemClick(int position, ListAdapter.Item item) {
-            mSharedPreferences.edit().putString(KEY_CURRENT_DEVICE, item.uri.getQuery()).apply();
+            mSharedPreferences.edit().putString(KEY_CURRENT_DEVICE, item.host).commit();
             reloadChannels();
         }
     };
@@ -282,7 +282,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             return;
         ChannelsFragment cf = (ChannelsFragment) ((ChannelsActivity)getActivity()).mFragments[0];
         cf.stopPlayback();
-        cf.loadChannelList(Uri.parse(url+"?"+device), false);
+        cf.loadChannelList(Uri.parse(url), false);
     }
 
     private ClickHandler mClickHandler = new ClickHandler();

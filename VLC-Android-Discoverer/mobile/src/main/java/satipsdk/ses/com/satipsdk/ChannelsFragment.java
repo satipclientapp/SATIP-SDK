@@ -143,6 +143,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         new Thread(new Runnable() {
             @Override
             public void run() {
+                final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, "");
                 Media playlist = new Media(mLibVLC, uri);
                 playlist.parse(Media.Parse.ParseNetwork);
                 final MediaList ml = playlist.subItems();
@@ -155,9 +156,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                         Media media;
                         for (int i = 0; i< ml.getCount(); ++i) {
                             media = ml.getMediaAt(i);
+                            media.parse(Media.Parse.ParseNetwork);
+                            Uri mediaUri = generateUri(media.getUri(), device);
                             la.add(new ListAdapter.Item(ListAdapter.TYPE_CHANNEL,
                                     media.getMeta(Media.Meta.Title),
-                                    media.getUri(),
+                                    mediaUri,
                                     null));
                         }
                         la.select(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
@@ -167,11 +170,19 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                         if (!TextUtils.isEmpty(lastUrl))
                             play(Uri.parse(lastUrl));
                         else if (ml != null && ml.getCount() >0)
-                            play(ml.getMediaAt(0).getUri());
+                            play(la.getItem(0).uri);
                     }
                 });
             }
         }).start();
+    }
+
+    private Uri generateUri(Uri mediaUri, String device) {
+        return new Uri.Builder().scheme("satip")
+                .encodedAuthority(device)
+                .encodedPath(mediaUri.getPath())
+                .encodedQuery(mediaUri.getQuery())
+                .build();
     }
 
     @Override
@@ -209,7 +220,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
                         //Load channels
                         if (ready)
-                            loadChannelList(Uri.parse(url+"?"+device), true);
+                            loadChannelList(Uri.parse(url), true);
                     }
                 });
             }
