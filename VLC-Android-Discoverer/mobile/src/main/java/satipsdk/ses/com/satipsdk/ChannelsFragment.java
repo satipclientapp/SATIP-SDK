@@ -220,6 +220,9 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onStop() {
         super.onStop();
 
+        if (expanded)
+            toggleFullscreen();
+
         if (mOnLayoutChangeListener != null) {
             mBinding.videoSurfaceFrame.removeOnLayoutChangeListener(mOnLayoutChangeListener);
             mOnLayoutChangeListener = null;
