@@ -243,22 +243,27 @@
 
     if (index < serverCount) {
         serverItem = [_discoveryController serverAtIndex:index];
+
+        /* this hack is possible because the artwork URL is guaranteed by the SAT>IP specification 1.2.2 */
+        NSString *artworkURLString = [serverItem metadataForKey:VLCMetaInformationArtworkURL];
+        NSURL *artworkURL = [NSURL URLWithString:artworkURLString];
+        ipString = artworkURL.host;
     } else {
         NSInteger customerServerIndex = index - serverCount;
         if (customerServerIndex < _discoveryController.customServers.count) {
             ipString = _discoveryController.customServers[index - serverCount];
         }
-
-        if (ipString == nil) {
-            NSLog(@"%s: Server parsing failure", __PRETTY_FUNCTION__);
-            return;
-        }
-
-        NSString *mrl = playlistURLString;
-
-        serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
-        [serverItem addOptions:@{ @"satip-host" : ipString}];
     }
+
+    if (ipString == nil) {
+        NSLog(@"%s: Server parsing failure", __PRETTY_FUNCTION__);
+        return;
+    }
+
+    NSString *mrl = playlistURLString;
+
+    serverItem = [VLCMedia mediaWithURL:[NSURL URLWithString:mrl]];
+    [serverItem addOptions:@{ @"satip-host" : ipString}];
 
     _serverMediaItem = serverItem;
 
