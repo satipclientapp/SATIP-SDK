@@ -22,6 +22,7 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
 
     ActivityChannelsBinding mBinding;
     TabFragment[] mFragments;
+    boolean mFullScreen = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        return mBinding.slidingTabs.getVisibility() == View.GONE;
+        return mFullScreen;
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -88,6 +89,7 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
     public void onTabReselected(TabLayout.Tab tab) {}
 
     public void toggleFullscreen(boolean fullscreen) {
+        mFullScreen = fullscreen;
         mBinding.slidingTabs.setVisibility(fullscreen ? View.GONE : View.VISIBLE);
         int visibility;
         if (fullscreen) {
