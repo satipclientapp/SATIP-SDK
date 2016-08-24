@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.net.Uri;
@@ -332,20 +331,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onEvent(MediaPlayer.Event event) {
         switch(event.type) {
             case MediaPlayer.Event.Playing:
-                if (!mMediaPlayer.getVLCVout().areViewsAttached())
-                    mMediaPlayer.getVLCVout().attachViews();
                 if (mBinding.channelList.hasFocus())
                     focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setFocusable(false);
                 mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
-                mMediaPlayer.getVLCVout().detachViews();
-                mBinding.videoSurface.getHolder().setFixedSize(1, 1);
-                mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
-                final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
-                c.drawRGB(0, 0, 0);
-                mBinding.videoSurface.getHolder().unlockCanvasAndPost(c);
                 break;
             case MediaPlayer.Event.Vout:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
@@ -430,12 +421,19 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     public void switchToSiblingChannel(boolean next) {
+        IVLCVout vout = mMediaPlayer.getVLCVout();
         ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
         int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
         if (newPosition < 0 || newPosition >= adapter.getItemCount())
             return;
         ListAdapter.Item item = adapter.getItem(newPosition);
+        mMediaPlayer.stop();
+        vout.detachViews();
+        mBinding.videoSurface.getHolder().setFixedSize(1, 1);
+        mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
         play(newPosition, item);
+        vout.setVideoView(mBinding.videoSurface);
+        vout.attachViews();
         adapter.select(newPosition);
     }
 
@@ -514,7 +512,13 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     @Override
-    public void onSurfacesCreated(IVLCVout vlcVout) {}
+    public void onSurfacesCreated(IVLCVout vlcVout) {
+        final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
+        if (c != null) {
+            c.drawRGB(0, 0, 0);
+            mBinding.videoSurface.getHolder().unlockCanvasAndPost(c);
+        }
+    }
 
     @Override
     public void onSurfacesDestroyed(IVLCVout vlcVout) {}
