@@ -332,12 +332,15 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onEvent(MediaPlayer.Event event) {
         switch(event.type) {
             case MediaPlayer.Event.Playing:
+                if (!mMediaPlayer.getVLCVout().areViewsAttached())
+                    mMediaPlayer.getVLCVout().attachViews();
                 if (mBinding.channelList.hasFocus())
                     focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setFocusable(false);
                 mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
+                mMediaPlayer.getVLCVout().detachViews();
                 mBinding.videoSurface.getHolder().setFixedSize(1, 1);
                 mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
                 final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
