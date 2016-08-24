@@ -299,6 +299,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         if (mBinding.videoSurfaceFrame.getHeight() < 100)
             return;
         expanded = !expanded;
+        ((ChannelsActivity)getActivity()).toggleFullscreen(expanded);
         Resources res = mBinding.getRoot().getContext().getResources();
         mBinding.getRoot().setBackgroundColor(expanded ? res.getColor(android.R.color.black) : res.getColor(R.color.light_gray));
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mBinding.videoSurfaceFrame.getLayoutParams();
@@ -322,7 +323,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
         mBinding.sesLogo.setVisibility(expanded ? View.GONE : View.VISIBLE);
-        ((ChannelsActivity)getActivity()).toggleFullscreen(expanded);
         mBinding.videoSurfaceFrame.setLayoutParams(lp);
         updateVideoSurfaces();
     }
