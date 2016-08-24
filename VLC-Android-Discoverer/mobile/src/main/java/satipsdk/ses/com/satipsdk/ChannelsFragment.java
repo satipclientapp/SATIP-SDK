@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.net.Uri;
@@ -215,7 +217,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                         if (mSubtitlesSurface != null)
                             vlcVout.setSubtitlesView(mSubtitlesSurface);
                         vlcVout.attachViews();
-                        mMediaPlayer.getVLCVout().addCallback(ChannelsFragment.this);
+                        vlcVout.addCallback(ChannelsFragment.this);
                         mMediaPlayer.setEventListener(ChannelsFragment.this);
 
                         //Load channels
@@ -336,6 +338,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setFocusable(false);
                 mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
+                mBinding.videoSurface.getHolder().setFixedSize(1, 1);
+                mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
+                final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
+                c.drawRGB(0, 0, 0);
+                mBinding.videoSurface.getHolder().unlockCanvasAndPost(c);
                 break;
             case MediaPlayer.Event.Vout:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
