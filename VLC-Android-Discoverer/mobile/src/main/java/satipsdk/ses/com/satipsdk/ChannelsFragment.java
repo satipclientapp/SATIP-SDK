@@ -179,8 +179,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private Uri generateUri(Uri mediaUri, String device) {
-        return new Uri.Builder().scheme("satip")
-                .encodedAuthority(device)
+        boolean replaceScheme = TextUtils.equals(mediaUri.getScheme(), "rtsp");
+        boolean replaceAuthority = TextUtils.equals(mediaUri.getEncodedAuthority(), "sat.ip");
+        return new Uri.Builder().scheme(replaceScheme ? "satip" : mediaUri.getScheme())
+                .encodedAuthority(replaceAuthority ? device : mediaUri.getEncodedAuthority())
                 .encodedPath(mediaUri.getPath())
                 .encodedQuery(mediaUri.getQuery())
                 .build();
