@@ -82,6 +82,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         Item item = mItemList.get(position);
         holder.binding.setItem(item);
         holder.binding.executePendingBindings();
+        if (item.type == TYPE_SERVER && mSelectedPosition == -2 && getItemCount() == 1) {
+            mSelectedPosition = position;
+            mItemClickCb.onItemClick(position, item);
+        }
         setItemViewBackground(holder.itemView, position);
         if (item.logoUrl != null && mRequestManager != null) {
             holder.binding.itemLogo.setVisibility(View.INVISIBLE);
@@ -260,8 +264,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public void select(String uriString) {
-        if (TextUtils.isEmpty(uriString))
+        if (TextUtils.isEmpty(uriString)) {
+            mSelectedPosition = -2;
             return;
+        }
         int position = -1;
         for (int i = 0; i < mItemList.size(); ++i) {
             if (TextUtils.equals(uriString, mItemList.get(i).uri.toString())) {
@@ -277,7 +283,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             return;
         int previous = mSelectedPosition;
         mSelectedPosition = position;
-        notifyItemChanged(previous);
+        if (previous >= 0 && previous < getItemCount())
+            notifyItemChanged(previous);
         notifyItemChanged(position);
     }
 
