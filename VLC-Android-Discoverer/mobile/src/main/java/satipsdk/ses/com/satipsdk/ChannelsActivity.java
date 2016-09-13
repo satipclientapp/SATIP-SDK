@@ -15,7 +15,7 @@ import android.view.WindowManager;
 
 import satipsdk.ses.com.satipsdk.databinding.ActivityChannelsBinding;
 
-public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnTouchListener {
+public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     protected static final int NUM_FRAGMENTS = 2;
     private static final String TAG = "ChannelsActivity";
@@ -39,7 +39,6 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
                 return (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT || keyCode == KeyEvent.KEYCODE_DPAD_LEFT);
             }
         });
-        mBinding.pager.setOnTouchListener(this);
     }
 
     @Override
@@ -48,11 +47,6 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
             ((ChannelsFragment)mFragments[0]).toggleFullscreen();
         } else
             super.onBackPressed();
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return mFullScreen;
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -89,6 +83,7 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
     public void onTabReselected(TabLayout.Tab tab) {}
 
     public void toggleFullscreen(boolean fullscreen) {
+        mBinding.pager.setSwipeEnabled(!fullscreen);
         mFullScreen = fullscreen;
         mBinding.slidingTabs.setVisibility(fullscreen ? View.GONE : View.VISIBLE);
         int visibility;
