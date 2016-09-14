@@ -362,21 +362,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         }
     }
 
-    class ViewDimensions {
-        public int videoWidth, videoHeight, leftMargin, bottomMargin, rightMargin, topMargin;
-
-        ViewDimensions() {
-            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mBinding.videoSurfaceFrame.getLayoutParams();
-
-            videoWidth = mBinding.videoSurfaceFrame.getMeasuredWidth();
-            videoHeight = mBinding.videoSurfaceFrame.getMeasuredHeight();
-            leftMargin = lp.leftMargin;
-            bottomMargin = lp.bottomMargin;
-            rightMargin = lp.rightMargin;
-            topMargin = lp.topMargin;
-        }
-    }
-
     /*
      * Video surface management
      */
