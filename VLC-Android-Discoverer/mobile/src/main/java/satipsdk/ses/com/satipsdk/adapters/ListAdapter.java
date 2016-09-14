@@ -149,9 +149,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public void addServer(int type, String title, Uri uri, String logoUrl) {
+        Item serverToBeRemoved = null;
         for (Item currentItem : mItemList)
-            if (currentItem.uri.equals(uri))
-                return;
+            if (currentItem.uri.equals(uri)) {
+                String host = Uri.parse(logoUrl).getHost();
+                if (TextUtils.equals(host, currentItem.host))
+                    return;
+                serverToBeRemoved = currentItem;
+                break;
+            }
+        //Update server in case of IP changed
+        if (serverToBeRemoved != null)
+            mItemList.remove(serverToBeRemoved);
         Item item = new Item(type, title, uri, logoUrl);
         item.host = Uri.parse(logoUrl).getHost();
         add(item);
