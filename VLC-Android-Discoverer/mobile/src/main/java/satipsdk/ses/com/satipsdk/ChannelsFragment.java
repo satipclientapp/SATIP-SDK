@@ -324,13 +324,19 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.bottomMargin = margin;
             lp.rightMargin = margin;
             lp.topMargin = margin;
-            focusOnCurrentChannel();
         }
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
         mBinding.sesLogo.setVisibility(expanded ? View.GONE : View.VISIBLE);
         mBinding.videoSurfaceFrame.setLayoutParams(lp);
         updateVideoSurfaces();
+        if (!expanded)
+            mBinding.videoSurfaceFrame.post(new Runnable() {
+                @Override
+                public void run() {
+                    focusOnCurrentChannel();
+                }
+            });
     }
 
     @Override
