@@ -5,7 +5,4 @@
         android:startColor="@color/cloud"
         android:type="linear" />
 
-    <corners
-        android:radius="6dp"/>
-
 </shape>
