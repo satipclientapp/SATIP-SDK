@@ -87,7 +87,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        if (ENABLE_SUBTITLES && HWDecoderUtil.HAS_SUBTITLES_SURFACE) {
+        if (ENABLE_SUBTITLES) {
             final ViewStub stub = (ViewStub) view.findViewById(R.id.subtitles_stub);
             mSubtitlesSurface = (SurfaceView) stub.inflate();
             mSubtitlesSurface.setZOrderMediaOverlay(true);
