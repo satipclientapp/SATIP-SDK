@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -301,9 +302,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         if (mBinding.videoSurfaceFrame.getHeight() < 100)
             return;
         expanded = !expanded;
+        Context context = mBinding.getRoot().getContext();
         ((ChannelsActivity)getActivity()).toggleFullscreen(expanded);
-        Resources res = mBinding.getRoot().getContext().getResources();
-        mBinding.getRoot().setBackgroundColor(expanded ? res.getColor(android.R.color.black) : res.getColor(R.color.light_gray));
+
+        mBinding.getRoot().setBackgroundColor(expanded ?
+                ContextCompat.getColor(context, android.R.color.black) :
+                ContextCompat.getColor(context, R.color.light_gray));
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mBinding.videoSurfaceFrame.getLayoutParams();
         if (expanded) {
             lp.width = mScreenWidth;
