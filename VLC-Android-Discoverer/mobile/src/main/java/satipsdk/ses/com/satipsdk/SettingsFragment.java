@@ -196,7 +196,7 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         }
         //Selected positions
         ListAdapter.Item server = mServerListAdapter.getItem(mServerListAdapter.getSelectedPosition());
-        String selectedServer = server != null ? server.uri.toString() : null;
+        String selectedServer = server != null ? server.host : null;
         int selectedChannelList = mChannelListAdapter.getSelectedPosition();
          SharedPreferences.Editor editor = mSharedPreferences.edit()
                 .putStringSet(KEY_CHANNELS_NAMES, chanListNames)
@@ -219,10 +219,11 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     @Override
     public void onMediaAdded(int i, Media media) {
         if (TextUtils.equals(media.getMeta(Media.Meta.Setting), "urn:ses-com:device:SatIPServer:1")) {
-            mServerListAdapter.addServer(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), media.getUri(), media.getMeta(Media.Meta.ArtworkURL));
+            ListAdapter.Item server = new ListAdapter.Item(ListAdapter.TYPE_SERVER, media.getMeta(Media.Meta.Title), media.getUri(), media.getMeta(Media.Meta.ArtworkURL));
+            mServerListAdapter.addServer(server);
             String selectedServer = mSharedPreferences.getString(KEY_SELECTED_DEVICE, "");
-            if (TextUtils.equals(media.getUri().toString(), selectedServer))
-                mServerListAdapter.select(mServerListAdapter.getItemCount()-1);
+            if (TextUtils.equals(server.host, selectedServer))
+                mServerListAdapter.select(mServerListAdapter.getItemCount() - 1);
         }
     }
 

@@ -148,12 +148,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyItemInserted(mItemList.size()-1);
     }
 
-    public void addServer(int type, String title, Uri uri, String logoUrl) {
+    public void addServer(Item server) {
         Item serverToBeRemoved = null;
         for (Item currentItem : mItemList)
-            if (TextUtils.equals(title, currentItem.title) && currentItem.uri.equals(uri)) {
-                String host = Uri.parse(logoUrl).getHost();
-                if (TextUtils.equals(host, currentItem.host))
+            if (TextUtils.equals(server.title, currentItem.title) && currentItem.uri.equals(server.uri)) {
+                if (TextUtils.equals(server.host, currentItem.host))
                     return;
                 serverToBeRemoved = currentItem;
                 break;
@@ -161,9 +160,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         //Update server in case of IP changed
         if (serverToBeRemoved != null)
             mItemList.remove(serverToBeRemoved);
-        Item item = new Item(type, title, uri, logoUrl);
-        item.host = Uri.parse(logoUrl).getHost();
-        add(item);
+        add(server);
     }
 
     public void remove(int position) {
@@ -329,6 +326,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             this.title = title;
             this.logoUrl = type == TYPE_CHANNEL ? generateLogoUrl(title) : logoUrl;
             this.uri = uri;
+            if (type == TYPE_SERVER)
+                host = Uri.parse(logoUrl).getHost();
         }
 
         String generateLogoUrl(String title) {
