@@ -3,7 +3,6 @@ package satipsdk.ses.com.satipsdk;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;

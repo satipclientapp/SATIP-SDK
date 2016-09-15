@@ -48,6 +48,15 @@ public class ChannelsActivity extends AppCompatActivity implements TabLayout.OnT
             super.onBackPressed();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && mFullScreen) {
+            ((ChannelsFragment)mFragments[0]).toggleFullscreen();
+            return true;
+        } else
+            return super.onKeyDown(keyCode, event);
+    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
