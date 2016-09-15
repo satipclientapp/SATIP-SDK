@@ -133,7 +133,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     public void stopPlayback() {
-        if (mMediaPlayer.getMedia() != null)
+        if (mMediaPlayer.getMedia() == null)
             return;
         mMediaPlayer.stop();
         mBinding.videoSurfaceFrame.setVisibility(View.GONE);

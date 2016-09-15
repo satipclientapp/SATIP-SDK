@@ -283,7 +283,6 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
     private void reloadChannels() {
         final String url = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_CHANNEL_LIST_ADDRESS, null);
         final String device = mSharedPreferences.getString(SettingsFragment.KEY_CURRENT_DEVICE, null);
-        mSharedPreferences.edit().putInt(KEY_SELECTED_CHANNEL, 0).apply();
         if (url == null || device == null)
             return;
         ChannelsFragment cf = (ChannelsFragment) ((ChannelsActivity)getActivity()).mFragments[0];
