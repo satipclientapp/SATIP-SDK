@@ -23,6 +23,6 @@ Both libvlc and VLCKit are distributed under the Lesser GNU General Public Licen
     Copyright (C) 1996-2016 VideoLAN and VLC Authors - LGPLv2.1 or later
 
     VLCKit
-    Copyright (C) 2007-2016 Pierre d&rsquo;Herbemont, Felix Paul K&uuml;hne, Faustino E. Osuna, et al. - LGPLv2.1 or later
+    Copyright (C) 2007-2016 Pierre d'Herbemont, Felix Paul Kühne, Faustino E. Osuna, et al. - LGPLv2.1 or later
 
     VideoLAN, VLC and VLC media player are internationally registered trademarks of the VideoLAN non-profit organization.
