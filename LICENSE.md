@@ -1,34 +1,3 @@
-# SAT>IP ShowCase app
-
-This app demonstrates the use of VLCKit for iOS (dubbed _MobileVLCKit_) and tvOS (dubbed _TVVLCKit_) as well as libvlc for Android to discover SAT>IP servers, feed a custom channel list from a m3u file located on a remote server or the SAT>IP device and finally play a channel of your choice. Additionally, we give an introduction to video output view manipulation with VLCKit and libvlc with regard to live zooming and resizing.
-
-On iOS and Android, libvlc makes use of the native hardware decoder exposed by the operating system to accelerate video rendering leading to a remarkably small CPU and memory footprint matching the native playback frameworks.
-
-## Requirements
-
-On Apple platform, this project uses the dynamic framework variants of VLCKit and therefore requires iOS 8 or tvOS 9. Note that bitcode is enabled only for the tvOS package. Static framework variants or bitcode for iOS require a compilation of VLCKit of your own. The sample project requires Xcode 7.3 or later. All code between the iOS and tvOS user interface is shared with only few platform specific code lines.
-
-On Android, the sample project requires version 4.2 or later. It can be deployed both on Android and Android TV. For compilation, you need the latest version of Android Studio (currently v2.1.3) and the NDK (currently r12b).
-
-## How to start for iOS and tvOS
-
- * Install cocoapods on your Mac. Note that the Mac-App is currently _not_ supported.
- * Execute "pod update" in your terminal within the project folder
- * Open the xcworkspace and execute the app either for iOS or tvOS
-
-Note that you can switch from the "SAT-IP-VLCKit" pod to other VLCKit pods as soon as version 3.0 is released.
-
-## How to start for Android
-
- * open the android project in Android Studio
- * Execute the app
-
-Note that you can build your own versions of libvlc for Android from git and once version 3.0 is released, it will include support for SAT>IP natively.
-
-## How to get help
-
-See the [Android Compile] (https://wiki.videolan.org/AndroidCompile) and [VLCKit] (https://wiki.videolan.org/VLCKit) pages on the [VideoLAN] (http://www.videolan.org) website for details on compiling the needed library.
-
 ## Copyright of the sample code
 
 The sample application code is Copyright (C) 2016 [SES S.A.] (http://www.ses.com) with contributions from [Sensory Minds GmbH] (http://www.sensoryminds.de) and [VideoLabs SAS] (https://videolabs.io) and distributed under the 3-clause BSD license. Therefore, you need to include the following paragraphs whenever you are using portions of the code or designs in your greater works and comply to the conditions.
