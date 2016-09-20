@@ -358,9 +358,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(false);
                 break;
             case MediaPlayer.Event.EncounteredError:
-                focusOnCurrentChannel();
                 if (expanded)
                     toggleFullscreen();
+                else
+                    focusOnCurrentChannel();
                 break;
         }
     }
