@@ -350,6 +350,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setFocusable(false);
                 mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
+                focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Vout:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
@@ -357,6 +358,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(false);
                 break;
             case MediaPlayer.Event.EncounteredError:
+                focusOnCurrentChannel();
                 if (expanded)
                     toggleFullscreen();
                 break;
