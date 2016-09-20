@@ -140,10 +140,15 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
             for (int i = 0; i<prefListsNames.size(); ++i)
                 mServerListAdapter.add(new ListAdapter.Item(ListAdapter.TYPE_SERVER_CUSTOM, (String) names[i], Uri.parse((String) urls[i]), null));
         }
-        if (mMediaBrowser == null)
-            mMediaBrowser = new MediaBrowser(VLCInstance.get(), this);
-        if (Util.hasLANConnection())
-            mMediaBrowser.discoverNetworkShares();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (mMediaBrowser == null)
+                    mMediaBrowser = new MediaBrowser(VLCInstance.get(), SettingsFragment.this);
+                if (Util.hasLANConnection())
+                    mMediaBrowser.discoverNetworkShares();
+            }
+        }).start();
         mBinding.serverList.requestFocus();
     }
 
