@@ -421,21 +421,26 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         }).start();
     }
 
-    public void switchToSiblingChannel(boolean next) {
-        IVLCVout vout = mMediaPlayer.getVLCVout();
-        ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
-        int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
-        if (newPosition < 0 || newPosition >= adapter.getItemCount())
-            return;
-        ListAdapter.Item item = adapter.getItem(newPosition);
-        mMediaPlayer.stop();
-        vout.detachViews();
-        mBinding.videoSurface.getHolder().setFixedSize(1, 1);
-        mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
-        play(newPosition, item);
-        vout.setVideoView(mBinding.videoSurface);
-        vout.attachViews();
-        adapter.select(newPosition);
+    public void switchToSiblingChannel(final boolean next) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                IVLCVout vout = mMediaPlayer.getVLCVout();
+                ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
+                int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
+                if (newPosition < 0 || newPosition >= adapter.getItemCount())
+                    return;
+                ListAdapter.Item item = adapter.getItem(newPosition);
+                mMediaPlayer.stop();
+                vout.detachViews();
+                mBinding.videoSurface.getHolder().setFixedSize(1, 1);
+                mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
+                play(newPosition, item);
+                vout.setVideoView(mBinding.videoSurface);
+                vout.attachViews();
+                adapter.select(newPosition);
+            }
+        });
     }
 
     private void updateVideoSurfaces() {
