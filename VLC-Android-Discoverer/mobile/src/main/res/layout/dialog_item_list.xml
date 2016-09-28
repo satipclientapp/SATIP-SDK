@@ -46,6 +46,6 @@
             android:layout_gravity="end"
             android:text="@android:string/ok"
             style="?android:attr/borderlessButtonStyle"
-            android:onClick="@{handler.onClick}"/>
+            android:onClick="@{handler::onClick}"/>
     </LinearLayout>
 </layout>

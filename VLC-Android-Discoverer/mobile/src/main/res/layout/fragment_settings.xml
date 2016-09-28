@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_server"
                 android:textColor="@color/deep_gray"
-                android:onClick="@{handler.openServerDialog}"
+                android:onClick="@{handler::openServerDialog}"
                 android:nextFocusUp="@id/server_list"
                 style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_channel"
                 android:textColor="@color/deep_gray"
-                android:onClick="@{handler.openChannelsDialog}"
+                android:onClick="@{handler::openChannelsDialog}"
                 android:nextFocusUp="@id/channel_list"
                 style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
