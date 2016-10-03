@@ -25,6 +25,7 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -344,6 +345,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onEvent(MediaPlayer.Event event) {
         switch(event.type) {
             case MediaPlayer.Event.Playing:
+                if (!mMediaPlayer.getVLCVout().areViewsAttached()) {
+                    IVLCVout vout = mMediaPlayer.getVLCVout();
+                    vout.setVideoView(mBinding.videoSurface);
+                    vout.attachViews();
+                }
                 if (mBinding.channelList.hasFocus())
                     focusOnCurrentChannel();
                 break;
@@ -402,42 +408,44 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private void play(final Uri uri) {
         ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(true);
         mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Media media = new Media(mLibVLC, uri);
-                try {
-                    mMediaPlayer.setMedia(media);
-                    mMediaPlayer.play();
-                } catch (IllegalStateException e) {
-                    try { //retry
-                        mMediaPlayer.setMedia(media);
-                        mMediaPlayer.play();
-                    } catch (IllegalStateException e1) {} //too bad
-                } finally {
-                    media.release();
-                }
-            }
-        }).start();
+        Media media = new Media(mLibVLC, uri);
+        try {
+            mMediaPlayer.setMedia(media);
+            mMediaPlayer.play();
+        } catch (IllegalStateException e) {
+            try { //retry
+                mMediaPlayer.setMedia(media);
+                mMediaPlayer.play();
+            } catch (IllegalStateException e1) {} //too bad
+        } finally {
+            media.release();
+        }
     }
 
     public void switchToSiblingChannel(final boolean next) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                IVLCVout vout = mMediaPlayer.getVLCVout();
+                final IVLCVout vout = mMediaPlayer.getVLCVout();
                 ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
-                int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
+                final int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
                 if (newPosition < 0 || newPosition >= adapter.getItemCount())
                     return;
-                ListAdapter.Item item = adapter.getItem(newPosition);
+                final ListAdapter.Item item = adapter.getItem(newPosition);
                 mMediaPlayer.stop();
                 vout.detachViews();
+
                 mBinding.videoSurface.getHolder().setFixedSize(1, 1);
                 mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
-                play(newPosition, item);
+                final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
+                if (c != null) {
+                    c.drawRGB(0, 0, 0);
+                    mBinding.videoSurface.getHolder().unlockCanvasAndPost(c);
+                }
+                mBinding.videoSurface.getHolder().setFormat(PixelFormat.UNKNOWN);
                 vout.setVideoView(mBinding.videoSurface);
                 vout.attachViews();
+                play(newPosition, item);
                 adapter.select(newPosition);
             }
         });
@@ -519,11 +527,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     @Override
     public void onSurfacesCreated(IVLCVout vlcVout) {
-        final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
-        if (c != null) {
-            c.drawRGB(0, 0, 0);
-            mBinding.videoSurface.getHolder().unlockCanvasAndPost(c);
-        }
+
     }
 
     @Override
