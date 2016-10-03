@@ -149,7 +149,8 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
                     mMediaBrowser.discoverNetworkShares();
             }
         }).start();
-        mBinding.serverList.requestFocus();
+        if (isSelected())
+            mBinding.serverList.requestFocus();
     }
 
     private void refreshChannels() {
@@ -296,6 +297,10 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
         cf.loadChannelList(Uri.parse(url), false);
     }
 
+    private boolean isSelected() {
+        return ((ChannelsActivity)getActivity()).mBinding.slidingTabs.getSelectedTabPosition() == 1;
+    }
+
     private ClickHandler mClickHandler = new ClickHandler();
     public class ClickHandler {
         public void openChannelsDialog(View v) {
@@ -317,12 +322,13 @@ public class SettingsFragment extends Fragment implements TabFragment, MediaBrow
 
     private class ChannelDisplayListScrollListener extends RecyclerView.OnScrollListener {
         RequestManager glide = ((ListAdapter) mBinding.channelDisplayList.getAdapter()).getGlideRequestManager();
+
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             if (newState == RecyclerView.SCROLL_STATE_SETTLING)
-               glide.pauseRequests();
+                glide.pauseRequests();
             else
-               glide.resumeRequests();
+                glide.resumeRequests();
         }
     }
 }

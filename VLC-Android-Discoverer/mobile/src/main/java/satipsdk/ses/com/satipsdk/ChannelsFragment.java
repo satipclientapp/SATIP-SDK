@@ -262,7 +262,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private void focusOnCurrentChannel() {
-        if (mBinding == null)
+        if (!expanded && mBinding == null)
             return;
         View v = mBinding.channelList.getChildAt(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
         if (v != null) {
@@ -350,8 +350,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     vout.setVideoView(mBinding.videoSurface);
                     vout.attachViews();
                 }
-                if (mBinding.channelList.hasFocus())
-                    focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Stopped:
                 mBinding.videoSurfaceFrame.setFocusable(false);
@@ -361,6 +359,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             case MediaPlayer.Event.Vout:
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
+                focusOnCurrentChannel();
                 ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(false);
                 break;
             case MediaPlayer.Event.EncounteredError:
