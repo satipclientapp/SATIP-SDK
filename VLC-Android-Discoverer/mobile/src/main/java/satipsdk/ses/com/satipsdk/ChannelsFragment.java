@@ -425,26 +425,11 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                final IVLCVout vout = mMediaPlayer.getVLCVout();
                 ListAdapter adapter = (ListAdapter)mBinding.channelList.getAdapter();
                 final int newPosition = adapter.getSelectedPosition() + (next ? 1 : -1);
                 if (newPosition < 0 || newPosition >= adapter.getItemCount())
                     return;
-                final ListAdapter.Item item = adapter.getItem(newPosition);
-                mMediaPlayer.stop();
-                vout.detachViews();
-
-                mBinding.videoSurface.getHolder().setFixedSize(1, 1);
-                mBinding.videoSurface.getHolder().setFormat(PixelFormat.RGB_565);
-                final Canvas c = mBinding.videoSurface.getHolder().lockCanvas();
-                if (c != null) {
-                    c.drawRGB(0, 0, 0);
-                    mBinding.videoSurface.getHolder().unlockCanvasAndPost(c);
-                }
-                mBinding.videoSurface.getHolder().setFormat(PixelFormat.UNKNOWN);
-                vout.setVideoView(mBinding.videoSurface);
-                vout.attachViews();
-                play(newPosition, item);
+                play(newPosition, adapter.getItem(newPosition));
                 adapter.select(newPosition);
             }
         });
