@@ -262,7 +262,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     }
 
     private void focusOnCurrentChannel() {
-        if (!expanded && mBinding == null)
+        if (expanded || mBinding == null)
             return;
         View v = mBinding.channelList.getChildAt(mSharedPreferences.getInt(SettingsFragment.KEY_SELECTED_CHANNEL, 0));
         if (v != null) {
