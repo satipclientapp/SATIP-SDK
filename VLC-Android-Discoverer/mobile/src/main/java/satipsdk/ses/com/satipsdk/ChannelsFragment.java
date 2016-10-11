@@ -4,13 +4,13 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
-import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,7 +25,6 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,6 @@ import org.videolan.libvlc.LibVLC;
 import org.videolan.libvlc.Media;
 import org.videolan.libvlc.MediaList;
 import org.videolan.libvlc.MediaPlayer;
-import org.videolan.libvlc.util.HWDecoderUtil;
 
 import java.util.ArrayList;
 
@@ -55,12 +53,31 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
 
+    private static final int TOGGLE_FULLSCREEN = 0;
+
+    private static final int FLING_MIN_VELOCITY = 3000;
+    private static final int TIMEOUT_ES_MILLIS = 1000;
+
     private FragmentChannelsBinding mBinding;
     private OnScrollListener mScrollListener;
     private SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SatIpApplication.get());
     private boolean expanded = false;
     private int mScreenWidth, mScreenHeight, mFoldedViewWidth;
     private double mVideoAr = 1.0d;
+    private volatile boolean mHasVout = false;
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case TOGGLE_FULLSCREEN:
+                    toggleFullscreen();
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    };
 
     public ChannelsFragment() {}
 
@@ -319,13 +336,19 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             lp.rightMargin = 0;
             lp.topMargin = 0;
         } else {
-            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            int margin = SatIpApplication.get().getResources().getDimensionPixelSize(R.dimen.video_frame_margin);
-            lp.leftMargin = margin;
-            lp.bottomMargin = margin;
-            lp.rightMargin = margin;
-            lp.topMargin = margin;
+            if (mHasVout) {
+                lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                int margin = SatIpApplication.get().getResources().getDimensionPixelSize(R.dimen.video_frame_margin);
+                lp.leftMargin = margin;
+                lp.bottomMargin = margin;
+                lp.rightMargin = margin;
+                lp.topMargin = margin;
+                ((ListAdapter) mBinding.channelList.getAdapter()).blockDpadRight(false);
+            } else {
+                mBinding.videoSurfaceFrame.setFocusable(false);
+                mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
+            }
         }
         lp.addRule(RelativeLayout.CENTER_VERTICAL, expanded ? RelativeLayout.TRUE : 0);
         mBinding.channelList.setVisibility(expanded ? View.GONE : View.VISIBLE);
@@ -350,24 +373,37 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     vout.setVideoView(mBinding.videoSurface);
                     vout.attachViews();
                 }
+                if (expanded)
+                    mHandler.sendEmptyMessageDelayed(TOGGLE_FULLSCREEN, TIMEOUT_ES_MILLIS);
                 break;
             case MediaPlayer.Event.Stopped:
+                mHasVout = false;
                 mBinding.videoSurfaceFrame.setFocusable(false);
                 mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
                 focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Vout:
+                mHasVout = event.getVoutCount() > 0;
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
-                focusOnCurrentChannel();
-                ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(false);
+                if (expanded) {
+                    if (!mHasVout)
+                        mHandler.sendEmptyMessage(TOGGLE_FULLSCREEN);
+                } else {
+                    focusOnCurrentChannel();
+                    ((ListAdapter) mBinding.channelList.getAdapter()).blockDpadRight(false);
+                }
                 break;
             case MediaPlayer.Event.EncounteredError:
+                mHasVout = false;
                 if (expanded)
                     toggleFullscreen();
                 else
                     focusOnCurrentChannel();
                 break;
+            case MediaPlayer.Event.ESAdded:
+                if (expanded)
+                    mHandler.removeMessages(TOGGLE_FULLSCREEN);
         }
     }
 
@@ -375,9 +411,6 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
      * Video surface management
      */
 
-    private static final int FLING_MIN_VELOCITY = 3000;
-
-    private final Handler mHandler = new Handler();
     private View.OnLayoutChangeListener mOnLayoutChangeListener = null;
 
     private LibVLC mLibVLC = null;
