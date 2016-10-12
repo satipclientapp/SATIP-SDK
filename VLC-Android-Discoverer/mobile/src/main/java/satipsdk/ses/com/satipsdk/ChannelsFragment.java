@@ -53,10 +53,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     private static final String TAG = "ChannelsFragment";
     private static final boolean ENABLE_SUBTITLES = true;
 
-    private static final int TOGGLE_FULLSCREEN = 0;
+    private static final int TOGGLE_FULLSCREEN_NO_ES = 0;
+    private static final int TOGGLE_FULLSCREEN_VOUT_KO = 1;
 
     private static final int FLING_MIN_VELOCITY = 3000;
-    private static final int TIMEOUT_ES_MILLIS = 1000;
+    private static final int TIMEOUT_ES_MILLIS = 2000;
+    private static final int TIMEOUT_VOUT_MILLIS = 5000;
 
     private FragmentChannelsBinding mBinding;
     private OnScrollListener mScrollListener;
@@ -70,8 +72,12 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case TOGGLE_FULLSCREEN:
-                    toggleFullscreen();
+                case TOGGLE_FULLSCREEN_NO_ES:
+                case TOGGLE_FULLSCREEN_VOUT_KO:
+                    removeMessages(TOGGLE_FULLSCREEN_NO_ES);
+                    removeMessages(TOGGLE_FULLSCREEN_VOUT_KO);
+                    if (expanded)
+                        toggleFullscreen();
                     break;
                 default:
                     super.handleMessage(msg);
@@ -373,8 +379,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     vout.setVideoView(mBinding.videoSurface);
                     vout.attachViews();
                 }
-                if (expanded)
-                    mHandler.sendEmptyMessageDelayed(TOGGLE_FULLSCREEN, TIMEOUT_ES_MILLIS);
+                if (expanded) {
+                    mHandler.sendEmptyMessageDelayed(TOGGLE_FULLSCREEN_NO_ES, TIMEOUT_ES_MILLIS);
+                    mHandler.sendEmptyMessageDelayed(TOGGLE_FULLSCREEN_VOUT_KO, TIMEOUT_VOUT_MILLIS);
+                }
                 break;
             case MediaPlayer.Event.Stopped:
                 mHasVout = false;
@@ -388,7 +396,9 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 mBinding.videoSurfaceFrame.setFocusable(true);
                 if (expanded) {
                     if (!mHasVout)
-                        mHandler.sendEmptyMessage(TOGGLE_FULLSCREEN);
+                        mHandler.sendEmptyMessage(TOGGLE_FULLSCREEN_VOUT_KO);
+                    else
+                        mHandler.removeMessages(TOGGLE_FULLSCREEN_VOUT_KO);
                 } else {
                     focusOnCurrentChannel();
                     ((ListAdapter) mBinding.channelList.getAdapter()).blockDpadRight(false);
@@ -403,7 +413,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 break;
             case MediaPlayer.Event.ESAdded:
                 if (expanded)
-                    mHandler.removeMessages(TOGGLE_FULLSCREEN);
+                    mHandler.removeMessages(TOGGLE_FULLSCREEN_NO_ES);
         }
     }
 
