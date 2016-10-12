@@ -236,16 +236,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 //VLC player init
                 mLibVLC = VLCInstance.get();
                 mMediaPlayer = new MediaPlayer(mLibVLC);
-                final IVLCVout vlcVout = mMediaPlayer.getVLCVout();
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        vlcVout.setVideoView(mBinding.videoSurface);
-                        if (mSubtitlesSurface != null)
-                            vlcVout.setSubtitlesView(mSubtitlesSurface);
-                        vlcVout.attachViews();
-                        vlcVout.addCallback(ChannelsFragment.this);
-                        mMediaPlayer.setEventListener(ChannelsFragment.this);
+                        setupVout();
 
                         //Load channels
                         if (ready)
@@ -254,6 +248,16 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 });
             }
         }).start();
+    }
+
+    private void setupVout() {
+        final IVLCVout vlcVout = mMediaPlayer.getVLCVout();
+        vlcVout.setVideoView(mBinding.videoSurface);
+        if (mSubtitlesSurface != null)
+            vlcVout.setSubtitlesView(mSubtitlesSurface);
+        vlcVout.attachViews();
+        vlcVout.addCallback(ChannelsFragment.this);
+        mMediaPlayer.setEventListener(ChannelsFragment.this);
     }
 
     @Override
@@ -455,10 +459,8 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
             mMediaPlayer.setMedia(media);
             mMediaPlayer.play();
         } catch (IllegalStateException e) {
-            try { //retry
-                mMediaPlayer.setMedia(media);
-                mMediaPlayer.play();
-            } catch (IllegalStateException e1) {} //too bad
+            if (expanded)
+                toggleFullscreen();
         } finally {
             media.release();
         }
