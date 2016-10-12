@@ -17,7 +17,7 @@ public class VLCInstance {
 //            }
 
             ArrayList<String> options = new ArrayList<>();
-            options.add("-vv");
+            options.add("-vvv");
             sLibVLC = new LibVLC(SatIpApplication.get(), options);
         }
         return sLibVLC;
