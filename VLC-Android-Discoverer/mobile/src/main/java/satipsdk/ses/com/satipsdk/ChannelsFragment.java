@@ -378,6 +378,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
     public void onEvent(MediaPlayer.Event event) {
         switch(event.type) {
             case MediaPlayer.Event.Playing:
+                Log.d(TAG, "onEvent: Playing");
                 if (!mMediaPlayer.getVLCVout().areViewsAttached()) {
                     IVLCVout vout = mMediaPlayer.getVLCVout();
                     vout.setVideoView(mBinding.videoSurface);
@@ -389,12 +390,14 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 }
                 break;
             case MediaPlayer.Event.Stopped:
+                Log.d(TAG, "onEvent: Stopped");
                 mHasVout = false;
                 mBinding.videoSurfaceFrame.setFocusable(false);
                 mBinding.videoSurfaceFrame.setVisibility(View.INVISIBLE);
                 focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.Vout:
+                Log.d(TAG, "onEvent: Vout "+event.getVoutCount());
                 mHasVout = event.getVoutCount() > 0;
                 mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
                 mBinding.videoSurfaceFrame.setFocusable(true);
@@ -409,6 +412,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 }
                 break;
             case MediaPlayer.Event.EncounteredError:
+                Log.d(TAG, "onEvent: EncounteredError");
                 mHasVout = false;
                 if (expanded)
                     toggleFullscreen();
@@ -416,8 +420,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     focusOnCurrentChannel();
                 break;
             case MediaPlayer.Event.ESAdded:
+                Log.d(TAG, "onEvent: ESAdded");
                 if (expanded)
                     mHandler.removeMessages(TOGGLE_FULLSCREEN_NO_ES);
+                break;
         }
     }
 
