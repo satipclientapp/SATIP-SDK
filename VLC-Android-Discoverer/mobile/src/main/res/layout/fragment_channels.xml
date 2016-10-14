@@ -49,6 +49,15 @@
                 android:layout_height="1dp"
                 android:layout="@layout/subtitles_surface"
                 android:id="@+id/subtitles_stub" />
+
+            <TextView
+                android:id="@+id/error_msg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/error_msg"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:visibility="gone"/>
         </FrameLayout>
     </RelativeLayout>
 </layout>
