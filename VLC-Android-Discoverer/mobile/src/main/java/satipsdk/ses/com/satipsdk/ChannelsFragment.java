@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.net.Uri;
@@ -55,6 +56,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     private static final int TOGGLE_FULLSCREEN_NO_ES = 0;
     private static final int TOGGLE_FULLSCREEN_VOUT_KO = 1;
+    private static final int HIDE_ERROR_MSG = 2;
 
     private static final int FLING_MIN_VELOCITY = 3000;
     private static final int TIMEOUT_ES_MILLIS = 2000;
@@ -77,9 +79,18 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     removeMessages(TOGGLE_FULLSCREEN_NO_ES);
                     removeMessages(TOGGLE_FULLSCREEN_VOUT_KO);
                     mBinding.errorMsg.setVisibility(View.VISIBLE);
+                    mBinding.videoSurface.setVisibility(View.INVISIBLE);
                     mBinding.videoSurfaceFrame.setVisibility(View.VISIBLE);
+                    mBinding.videoSurfaceFrame.setBackgroundColor(Color.BLACK);
                     mBinding.videoSurfaceFrame.setFocusable(true);
                     mBinding.videoSurfaceFrame.requestFocus();
+                    break;
+                case HIDE_ERROR_MSG:
+                    removeMessages(TOGGLE_FULLSCREEN_NO_ES);
+                    removeMessages(TOGGLE_FULLSCREEN_VOUT_KO);
+                    mBinding.videoSurface.setVisibility(View.VISIBLE);
+                    mBinding.videoSurfaceFrame.setBackgroundResource(0);
+                    mBinding.errorMsg.setVisibility(View.GONE);
                     break;
                 default:
                     super.handleMessage(msg);
@@ -403,8 +414,10 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                 mBinding.videoSurfaceFrame.setFocusable(true);
                 if (!mHasVout)
                     mHandler.sendEmptyMessage(TOGGLE_FULLSCREEN_VOUT_KO);
-                else
+                else {
+                    mBinding.videoSurface.setVisibility(View.VISIBLE);
                     mHandler.removeMessages(TOGGLE_FULLSCREEN_VOUT_KO);
+                }
                 if (!expanded) {
                     focusOnCurrentChannel();
                     ((ListAdapter) mBinding.channelList.getAdapter()).blockDpadRight(false);
@@ -417,6 +430,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
                     toggleFullscreen();
                 else
                     focusOnCurrentChannel();
+                mHandler.sendEmptyMessage(TOGGLE_FULLSCREEN_VOUT_KO);
                 break;
             case MediaPlayer.Event.ESAdded:
                 Log.d(TAG, "onEvent: ESAdded");
@@ -457,7 +471,7 @@ public class ChannelsFragment extends Fragment implements TabFragment, ListAdapt
 
     private void play(final Uri uri) {
         ((ListAdapter)mBinding.channelList.getAdapter()).blockDpadRight(true);
-        mBinding.errorMsg.setVisibility(View.INVISIBLE);
+        mHandler.sendEmptyMessage(HIDE_ERROR_MSG);
         Media media = new Media(mLibVLC, uri);
         try {
             mMediaPlayer.setMedia(media);
