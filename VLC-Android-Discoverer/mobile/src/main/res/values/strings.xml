@@ -16,5 +16,5 @@
     <string name="delete_message">You are about to remove this %1$s</string>
     <string name="channel_lists">Channel lists</string>
     <string name="server_lists">Servers</string>
-    <string name="error_msg">Error, impossible to play this channel</string>
+    <string name="error_msg">Sorry, this channel is not available right now</string>
 </resources>
